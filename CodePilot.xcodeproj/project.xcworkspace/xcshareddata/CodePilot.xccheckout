@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>733BFA2D-D3BD-4A95-A88D-467D9B8113E3</string>
+	<key>IDESourceControlProjectName</key>
+	<string>CodePilot</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>7B7D0DA6-1DA7-406A-81B8-AA19DC540E4B</key>
+		<string>ssh://github.com/antmd/CodePilot.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>CodePilot.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>7B7D0DA6-1DA7-406A-81B8-AA19DC540E4B</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://github.com/antmd/CodePilot.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>7B7D0DA6-1DA7-406A-81B8-AA19DC540E4B</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>7B7D0DA6-1DA7-406A-81B8-AA19DC540E4B</string>
+			<key>IDESourceControlWCCName</key>
+			<string>CodePilot</string>
+		</dict>
+	</array>
+</dict>
+</plist>
