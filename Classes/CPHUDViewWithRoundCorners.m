@@ -10,6 +10,16 @@
 #import "NSView+RoundedFrame.h"
 
 @implementation CPHUDViewWithRoundCorners
+-(instancetype)initWithFrame:(NSRect)frameRect
+{
+  self = [super initWithFrame:frameRect];
+  if (self != nil) {
+    self.appearance = [NSAppearance appearanceNamed:NSAppearanceNameVibrantDark];
+    
+  }
+  return self;
+}
+
 - (void)drawRect:(NSRect)rect
 {
 	[[NSColor clearColor] setFill];
@@ -17,7 +27,7 @@
   
 	[NSView drawRoundedFrame:self.frame
 								withRadius:self.cornerRadius
-				 	 filledWithColor:self.backgroundColor];
+				 	 filledWithColor:[NSColor windowBackgroundColor]];
 }
 
 - (BOOL)isOpaque

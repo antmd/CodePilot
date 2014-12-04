@@ -34,6 +34,7 @@
     [self setBackgroundColor:[NSColor clearColor]];
     [self setHasShadow:YES];
     [self setOpaque:NO];
+    self.movableByWindowBackground = YES;
     
     self.xcodeVersionUnsupportedWindowView = [[CPXcodeVersionUnsupportedWindowView alloc] initWithFrame:NSMakeRect(0, 0, self.frame.size.width, self.frame.size.height)];
     self.noProjectOpenWindowView = [[CPNoProjectOpenWindowView alloc] initWithFrame:NSMakeRect(0, 0, self.frame.size.width, self.frame.size.height)];

@@ -114,4 +114,5 @@ enum {
 {
 	return nil;
 }
+-(BOOL)allowsVibrancy { return YES;}
 @end

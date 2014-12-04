@@ -8,7 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface CPHUDViewWithRoundCorners : NSView
+@interface CPHUDViewWithRoundCorners : NSVisualEffectView
 @property (nonatomic, assign) NSUInteger cornerRadius;
 @property (nonatomic, strong) NSColor *backgroundColor;
 @end

@@ -236,4 +236,5 @@ static NSString * const SelectedObjectKeyPath = @"selectedObject";
 {
   [self.placeholderTextField setHidden:!IsEmpty([self stringValue])];
 }
+-(BOOL)allowsVibrancy { return YES; }
 @end

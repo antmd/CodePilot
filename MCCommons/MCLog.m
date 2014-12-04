@@ -87,7 +87,7 @@ NSString * MCToStringFromTypeAndValue(const char * typeCode, void * value)
     return NSStringFromRange(*(NSRange *)value);
     
   } else if (strcmp(typeCode, @encode(id)) == 0) {
-    return MCNSStringWithFormat(@"%@", *(id *)value);
+    return MCNSStringWithFormat(@"%@", *(const id *)value);
     
   } else if (strcmp(typeCode, @encode(BOOL)) == 0) {
     return (*(BOOL *)value) ? @"YES" : @"NO";

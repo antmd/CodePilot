@@ -54,6 +54,7 @@
 	}
 }
 
+-(BOOL)allowsVibrancy {return YES;}
 - (void)reloadData
 {
 	[super reloadData];
