@@ -21,7 +21,7 @@
 - (BOOL)hasOpenWorkspace;
 - (NSScreen *)currentScreen;
 - (BOOL)currentProjectIsIndexing;
-- (void)openFileOrSymbol:(id)fileOrSymbol;
+- (void)openFileOrSymbol:(id)fileOrSymbol sourceCodeEditor:(IDESourceCodeEditor*)sourceCodeEditor;
 - (void)openCPSymbol:(CPSymbol *)symbol;
 - (void)openCPFileReference:(CPFileReference *)cpFileReference;
 - (NSString *)currentProjectName;
@@ -64,4 +64,6 @@
 - (BOOL)isSymbolCachingInProgress;
 
 - (NSArray *)recentlyVisitedFiles;
+-(NSDictionary*)sourceCodeEditorsByURL;
+
 @end

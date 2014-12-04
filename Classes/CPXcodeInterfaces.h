@@ -60,6 +60,7 @@
 @interface IDEDocumentController : NSObject
 + (id)sharedDocumentController;
 - (NSArray *)workspaceDocuments;
+-(NSArray*)editorDocuments;
 @end
 
 @class DVTDocumentLocation, DVTFileDataType;
@@ -411,8 +412,14 @@
 
 extern NSString *IDEEditorDocumentDidChangeNotification;
 
+@interface IDESourceCodeEditor :NSObject
+-(NSWindow*)viewWindow;
+-(void)takeFocus;
+@end
 @interface IDESourceCodeDocument <NSObject>
 - (id)knownFileReferences;
+-(NSURL*)fileURL;
+-(IDESourceCodeEditor*)_firstEditor;
 @end
 
 @interface Xcode3FileReference <NSObject>

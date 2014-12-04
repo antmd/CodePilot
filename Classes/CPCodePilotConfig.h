@@ -55,7 +55,7 @@
 #define OUR_WINDOW_IS_OPEN [PILOT_WINDOW_DELEGATE ourWindowIsOpen]
 
 
-#define CORNER_RADIUS 20
+#define CORNER_RADIUS 10
 #define BACKGROUND_COLOR [NSColor colorWithCalibratedRed:0 green:0 blue:0 alpha:0.851]
 
 #define FILE_SELECTION_CELL_FONT_NAME @"Helvetica"

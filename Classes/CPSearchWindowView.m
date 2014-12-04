@@ -11,7 +11,6 @@
 #import "CPResultTableView.h"
 #import "CPStatusLabel.h"
 #import "CPWindow.h"
-#import "QSBSmallScroller.h"
 #import "CPSearchField.h"
 #import "CPResultScrollView.h"
 
@@ -87,7 +86,6 @@
   [self.resultTableScrollView setDocumentView:self.resultTableView];
   [self.resultTableScrollView setHasVerticalScroller:YES];
   [self.resultTableScrollView setAutohidesScrollers:YES];
-  [self.resultTableScrollView setVerticalScroller:[[QSBSmallScroller alloc] init]];
   [self addSubview:self.resultTableScrollView];
 }
 
@@ -225,7 +223,7 @@
   self.headerImageRepresentation = nil;
   self.headerWithInfoImageRepresentation = nil;
   
-  NSString *headerImagePath = [[NSBundle bundleForClass:[self class]] pathForResource:@"Header"
+  NSString *headerImagePath = [[NSBundle bundleForClass:[self class]] pathForResource:@"logo"
                                                                                ofType:@"png"];
   
   NSImage *headerImage = [[NSImage alloc] initWithContentsOfFile:headerImagePath];

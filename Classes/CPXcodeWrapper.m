@@ -88,6 +88,22 @@ static NSString * const IDEIndexDidIndexWorkspaceNotification = @"IDEIndexDidInd
                          withObject:workspace];
 }
 
+-(NSDictionary*)sourceCodeEditorsByURL
+{
+  NSArray *editorDocuments = [[IDEDocumentController sharedDocumentController] editorDocuments];
+  NSMutableDictionary *newurls = [NSMutableDictionary new];
+  for (IDESourceCodeDocument *doc in editorDocuments) {
+    if ([doc isKindOfClass:NSClassFromString(@"IDESourceCodeDocument")]) {
+      NSURL *fileURL = [doc fileURL];
+      IDESourceCodeEditor *editor = [doc _firstEditor];
+      if ([editor isKindOfClass:NSClassFromString(@"IDESourceCodeEditor")]) {
+        newurls[fileURL] = editor;
+      }
+    }
+  }
+  return newurls;
+}
+
 // if someone closes workspace while it's being indexed,
 // we need to remove it from currentlyIndexedWorkspaces array
 - (void)removeClosedWorkspacesFromCurrentlyIndexed
@@ -395,14 +411,22 @@ static NSString * const IDEIndexDidIndexWorkspaceNotification = @"IDEIndexDidInd
   return self.symbolCachingInProgress;
 }
 
-- (void)openFileOrSymbol:(id)fileOrSymbol
+- (void)openFileOrSymbol:(id)fileOrSymbol sourceCodeEditor:(IDESourceCodeEditor*)sourceCodeEditor;
 {
   if (nil != fileOrSymbol && [fileOrSymbol isOpenable]) {
     if ([fileOrSymbol isKindOfClass:[CPSymbol class]]) {
       [self openCPSymbol:fileOrSymbol];
       
     } else if ([fileOrSymbol isKindOfClass:[CPFileReference class]]) {
-      [self openCPFileReference:fileOrSymbol];
+      if ([fileOrSymbol isOpen] && sourceCodeEditor) {
+        // Move focus to already open file
+        [sourceCodeEditor.viewWindow makeKeyAndOrderFront:self];
+        [sourceCodeEditor performSelector:@selector(takeFocus) withObject:nil afterDelay:0.001];
+      }
+      else {
+        // Open file in new editor
+        [self openCPFileReference:fileOrSymbol];
+      }
     }
   }
 }

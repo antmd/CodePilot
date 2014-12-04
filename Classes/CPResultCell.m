@@ -8,6 +8,7 @@
 
 #import "CPResultCell.h"
 #import "CPCodePilotConfig.h"
+#import "CPFileReference.h"
 
 @implementation CPResultCell
 - (void)drawWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
@@ -19,6 +20,10 @@
   if ([self isHighlighted]) {
     backgroundImageFileName = @"ResultSelection";
     [self drawWithBackgroundImageNamed:backgroundImageFileName withFrame:cellFrame];
+  }
+  else if ([self.objectValue isKindOfClass:CPFileReference.class] && [(CPFileReference*)self.objectValue isOpen]) {
+    [self drawWithBackgroundImageNamed:@"DarkCell" withFrame:cellFrame];
+    
   }
   
 }

@@ -59,7 +59,6 @@
 		4BEE52511339193600DA9881 /* NSArray+MiscExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BDCDAF5113142B40015BF7D /* NSArray+MiscExtensions.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		4BEE52521339193600DA9881 /* NSView+AllSubviews.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BA45D2C11343FA9006351CC /* NSView+AllSubviews.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		4BEE52531339193600DA9881 /* NSString+Abbreviation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B04640311347A1C00A27CC6 /* NSString+Abbreviation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		4BEE52541339193600DA9881 /* QSBSmallScroller.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B24B642113913B70000EF99 /* QSBSmallScroller.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		4BEE52551339193600DA9881 /* CPSearchField.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7E38CF1139898E00FDBC98 /* CPSearchField.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		4BEE52561339193600DA9881 /* CPSearchFieldTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BBEE9401139B19F00C77C0C /* CPSearchFieldTextView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		4BEE52571339193600DA9881 /* CPSelectedObjectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BCE7C18113AF46A001F6CB1 /* CPSelectedObjectCell.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -82,6 +81,9 @@
 		4BEE52751339193600DA9881 /* libssl.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B71F65C11561A15005A8471 /* libssl.dylib */; };
 		4BEE52761339193600DA9881 /* libcrypto.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B71F66011561A5E005A8471 /* libcrypto.dylib */; };
 		4BEE52771339193600DA9881 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B25285A1165E23700374EB0 /* WebKit.framework */; };
+		ED4EDF5A1A310C1200FE7F92 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = ED4EDF571A310C1200FE7F92 /* logo.png */; };
+		ED4EDF5B1A310C1200FE7F92 /* logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED4EDF581A310C1200FE7F92 /* logo@2x.png */; };
+		ED4EDF5C1A310C1200FE7F92 /* logo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED4EDF591A310C1200FE7F92 /* logo@3x.png */; };
 		F93F4FAD17B3FE550077B19E /* NSColor+ColorArithmetic.m in Sources */ = {isa = PBXBuildFile; fileRef = F93F4FAC17B3FE550077B19E /* NSColor+ColorArithmetic.m */; };
 		F9979794155D52060023D04C /* CPSymbolCache.m in Sources */ = {isa = PBXBuildFile; fileRef = F9979793155D52060023D04C /* CPSymbolCache.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F9EAED25179D945100701117 /* CPXcodeInterfaces.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EAED24179D945100701117 /* CPXcodeInterfaces.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -125,8 +127,6 @@
 		4B19163B1150FFBD00E073F8 /* CodePilotPrefs.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CodePilotPrefs.png; sourceTree = "<group>"; };
 		4B19163C1150FFBD00E073F8 /* CodePilotIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = CodePilotIcon.icns; sourceTree = "<group>"; };
 		4B197DC013AF37A100DF2598 /* memlak.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = memlak.png; sourceTree = "<group>"; };
-		4B24B641113913B70000EF99 /* QSBSmallScroller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSBSmallScroller.h; sourceTree = "<group>"; };
-		4B24B642113913B70000EF99 /* QSBSmallScroller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = QSBSmallScroller.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		4B25285A1165E23700374EB0 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		4B28A81F1153C3F300F077A5 /* CPInfoWindowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CPInfoWindowView.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		4B28A8201153C3F300F077A5 /* CPInfoWindowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPInfoWindowView.h; sourceTree = "<group>"; };
@@ -221,6 +221,9 @@
 		4BEE527B1339193600DA9881 /* CodePilot3.xcplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CodePilot3.xcplugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		4BEE52A513391CBF00DA9881 /* CPCodePilotConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = CPCodePilotConfig.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		D2F7E65807B2D6F200F64583 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
+		ED4EDF571A310C1200FE7F92 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
+		ED4EDF581A310C1200FE7F92 /* logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@2x.png"; sourceTree = "<group>"; };
+		ED4EDF591A310C1200FE7F92 /* logo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@3x.png"; sourceTree = "<group>"; };
 		F90494C017D650DA00B7C1CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F93F4FAB17B3FE550077B19E /* NSColor+ColorArithmetic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSColor+ColorArithmetic.h"; sourceTree = "<group>"; };
 		F93F4FAC17B3FE550077B19E /* NSColor+ColorArithmetic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSColor+ColorArithmetic.m"; sourceTree = "<group>"; };
@@ -273,6 +276,9 @@
 		089C167CFE841241C02AAC07 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				ED4EDF571A310C1200FE7F92 /* logo.png */,
+				ED4EDF581A310C1200FE7F92 /* logo@2x.png */,
+				ED4EDF591A310C1200FE7F92 /* logo@3x.png */,
 				4B197DC013AF37A100DF2598 /* memlak.png */,
 				4B32ED3F138E4B8B00D272E4 /* ATROX.TTF */,
 				4BEAF842138D67E8003DB3AB /* LightCell.png */,
@@ -384,15 +390,6 @@
 				F93F4FAC17B3FE550077B19E /* NSColor+ColorArithmetic.m */,
 			);
 			name = Categories;
-			sourceTree = "<group>";
-		};
-		4B24B6401139138E0000EF99 /* QSB */ = {
-			isa = PBXGroup;
-			children = (
-				4B24B641113913B70000EF99 /* QSBSmallScroller.h */,
-				4B24B642113913B70000EF99 /* QSBSmallScroller.m */,
-			);
-			name = QSB;
 			sourceTree = "<group>";
 		};
 		4B3B5B06113D07C600503FE7 /* XcodeConnectivity */ = {
@@ -513,7 +510,6 @@
 			isa = PBXGroup;
 			children = (
 				4B918210113C258100BF23B5 /* AMIndeterminateProgressIndicatorCell */,
-				4B24B6401139138E0000EF99 /* QSB */,
 			);
 			name = "3rd party";
 			path = ../Classes;
@@ -581,11 +577,14 @@
 				4BC46219135494830046C0A6 /* Header.png in Resources */,
 				4BC4621A135494830046C0A6 /* Footer.png in Resources */,
 				4B4D42C01354B8BF00ACA78B /* ResultSelection.png in Resources */,
+				ED4EDF5C1A310C1200FE7F92 /* logo@3x.png in Resources */,
 				4B3A21011354CCF0004EAF8F /* InfoLabelBarTriangle.png in Resources */,
 				4B3A21021354CCF0004EAF8F /* InfoLabelBarRect.png in Resources */,
 				4B61EB371354D52900ED0A40 /* HeaderWithInfo.png in Resources */,
+				ED4EDF5B1A310C1200FE7F92 /* logo@2x.png in Resources */,
 				4B30AEF5138D526F0008B1A9 /* UpperStatusBackground.png in Resources */,
 				4BEAF844138D67E8003DB3AB /* LightCell.png in Resources */,
+				ED4EDF5A1A310C1200FE7F92 /* logo.png in Resources */,
 				4BEAF845138D67E8003DB3AB /* DarkCell.png in Resources */,
 				4B32ED40138E4B8B00D272E4 /* ATROX.TTF in Resources */,
 				4B197DC113AF37A100DF2598 /* memlak.png in Resources */,
@@ -633,7 +632,6 @@
 				4BEE52511339193600DA9881 /* NSArray+MiscExtensions.m in Sources */,
 				4BEE52521339193600DA9881 /* NSView+AllSubviews.m in Sources */,
 				4BEE52531339193600DA9881 /* NSString+Abbreviation.m in Sources */,
-				4BEE52541339193600DA9881 /* QSBSmallScroller.m in Sources */,
 				F93F4FAD17B3FE550077B19E /* NSColor+ColorArithmetic.m in Sources */,
 				4BEE52551339193600DA9881 /* CPSearchField.m in Sources */,
 				4BEE52561339193600DA9881 /* CPSearchFieldTextView.m in Sources */,

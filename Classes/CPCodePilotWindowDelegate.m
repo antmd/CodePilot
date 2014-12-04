@@ -97,5 +97,6 @@
 
 - (void)windowWillClose:(NSNotification *)notification
 {
+  [self.searchController windowDidBecomeInactive];
 }
 @end

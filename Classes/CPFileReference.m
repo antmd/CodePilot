@@ -126,6 +126,7 @@
 	newSelf.isGroup = self.isGroup;
 	newSelf.isOpenable = self.isOpenable;
 	newSelf.isSearchable = self.isSearchable;
+  newSelf.isOpen = self.isOpen;
   
 	return newSelf;
 }

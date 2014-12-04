@@ -20,7 +20,9 @@
 #import "CPSymbol.h"
 #import "CPResult.h"
 
-@implementation CPSearchController
+@implementation CPSearchController {
+  NSDictionary *_urlToSourceCodeEditor;
+}
 - (id)init
 {
 	self = [super init];
@@ -59,13 +61,14 @@
 
 - (void)windowDidBecomeInactive
 {
+  _urlToSourceCodeEditor = nil;
 }
 
 // before the window is on screen
 - (void)windowWillBecomeActive
 {
 	[self.searchField reset];
-  
+  _urlToSourceCodeEditor = [_xcodeWrapper sourceCodeEditorsByURL];
 	[self updateContentsWithSearchField];
 	[self selectRowAtIndex:0];
   
@@ -138,6 +141,9 @@
 {
 	self.currentDataMode = DataModeRecentJumps;
 	self.suggestedObjects = [self.xcodeWrapper recentlyVisited];
+  for (CPFileReference *fileRef in self.suggestedObjects) {
+    fileRef.isOpen = (_urlToSourceCodeEditor[fileRef.fileURL] != nil);
+  }
 	self.tableView.extendedDisplay = NO;
 	self.tableView.fileQuery = @"";
 	self.tableView.symbolQuery = @"";
@@ -470,7 +476,8 @@
 	if (@selector(insertNewline:) == command || @selector(PBX_insertNewlineAndIndent:) == command) {
 		if (self.selectedElement) {
 			[(CPCodePilotWindowDelegate *)[[self.searchField window] delegate] hideWindow];
-			[self.xcodeWrapper openFileOrSymbol:self.selectedElement];
+      id sourceCodeEditor = [self.selectedElement isKindOfClass:CPFileReference.class] ? _urlToSourceCodeEditor[[(CPFileReference*)self.selectedElement fileURL]] : nil;
+			[self.xcodeWrapper openFileOrSymbol:self.selectedElement sourceCodeEditor:sourceCodeEditor];
 		}
     
 		return YES;

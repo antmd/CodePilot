@@ -22,6 +22,7 @@
 @property (nonatomic, assign) BOOL isOpenable;
 @property (nonatomic, assign) BOOL isSearchable;
 @property (nonatomic, assign) BOOL isOpenableInEditor;
+@property (nonatomic, assign) BOOL isOpen;
 
 - (CPFileReference *)initWithPBXFileReference:(PBXFileReference *)pbxFileReference;
 - (CPFileReference *)initWithFileURL:(NSURL *)_fileURL;
