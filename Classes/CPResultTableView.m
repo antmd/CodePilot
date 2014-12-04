@@ -33,7 +33,8 @@
     [self setAllowsTypeSelect:NO];
     [self setAlphaValue:1];
     [self setBackgroundColor:[NSColor clearColor]];
-    [self setGridColor:[NSColor clearColor]];
+    self.gridStyleMask = NSTableViewSolidHorizontalGridLineMask;
+    self.gridColor = quaternaryLabelColor();
     [self setIntercellSpacing:NSZeroSize];
 	}
   

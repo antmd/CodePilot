@@ -23,6 +23,7 @@ static NSString * const SelectedObjectKeyPath = @"selectedObject";
 	self = [super initWithFrame:frameRect];
   
   if (self) {
+    self.bezeled = NO;
     [self setDrawsBackground:NO];
     [self setContinuous:YES];
     [self setImportsGraphics:YES];
@@ -35,30 +36,9 @@ static NSString * const SelectedObjectKeyPath = @"selectedObject";
       self.delay = [[NSUserDefaults standardUserDefaults] floatForKey:DEFAULTS_SEARCH_INTERVAL_KEY];
       USER_LOG(@"Custom user searchfield delay set to %f", self.delay);
     }
+    self.placeholderString = SEARCHFIELD_PLACEHOLDER_STRING;
     
-    NSMutableParagraphStyle *paragraphStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
-    [paragraphStyle setAlignment:NSCenterTextAlignment];
-    
-    NSFont *placeholderFont = [NSFont fontWithName:SEARCHFIELD_PLACEHOLDER_FONT size:SEARCHFIELD_PLACEHOLDER_FONT_SIZE];
-    
-    if (nil == placeholderFont) {
-      placeholderFont = [NSFont fontWithName:SEARCHFIELD_PLACEHOLDER_ALTERNATIVE_FONT size:SEARCHFIELD_PLACEHOLDER_FONT_SIZE];
-    }
-    
-    NSDictionary *placeholderAttributes = [[NSDictionary alloc] initWithObjectsAndKeys:
-                                           SEARCHFIELD_PLACEHOLDER_FONT_COLOR, NSForegroundColorAttributeName,
-                                           paragraphStyle, NSParagraphStyleAttributeName,
-                                           placeholderFont, NSFontAttributeName, nil];
-    
-    NSAttributedString *placeholderAttributedString = [[NSAttributedString alloc] initWithString:SEARCHFIELD_PLACEHOLDER_STRING
-                                                                                      attributes:placeholderAttributes];
-    
-    self.placeholderTextField = [[CPStatusLabel alloc] initWithFrame:NSMakeRect(-27, 4, self.frame.size.width, self.frame.size.height)];
-    [self.placeholderTextField setAttributedStringValue:placeholderAttributedString];
-    
-    [self addSubview:self.placeholderTextField];
-    
-    [self setFont:[NSFont fontWithName:SEARCHFIELD_FONT size:SEARCHFIELD_FONT_SIZE]];
+    [self setFont:[NSFont systemFontOfSize:SEARCHFIELD_FONT_SIZE]];
     
     [self addObserver:self
            forKeyPath:SelectedObjectKeyPath
@@ -126,6 +106,7 @@ static NSString * const SelectedObjectKeyPath = @"selectedObject";
 	}
 }
 
+-(BOOL)isFlipped { return YES; }
 - (void)reset
 {
 	[self setStringValue:@""];
@@ -232,9 +213,14 @@ static NSString * const SelectedObjectKeyPath = @"selectedObject";
   [super setStringValue:str ?: @""];
 }
 
-- (void)drawRect:(NSRect)dirtyRect
+-(void)drawRect:(NSRect)dirtyRect
 {
-  [self.placeholderTextField setHidden:!IsEmpty([self stringValue])];
+  [super drawRect:dirtyRect];
+  [labelColor() set];
+  NSBezierPath * outline = [NSBezierPath bezierPathWithRoundedRect:self.bounds xRadius:8.0 yRadius:8.0] ;
+  [outline setClip];
+  [outline stroke];
 }
+
 -(BOOL)allowsVibrancy { return YES; }
 @end

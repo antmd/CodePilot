@@ -10,7 +10,7 @@
 
 @class CPStatusLabel, CPSearchFieldTextView, CPResult;
 
-@interface CPSearchField : NSTextField
+@interface CPSearchField : NSSearchField
 @property (nonatomic, strong) NSString *fileQuery;
 @property (nonatomic, strong) NSString *symbolQuery;
 @property (nonatomic, weak) NSTimer *delegateNotificationAboutChangedQueriesTimer;

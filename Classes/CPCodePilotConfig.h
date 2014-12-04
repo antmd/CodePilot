@@ -112,7 +112,7 @@
 
 #define SEARCHFIELD_FONT                    @"Lucida Grande"
 #define SEARCHFIELD_FONT_SIZE														18
-#define SEARCHFIELD_FONT_COLOR							[NSColor whiteColor]
+#define SEARCHFIELD_FONT_COLOR							[NSColor controlTextColor]
 #define SEARCHFIELD_TOKEN_FONT							@"Lucida Grande"
 #define SEARCHFIELD_TOKEN_CORNER_RADIUS     10
 #define SEARCHFIELD_TOKEN_FONT_SIZE					18

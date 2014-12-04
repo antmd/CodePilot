@@ -12,21 +12,15 @@
 @implementation CPResultCell
 - (void)drawWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
 {
-  NSInteger rowIndex = [(NSTableView *)controlView rowAtPoint:NSMakePoint(cellFrame.origin.x, cellFrame.origin.y)];
+  //NSInteger rowIndex = [(NSTableView *)controlView rowAtPoint:NSMakePoint(cellFrame.origin.x, cellFrame.origin.y)];
   
   NSString *backgroundImageFileName;
   
   if ([self isHighlighted]) {
     backgroundImageFileName = @"ResultSelection";
-  } else {
-    if (rowIndex % 2) {
-      backgroundImageFileName = @"DarkCell";
-    } else {
-      backgroundImageFileName = @"LightCell";
-    }
+    [self drawWithBackgroundImageNamed:backgroundImageFileName withFrame:cellFrame];
   }
   
-  [self drawWithBackgroundImageNamed:backgroundImageFileName withFrame:cellFrame];
 }
 
 - (void)drawWithBackgroundImageNamed:(NSString *)backgroundImageName withFrame:(NSRect)cellFrame
