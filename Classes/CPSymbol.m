@@ -12,9 +12,16 @@
 
 @interface CPSymbol ()
 @property (nonatomic, assign, readwrite) BOOL hasOccurrences;
+@property (copy,readwrite,nonatomic) NSString *name;
+@property (copy,readwrite,nonatomic) NSImage *icon;
+@property (copy,readwrite,nonatomic) NSString *sourceFile;
 @end
 
 @implementation CPSymbol
+@synthesize name;
+@synthesize icon;
+@synthesize sourceFile;
+
 - (CPSymbol *)init
 {
   self = [super init];

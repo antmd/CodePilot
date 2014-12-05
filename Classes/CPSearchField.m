@@ -10,7 +10,6 @@
 #import "CPCodePilotConfig.h"
 #import "CPSearchController.h"
 #import "CPSelectedObjectCell.h"
-#import "NSView+RoundedFrame.h"
 #import "CPStatusLabel.h"
 #import "CPSymbol.h"
 #import "CPSearchFieldTextView.h"

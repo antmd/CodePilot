@@ -8,7 +8,6 @@
 
 #import "CPSelectedObjectCell.h"
 #import "CPCodePilotConfig.h"
-#import "NSView+RoundedFrame.h"
 
 @implementation CPSelectedObjectCell
 - (id)init
@@ -39,9 +38,8 @@
 
 - (void)drawWithFrame:(NSRect)cellFrame inView:(NSView *)controlView characterIndex:(NSUInteger)charIndex layoutManager:(NSLayoutManager *)layoutManager
 {
-	[NSView drawRoundedFrame:cellFrame
-								withRadius:6
-					 filledWithColor:SEARCHFIELD_TOKEN_BACKGROUND_COLOR];
+  [SEARCHFIELD_TOKEN_BACKGROUND_COLOR setFill];
+  [[NSBezierPath bezierPathWithRoundedRect:cellFrame xRadius:6.0 yRadius:6.0] fill];
   
 	cellFrame.origin.x += SEARCHFIELD_TOKEN_INSIDE_MARGIN;
   

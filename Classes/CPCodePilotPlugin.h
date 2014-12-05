@@ -8,11 +8,11 @@
 
 #import <Cocoa/Cocoa.h>
 
-@class CPCodePilotWindowDelegate, CPXcodeWrapper, PBXGroup, CPPluginInstaller;
+@class CPCodePilotWindowController, CPXcodeWrapper, PBXGroup, CPPluginInstaller;
 
 @interface CPCodePilotPlugin : NSObject
 @property (nonatomic, strong) CPXcodeWrapper *xcWrapper;
-@property (nonatomic, strong) CPCodePilotWindowDelegate *windowDelegate;
+@property (nonatomic, strong) CPCodePilotWindowController *windowController;
 @property (nonatomic, strong) CPPluginInstaller *installer;
 @property (nonatomic, strong) NSString *userKeyEquivalent;
 @property (nonatomic, assign) BOOL thisVersionFirstRun;

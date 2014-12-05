@@ -43,18 +43,13 @@
 		4BEE523C1339193600DA9881 /* CodePilotPrefs.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B19163B1150FFBD00E073F8 /* CodePilotPrefs.png */; };
 		4BEE523D1339193600DA9881 /* CodePilotIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 4B19163C1150FFBD00E073F8 /* CodePilotIcon.icns */; };
 		4BEE523F1339193600DA9881 /* CPCodePilotPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B38FD31112DF476006C375F /* CPCodePilotPlugin.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		4BEE52401339193600DA9881 /* CPCodePilotWindowDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7FBFEE112FFFF700846DF6 /* CPCodePilotWindowDelegate.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		4BEE52401339193600DA9881 /* CPCodePilotWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7FBFEE112FFFF700846DF6 /* CPCodePilotWindowController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		4BEE52411339193600DA9881 /* CPXcodeWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7FBFF0112FFFF700846DF6 /* CPXcodeWrapper.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		4BEE52431339193600DA9881 /* CPSymbolCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7FBFF6112FFFF800846DF6 /* CPSymbolCell.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		4BEE52441339193600DA9881 /* CPSearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7FBFF7112FFFF800846DF6 /* CPSearchController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		4BEE52451339193600DA9881 /* CPSearchWindowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7FBFFC112FFFF800846DF6 /* CPSearchWindowView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		4BEE52461339193600DA9881 /* CPWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7FBFFE112FFFF800846DF6 /* CPWindow.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		4BEE52471339193600DA9881 /* CPResultTableViewColumn.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7FC000112FFFF800846DF6 /* CPResultTableViewColumn.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		4BEE52481339193600DA9881 /* CPResultTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7FC002112FFFF800846DF6 /* CPResultTableView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		4BEE52491339193600DA9881 /* NSString+MiscExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7FC004112FFFF800846DF6 /* NSString+MiscExtensions.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		4BEE524A1339193600DA9881 /* NSAppleEventDescriptor+ToObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7FC006112FFFF800846DF6 /* NSAppleEventDescriptor+ToObject.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		4BEE524B1339193600DA9881 /* MCLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7FC008112FFFF800846DF6 /* MCLog.m */; };
-		4BEE524E1339193600DA9881 /* CPFileReferenceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7FC00F112FFFF800846DF6 /* CPFileReferenceCell.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		4BEE52501339193600DA9881 /* CPStatusLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B88D25511303885007250E5 /* CPStatusLabel.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		4BEE52511339193600DA9881 /* NSArray+MiscExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BDCDAF5113142B40015BF7D /* NSArray+MiscExtensions.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		4BEE52521339193600DA9881 /* NSView+AllSubviews.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BA45D2C11343FA9006351CC /* NSView+AllSubviews.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -63,17 +58,11 @@
 		4BEE52561339193600DA9881 /* CPSearchFieldTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BBEE9401139B19F00C77C0C /* CPSearchFieldTextView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		4BEE52571339193600DA9881 /* CPSelectedObjectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BCE7C18113AF46A001F6CB1 /* CPSelectedObjectCell.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		4BEE52581339193600DA9881 /* AMIndeterminateProgressIndicatorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B918211113C25AD00BF23B5 /* AMIndeterminateProgressIndicatorCell.m */; };
-		4BEE52591339193600DA9881 /* CPResultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B3B5B0F113D08D700503FE7 /* CPResultCell.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		4BEE525A1339193600DA9881 /* CPFileReference.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B6EC540113D354D00126AE0 /* CPFileReference.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		4BEE525D1339193600DA9881 /* CPPreferencesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B10F4851147B29B0081A264 /* CPPreferencesView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		4BEE52611339193600DA9881 /* CPHUDViewWithRoundCorners.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B1171B011490EA70029BB44 /* CPHUDViewWithRoundCorners.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		4BEE52631339193600DA9881 /* NSAttributedString+Hyperlink.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B53D0F911492AB200224F53 /* NSAttributedString+Hyperlink.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		4BEE52641339193600DA9881 /* NSNumber+VersionComparison.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B69D3041153AA5E00541012 /* NSNumber+VersionComparison.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		4BEE52651339193600DA9881 /* CPInfoWindowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B28A81F1153C3F300F077A5 /* CPInfoWindowView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		4BEE52661339193600DA9881 /* CPNoProjectOpenWindowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B304E681153C9DF00240FF1 /* CPNoProjectOpenWindowView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		4BEE52671339193600DA9881 /* CPXcodeVersionUnsupportedWindowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B304E6B1153CA3300240FF1 /* CPXcodeVersionUnsupportedWindowView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		4BEE52681339193600DA9881 /* NSView+RoundedFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B6C94121153F4D2003ED852 /* NSView+RoundedFrame.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		4BEE52691339193600DA9881 /* CPFirstRunWindowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BE803001156C9F900F603A8 /* CPFirstRunWindowView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		4BEE526A1339193600DA9881 /* NSMutableArray+MiscExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B38187B115CD37F0007D74B /* NSMutableArray+MiscExtensions.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		4BEE526C1339193600DA9881 /* MCStringScoring.c in Sources */ = {isa = PBXBuildFile; fileRef = 4B63C9261190199500C0DB12 /* MCStringScoring.c */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		4BEE526E1339193600DA9881 /* CPSymbol.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BBC547911D7757D00C63705 /* CPSymbol.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -84,6 +73,11 @@
 		ED4EDF5A1A310C1200FE7F92 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = ED4EDF571A310C1200FE7F92 /* logo.png */; };
 		ED4EDF5B1A310C1200FE7F92 /* logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED4EDF581A310C1200FE7F92 /* logo@2x.png */; };
 		ED4EDF5C1A310C1200FE7F92 /* logo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED4EDF591A310C1200FE7F92 /* logo@3x.png */; };
+		EDCAEA4B1A32186100094CF0 /* CPResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDCAEA491A32186100094CF0 /* CPResultsViewController.m */; };
+		EDCAEA4C1A32186100094CF0 /* CPResultsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EDCAEA4A1A32186100094CF0 /* CPResultsViewController.xib */; };
+		EDD1DD8C1A325AAB00857D66 /* hudmask.png in Resources */ = {isa = PBXBuildFile; fileRef = EDD1DD891A325AAB00857D66 /* hudmask.png */; };
+		EDD1DD8D1A325AAB00857D66 /* hudmask@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EDD1DD8A1A325AAB00857D66 /* hudmask@2x.png */; };
+		EDD1DD8E1A325AAB00857D66 /* hudmask@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = EDD1DD8B1A325AAB00857D66 /* hudmask@3x.png */; };
 		F93F4FAD17B3FE550077B19E /* NSColor+ColorArithmetic.m in Sources */ = {isa = PBXBuildFile; fileRef = F93F4FAC17B3FE550077B19E /* NSColor+ColorArithmetic.m */; };
 		F9979794155D52060023D04C /* CPSymbolCache.m in Sources */ = {isa = PBXBuildFile; fileRef = F9979793155D52060023D04C /* CPSymbolCache.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F9EAED25179D945100701117 /* CPXcodeInterfaces.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EAED24179D945100701117 /* CPXcodeInterfaces.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -128,12 +122,6 @@
 		4B19163C1150FFBD00E073F8 /* CodePilotIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = CodePilotIcon.icns; sourceTree = "<group>"; };
 		4B197DC013AF37A100DF2598 /* memlak.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = memlak.png; sourceTree = "<group>"; };
 		4B25285A1165E23700374EB0 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
-		4B28A81F1153C3F300F077A5 /* CPInfoWindowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CPInfoWindowView.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		4B28A8201153C3F300F077A5 /* CPInfoWindowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPInfoWindowView.h; sourceTree = "<group>"; };
-		4B304E671153C9DF00240FF1 /* CPNoProjectOpenWindowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPNoProjectOpenWindowView.h; sourceTree = "<group>"; };
-		4B304E681153C9DF00240FF1 /* CPNoProjectOpenWindowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CPNoProjectOpenWindowView.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		4B304E6A1153CA3300240FF1 /* CPXcodeVersionUnsupportedWindowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPXcodeVersionUnsupportedWindowView.h; sourceTree = "<group>"; };
-		4B304E6B1153CA3300240FF1 /* CPXcodeVersionUnsupportedWindowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPXcodeVersionUnsupportedWindowView.m; sourceTree = "<group>"; };
 		4B30A184133979A7008A4372 /* CPPluginInstaller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPPluginInstaller.h; sourceTree = "<group>"; };
 		4B30A185133979A7008A4372 /* CPPluginInstaller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CPPluginInstaller.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		4B30AEF4138D526F0008B1A9 /* UpperStatusBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UpperStatusBackground.png; sourceTree = "<group>"; };
@@ -144,8 +132,6 @@
 		4B38FD31112DF476006C375F /* CPCodePilotPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CPCodePilotPlugin.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		4B3A20FF1354CCF0004EAF8F /* InfoLabelBarTriangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = InfoLabelBarTriangle.png; sourceTree = "<group>"; };
 		4B3A21001354CCF0004EAF8F /* InfoLabelBarRect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = InfoLabelBarRect.png; sourceTree = "<group>"; };
-		4B3B5B0E113D08D700503FE7 /* CPResultCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPResultCell.h; sourceTree = "<group>"; };
-		4B3B5B0F113D08D700503FE7 /* CPResultCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CPResultCell.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		4B4D42BE1354B8BF00ACA78B /* ResultSelection.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ResultSelection.png; sourceTree = "<group>"; };
 		4B4DCEF01363543B0009304C /* CPPreferencesToolbarDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPPreferencesToolbarDelegate.h; sourceTree = "<group>"; };
 		4B4DCEF11363543B0009304C /* CPPreferencesToolbarDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CPPreferencesToolbarDelegate.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -156,8 +142,6 @@
 		4B63C9261190199500C0DB12 /* MCStringScoring.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = MCStringScoring.c; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.c; };
 		4B69D3031153AA5E00541012 /* NSNumber+VersionComparison.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+VersionComparison.h"; sourceTree = "<group>"; };
 		4B69D3041153AA5E00541012 /* NSNumber+VersionComparison.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = "NSNumber+VersionComparison.m"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		4B6C94121153F4D2003ED852 /* NSView+RoundedFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = "NSView+RoundedFrame.m"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		4B6C94131153F4D2003ED852 /* NSView+RoundedFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSView+RoundedFrame.h"; sourceTree = "<group>"; };
 		4B6EC540113D354D00126AE0 /* CPFileReference.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CPFileReference.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		4B6EC541113D354D00126AE0 /* CPFileReference.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = CPFileReference.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		4B71F65C11561A15005A8471 /* libssl.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libssl.dylib; path = usr/lib/libssl.dylib; sourceTree = SDKROOT; };
@@ -166,30 +150,20 @@
 		4B7E38CE1139898E00FDBC98 /* CPSearchField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPSearchField.h; sourceTree = "<group>"; };
 		4B7E38CF1139898E00FDBC98 /* CPSearchField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CPSearchField.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		4B7FBFED112FFFF700846DF6 /* CPXcodeWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = CPXcodeWrapper.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		4B7FBFEE112FFFF700846DF6 /* CPCodePilotWindowDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CPCodePilotWindowDelegate.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		4B7FBFEE112FFFF700846DF6 /* CPCodePilotWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CPCodePilotWindowController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		4B7FBFF0112FFFF700846DF6 /* CPXcodeWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CPXcodeWrapper.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		4B7FBFF6112FFFF800846DF6 /* CPSymbolCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPSymbolCell.m; sourceTree = "<group>"; };
 		4B7FBFF7112FFFF800846DF6 /* CPSearchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CPSearchController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		4B7FBFF8112FFFF800846DF6 /* MCCommons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCCommons.h; sourceTree = "<group>"; };
 		4B7FBFF9112FFFF800846DF6 /* CPSearchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = CPSearchController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		4B7FBFFA112FFFF800846DF6 /* CPCodePilotWindowDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPCodePilotWindowDelegate.h; sourceTree = "<group>"; };
-		4B7FBFFB112FFFF800846DF6 /* CPSymbolCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPSymbolCell.h; sourceTree = "<group>"; };
-		4B7FBFFC112FFFF800846DF6 /* CPSearchWindowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPSearchWindowView.m; sourceTree = "<group>"; };
-		4B7FBFFD112FFFF800846DF6 /* CPSearchWindowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPSearchWindowView.h; sourceTree = "<group>"; };
+		4B7FBFFA112FFFF800846DF6 /* CPCodePilotWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPCodePilotWindowController.h; sourceTree = "<group>"; };
 		4B7FBFFE112FFFF800846DF6 /* CPWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPWindow.m; sourceTree = "<group>"; };
 		4B7FBFFF112FFFF800846DF6 /* CPWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPWindow.h; sourceTree = "<group>"; };
-		4B7FC000112FFFF800846DF6 /* CPResultTableViewColumn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CPResultTableViewColumn.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		4B7FC001112FFFF800846DF6 /* CPResultTableViewColumn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPResultTableViewColumn.h; sourceTree = "<group>"; };
-		4B7FC002112FFFF800846DF6 /* CPResultTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CPResultTableView.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		4B7FC003112FFFF800846DF6 /* CPResultTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPResultTableView.h; sourceTree = "<group>"; };
 		4B7FC004112FFFF800846DF6 /* NSString+MiscExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = "NSString+MiscExtensions.m"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		4B7FC005112FFFF800846DF6 /* NSString+MiscExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MiscExtensions.h"; sourceTree = "<group>"; };
 		4B7FC006112FFFF800846DF6 /* NSAppleEventDescriptor+ToObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAppleEventDescriptor+ToObject.m"; sourceTree = "<group>"; };
 		4B7FC007112FFFF800846DF6 /* NSAppleEventDescriptor+ToObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAppleEventDescriptor+ToObject.h"; sourceTree = "<group>"; };
 		4B7FC008112FFFF800846DF6 /* MCLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCLog.m; sourceTree = "<group>"; };
 		4B7FC009112FFFF800846DF6 /* MCLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = MCLog.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		4B7FC00F112FFFF800846DF6 /* CPFileReferenceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CPFileReferenceCell.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		4B7FC010112FFFF800846DF6 /* CPFileReferenceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPFileReferenceCell.h; sourceTree = "<group>"; };
 		4B88D25411303885007250E5 /* CPStatusLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPStatusLabel.h; sourceTree = "<group>"; };
 		4B88D25511303885007250E5 /* CPStatusLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPStatusLabel.m; sourceTree = "<group>"; };
 		4B918211113C25AD00BF23B5 /* AMIndeterminateProgressIndicatorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AMIndeterminateProgressIndicatorCell.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -212,8 +186,6 @@
 		4BCE7C18113AF46A001F6CB1 /* CPSelectedObjectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPSelectedObjectCell.m; sourceTree = "<group>"; };
 		4BDCDAF4113142B40015BF7D /* NSArray+MiscExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+MiscExtensions.h"; sourceTree = "<group>"; };
 		4BDCDAF5113142B40015BF7D /* NSArray+MiscExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = "NSArray+MiscExtensions.m"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		4BE802FF1156C9F900F603A8 /* CPFirstRunWindowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPFirstRunWindowView.h; sourceTree = "<group>"; };
-		4BE803001156C9F900F603A8 /* CPFirstRunWindowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CPFirstRunWindowView.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		4BEAF842138D67E8003DB3AB /* LightCell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LightCell.png; sourceTree = "<group>"; };
 		4BEAF843138D67E8003DB3AB /* DarkCell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DarkCell.png; sourceTree = "<group>"; };
 		4BEB7733138E466D00D52605 /* CPResultScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPResultScrollView.h; sourceTree = "<group>"; };
@@ -225,6 +197,12 @@
 		ED4EDF581A310C1200FE7F92 /* logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@2x.png"; sourceTree = "<group>"; };
 		ED4EDF591A310C1200FE7F92 /* logo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@3x.png"; sourceTree = "<group>"; };
 		EDB488491A320F16009E4BBD /* CPSearchTableDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CPSearchTableDelegate.h; sourceTree = "<group>"; };
+		EDCAEA481A32186100094CF0 /* CPResultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPResultsViewController.h; sourceTree = "<group>"; };
+		EDCAEA491A32186100094CF0 /* CPResultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPResultsViewController.m; sourceTree = "<group>"; };
+		EDCAEA4A1A32186100094CF0 /* CPResultsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CPResultsViewController.xib; sourceTree = "<group>"; };
+		EDD1DD891A325AAB00857D66 /* hudmask.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hudmask.png; sourceTree = "<group>"; };
+		EDD1DD8A1A325AAB00857D66 /* hudmask@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hudmask@2x.png"; sourceTree = "<group>"; };
+		EDD1DD8B1A325AAB00857D66 /* hudmask@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hudmask@3x.png"; sourceTree = "<group>"; };
 		F90494C017D650DA00B7C1CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F93F4FAB17B3FE550077B19E /* NSColor+ColorArithmetic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSColor+ColorArithmetic.h"; sourceTree = "<group>"; };
 		F93F4FAC17B3FE550077B19E /* NSColor+ColorArithmetic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSColor+ColorArithmetic.m"; sourceTree = "<group>"; };
@@ -277,6 +255,9 @@
 		089C167CFE841241C02AAC07 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				EDD1DD891A325AAB00857D66 /* hudmask.png */,
+				EDD1DD8A1A325AAB00857D66 /* hudmask@2x.png */,
+				EDD1DD8B1A325AAB00857D66 /* hudmask@3x.png */,
 				ED4EDF571A310C1200FE7F92 /* logo.png */,
 				ED4EDF581A310C1200FE7F92 /* logo@2x.png */,
 				ED4EDF591A310C1200FE7F92 /* logo@3x.png */,
@@ -369,8 +350,6 @@
 			children = (
 				4B38187C115CD37F0007D74B /* NSMutableArray+MiscExtensions.h */,
 				4B38187B115CD37F0007D74B /* NSMutableArray+MiscExtensions.m */,
-				4B6C94131153F4D2003ED852 /* NSView+RoundedFrame.h */,
-				4B6C94121153F4D2003ED852 /* NSView+RoundedFrame.m */,
 				4B53D0F811492AB200224F53 /* NSAttributedString+Hyperlink.h */,
 				4B53D0F911492AB200224F53 /* NSAttributedString+Hyperlink.m */,
 				4B7FC005112FFFF800846DF6 /* NSString+MiscExtensions.h */,
@@ -396,14 +375,14 @@
 		4B3B5B06113D07C600503FE7 /* XcodeConnectivity */ = {
 			isa = PBXGroup;
 			children = (
-				4B76E9261333B7A000398AB0 /* CPXcodeInterfaces.h */,
-				F9EAED24179D945100701117 /* CPXcodeInterfaces.m */,
-				4B7FBFED112FFFF700846DF6 /* CPXcodeWrapper.h */,
-				4B7FBFF0112FFFF700846DF6 /* CPXcodeWrapper.m */,
 				4B38FD30112DF476006C375F /* CPCodePilotPlugin.h */,
 				4B38FD31112DF476006C375F /* CPCodePilotPlugin.m */,
 				4B30A184133979A7008A4372 /* CPPluginInstaller.h */,
 				4B30A185133979A7008A4372 /* CPPluginInstaller.m */,
+				4B76E9261333B7A000398AB0 /* CPXcodeInterfaces.h */,
+				F9EAED24179D945100701117 /* CPXcodeInterfaces.m */,
+				4B7FBFED112FFFF700846DF6 /* CPXcodeWrapper.h */,
+				4B7FBFF0112FFFF700846DF6 /* CPXcodeWrapper.m */,
 			);
 			name = XcodeConnectivity;
 			sourceTree = "<group>";
@@ -411,40 +390,23 @@
 		4B3B5B07113D07F400503FE7 /* UI Elements */ = {
 			isa = PBXGroup;
 			children = (
-				4B28A8201153C3F300F077A5 /* CPInfoWindowView.h */,
-				4B28A81F1153C3F300F077A5 /* CPInfoWindowView.m */,
-				4B7FBFFD112FFFF800846DF6 /* CPSearchWindowView.h */,
-				4B7FBFFC112FFFF800846DF6 /* CPSearchWindowView.m */,
-				4B7FBFFF112FFFF800846DF6 /* CPWindow.h */,
-				4B7FBFFE112FFFF800846DF6 /* CPWindow.m */,
-				4BE802FF1156C9F900F603A8 /* CPFirstRunWindowView.h */,
-				4BE803001156C9F900F603A8 /* CPFirstRunWindowView.m */,
 				4B1171AF11490EA70029BB44 /* CPHUDViewWithRoundCorners.h */,
 				4B1171B011490EA70029BB44 /* CPHUDViewWithRoundCorners.m */,
-				4B7FC001112FFFF800846DF6 /* CPResultTableViewColumn.h */,
-				4B7FC000112FFFF800846DF6 /* CPResultTableViewColumn.m */,
-				4B7FC003112FFFF800846DF6 /* CPResultTableView.h */,
-				4B7FC002112FFFF800846DF6 /* CPResultTableView.m */,
-				4B7FC010112FFFF800846DF6 /* CPFileReferenceCell.h */,
-				4B7FC00F112FFFF800846DF6 /* CPFileReferenceCell.m */,
-				4B7FBFFB112FFFF800846DF6 /* CPSymbolCell.h */,
-				4B7FBFF6112FFFF800846DF6 /* CPSymbolCell.m */,
-				4B88D25411303885007250E5 /* CPStatusLabel.h */,
-				4B88D25511303885007250E5 /* CPStatusLabel.m */,
-				4B7E38CE1139898E00FDBC98 /* CPSearchField.h */,
-				4B7E38CF1139898E00FDBC98 /* CPSearchField.m */,
-				4BCE7C17113AF46A001F6CB1 /* CPSelectedObjectCell.h */,
-				4BCE7C18113AF46A001F6CB1 /* CPSelectedObjectCell.m */,
-				4BBEE93F1139B19F00C77C0C /* CPSearchFieldTextView.h */,
-				4BBEE9401139B19F00C77C0C /* CPSearchFieldTextView.m */,
-				4B3B5B0E113D08D700503FE7 /* CPResultCell.h */,
-				4B3B5B0F113D08D700503FE7 /* CPResultCell.m */,
-				4B304E671153C9DF00240FF1 /* CPNoProjectOpenWindowView.h */,
-				4B304E681153C9DF00240FF1 /* CPNoProjectOpenWindowView.m */,
-				4B304E6A1153CA3300240FF1 /* CPXcodeVersionUnsupportedWindowView.h */,
-				4B304E6B1153CA3300240FF1 /* CPXcodeVersionUnsupportedWindowView.m */,
 				4BEB7733138E466D00D52605 /* CPResultScrollView.h */,
 				4BEB7734138E466D00D52605 /* CPResultScrollView.m */,
+				EDCAEA481A32186100094CF0 /* CPResultsViewController.h */,
+				EDCAEA491A32186100094CF0 /* CPResultsViewController.m */,
+				EDCAEA4A1A32186100094CF0 /* CPResultsViewController.xib */,
+				4B7E38CE1139898E00FDBC98 /* CPSearchField.h */,
+				4B7E38CF1139898E00FDBC98 /* CPSearchField.m */,
+				4BBEE93F1139B19F00C77C0C /* CPSearchFieldTextView.h */,
+				4BBEE9401139B19F00C77C0C /* CPSearchFieldTextView.m */,
+				4BCE7C17113AF46A001F6CB1 /* CPSelectedObjectCell.h */,
+				4BCE7C18113AF46A001F6CB1 /* CPSelectedObjectCell.m */,
+				4B88D25411303885007250E5 /* CPStatusLabel.h */,
+				4B88D25511303885007250E5 /* CPStatusLabel.m */,
+				4B7FBFFF112FFFF800846DF6 /* CPWindow.h */,
+				4B7FBFFE112FFFF800846DF6 /* CPWindow.m */,
 			);
 			name = "UI Elements";
 			sourceTree = "<group>";
@@ -454,8 +416,8 @@
 			children = (
 				4B7FBFF9112FFFF800846DF6 /* CPSearchController.h */,
 				4B7FBFF7112FFFF800846DF6 /* CPSearchController.m */,
-				4B7FBFFA112FFFF800846DF6 /* CPCodePilotWindowDelegate.h */,
-				4B7FBFEE112FFFF700846DF6 /* CPCodePilotWindowDelegate.m */,
+				4B7FBFFA112FFFF800846DF6 /* CPCodePilotWindowController.h */,
+				4B7FBFEE112FFFF700846DF6 /* CPCodePilotWindowController.m */,
 				EDB488491A320F16009E4BBD /* CPSearchTableDelegate.h */,
 			);
 			name = "Controllers and delegates";
@@ -573,6 +535,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EDCAEA4C1A32186100094CF0 /* CPResultsViewController.xib in Resources */,
+				EDD1DD8E1A325AAB00857D66 /* hudmask@3x.png in Resources */,
 				4BEE523B1339193600DA9881 /* InfoPlist.strings in Resources */,
 				4BEE523C1339193600DA9881 /* CodePilotPrefs.png in Resources */,
 				4BEE523D1339193600DA9881 /* CodePilotIcon.icns in Resources */,
@@ -580,6 +544,7 @@
 				4BC4621A135494830046C0A6 /* Footer.png in Resources */,
 				4B4D42C01354B8BF00ACA78B /* ResultSelection.png in Resources */,
 				ED4EDF5C1A310C1200FE7F92 /* logo@3x.png in Resources */,
+				EDD1DD8D1A325AAB00857D66 /* hudmask@2x.png in Resources */,
 				4B3A21011354CCF0004EAF8F /* InfoLabelBarTriangle.png in Resources */,
 				4B3A21021354CCF0004EAF8F /* InfoLabelBarRect.png in Resources */,
 				4B61EB371354D52900ED0A40 /* HeaderWithInfo.png in Resources */,
@@ -589,6 +554,7 @@
 				ED4EDF5A1A310C1200FE7F92 /* logo.png in Resources */,
 				4BEAF845138D67E8003DB3AB /* DarkCell.png in Resources */,
 				4B32ED40138E4B8B00D272E4 /* ATROX.TTF in Resources */,
+				EDD1DD8C1A325AAB00857D66 /* hudmask.png in Resources */,
 				4B197DC113AF37A100DF2598 /* memlak.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -617,19 +583,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				4BEE523F1339193600DA9881 /* CPCodePilotPlugin.m in Sources */,
-				4BEE52401339193600DA9881 /* CPCodePilotWindowDelegate.m in Sources */,
+				4BEE52401339193600DA9881 /* CPCodePilotWindowController.m in Sources */,
 				4BEE52411339193600DA9881 /* CPXcodeWrapper.m in Sources */,
-				4BEE52431339193600DA9881 /* CPSymbolCell.m in Sources */,
+				EDCAEA4B1A32186100094CF0 /* CPResultsViewController.m in Sources */,
 				4BEE52441339193600DA9881 /* CPSearchController.m in Sources */,
-				4BEE52451339193600DA9881 /* CPSearchWindowView.m in Sources */,
 				4BEE52461339193600DA9881 /* CPWindow.m in Sources */,
 				F9F596B417BBF78E0037BE7A /* CPResult.m in Sources */,
-				4BEE52471339193600DA9881 /* CPResultTableViewColumn.m in Sources */,
-				4BEE52481339193600DA9881 /* CPResultTableView.m in Sources */,
 				4BEE52491339193600DA9881 /* NSString+MiscExtensions.m in Sources */,
 				4BEE524A1339193600DA9881 /* NSAppleEventDescriptor+ToObject.m in Sources */,
 				4BEE524B1339193600DA9881 /* MCLog.m in Sources */,
-				4BEE524E1339193600DA9881 /* CPFileReferenceCell.m in Sources */,
 				4BEE52501339193600DA9881 /* CPStatusLabel.m in Sources */,
 				4BEE52511339193600DA9881 /* NSArray+MiscExtensions.m in Sources */,
 				4BEE52521339193600DA9881 /* NSView+AllSubviews.m in Sources */,
@@ -639,18 +601,12 @@
 				4BEE52561339193600DA9881 /* CPSearchFieldTextView.m in Sources */,
 				4BEE52571339193600DA9881 /* CPSelectedObjectCell.m in Sources */,
 				4BEE52581339193600DA9881 /* AMIndeterminateProgressIndicatorCell.m in Sources */,
-				4BEE52591339193600DA9881 /* CPResultCell.m in Sources */,
 				4BEE525A1339193600DA9881 /* CPFileReference.m in Sources */,
 				4BEE525D1339193600DA9881 /* CPPreferencesView.m in Sources */,
 				4BEE52611339193600DA9881 /* CPHUDViewWithRoundCorners.m in Sources */,
 				4BEE52631339193600DA9881 /* NSAttributedString+Hyperlink.m in Sources */,
 				4BEE52641339193600DA9881 /* NSNumber+VersionComparison.m in Sources */,
-				4BEE52651339193600DA9881 /* CPInfoWindowView.m in Sources */,
-				4BEE52661339193600DA9881 /* CPNoProjectOpenWindowView.m in Sources */,
-				4BEE52671339193600DA9881 /* CPXcodeVersionUnsupportedWindowView.m in Sources */,
 				F9EAED25179D945100701117 /* CPXcodeInterfaces.m in Sources */,
-				4BEE52681339193600DA9881 /* NSView+RoundedFrame.m in Sources */,
-				4BEE52691339193600DA9881 /* CPFirstRunWindowView.m in Sources */,
 				4BEE526A1339193600DA9881 /* NSMutableArray+MiscExtensions.m in Sources */,
 				4BEE526C1339193600DA9881 /* MCStringScoring.c in Sources */,
 				4BEE526E1339193600DA9881 /* CPSymbol.m in Sources */,

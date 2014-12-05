@@ -11,7 +11,17 @@
 #import "CPXcodeInterfaces.h"
 #import "objc/objc-class.h"
 
+@interface CPFileReference ()
+@property (copy,readwrite,nonatomic) NSString *name;
+@property (copy,readwrite,nonatomic) NSImage *icon;
+@property (copy,readwrite,nonatomic) NSString *sourceFile;
+@end
+
 @implementation CPFileReference
+@synthesize name;
+@synthesize icon;
+@synthesize sourceFile;
+
 - (CPFileReference *)initWithDVTFilePath:(DVTFilePath *)dvtFilePath
 {
   return [self initWithFileURL:[dvtFilePath fileURL]];

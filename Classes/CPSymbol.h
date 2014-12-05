@@ -29,7 +29,6 @@
 - (NSString *)name;
 - (NSString *)sourceFile;
 - (NSString *)originalClassName;
-- (NSImage *)icon;
 
 - (void)logOccurrences;
 - (DVTTextDocumentLocation *)relatedDocumentLocation;

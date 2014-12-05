@@ -1,23 +1,26 @@
 //
-//  CPCodePilotWindowDelegate.m
+//  CPCodePilotWindowController.m
 //  CodePilot
 //
 //  Created by Zbigniew Sobiecki on 2/9/10.
 //  Copyright 2010 Macoscope. All rights reserved.
 //
 
-#import "CPCodePilotWindowDelegate.h"
+#import "CPCodePilotWindowController.h"
 #import "CPXcodeWrapper.h"
 #import "CPSearchController.h"
-#import "CPResultTableView.h"
 #import "CPWindow.h"
-#import "CPSearchWindowView.h"
 #import "CPCodePilotConfig.h"
 #import "CPStatusLabel.h"
 #import "CPSearchField.h"
 #import "CPSearchFieldTextView.h"
+#import "CPResultsViewController.h"
 
-@implementation CPCodePilotWindowDelegate
+@interface CPCodePilotWindowController ()
+@property (strong,nonatomic) CPResultsViewController *resultsViewController;
+@end
+
+@implementation CPCodePilotWindowController
 - (id)initWithXcodeWrapper:(CPXcodeWrapper *)xcodeWrapper
 {
 	self = [super init];
@@ -31,30 +34,21 @@
     self.window = [[CPWindow alloc] initWithDefaultSettings];
     [self.window setDelegate:self];
     
-    [self.searchController setSearchField:[self.window.searchWindowView searchField]];
-    [[self.window.searchWindowView searchField] setDelegate:self.searchController];
+    CPResultsViewController *resultsViewController = [[CPResultsViewController alloc] initWithSearchController:self.searchController];
+    self.window.contentView = resultsViewController.view; // Loads the view ... must happen before referring to subviews below
+    resultsViewController.searchField.delegate = self.searchController;
+    [self.searchController setSearchField:resultsViewController.searchField];
+    [self.searchController setIndexingProgressIndicator:(NSControl*)resultsViewController.indexingProgressIndicator];
+    [self.searchController setUpperStatusLabel:resultsViewController.upperStatusLabel];
+    [self.searchController setLowerStatusLabel:resultsViewController.lowerStatusLabel];
+    self.resultsViewController = resultsViewController;
+    //    [self.searchController setInfoStatusLabel:[self.window.searchWindowView infoStatusLabel]];
     
-    [self.searchController setIndexingProgressIndicator:[self.window.searchWindowView indexingProgressIndicator]];
-    [self.searchController setUpperStatusLabel:[self.window.searchWindowView upperStatusLabel]];
-    [self.searchController setLowerStatusLabel:[self.window.searchWindowView lowerStatusLabel]];
-    [self.searchController setInfoStatusLabel:[self.window.searchWindowView infoStatusLabel]];
-    
-    CPResultTableView *resultTableView = [self.window.searchWindowView resultTableView];
-    [self.searchController setTableView:resultTableView];
-    [resultTableView setDataSource:self.searchController];
-    [resultTableView setDelegate:self.searchController];
-    [resultTableView setTarget:self.searchController];
 	}
   
 	return self;
 }
 
-- (void)openFirstRunWindow
-{
-	[self.window firstRunOrderFront];
-	[self.window makeKeyWindow];
-	self.ourWindowIsOpen = YES;
-}
 
 - (void)openWindow
 {
@@ -63,8 +57,8 @@
 	}
   
 	[self.searchController windowWillBecomeActive];
-	[self.window orderFront:self];
-	[self.window makeKeyWindow];
+    [self.window center];
+	[self.window makeKeyAndOrderFront:self];
 	[self.searchController windowDidBecomeActive];
 	self.ourWindowIsOpen = YES;
 }
@@ -90,7 +84,7 @@
 
 - (void)windowDidResignKey:(NSNotification *)notification
 {
-	[self hideWindow];
+  //[self hideWindow];
 }
 
 - (void)windowDidResignMain:(NSNotification *)notification

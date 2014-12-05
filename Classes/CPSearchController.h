@@ -10,7 +10,7 @@
 #import "CPCodePilotConfig.h"
 #import "CPSearchTableDelegate.h"
 
-@class CPXcodeWrapper, CPResultTableView, CPSearchField, CPStatusLabel, CPResult;
+@class CPXcodeWrapper,  CPSearchField, CPStatusLabel, CPResult;
 
 enum {
   DataModeRecentJumps = 1,
@@ -20,10 +20,9 @@ enum {
 } DataMode;
 
 @interface CPSearchController : NSObject <NSTextFieldDelegate,NSTableViewDataSource,NSTableViewDelegate,CPSearchTableDelegate>
-@property (nonatomic, weak) NSTimer *indexingProgressIndicatorTimer;
 @property (nonatomic, weak) NSControl *indexingProgressIndicator;
 @property (nonatomic, weak) CPSearchField *searchField;
-@property (nonatomic, weak) CPResultTableView *tableView;
+@property (nonatomic, weak) NSTableView *tableView;
 @property (nonatomic, weak) CPStatusLabel *upperStatusLabel;
 @property (nonatomic, weak) CPStatusLabel *lowerStatusLabel;
 @property (nonatomic, weak) CPStatusLabel *infoStatusLabel;
@@ -31,9 +30,12 @@ enum {
 @property (nonatomic, strong) NSArray *suggestedObjects;
 @property (nonatomic, assign) NSUInteger currentDataMode;
 @property (nonatomic, strong) CPResult *selectedElement;
+@property (nonatomic, copy) NSString *searchString;
+@property (nonatomic, strong) NSString *fileQuery;
+@property (nonatomic, strong) NSString *symbolQuery;
+@property (nonatomic) BOOL extendedDisplay;
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)aTableView;
-- (id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)rowIndex;
 - (void)selectRowAtIndex:(NSUInteger)rowIndex;
 - (void)windowDidBecomeActive;
 - (void)updateContentsWithSearchField;
@@ -55,10 +57,7 @@ enum {
 #ifdef PRESERVE_SELECTION
 - (NSInteger)indexOfObjectIsSuggestedCurrentlyForObject:(id)object;
 #endif
-- (CGFloat)tableView:(NSTableView *)tableView heightOfRow:(NSInteger)row;
 - (BOOL)spacePressedForSearchField:(CPSearchField *)searchField;
-- (void)animateIndexingProgressIndicator:(NSTimer *)aTimer;
-- (void)setupIndexingProgressIndicatorTimer;
 - (void)noteQueriesChanged;
 - (void)noteProjectIndexChanged;
 - (void)setupInfoStatusLabel;

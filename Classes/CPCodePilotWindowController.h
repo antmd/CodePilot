@@ -1,5 +1,5 @@
 //
-//  CPCodePilotWindowDelegate.h
+//  CPCodePilotWindowController.h
 //  CodePilot
 //
 //  Created by Zbigniew Sobiecki on 2/9/10.
@@ -12,7 +12,7 @@
 @class CPSearchController;
 @class CPSearchFieldTextView;
 
-@interface CPCodePilotWindowDelegate : NSObject <NSWindowDelegate>
+@interface CPCodePilotWindowController : NSWindowController <NSWindowDelegate>
 @property (nonatomic, strong) IBOutlet CPWindow *window;
 @property (nonatomic, strong) IBOutlet CPSearchController *searchController;
 @property (nonatomic, assign) BOOL ourWindowIsOpen;
@@ -22,5 +22,4 @@
 
 - (void)openWindow;
 - (void)hideWindow;
-- (void)openFirstRunWindow;
 @end

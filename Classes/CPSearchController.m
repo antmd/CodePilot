@@ -7,13 +7,9 @@
 //
 
 #import "CPSearchController.h"
-#import "CPCodePilotWindowDelegate.h"
+#import "CPCodePilotWindowController.h"
 #import "CPXcodeWrapper.h"
-#import "CPResultTableView.h"
 #import "CPCodePilotConfig.h"
-#import "CPSearchWindowView.h"
-#import "CPSymbolCell.h"
-#import "CPResultTableViewColumn.h"
 #import "CPSearchField.h"
 #import "CPFileReference.h"
 #import "CPStatusLabel.h"
@@ -71,8 +67,6 @@
   _urlToSourceCodeEditor = [_xcodeWrapper sourceCodeEditorsByURL];
 	[self updateContentsWithSearchField];
 	[self selectRowAtIndex:0];
-  
-	[self setupIndexingProgressIndicatorTimer];
 }
 
 // after the window appeared on the screen
@@ -153,9 +147,9 @@
   for (CPFileReference *fileRef in self.suggestedObjects) {
     fileRef.isOpen = (_urlToSourceCodeEditor[fileRef.fileURL] != nil);
   }
-	self.tableView.extendedDisplay = NO;
-	self.tableView.fileQuery = @"";
-	self.tableView.symbolQuery = @"";
+	self.extendedDisplay = NO;
+	self.fileQuery = @"";
+	self.symbolQuery = @"";
 }
 
 - (void)setupMatchingFilesAndSymbolsData
@@ -164,9 +158,9 @@
   
   self.suggestedObjects = [self.xcodeWrapper filesAndSymbolsFromProjectForQuery:[self.searchField fileQuery]];
   
-	self.tableView.extendedDisplay = YES;
-	self.tableView.fileQuery = [self.xcodeWrapper normalizedQueryForQuery:self.searchField.fileQuery];
-	self.tableView.symbolQuery = [self.xcodeWrapper normalizedQueryForQuery:self.searchField.fileQuery];
+	self.extendedDisplay = YES;
+	self.fileQuery = [self.xcodeWrapper normalizedQueryForQuery:self.searchField.fileQuery];
+	self.symbolQuery = [self.xcodeWrapper normalizedQueryForQuery:self.searchField.fileQuery];
 }
 
 - (void)setupMatchingSymbolsData
@@ -175,10 +169,9 @@
 	self.suggestedObjects = [self.xcodeWrapper contentsForQuery:self.searchField.symbolQuery
                                                    fromResult:self.searchField.selectedObject];
   
-  self.tableView.extendedDisplay = NO;
-  
-	self.tableView.fileQuery = [self.xcodeWrapper normalizedQueryForQuery:self.searchField.fileQuery];
-	self.tableView.symbolQuery = [self.xcodeWrapper normalizedQueryForQuery:self.searchField.symbolQuery];
+  self.extendedDisplay = NO;
+	self.fileQuery = [self.xcodeWrapper normalizedQueryForQuery:self.searchField.fileQuery];
+	self.symbolQuery = [self.xcodeWrapper normalizedQueryForQuery:self.searchField.symbolQuery];
 }
 
 #pragma mark - Status Labels
@@ -434,10 +427,6 @@
 	[self updateSelectionAfterDataChange];
 	[self setupStatusLabels];
   
-	// this needs to go after [tableView reloadData] (as it could change required size
-	// for the table), and after setupStatusLabels (as it could change visibility of the
-	// upper/lower status labels)
-	[(CPSearchWindowView *)[self.searchField superview] layoutSubviews];
 }
 
 #pragma mark - Search Field Delegate
@@ -484,7 +473,7 @@
 	// enter - file opening
 	if (@selector(insertNewline:) == command || @selector(PBX_insertNewlineAndIndent:) == command) {
 		if (self.selectedElement) {
-			[(CPCodePilotWindowDelegate *)[[self.searchField window] delegate] hideWindow];
+			[(CPCodePilotWindowController *)[[self.searchField window] delegate] hideWindow];
       [self jumpToResult:self.selectedElement];
 		}
     
@@ -493,7 +482,7 @@
   
 	// escape - we step aside
 	if (@selector(cancelOperation:) == command) {
-		[(CPCodePilotWindowDelegate *)[[self.searchField window] delegate] hideWindow];
+		[(CPCodePilotWindowController *)[[self.searchField window] delegate] hideWindow];
 		return YES;
 	}
   
@@ -554,41 +543,6 @@
   return nil;
 }
 
-- (CGFloat)tableView:(NSTableView *)tableView heightOfRow:(NSInteger)row
-{
-	CPResultTableViewColumn *tableColumn = (CPResultTableViewColumn *)[[self.tableView tableColumns] objectAtIndex:0];
-	id cell = [tableColumn dataCellForRow:row];
-	return [cell requiredHeight];
-}
-
-#pragma mark - Indexing Progress Indicator
-- (void)setupIndexingProgressIndicatorTimer
-{
-	if (nil == self.indexingProgressIndicatorTimer) {
-		self.indexingProgressIndicatorTimer = [NSTimer scheduledTimerWithTimeInterval:[[self.indexingProgressIndicator cell] animationDelay]
-                                                                           target:self
-                                                                         selector:@selector(animateIndexingProgressIndicator:)
-                                                                         userInfo:NULL
-                                                                          repeats:YES];
-    
-		[[NSRunLoop currentRunLoop] addTimer:self.indexingProgressIndicatorTimer
-                                 forMode:NSEventTrackingRunLoopMode];
-	}
-}
-
-- (void)animateIndexingProgressIndicator:(NSTimer *)aTimer
-{
-	double value = fmod(([[self.indexingProgressIndicator cell] doubleValue] + (5.0/60.0)), 1.0);
-  
-	[[self.indexingProgressIndicator cell] setDoubleValue:value];
-	[self.indexingProgressIndicator setNeedsDisplay:YES];
-  
-	if ([self.xcodeWrapper currentProjectIsIndexing]) {
-		[self.indexingProgressIndicator setHidden:NO];
-	} else {
-		[self.indexingProgressIndicator setHidden:YES];
-	}
-}
 /*
  *
  *

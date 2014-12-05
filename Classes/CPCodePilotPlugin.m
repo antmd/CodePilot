@@ -7,7 +7,7 @@
 //
 
 #import "CPCodePilotPlugin.h"
-#import "CPCodePilotWindowDelegate.h"
+#import "CPCodePilotWindowController.h"
 #import "CPXcodeWrapper.h"
 #import "CPPluginInstaller.h"
 
@@ -36,7 +36,7 @@
     [self checkForFirstRun];
     
 		self.xcWrapper = [CPXcodeWrapper new];
-		self.windowDelegate = [[CPCodePilotWindowDelegate alloc] initWithXcodeWrapper:self.xcWrapper];
+		self.windowController = [[CPCodePilotWindowController alloc] initWithXcodeWrapper:self.xcWrapper];
     
     // we want to start real installation once the app is fully launched
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -55,21 +55,18 @@
   
   [self.installer installPlugin:self];
   
-  if (self.firstRunEver) {
-    [self.windowDelegate openFirstRunWindow];
-  }
 }
 
 - (void)openCodePilotWindow
 {
   LOGCALL;
   
-	if (self.windowDelegate.ourWindowIsOpen) {
-		[self.windowDelegate hideWindow];
+	if (self.windowController.ourWindowIsOpen) {
+		[self.windowController hideWindow];
 	}
   
 	[self.xcWrapper reloadXcodeState];
-	[self.windowDelegate openWindow];
+	[self.windowController openWindow];
 }
 
 - (void)checkForFirstRun

@@ -13,7 +13,6 @@
 @property (nonatomic, strong) NSString *fileName;
 @property (nonatomic, strong) NSString *groupName;
 @property (nonatomic, strong) NSString *absolutePath;
-@property (nonatomic, strong) NSImage *icon;
 @property (nonatomic, strong) NSURL *fileURL;
 @property (nonatomic, strong) NSString *projectName;
 @property (nonatomic, assign) BOOL subprojectFile;

@@ -9,7 +9,7 @@
 #import "CPCodePilotPlugin.h"
 #import "NSView+AllSubviews.h"
 #import "NSString+Abbreviation.h"
-#import "CPCodePilotWindowDelegate.h"
+#import "CPCodePilotWindowController.h"
 #import "NSNumber+VersionComparison.h"
 
 #undef DEBUG_MODE
@@ -50,7 +50,7 @@
 #define CREDITS_STRING @"AMIndeterminateProgressIndicatorCell - Copyright © 2007 Andreas Mayer\nQSSmallScroller - Copyright © 2007-2008 Google Inc. All rights reserved\nRegexKitLite - Copyright © 2008-2009 John Engelhart"
 #define THANKS_STRING @"Ruben Bakker, Marcus S. Zarra";
 
-#define PILOT_WINDOW_DELEGATE (CPCodePilotWindowDelegate *)[[CPCodePilotPlugin sharedInstance] windowDelegate]
+#define PILOT_WINDOW_DELEGATE (CPCodePilotWindowController *)[[CPCodePilotPlugin sharedInstance] windowController]
 #define USER_LEVEL_DEBUG [[CPCodePilotPlugin sharedInstance] isUserLevelDebugOn]
 #define OUR_WINDOW_IS_OPEN [PILOT_WINDOW_DELEGATE ourWindowIsOpen]
 

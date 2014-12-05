@@ -9,8 +9,9 @@
 #import <Foundation/Foundation.h>
 
 @interface CPResult : NSObject
-- (NSString *)name;
-- (NSString *)sourceFile;
+@property (copy,readonly,nonatomic) NSString *name;
+@property (copy,readonly,nonatomic) NSImage *icon;
+@property (copy,readonly,nonatomic) NSString *sourceFile;
 - (double)scoreOffset;
 - (BOOL)isSearchable;
 - (BOOL)isOpenable;
