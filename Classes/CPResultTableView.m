@@ -10,6 +10,7 @@
 #import "CPCodePilotConfig.h"
 #import "CPSearchWindowView.h"
 #import "CPResultTableViewColumn.h"
+#import "CPSearchTableDelegate.h"
 
 @implementation CPResultTableView
 - (id)initWithFrame:(NSRect)frameRect
@@ -36,6 +37,7 @@
     self.gridStyleMask = NSTableViewSolidHorizontalGridLineMask;
     self.gridColor = quaternaryLabelColor();
     [self setIntercellSpacing:NSZeroSize];
+    self.doubleAction = @selector(doubleClickedOnRow:);
 	}
   
 	return self;
@@ -61,34 +63,12 @@
 	[super reloadData];
 }
 
-- (BOOL)isOpaque
-{
-	return NO;
-}
 
 - (void)keyDown:(NSEvent *)theEvent
 {
 }
 
-- (void)mouseDown:(NSEvent *)theEvent
-{
-}
-
-- (BOOL)canBecomeKeyView
-{
-	return NO;
-}
-
-- (BOOL)acceptsFirstMouse:(NSEvent *)theEvent
-{
-	return NO;
-}
-
-- (BOOL)acceptsFirstResponder
-{
-	return NO;
-}
-
+-(BOOL)acceptsFirstResponder { return NO; }
 - (NSUInteger)requiredHeight
 {
 	NSUInteger newTableViewHeight = 0;

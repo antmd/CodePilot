@@ -224,6 +224,7 @@
 		ED4EDF571A310C1200FE7F92 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		ED4EDF581A310C1200FE7F92 /* logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@2x.png"; sourceTree = "<group>"; };
 		ED4EDF591A310C1200FE7F92 /* logo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@3x.png"; sourceTree = "<group>"; };
+		EDB488491A320F16009E4BBD /* CPSearchTableDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CPSearchTableDelegate.h; sourceTree = "<group>"; };
 		F90494C017D650DA00B7C1CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F93F4FAB17B3FE550077B19E /* NSColor+ColorArithmetic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSColor+ColorArithmetic.h"; sourceTree = "<group>"; };
 		F93F4FAC17B3FE550077B19E /* NSColor+ColorArithmetic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSColor+ColorArithmetic.m"; sourceTree = "<group>"; };
@@ -455,6 +456,7 @@
 				4B7FBFF7112FFFF800846DF6 /* CPSearchController.m */,
 				4B7FBFFA112FFFF800846DF6 /* CPCodePilotWindowDelegate.h */,
 				4B7FBFEE112FFFF700846DF6 /* CPCodePilotWindowDelegate.m */,
+				EDB488491A320F16009E4BBD /* CPSearchTableDelegate.h */,
 			);
 			name = "Controllers and delegates";
 			sourceTree = "<group>";

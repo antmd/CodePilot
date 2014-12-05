@@ -39,9 +39,11 @@
     [self.searchController setLowerStatusLabel:[self.window.searchWindowView lowerStatusLabel]];
     [self.searchController setInfoStatusLabel:[self.window.searchWindowView infoStatusLabel]];
     
-    [self.searchController setTableView:[self.window.searchWindowView resultTableView]];
-    [[self.window.searchWindowView resultTableView] setDataSource:self.searchController];
-    [[self.window.searchWindowView resultTableView] setDelegate:self.searchController];
+    CPResultTableView *resultTableView = [self.window.searchWindowView resultTableView];
+    [self.searchController setTableView:resultTableView];
+    [resultTableView setDataSource:self.searchController];
+    [resultTableView setDelegate:self.searchController];
+    [resultTableView setTarget:self.searchController];
 	}
   
 	return self;

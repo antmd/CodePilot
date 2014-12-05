@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "CPCodePilotConfig.h"
+#import "CPSearchTableDelegate.h"
 
 @class CPXcodeWrapper, CPResultTableView, CPSearchField, CPStatusLabel, CPResult;
 
@@ -18,7 +19,7 @@ enum {
   
 } DataMode;
 
-@interface CPSearchController : NSObject <NSTextFieldDelegate,NSTableViewDataSource,NSTableViewDelegate>
+@interface CPSearchController : NSObject <NSTextFieldDelegate,NSTableViewDataSource,NSTableViewDelegate,CPSearchTableDelegate>
 @property (nonatomic, weak) NSTimer *indexingProgressIndicatorTimer;
 @property (nonatomic, weak) NSControl *indexingProgressIndicator;
 @property (nonatomic, weak) CPSearchField *searchField;

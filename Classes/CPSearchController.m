@@ -93,9 +93,18 @@
 
 - (void)saveSelectedElement
 {
-	self.selectedElement = [self tableView:self.tableView
-               objectValueForTableColumn:nil
-                                     row:[self.tableView selectedRow]];
+  self.selectedElement = [self elementAtRow:self.tableView.selectedRow];
+}
+
+-(CPResult*)elementAtRow:(NSInteger)row
+{
+  CPResult *element = nil;
+  if (row >=0 && row < self.tableView.numberOfRows) {
+  	element = [self tableView:self.tableView
+                 objectValueForTableColumn:nil
+                                     row:row];
+  }
+  return element;
 }
 
 // tries to remain selection, or selects first element
@@ -476,8 +485,7 @@
 	if (@selector(insertNewline:) == command || @selector(PBX_insertNewlineAndIndent:) == command) {
 		if (self.selectedElement) {
 			[(CPCodePilotWindowDelegate *)[[self.searchField window] delegate] hideWindow];
-      id sourceCodeEditor = [self.selectedElement isKindOfClass:CPFileReference.class] ? _urlToSourceCodeEditor[[(CPFileReference*)self.selectedElement fileURL]] : nil;
-			[self.xcodeWrapper openFileOrSymbol:self.selectedElement sourceCodeEditor:sourceCodeEditor];
+      [self jumpToResult:self.selectedElement];
 		}
     
 		return YES;
@@ -513,6 +521,14 @@
   }
   
 	return NO;
+}
+
+-(void)jumpToResult:(CPResult*)result
+{
+  if (result) {
+      id sourceCodeEditor = [result isKindOfClass:CPFileReference.class] ? _urlToSourceCodeEditor[[(CPFileReference*)result fileURL]] : nil;
+			[self.xcodeWrapper openFileOrSymbol:result sourceCodeEditor:sourceCodeEditor];
+  }
 }
 
 #pragma mark - Table View Data Source
@@ -573,5 +589,19 @@
 		[self.indexingProgressIndicator setHidden:YES];
 	}
 }
+/*
+ *
+ *
+ *================================================================================================*/
+#pragma mark - CPSearchTableDelegate
+/*==================================================================================================
+ */
 
+
+-(void)doubleClickedOnRow:(id)sender
+{
+  CPResult *result = [self elementAtRow:self.tableView.selectedRow];
+  [self jumpToResult:result];
+  
+}
 @end
