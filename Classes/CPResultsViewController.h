@@ -7,12 +7,14 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "CPResultController.h"
+
 @class CPSearchField;
 @class CPSearchController;
 @class CPStatusLabel;
 @class CPXcodeWrapper;
 
-@interface CPResultsViewController : NSViewController <NSTableViewDelegate>
+@interface CPResultsViewController : NSViewController <NSTableViewDelegate, CPResultController>
 @property (unsafe_unretained) IBOutlet CPSearchField *searchField;
 @property (unsafe_unretained) IBOutlet NSTableView *resultsTableView;
 @property (strong) IBOutlet NSArrayController *resultsArrayController;

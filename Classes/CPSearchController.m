@@ -16,6 +16,14 @@
 #import "CPSymbol.h"
 #import "CPResult.h"
 
+static void *RESULT_SELECTION_CHANGED = &RESULT_SELECTION_CHANGED;
+static void *QUERY_CHANGED = &QUERY_CHANGED;
+
+
+@interface CPSearchController()
+@property (nonatomic) NSUInteger resultSelectionIndex;
+@property (nonatomic,copy,readonly) NSIndexSet *indexesOfSelectableResults;
+@end
 @implementation CPSearchController {
   NSDictionary *_urlToSourceCodeEditor;
 }
@@ -30,10 +38,134 @@
                                              selector:@selector(noteQueriesChanged)
                                                  name:MCXcodeWrapperReloadedIndex
                                                object:nil];
+    [self addObserver:self
+           forKeyPath:@"resultSelectionIndex"
+              options:NSKeyValueObservingOptionInitial
+              context:RESULT_SELECTION_CHANGED];
+    [self addObserver:self
+           forKeyPath:@"selectedObject"
+              options:nil
+              context:QUERY_CHANGED];
+    [self addObserver:self
+           forKeyPath:@"searchString"
+              options:nil
+              context:QUERY_CHANGED];
 	}
   
 	return self;
 }
+
+-(void)dealloc
+{
+  [self removeObserver:self forKeyPath:@"resultSelectionIndex"];
+  [self removeObserver:self forKeyPath:@"selectedObject"];
+  [self removeObserver:self forKeyPath:@"searchString"];
+}
+
+/*
+ *
+ *
+ *================================================================================================*/
+#pragma mark - Properties
+/*==================================================================================================
+ */
+
+
+-(NSIndexSet *)resultSelectionIndexes
+{
+        return self.resultSelectionIndex != NSNotFound
+                ? [NSIndexSet indexSetWithIndex:self.resultSelectionIndex]
+                : [NSIndexSet indexSet];
+}
+
+-(void)setResultSelectionIndexes:(NSIndexSet *)resultSelectionIndexes
+{
+        if (!resultSelectionIndexes.count) { _resultSelectionIndex = NSNotFound; return; }
+        _resultSelectionIndex = resultSelectionIndexes.firstIndex;
+}
++(NSSet *)keyPathsForValuesAffectingResultSelectionIndexes
+{
+  return [NSSet setWithObjects:@"resultSelectionIndex", nil];
+}
++(NSSet *)keyPathsForValuesAffectingResultSelectionIndex
+{
+  return [NSSet setWithObjects:@"resultSelectionIndexes", nil];
+}
+
+-(NSIndexSet*)indexesOfSelectableResults
+{
+  return [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, self.suggestedObjects.count) ];
+}
+
+/*
+ *
+ *
+ *================================================================================================*/
+#pragma mark - KVO
+/*==================================================================================================
+ */
+
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+  if (context == RESULT_SELECTION_CHANGED) {
+    self.selectedElement = self.resultSelectionIndex < self.suggestedObjects.count
+                    ? self.suggestedObjects[self.resultSelectionIndex]
+                    : nil;
+  }
+  else if (context == QUERY_CHANGED) {
+    [self noteQueriesChanged];
+  }
+}
+
+/*
+ *
+ *
+ *================================================================================================*/
+#pragma mark - Actions
+/*==================================================================================================
+ */
+
+-(void)selectNext:(id)sender
+{
+        if (self.indexesOfSelectableResults.count == 0) return ;
+        if (self.resultSelectionIndex != NSNotFound) {
+                NSUInteger newIdx = [self.indexesOfSelectableResults indexGreaterThanIndex:self.resultSelectionIndex ] ;
+                if (newIdx != NSNotFound) {
+                        self.resultSelectionIndex = newIdx;
+                }
+        }
+        else {
+                self.resultSelectionIndex = [self.indexesOfSelectableResults indexGreaterThanOrEqualToIndex:0];
+        }
+}
+
+-(void)selectPrevious:(id)sender
+{
+        if (self.indexesOfSelectableResults.count == 0) return ;
+        if (self.resultSelectionIndex != NSNotFound) {
+                NSUInteger newIdx = [ self.indexesOfSelectableResults indexLessThanIndex:self.resultSelectionIndex ] ;
+                if (newIdx != NSNotFound) {
+                        self.resultSelectionIndex = newIdx;
+                }
+        }
+        else {
+                self.resultSelectionIndex = [self.indexesOfSelectableResults indexLessThanOrEqualToIndex:(self.suggestedObjects.count-1)];
+        }
+}
+-(void)pageDown:(id)sender { /* TODO */; }
+-(void)pageUp:(id)sender { /* TODO */; }
+-(IBAction)jumpToSelectedResult:(id)sender
+{
+  [self jumpToResult:self.selectedElement];
+}
+/*
+ *
+ *
+ *================================================================================================*/
+#pragma mark - Etc.
+/*==================================================================================================
+ */
+
 
 - (void)noteQueriesChanged
 {
@@ -87,19 +219,9 @@
 
 - (void)saveSelectedElement
 {
-  self.selectedElement = [self elementAtRow:self.tableView.selectedRow];
+  self.selectedElement = self.resultSelectionIndex != NSNotFound ? self.suggestedObjects[self.resultSelectionIndex] : nil;
 }
 
--(CPResult*)elementAtRow:(NSInteger)row
-{
-  CPResult *element = nil;
-  if (row >=0 && row < self.tableView.numberOfRows) {
-  	element = [self tableView:self.tableView
-                 objectValueForTableColumn:nil
-                                     row:row];
-  }
-  return element;
-}
 
 // tries to remain selection, or selects first element
 - (void)updateSelectionAfterDataChange
@@ -143,35 +265,27 @@
 - (void)setupRecentJumpsData
 {
 	self.currentDataMode = DataModeRecentJumps;
+  self.extendedDisplay = NO; // Must come before setting 'suggestedObjects'!
 	self.suggestedObjects = [self.xcodeWrapper recentlyVisited];
   for (CPFileReference *fileRef in self.suggestedObjects) {
     fileRef.isOpen = (_urlToSourceCodeEditor[fileRef.fileURL] != nil);
   }
-	self.extendedDisplay = NO;
-	self.fileQuery = @"";
-	self.symbolQuery = @"";
 }
 
 - (void)setupMatchingFilesAndSymbolsData
 {
 	self.currentDataMode = DataModeMatchingFiles;
+	self.extendedDisplay = YES; // Must come before setting 'suggestedObjects'!
+  self.suggestedObjects = [self.xcodeWrapper filesAndSymbolsFromProjectForQuery:self.searchString];
   
-  self.suggestedObjects = [self.xcodeWrapper filesAndSymbolsFromProjectForQuery:[self.searchField fileQuery]];
-  
-	self.extendedDisplay = YES;
-	self.fileQuery = [self.xcodeWrapper normalizedQueryForQuery:self.searchField.fileQuery];
-	self.symbolQuery = [self.xcodeWrapper normalizedQueryForQuery:self.searchField.fileQuery];
 }
 
 - (void)setupMatchingSymbolsData
 {
 	self.currentDataMode = DataModeMatchingSymbols;
-	self.suggestedObjects = [self.xcodeWrapper contentsForQuery:self.searchField.symbolQuery
-                                                   fromResult:self.searchField.selectedObject];
-  
-  self.extendedDisplay = NO;
-	self.fileQuery = [self.xcodeWrapper normalizedQueryForQuery:self.searchField.fileQuery];
-	self.symbolQuery = [self.xcodeWrapper normalizedQueryForQuery:self.searchField.symbolQuery];
+  self.extendedDisplay = NO; // Must come before setting 'suggestedObjects'!
+	self.suggestedObjects = [self.xcodeWrapper contentsForQuery:self.searchString
+                                                   fromResult:self.selectedObject];
 }
 
 #pragma mark - Status Labels
@@ -324,11 +438,11 @@
   
   
 	[attributedLabel appendAttributedString:[self normalFacedStatusLabelString:@" found in "]];
-	[attributedLabel appendAttributedString:[self boldFacedStatusLabelString:[self.searchField.selectedObject name]]];
+	[attributedLabel appendAttributedString:[self boldFacedStatusLabelString:[self.selectedObject name]]];
   
 	NSString *suffix = @":";
-	if ([self.searchField.selectedObject isKindOfClass:[CPSymbol class]]) {
-		suffix = [NSString stringWithFormat:@" %@:", [(CPSymbol *)self.searchField.selectedObject symbolTypeName]];
+	if ([self.selectedObject isKindOfClass:[CPSymbol class]]) {
+		suffix = [NSString stringWithFormat:@" %@:", [(CPSymbol *)self.selectedObject symbolTypeName]];
 	}
   
 	[attributedLabel appendAttributedString:[self normalFacedStatusLabelString:suffix]];
@@ -339,24 +453,19 @@
   attributedLabel = [[NSMutableAttributedString alloc] initWithString:@" "
                                                            attributes:[self lowerStatusLabelStringAttributes]];
   
-	[attributedLabel appendAttributedString:[self normalFacedStatusLabelString:@"Press "]];
 	[attributedLabel appendAttributedString:[self boldFacedStatusLabelString:@"[backspace]"]];
-	[attributedLabel appendAttributedString:[self normalFacedStatusLabelString:@" to go back"]];
+	[attributedLabel appendAttributedString:[self normalFacedStatusLabelString:@": go back"]];
   
 	if ([self.selectedElement isSearchable]) {
 		[attributedLabel appendAttributedString:[self normalFacedStatusLabelString:@", "]];
 		[attributedLabel appendAttributedString:[self boldFacedStatusLabelString:@"[space]"]];
-		[attributedLabel appendAttributedString:[self normalFacedStatusLabelString:@" for contents"]];
+		[attributedLabel appendAttributedString:[self normalFacedStatusLabelString:@": contents"]];
 	}
   
 	if ([self.selectedElement isOpenable]) {
-		if ([self.selectedElement isSearchable]) {
-			[attributedLabel appendAttributedString:[self normalFacedStatusLabelString:@" or "]];
-		} else {
-			[attributedLabel appendAttributedString:[self normalFacedStatusLabelString:@", "]];
-		}
+		[attributedLabel appendAttributedString:[self normalFacedStatusLabelString:@", "]];
 		[attributedLabel appendAttributedString:[self boldFacedStatusLabelString:@"[enter]"]];
-		[attributedLabel appendAttributedString:[self normalFacedStatusLabelString:@" to open"]];
+		[attributedLabel appendAttributedString:[self normalFacedStatusLabelString:@": open"]];
 	}
   
 	[self.lowerStatusLabel setAttributedStringValue:attributedLabel];
@@ -408,10 +517,10 @@
 
 - (void)updateContentsWithSearchField
 {
-	if (self.searchField.selectedObject) {
+	if (self.selectedObject) {
 		[self setupMatchingSymbolsData];
     
-	} else if (IsEmpty(self.searchField.fileQuery)) {
+	} else if (IsEmpty(self.searchString)) {
 		[self setupRecentJumpsData];
     
 	} else {
@@ -433,11 +542,29 @@
 - (BOOL)spacePressedForSearchField:(CPSearchField *)searchField
 {
 	if (self.selectedElement && [self.selectedElement isSearchable]) {
-		self.searchField.selectedObject = self.selectedElement;
-		[self noteQueriesChanged];
+		self.searchField.label = self.selectedElement.name;
+    self.selectedObject = self.selectedElement;
+    self.searchString = @"";
 	}
   
 	return YES; // it wasn't handled.
+}
+
+- (BOOL)cmdBackspacePressedForSearchField:(CPSearchField *)searchField
+{
+  //TODO:
+  return NO;
+  
+}
+
+-(BOOL)deleteLabelForSearchField:(CPSearchField*)searchField
+{
+  if (self.selectedObject) {
+    self.selectedObject = nil;
+    self.searchField.label = nil;
+    return YES;
+  }
+  return NO;
 }
 
 - (BOOL)control:(NSControl *)control textView:(NSTextView *)textView doCommandBySelector:(SEL)command
@@ -543,19 +670,4 @@
   return nil;
 }
 
-/*
- *
- *
- *================================================================================================*/
-#pragma mark - CPSearchTableDelegate
-/*==================================================================================================
- */
-
-
--(void)doubleClickedOnRow:(id)sender
-{
-  CPResult *result = [self elementAtRow:self.tableView.selectedRow];
-  [self jumpToResult:result];
-  
-}
 @end

@@ -8,7 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "CPCodePilotConfig.h"
-#import "CPSearchTableDelegate.h"
+#import "CPSearchFieldDelegate.h"
 
 @class CPXcodeWrapper,  CPSearchField, CPStatusLabel, CPResult;
 
@@ -19,7 +19,7 @@ enum {
   
 } DataMode;
 
-@interface CPSearchController : NSObject <NSTextFieldDelegate,NSTableViewDataSource,NSTableViewDelegate,CPSearchTableDelegate>
+@interface CPSearchController : NSObject <NSTextFieldDelegate,NSTableViewDataSource,NSTableViewDelegate,CPSearchFieldDelegate>
 @property (nonatomic, weak) NSControl *indexingProgressIndicator;
 @property (nonatomic, weak) CPSearchField *searchField;
 @property (nonatomic, weak) NSTableView *tableView;
@@ -31,9 +31,9 @@ enum {
 @property (nonatomic, assign) NSUInteger currentDataMode;
 @property (nonatomic, strong) CPResult *selectedElement;
 @property (nonatomic, copy) NSString *searchString;
-@property (nonatomic, strong) NSString *fileQuery;
-@property (nonatomic, strong) NSString *symbolQuery;
 @property (nonatomic) BOOL extendedDisplay;
+@property (nonatomic,copy) NSIndexSet *resultSelectionIndexes; // For NSArrayController
+@property (nonatomic, strong) CPResult *selectedObject;
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)aTableView;
 - (void)selectRowAtIndex:(NSUInteger)rowIndex;
@@ -57,7 +57,6 @@ enum {
 #ifdef PRESERVE_SELECTION
 - (NSInteger)indexOfObjectIsSuggestedCurrentlyForObject:(id)object;
 #endif
-- (BOOL)spacePressedForSearchField:(CPSearchField *)searchField;
 - (void)noteQueriesChanged;
 - (void)noteProjectIndexChanged;
 - (void)setupInfoStatusLabel;
@@ -67,4 +66,12 @@ enum {
 
 - (NSFont *)statusLabelFont;
 - (NSMutableAttributedString *)normalFacedStatusLabelString:(NSString *)str;
+
+
+// ACTIONS
+-(IBAction)selectNext:(id)sender;
+-(IBAction)selectPrevious:(id)IBActionsender;
+-(IBAction)pageDown:(id)senderIBAction;
+-(IBAction)pageUp:(id)sender;
+-(IBAction)jumpToSelectedResult:(id)sender;
 @end

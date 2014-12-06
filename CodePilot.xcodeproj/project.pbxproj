@@ -38,7 +38,6 @@
 		4BC6BE4F1366E49200C8B378 /* CPPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BC6BE4E1366E49200C8B378 /* CPPreferencesViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		4BEAF844138D67E8003DB3AB /* LightCell.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BEAF842138D67E8003DB3AB /* LightCell.png */; };
 		4BEAF845138D67E8003DB3AB /* DarkCell.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BEAF843138D67E8003DB3AB /* DarkCell.png */; };
-		4BEB7735138E466D00D52605 /* CPResultScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BEB7734138E466D00D52605 /* CPResultScrollView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		4BEE523B1339193600DA9881 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C167DFE841241C02AAC07 /* InfoPlist.strings */; };
 		4BEE523C1339193600DA9881 /* CodePilotPrefs.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B19163B1150FFBD00E073F8 /* CodePilotPrefs.png */; };
 		4BEE523D1339193600DA9881 /* CodePilotIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 4B19163C1150FFBD00E073F8 /* CodePilotIcon.icns */; };
@@ -70,6 +69,11 @@
 		4BEE52751339193600DA9881 /* libssl.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B71F65C11561A15005A8471 /* libssl.dylib */; };
 		4BEE52761339193600DA9881 /* libcrypto.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B71F66011561A5E005A8471 /* libcrypto.dylib */; };
 		4BEE52771339193600DA9881 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B25285A1165E23700374EB0 /* WebKit.framework */; };
+		ED01FE0D1A33697900D81A18 /* CPSearchFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ED01FE0C1A33697900D81A18 /* CPSearchFieldCell.m */; };
+		ED29B1251A3326F500D13CD9 /* CPResultsTableRowView.m in Sources */ = {isa = PBXBuildFile; fileRef = ED29B1241A3326F500D13CD9 /* CPResultsTableRowView.m */; };
+		ED29B12A1A333D0A00D13CD9 /* openbookTemplate.png in Resources */ = {isa = PBXBuildFile; fileRef = ED29B1271A333D0A00D13CD9 /* openbookTemplate.png */; };
+		ED29B12B1A333D0A00D13CD9 /* openbookTemplate@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED29B1281A333D0A00D13CD9 /* openbookTemplate@2x.png */; };
+		ED29B12C1A333D0A00D13CD9 /* openbookTemplate@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED29B1291A333D0A00D13CD9 /* openbookTemplate@3x.png */; };
 		ED4EDF5A1A310C1200FE7F92 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = ED4EDF571A310C1200FE7F92 /* logo.png */; };
 		ED4EDF5B1A310C1200FE7F92 /* logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED4EDF581A310C1200FE7F92 /* logo@2x.png */; };
 		ED4EDF5C1A310C1200FE7F92 /* logo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED4EDF591A310C1200FE7F92 /* logo@3x.png */; };
@@ -188,15 +192,22 @@
 		4BDCDAF5113142B40015BF7D /* NSArray+MiscExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = "NSArray+MiscExtensions.m"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		4BEAF842138D67E8003DB3AB /* LightCell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LightCell.png; sourceTree = "<group>"; };
 		4BEAF843138D67E8003DB3AB /* DarkCell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DarkCell.png; sourceTree = "<group>"; };
-		4BEB7733138E466D00D52605 /* CPResultScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPResultScrollView.h; sourceTree = "<group>"; };
-		4BEB7734138E466D00D52605 /* CPResultScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CPResultScrollView.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		4BEE527B1339193600DA9881 /* CodePilot3.xcplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CodePilot3.xcplugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		4BEE52A513391CBF00DA9881 /* CPCodePilotConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = CPCodePilotConfig.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		D2F7E65807B2D6F200F64583 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
+		ED01FE0B1A33697900D81A18 /* CPSearchFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPSearchFieldCell.h; sourceTree = "<group>"; };
+		ED01FE0C1A33697900D81A18 /* CPSearchFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPSearchFieldCell.m; sourceTree = "<group>"; };
+		ED29B1231A3326F500D13CD9 /* CPResultsTableRowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPResultsTableRowView.h; sourceTree = "<group>"; };
+		ED29B1241A3326F500D13CD9 /* CPResultsTableRowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPResultsTableRowView.m; sourceTree = "<group>"; };
+		ED29B1261A332FDE00D13CD9 /* CPResultController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CPResultController.h; sourceTree = "<group>"; };
+		ED29B1271A333D0A00D13CD9 /* openbookTemplate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = openbookTemplate.png; sourceTree = "<group>"; };
+		ED29B1281A333D0A00D13CD9 /* openbookTemplate@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "openbookTemplate@2x.png"; sourceTree = "<group>"; };
+		ED29B1291A333D0A00D13CD9 /* openbookTemplate@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "openbookTemplate@3x.png"; sourceTree = "<group>"; };
 		ED4EDF571A310C1200FE7F92 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		ED4EDF581A310C1200FE7F92 /* logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@2x.png"; sourceTree = "<group>"; };
 		ED4EDF591A310C1200FE7F92 /* logo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@3x.png"; sourceTree = "<group>"; };
 		EDB488491A320F16009E4BBD /* CPSearchTableDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CPSearchTableDelegate.h; sourceTree = "<group>"; };
+		EDBF8E3A1A33B12A001133B0 /* CPSearchFieldDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CPSearchFieldDelegate.h; sourceTree = "<group>"; };
 		EDCAEA481A32186100094CF0 /* CPResultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPResultsViewController.h; sourceTree = "<group>"; };
 		EDCAEA491A32186100094CF0 /* CPResultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPResultsViewController.m; sourceTree = "<group>"; };
 		EDCAEA4A1A32186100094CF0 /* CPResultsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CPResultsViewController.xib; sourceTree = "<group>"; };
@@ -255,6 +266,9 @@
 		089C167CFE841241C02AAC07 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				ED29B1271A333D0A00D13CD9 /* openbookTemplate.png */,
+				ED29B1281A333D0A00D13CD9 /* openbookTemplate@2x.png */,
+				ED29B1291A333D0A00D13CD9 /* openbookTemplate@3x.png */,
 				EDD1DD891A325AAB00857D66 /* hudmask.png */,
 				EDD1DD8A1A325AAB00857D66 /* hudmask@2x.png */,
 				EDD1DD8B1A325AAB00857D66 /* hudmask@3x.png */,
@@ -392,13 +406,15 @@
 			children = (
 				4B1171AF11490EA70029BB44 /* CPHUDViewWithRoundCorners.h */,
 				4B1171B011490EA70029BB44 /* CPHUDViewWithRoundCorners.m */,
-				4BEB7733138E466D00D52605 /* CPResultScrollView.h */,
-				4BEB7734138E466D00D52605 /* CPResultScrollView.m */,
+				ED29B1231A3326F500D13CD9 /* CPResultsTableRowView.h */,
+				ED29B1241A3326F500D13CD9 /* CPResultsTableRowView.m */,
 				EDCAEA481A32186100094CF0 /* CPResultsViewController.h */,
 				EDCAEA491A32186100094CF0 /* CPResultsViewController.m */,
 				EDCAEA4A1A32186100094CF0 /* CPResultsViewController.xib */,
 				4B7E38CE1139898E00FDBC98 /* CPSearchField.h */,
 				4B7E38CF1139898E00FDBC98 /* CPSearchField.m */,
+				ED01FE0B1A33697900D81A18 /* CPSearchFieldCell.h */,
+				ED01FE0C1A33697900D81A18 /* CPSearchFieldCell.m */,
 				4BBEE93F1139B19F00C77C0C /* CPSearchFieldTextView.h */,
 				4BBEE9401139B19F00C77C0C /* CPSearchFieldTextView.m */,
 				4BCE7C17113AF46A001F6CB1 /* CPSelectedObjectCell.h */,
@@ -419,6 +435,8 @@
 				4B7FBFFA112FFFF800846DF6 /* CPCodePilotWindowController.h */,
 				4B7FBFEE112FFFF700846DF6 /* CPCodePilotWindowController.m */,
 				EDB488491A320F16009E4BBD /* CPSearchTableDelegate.h */,
+				ED29B1261A332FDE00D13CD9 /* CPResultController.h */,
+				EDBF8E3A1A33B12A001133B0 /* CPSearchFieldDelegate.h */,
 			);
 			name = "Controllers and delegates";
 			sourceTree = "<group>";
@@ -537,12 +555,15 @@
 			files = (
 				EDCAEA4C1A32186100094CF0 /* CPResultsViewController.xib in Resources */,
 				EDD1DD8E1A325AAB00857D66 /* hudmask@3x.png in Resources */,
+				ED29B12C1A333D0A00D13CD9 /* openbookTemplate@3x.png in Resources */,
 				4BEE523B1339193600DA9881 /* InfoPlist.strings in Resources */,
 				4BEE523C1339193600DA9881 /* CodePilotPrefs.png in Resources */,
 				4BEE523D1339193600DA9881 /* CodePilotIcon.icns in Resources */,
 				4BC46219135494830046C0A6 /* Header.png in Resources */,
 				4BC4621A135494830046C0A6 /* Footer.png in Resources */,
 				4B4D42C01354B8BF00ACA78B /* ResultSelection.png in Resources */,
+				ED29B12A1A333D0A00D13CD9 /* openbookTemplate.png in Resources */,
+				ED29B12B1A333D0A00D13CD9 /* openbookTemplate@2x.png in Resources */,
 				ED4EDF5C1A310C1200FE7F92 /* logo@3x.png in Resources */,
 				EDD1DD8D1A325AAB00857D66 /* hudmask@2x.png in Resources */,
 				4B3A21011354CCF0004EAF8F /* InfoLabelBarTriangle.png in Resources */,
@@ -596,6 +617,7 @@
 				4BEE52511339193600DA9881 /* NSArray+MiscExtensions.m in Sources */,
 				4BEE52521339193600DA9881 /* NSView+AllSubviews.m in Sources */,
 				4BEE52531339193600DA9881 /* NSString+Abbreviation.m in Sources */,
+				ED29B1251A3326F500D13CD9 /* CPResultsTableRowView.m in Sources */,
 				F93F4FAD17B3FE550077B19E /* NSColor+ColorArithmetic.m in Sources */,
 				4BEE52551339193600DA9881 /* CPSearchField.m in Sources */,
 				4BEE52561339193600DA9881 /* CPSearchFieldTextView.m in Sources */,
@@ -603,6 +625,7 @@
 				4BEE52581339193600DA9881 /* AMIndeterminateProgressIndicatorCell.m in Sources */,
 				4BEE525A1339193600DA9881 /* CPFileReference.m in Sources */,
 				4BEE525D1339193600DA9881 /* CPPreferencesView.m in Sources */,
+				ED01FE0D1A33697900D81A18 /* CPSearchFieldCell.m in Sources */,
 				4BEE52611339193600DA9881 /* CPHUDViewWithRoundCorners.m in Sources */,
 				4BEE52631339193600DA9881 /* NSAttributedString+Hyperlink.m in Sources */,
 				4BEE52641339193600DA9881 /* NSNumber+VersionComparison.m in Sources */,
@@ -614,7 +637,6 @@
 				4B4DCEF21363543B0009304C /* CPPreferencesToolbarDelegate.m in Sources */,
 				4BC6BE4F1366E49200C8B378 /* CPPreferencesViewController.m in Sources */,
 				4BAC9BD51386B6310024658A /* CPWorkspaceSymbolCache.m in Sources */,
-				4BEB7735138E466D00D52605 /* CPResultScrollView.m in Sources */,
 				4BC0BBF313AEBBB80093D04D /* NSURL+Anchors.m in Sources */,
 				F9979794155D52060023D04C /* CPSymbolCache.m in Sources */,
 			);

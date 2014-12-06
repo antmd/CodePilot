@@ -8,138 +8,154 @@
 
 #import "CPSearchField.h"
 #import "CPCodePilotConfig.h"
-#import "CPSearchController.h"
+#import "CPSearchFieldDelegate.h"
 #import "CPSelectedObjectCell.h"
 #import "CPStatusLabel.h"
 #import "CPSymbol.h"
 #import "CPSearchFieldTextView.h"
-
-static NSString * const SelectedObjectKeyPath = @"selectedObject";
+#import "CPResultController.h"
+#import "CPSearchFieldCell.h"
 
 @implementation CPSearchField
-- (CPSearchField *)initWithFrame:(NSRect)frameRect
+
+-(void)_setup
 {
-	self = [super initWithFrame:frameRect];
-  
-  if (self) {
     self.bezeled = NO;
     [self setDrawsBackground:NO];
     [self setContinuous:YES];
-    [self setImportsGraphics:YES];
-    [self setTextColor:SEARCHFIELD_FONT_COLOR];
     [self setFocusRingType:NSFocusRingTypeNone];
-    
-    self.delay = DEFAULT_SEARCHFIELD_DELAY_VALUE;
-    
-    if (nil != [[NSUserDefaults standardUserDefaults] objectForKey:DEFAULTS_SEARCH_INTERVAL_KEY]) {
-      self.delay = [[NSUserDefaults standardUserDefaults] floatForKey:DEFAULTS_SEARCH_INTERVAL_KEY];
-      USER_LOG(@"Custom user searchfield delay set to %f", self.delay);
-    }
     self.placeholderString = SEARCHFIELD_PLACEHOLDER_STRING;
     
-    [self setFont:[NSFont systemFontOfSize:SEARCHFIELD_FONT_SIZE]];
-    
-    [self addObserver:self
-           forKeyPath:SelectedObjectKeyPath
-              options:0
-              context:nil];
-    
-    [self letDelegateKnowAboutChangedQueries];
+}
+
+- (instancetype)initWithFrame:(NSRect)frame
+{
+  self = [super initWithFrame:frame];
+  if (self) {
+    [self _setup];
   }
-  
   return self;
 }
 
-- (void)dealloc
+- (instancetype)initWithCoder:(NSCoder *)coder
 {
-  [self removeObserver:self forKeyPath:SelectedObjectKeyPath];
+  self = [super initWithCoder:coder];
+  if (self) {
+    [self _setup];
+  }
+  return self;
 }
 
-- (void)setupDelegateNotificationAboutChangedQueriesTimer
+/*
+ *
+ *
+ *================================================================================================*/
+#pragma mark - Properties
+/*==================================================================================================
+ */
+
+-(NSString *)label
 {
-	if (nil != self.delegateNotificationAboutChangedQueriesTimer) {
-		[self.delegateNotificationAboutChangedQueriesTimer invalidate];
-	}
-  
-	self.delegateNotificationAboutChangedQueriesTimer = [NSTimer scheduledTimerWithTimeInterval:self.delay
-																																											 target:self
-																																										 selector:@selector(letDelegateKnowAboutChangedQueries)
-																																										 userInfo:NULL
-																																											repeats:NO];
-  
-	[[NSRunLoop currentRunLoop] addTimer:self.delegateNotificationAboutChangedQueriesTimer
-															 forMode:NSEventTrackingRunLoopMode];
+  return ((CPSearchFieldCell*)self.cell).label;
 }
 
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+-(void)setLabel:(NSString *)label
 {
-	if ([keyPath isEqualToString:SelectedObjectKeyPath]) {
-		[self selectedObjectDidChange];
-	}
+  ((CPSearchFieldCell*)self.cell).label = label;
 }
 
-- (void)selectedObjectDidChange
+/*
+ *
+ *
+ *================================================================================================*/
+#pragma mark - TextView Delegate
+/*==================================================================================================
+ */
+
+- (BOOL)textView:(NSTextView*)aTextView doCommandBySelector:(SEL)commandSelector
 {
-	if (self.selectedObject) {
-		NSTextAttachment *at = [[NSTextAttachment alloc] initWithFileWrapper:nil];
-		CPSelectedObjectCell *attachCell = [[CPSelectedObjectCell alloc] init];
-    
-		[attachCell setTitle:[self.selectedObject name]];
-		[attachCell setAttachment:at];
-		[at setAttachmentCell: attachCell];
-    
-		NSMutableAttributedString *as = [[NSAttributedString attributedStringWithAttachment: at] mutableCopy];
-    
-		[self setStringValue:@" "];
-		NSMutableAttributedString *currentSpace = [[self attributedStringValue] mutableCopy];
-    
-		// by default, text after the attachment gets lowered baseline, to start where the icon starts
-		[currentSpace addAttribute:NSBaselineOffsetAttributeName
-												 value:[NSNumber numberWithFloat:3.0]
-												 range:NSMakeRange(0, [currentSpace length])];
-    
-		[as appendAttributedString:currentSpace];
-		[self setAttributedStringValue:as];
-    
-		self.symbolQuery = nil;
-	}
+
+        if ((commandSelector == @selector(complete:))
+            || (commandSelector == @selector(cancelOperation:))) // ESCAPE
+        {
+                // Only get here if the Field Editor hasn't used escape for its own purposes (i.e., cancel completion, then clear text)
+                // We can guarantee that the field is blank at this point
+                if (self.stringValue.length) {
+                        self.stringValue = @"";
+                }
+                [self sendAction:@selector(performClose:) to:nil];
+          
+                return YES;
+        } // ESCAPE
+        if (commandSelector == @selector(deleteBackward:)) // BACKSPACE
+        {
+              if (self.stringValue.length == 0
+                  && [self.delegate respondsToSelector:@selector(deleteLabelForSearchField:)]) {
+              		return [(id<CPSearchFieldDelegate>)self.delegate deleteLabelForSearchField:self];
+              }
+                return NO;
+        } // DOWN-ARROW
+        if (commandSelector == @selector(moveDown:)) // DOWN-ARROW
+        {
+                [self sendAction:@selector(selectNextResult:) to:nil];
+                [NSCursor setHiddenUntilMouseMoves:YES];
+                return YES;
+        } // DOWN-ARROW
+        else if (commandSelector == @selector(moveUp:)) // UP-ARROW
+        {
+                [self sendAction:@selector(selectPreviousResult:) to:nil];
+                [NSCursor setHiddenUntilMouseMoves:YES];
+                return YES;
+        } // UP-ARROW
+        else if (commandSelector == @selector(scrollPageDown:)) // PAGE-DOWN
+        {
+                [self sendAction:@selector(selectResultPageDown:) to:nil];
+                [NSCursor setHiddenUntilMouseMoves:YES];
+                return YES;
+        } // PAGE-DOWN
+        else if (commandSelector == @selector(scrollPageUp:)) // PAGE-UP
+        {
+                [self sendAction:@selector(selectResultPageUp:) to:nil];
+                [NSCursor setHiddenUntilMouseMoves:YES];
+                return YES;
+        } // PAGE-UP
+        else if (commandSelector == @selector(insertNewline:)
+                 || commandSelector == @selector(insertNewlineIgnoringFieldEditor:)) // RETURN / ALT+RETURN
+        {
+                [self sendAction:@selector(performDefaultAction:) to:nil];
+
+                return YES;
+        }
+
+        return NO;
 }
+
 
 -(BOOL)isFlipped { return YES; }
 - (void)reset
 {
 	[self setStringValue:@""];
-  
-	self.fileQuery = nil;
-	self.symbolQuery = nil;
-	self.selectedObject = nil;
 }
 
 - (BOOL)cmdBackspaceKeyDown
 {
-  if (nil != self.selectedObject) {
-    if (!IsEmpty(self.symbolQuery)) {
-      // redo current symbol with empty query string when user
-      // presses cmd-backspace in in-file-symbol-query-mode
-      [self selectedObjectDidChange];
-    } else {
-      // cmd-backspace when only file attachment is visible
-      // in query results with total reset of the query
-      [self reset];
-    }
-    
-    [self textDidChange:nil];
+  if (!self.label.length) {
+    self.stringValue = @"";
     return YES;
 	}
+  else if ([self.delegate respondsToSelector:@selector(cmdBackspacePressedForSearchField:)]) {
+		return [(id<CPSearchFieldDelegate>)self.delegate cmdBackspacePressedForSearchField:self];
+	}
   
-  return NO; // not handled here
+  
+  return YES;
 }
 
 // called from SearchFieldTextView
 - (BOOL)spaceKeyDown
 {
-	if ([self delegate] && [[self delegate] respondsToSelector:@selector(spacePressedForSearchField:)]) {
-		return [(CPSearchController *)[self delegate] spacePressedForSearchField:self];
+	if ([self.delegate respondsToSelector:@selector(spacePressedForSearchField:)]) {
+		return [(id<CPSearchFieldDelegate>)self.delegate spacePressedForSearchField:self];
 	}
   
 	return NO; // not handled here.
@@ -151,60 +167,6 @@ static NSString * const SelectedObjectKeyPath = @"selectedObject";
 	[(CPSearchFieldTextView *)[self currentEditor] pasteString:str];
 }
 
-- (void)textDidChange:(NSNotification *)aNotification
-{
-	[self setupDelegateNotificationAboutChangedQueriesTimer];
-  
-	if (self.selectedObject) {
-		// stripping funny ascii representations of text attachments
-		NSString *strValue = [self stringValue];
-		NSMutableString *tmpString = [NSMutableString new];
-		
-		for (NSInteger i = 0; i < [strValue length]; i++) {
-			unichar ch = [strValue characterAtIndex:i];
-			if (ch == ' ' || [[NSCharacterSet alphanumericCharacterSet] characterIsMember:ch]) {
-				[tmpString appendFormat:@"%c", ch];
-			}
-		}
-    
-		// backspace pressed where the situation was: "[object] "
-		if (0 == [tmpString length]) {
-			self.symbolQuery = nil;
-      self.stringValue = self.fileQuery;
-			self.selectedObject = nil;
-		} else {
-			self.symbolQuery = [tmpString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-		}
-	} else {
-		self.fileQuery = [self stringValue];
-		self.symbolQuery = nil;
-	}
-}
-
-- (void)letDelegateKnowAboutChangedQueries
-{
-	if ([self delegate] && [[self delegate] respondsToSelector:@selector(noteQueriesChanged)] &&
-      (!((CPSearchFieldTextView *)[self currentEditor]).someKeyIsDown)) {
-		[self.delegate performSelector:@selector(noteQueriesChanged)];
-	}
-}
-
-- (id)copyWithZone:(NSZone *)zone
-{
-  CPSearchField *newSelf = [[self class] new];
-  
-	[newSelf disableObservers];
-	newSelf.fileQuery = self.fileQuery;
-	newSelf.symbolQuery = self.symbolQuery;
-	newSelf.selectedObject = self.selectedObject;
-  
-	return newSelf;
-}
-
-- (void)disableObservers
-{
-	[self removeObserver:self forKeyPath:SelectedObjectKeyPath];
-}
 
 // nil capable! super-power!
 - (void)setStringValue:(NSString *)str
@@ -216,10 +178,13 @@ static NSString * const SelectedObjectKeyPath = @"selectedObject";
 {
   [super drawRect:dirtyRect];
   [labelColor() set];
-  NSBezierPath * outline = [NSBezierPath bezierPathWithRoundedRect:self.bounds xRadius:8.0 yRadius:8.0] ;
+  CGFloat radius = NSHeight(self.bounds) / 2.0;
+  NSBezierPath * outline = [NSBezierPath bezierPathWithRoundedRect:self.bounds xRadius:radius yRadius:radius] ;
   [outline setClip];
   [outline stroke];
 }
 
 -(BOOL)allowsVibrancy { return YES; }
 @end
+
+

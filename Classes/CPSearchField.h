@@ -11,20 +11,13 @@
 @class CPStatusLabel, CPSearchFieldTextView, CPResult;
 
 @interface CPSearchField : NSSearchField
-@property (nonatomic, strong) NSString *fileQuery;
-@property (nonatomic, strong) NSString *symbolQuery;
-@property (nonatomic, weak) NSTimer *delegateNotificationAboutChangedQueriesTimer;
-@property (nonatomic, strong) CPResult *selectedObject;
-@property (nonatomic, assign) CGFloat delay;
 @property (nonatomic, strong)	CPStatusLabel *placeholderTextField;
+@property (copy,nonatomic) NSString *label; // The 'token field' on the left
 
 - (BOOL)spaceKeyDown;
 - (void)reset;
-- (id)copyWithZone:(NSZone *)zone;
-- (void)disableObservers;
-- (void)letDelegateKnowAboutChangedQueries;
-- (void)setupDelegateNotificationAboutChangedQueriesTimer;
-- (void)selectedObjectDidChange;
 - (BOOL)cmdBackspaceKeyDown;
 - (void)pasteString:(NSString *)str;
 @end
+
+

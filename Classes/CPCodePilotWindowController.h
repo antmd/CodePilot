@@ -22,4 +22,7 @@
 
 - (void)openWindow;
 - (void)hideWindow;
+
+//ACTIONS
+-(IBAction)peformClose:(id)sender;
 @end
