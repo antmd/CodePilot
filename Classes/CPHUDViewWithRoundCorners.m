@@ -64,5 +64,10 @@ static NSString * const CPHudMaskImageName = @"HudMaskImage";
 - (BOOL)isOpaque { return NO; }
 #endif
 
+-(BOOL)acceptsFirstResponder
+{
+  return NO;
+}
+
 
 @end

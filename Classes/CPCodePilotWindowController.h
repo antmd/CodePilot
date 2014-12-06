@@ -24,5 +24,5 @@
 - (void)hideWindow;
 
 //ACTIONS
--(IBAction)peformClose:(id)sender;
+-(IBAction)performClose:(id)sender;
 @end

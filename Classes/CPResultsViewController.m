@@ -8,12 +8,13 @@
 
 #import "CPResultsViewController.h"
 #import "CPSymbol.h"
+#import "CPSearchField.h"
 #import "CPFileReference.h"
 #import "CPXcodeWrapper.h"
 #import "CPSearchController.h"
 
 @interface CPResultsViewController ()
-
+@property (nonatomic) BOOL hasAwoken;
 @end
 
 @implementation CPResultsViewController
@@ -28,11 +29,6 @@
   return self;
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do view setup here.
-}
-
 -(NSString *)nibName
 {
   return @"CPResultsViewController";
@@ -43,6 +39,13 @@
   return [NSBundle bundleForClass:CPResultsViewController.class];
 }
 
+-(void)awakeFromNib
+{
+  if (!self.hasAwoken) {
+    self.hasAwoken = YES;
+    self.resultsTableView.doubleAction = @selector(doubleClickedOnResult:);
+  }
+}
 /*
  *
  *
@@ -70,13 +73,27 @@
 -(void)performDefaultAction:(id)sender
 {
   [self.searchController jumpToSelectedResult:self];
+  [self performClose:self];
 }
 
 -(void)doubleClickedOnResult:(id)sender
 {
-  
+  if (sender==self.resultsTableView) {
+    CPResult *clickedResult = [self resultAtRow:self.resultsTableView.clickedRow];
+    if (clickedResult) {
+      [self.searchController jumpToResult:clickedResult];
+      [self performClose:self];
+    }
+  }
 }
-
+-(void)performClose:(id)sender
+{
+  self.searchController.searchString = @"";
+  self.searchController.selectedObject = nil;
+  self.searchField.stringValue = @"";
+  self.searchField.label = nil;
+  [self.view.window.windowController hideWindow];
+}
 /*
  *
  *
@@ -104,6 +121,11 @@
   return view;
 }
 
+-(CGFloat)tableView:(NSTableView *)tableView heightOfRow:(NSInteger)row
+{
+        return self.searchController.extendedDisplay ? 50.0 : 40.0;
+}
+
 -(NSTableRowView *)tableView:(NSTableView *)tableView rowViewForRow:(NSInteger)row
 {
   return [tableView makeViewWithIdentifier:@"ResultsRowView" owner:self];
@@ -122,6 +144,19 @@
  *
  *
  *================================================================================================*/
+#pragma mark - NSResponder
+/*==================================================================================================
+ */
+
+-(BOOL)acceptsFirstResponder
+{
+  return YES;
+}
+
+/*
+ *
+ *
+ *================================================================================================*/
 #pragma mark - Utilities
 /*==================================================================================================
  */
@@ -129,7 +164,7 @@
 -(CPResult*)resultAtRow:(NSInteger)row
 {
   CPResult *result = nil;
-  if (row >=0 && row < self.resultsTableView.numberOfRows) {
+  if (row >=0 && row < [self.resultsArrayController.arrangedObjects count]) {
     result = self.resultsArrayController.arrangedObjects[row];
   }
   return result;

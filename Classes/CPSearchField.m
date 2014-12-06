@@ -20,12 +20,12 @@
 
 -(void)_setup
 {
-    self.bezeled = NO;
-    [self setDrawsBackground:NO];
-    [self setContinuous:YES];
-    [self setFocusRingType:NSFocusRingTypeNone];
-    self.placeholderString = SEARCHFIELD_PLACEHOLDER_STRING;
-    
+  self.bezeled = NO;
+  [self setDrawsBackground:NO];
+  [self setContinuous:YES];
+  [self setFocusRingType:NSFocusRingTypeNone];
+  self.placeholderString = SEARCHFIELD_PLACEHOLDER_STRING;
+  
 }
 
 - (instancetype)initWithFrame:(NSRect)frame
@@ -74,67 +74,64 @@
 
 - (BOOL)textView:(NSTextView*)aTextView doCommandBySelector:(SEL)commandSelector
 {
-
-        if ((commandSelector == @selector(complete:))
-            || (commandSelector == @selector(cancelOperation:))) // ESCAPE
-        {
-                // Only get here if the Field Editor hasn't used escape for its own purposes (i.e., cancel completion, then clear text)
-                // We can guarantee that the field is blank at this point
-                if (self.stringValue.length) {
-                        self.stringValue = @"";
-                }
-                [self sendAction:@selector(performClose:) to:nil];
-          
-                return YES;
-        } // ESCAPE
-        if (commandSelector == @selector(deleteBackward:)) // BACKSPACE
-        {
-              if (self.stringValue.length == 0
-                  && [self.delegate respondsToSelector:@selector(deleteLabelForSearchField:)]) {
-              		return [(id<CPSearchFieldDelegate>)self.delegate deleteLabelForSearchField:self];
-              }
-                return NO;
-        } // DOWN-ARROW
-        if (commandSelector == @selector(moveDown:)) // DOWN-ARROW
-        {
-                [self sendAction:@selector(selectNextResult:) to:nil];
-                [NSCursor setHiddenUntilMouseMoves:YES];
-                return YES;
-        } // DOWN-ARROW
-        else if (commandSelector == @selector(moveUp:)) // UP-ARROW
-        {
-                [self sendAction:@selector(selectPreviousResult:) to:nil];
-                [NSCursor setHiddenUntilMouseMoves:YES];
-                return YES;
-        } // UP-ARROW
-        else if (commandSelector == @selector(scrollPageDown:)) // PAGE-DOWN
-        {
-                [self sendAction:@selector(selectResultPageDown:) to:nil];
-                [NSCursor setHiddenUntilMouseMoves:YES];
-                return YES;
-        } // PAGE-DOWN
-        else if (commandSelector == @selector(scrollPageUp:)) // PAGE-UP
-        {
-                [self sendAction:@selector(selectResultPageUp:) to:nil];
-                [NSCursor setHiddenUntilMouseMoves:YES];
-                return YES;
-        } // PAGE-UP
-        else if (commandSelector == @selector(insertNewline:)
-                 || commandSelector == @selector(insertNewlineIgnoringFieldEditor:)) // RETURN / ALT+RETURN
-        {
-                [self sendAction:@selector(performDefaultAction:) to:nil];
-
-                return YES;
-        }
-
-        return NO;
+  
+  if ((commandSelector == @selector(complete:))
+      || (commandSelector == @selector(cancelOperation:))
+      || (commandSelector == @selector(insertTab:))
+      ) // ESCAPE or TAB
+  {
+    
+    [self sendAction:@selector(performClose:) to:nil];
+    return YES;
+  } // ESCAPE
+  if (commandSelector == @selector(deleteBackward:)) // BACKSPACE
+  {
+    if (self.stringValue.length == 0
+        && [self.delegate respondsToSelector:@selector(deleteLabelForSearchField:)]) {
+      return [(id<CPSearchFieldDelegate>)self.delegate deleteLabelForSearchField:self];
+    }
+    return NO;
+  } // DOWN-ARROW
+  if (commandSelector == @selector(moveDown:)) // DOWN-ARROW
+  {
+    [self sendAction:@selector(selectNextResult:) to:nil];
+    [NSCursor setHiddenUntilMouseMoves:YES];
+    return YES;
+  } // DOWN-ARROW
+  else if (commandSelector == @selector(moveUp:)) // UP-ARROW
+  {
+    [self sendAction:@selector(selectPreviousResult:) to:nil];
+    [NSCursor setHiddenUntilMouseMoves:YES];
+    return YES;
+  } // UP-ARROW
+  else if (commandSelector == @selector(scrollPageDown:)) // PAGE-DOWN
+  {
+    [self sendAction:@selector(selectResultPageDown:) to:nil];
+    [NSCursor setHiddenUntilMouseMoves:YES];
+    return YES;
+  } // PAGE-DOWN
+  else if (commandSelector == @selector(scrollPageUp:)) // PAGE-UP
+  {
+    [self sendAction:@selector(selectResultPageUp:) to:nil];
+    [NSCursor setHiddenUntilMouseMoves:YES];
+    return YES;
+  } // PAGE-UP
+  else if (commandSelector == @selector(insertNewline:)
+           || commandSelector == @selector(insertNewlineIgnoringFieldEditor:)) // RETURN / ALT+RETURN
+  {
+    [self sendAction:@selector(performDefaultAction:) to:nil];
+    
+    return YES;
+  }
+  
+  return NO;
 }
 
 
 -(BOOL)isFlipped { return YES; }
 - (void)reset
 {
-	[self setStringValue:@""];
+  [self setStringValue:@""];
 }
 
 - (BOOL)cmdBackspaceKeyDown
@@ -142,10 +139,10 @@
   if (!self.label.length) {
     self.stringValue = @"";
     return YES;
-	}
+  }
   else if ([self.delegate respondsToSelector:@selector(cmdBackspacePressedForSearchField:)]) {
-		return [(id<CPSearchFieldDelegate>)self.delegate cmdBackspacePressedForSearchField:self];
-	}
+    return [(id<CPSearchFieldDelegate>)self.delegate cmdBackspacePressedForSearchField:self];
+  }
   
   
   return YES;
@@ -154,17 +151,17 @@
 // called from SearchFieldTextView
 - (BOOL)spaceKeyDown
 {
-	if ([self.delegate respondsToSelector:@selector(spacePressedForSearchField:)]) {
-		return [(id<CPSearchFieldDelegate>)self.delegate spacePressedForSearchField:self];
-	}
+  if ([self.delegate respondsToSelector:@selector(spacePressedForSearchField:)]) {
+    return [(id<CPSearchFieldDelegate>)self.delegate spacePressedForSearchField:self];
+  }
   
-	return NO; // not handled here.
+  return NO; // not handled here.
 }
 
 // programmatic setting of the search query
 - (void)pasteString:(NSString *)str
 {
-	[(CPSearchFieldTextView *)[self currentEditor] pasteString:str];
+  [(CPSearchFieldTextView *)[self currentEditor] pasteString:str];
 }
 
 

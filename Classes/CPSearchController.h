@@ -66,6 +66,7 @@ enum {
 
 - (NSFont *)statusLabelFont;
 - (NSMutableAttributedString *)normalFacedStatusLabelString:(NSString *)str;
+-(void)jumpToResult:(CPResult*)result;
 
 
 // ACTIONS

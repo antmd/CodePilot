@@ -84,7 +84,7 @@
 
 - (void)windowDidResignKey:(NSNotification *)notification
 {
-  //[self hideWindow];
+  [self hideWindow];
 }
 
 - (void)windowDidResignMain:(NSNotification *)notification
@@ -100,11 +100,23 @@
  *
  *
  *================================================================================================*/
+#pragma mark - NSResponder
+/*==================================================================================================
+ */
+-(BOOL)acceptsFirstResponder
+{
+  return YES;
+}
+
+/*
+ *
+ *
+ *================================================================================================*/
 #pragma mark - Actions
 /*==================================================================================================
  */
 
--(IBAction)peformClose:(id)sender
+-(IBAction)performClose:(id)sender
 {
   [self hideWindow];
 }
