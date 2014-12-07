@@ -24,6 +24,7 @@
 - (void)openFileOrSymbol:(id)fileOrSymbol sourceCodeEditor:(IDESourceCodeEditor*)sourceCodeEditor;
 - (void)openCPSymbol:(CPSymbol *)symbol;
 - (void)openCPFileReference:(CPFileReference *)cpFileReference;
+- (void)openCPFileReference:(CPFileReference *)cpFileReference openMode:(CPOpenFileMode)openMode;
 - (NSString *)currentProjectName;
 - (NSString *)normalizedQueryForQuery:(NSString *)query;
 - (NSArray *)contentsForQuery:(NSString *)query fromResult:(CPResult *)result;

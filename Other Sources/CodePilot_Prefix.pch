@@ -7,4 +7,5 @@
 #  import <WebKit/WebKit.h>
 #  import "CPCodePilotConfig.h"
 #  import "CPXcodeInterfaces.h"
+#  import "CPCodePilotConstants.h"
 #endif

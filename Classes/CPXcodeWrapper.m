@@ -425,13 +425,19 @@ static NSString * const IDEIndexDidIndexWorkspaceNotification = @"IDEIndexDidInd
       }
       else {
         // Open file in new editor
-        [self openCPFileReference:fileOrSymbol];
+        [self openCPFileReference:fileOrSymbol openMode:CP_OPEN_IN_NEW_WINDOW];
       }
     }
   }
 }
 
 - (void)openCPFileReference:(CPFileReference *)cpFileReference
+{
+  [self openCPFileReference:cpFileReference openMode:CP_OPEN_IN_CURRENT_EDITOR];
+}
+
+
+- (void)openCPFileReference:(CPFileReference *)cpFileReference openMode:(CPOpenFileMode)openMode
 {
   DVTDocumentLocation *documentLocation = [[DVTDocumentLocation alloc] initWithDocumentURL:[cpFileReference fileURL]
                                                                                  timestamp:nil];
@@ -440,7 +446,29 @@ static NSString * const IDEIndexDidIndexWorkspaceNotification = @"IDEIndexDidInd
                                                                                                       inWorkspace:[self currentWorkspace]
                                                                                                             error:nil];
   
-  [[self currentEditorContext] openEditorOpenSpecifier:openSpecifier];
+  
+  switch (openMode) {
+    case CP_OPEN_IN_NEW_WINDOW: {
+      IDEWorkspaceWindowController * lastActiveWorkspaceWindowController = [IDEWorkspaceWindow lastActiveWorkspaceWindowController] ;
+      id activeWorkspaceTabController = [lastActiveWorkspaceWindowController activeWorkspaceTabController] ;
+      
+      [IDEEditorCoordinator _doOpenIn_NewWindow_withWorkspaceTabController:activeWorkspaceTabController
+                                                               documentURL:cpFileReference.fileURL
+                                                                usingBlock:^(IDEEditorContext* primaryEditorContext) {
+                                                                  // This continuation block is fired after the new window has opened,
+                                                                  // to set the editor area to edit the selected file
+                                                                  IDEWorkspaceTabController *tabController = [primaryEditorContext workspaceTabController] ;
+                                                                  IDEEditorArea *editorArea = [tabController editorArea] ;
+                                                                  [editorArea _openEditorOpenSpecifier:openSpecifier editorContext:primaryEditorContext takeFocus:YES];
+                                                                  [editorArea.view.window zoom:self];
+                                                                }];
+    }
+      break;
+    case CP_OPEN_IN_CURRENT_EDITOR:
+    default:
+      [[self currentEditorContext] openEditorOpenSpecifier:openSpecifier];
+      break;
+  }
 }
 
 - (void)openCPSymbol:(CPSymbol *)symbol

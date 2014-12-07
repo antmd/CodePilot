@@ -8,7 +8,6 @@
 
 #import "CPPreferencesToolbarDelegate.h"
 #import "CPPreferencesViewController.h"
-#import "CPPreferencesView.h"
 
 static NSString * const SelectedItemIdentifierKeyPath = @"selectedItemIdentifier";
 
@@ -54,8 +53,8 @@ static NSString * const SelectedItemIdentifierKeyPath = @"selectedItemIdentifier
     self.ourViewController = [[CPPreferencesViewController alloc] init];
     
     // apply changes in the controller
-    [[NSNotificationCenter defaultCenter] addObserver:self.ourViewController
-                                             selector:@selector(applyChanges)
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(applyChanges:)
                                                  name:NSWindowWillCloseNotification
                                                object:self.originalDelegate.paneReplacementView.window];
     
@@ -65,11 +64,18 @@ static NSString * const SelectedItemIdentifierKeyPath = @"selectedItemIdentifier
   return self;
 }
 
+
 - (void)dealloc
 {
   [[self.ourToolbarItem toolbar] removeObserver:self forKeyPath:SelectedItemIdentifierKeyPath];
   [[self.ourToolbarItem toolbar] setDelegate:nil];
   [[NSNotificationCenter defaultCenter] removeObserver:self.ourViewController];
+}
+
+-(void)applyChanges:(NSNotification*)note
+{
+  [[NSUserDefaults standardUserDefaults] synchronize];
+  
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(NSToolbar *)toolbar change:(NSDictionary *)change context:(void *)context
@@ -79,7 +85,6 @@ static NSString * const SelectedItemIdentifierKeyPath = @"selectedItemIdentifier
   NSWindow *window = [replacementView window];
   
   if ([replacementView isHidden]) {
-    [self.ourViewController applyChanges];
     [self.ourViewController.view removeFromSuperview];
     
     // The automatic resizing is only applied when the DVTExtension changes
@@ -136,19 +141,22 @@ static NSString * const SelectedItemIdentifierKeyPath = @"selectedItemIdentifier
 - (void)ourItemWasSelected:(id)sender
 {
   DVTReplacementView *replacementView = [self.originalDelegate paneReplacementView];
+  NSRect oldRect = replacementView.frame;
   NSWindow *window = [replacementView window];
   
   self.previousReplacementViewHeight = replacementView.frame.size.height;
   
+  NSView *ourPrefView = self.ourViewController.view;
+  
   CGRect newWindowFrame = window.frame;
-  newWindowFrame.size.height -= replacementView.frame.size.height - self.ourViewController.view.frame.size.height;
-  newWindowFrame.origin.y += replacementView.frame.size.height - self.ourViewController.view.frame.size.height;
+  [ourPrefView setFrame:NSMakeRect(0.0, 0.0, NSWidth(oldRect), ourPrefView.frame.size.height)];
+  newWindowFrame.size.height -= replacementView.frame.size.height - ourPrefView.frame.size.height;
+  newWindowFrame.origin.y += replacementView.frame.size.height - ourPrefView.frame.size.height;
   
   [window setTitle:PRODUCT_NAME];
   [window setFrame:newWindowFrame display:YES animate:YES];
   
   [replacementView setHidden:YES];
-  [self.ourViewController.view setFrame:(CGRect) {replacementView.frame.origin, CGSizeMake(replacementView.frame.size.width, [CPPreferencesView preferredHeight])}];
   [[replacementView superview] addSubview:self.ourViewController.view];
 }
 

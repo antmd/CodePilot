@@ -2,17 +2,13 @@
 //  CPPreferencesViewController.h
 //  CodePilot
 //
-//  Created by Zbigniew Sobiecki on 4/26/11.
-//  Copyright 2011 Macoscope. All rights reserved.
+//  Created by Anthony Dervish on 07/12/2014.
+//  Copyright (c) 2014 Macoscope. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <Cocoa/Cocoa.h>
 
-@class CPPreferencesView;
-
-@interface CPPreferencesViewController : NSObject
-@property (nonatomic, strong) CPPreferencesView *view;
-
-- (void)setupFromDefaults;
-- (void)applyChanges;
+@interface CPPreferencesViewController : NSViewController
+@property (readonly,nonatomic) NSAttributedString *hyperlink;
+@property (readonly,nonatomic) NSString *productVersion;
 @end

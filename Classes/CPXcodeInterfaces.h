@@ -144,6 +144,7 @@
 @end
 
 @interface IDEWorkspaceWindow : NSWindow
++ (id)lastActiveWorkspaceWindowController;
 - (IDEWorkspaceDocument *)document;
 @end
 
@@ -315,22 +316,32 @@
 - (IDEEditorHistoryItem *)currentEditorHistoryItem;
 @end
 
+@class IDEEditorArea;
+@interface IDEWorkspaceTabController : NSObject
+-(IDEEditorArea*)editorArea;
+@end
+
 @class IDEEditor;
+
 @interface IDEEditorContext : IDEViewController
 - (BOOL)openEditorOpenSpecifier:(IDEEditorOpenSpecifier *)openSpecifier;
 - (IDEEditorHistoryStack *)currentHistoryStack;
 - (IDEEditor *)editor;
+- (IDEWorkspaceTabController*)workspaceTabController;
 @end
 
+@class IDEEditorOpenSpecifier;
 @interface IDEEditorArea : IDEViewController
 - (IDEEditorContext *)primaryEditorContext;
 - (IDEEditorContext *)lastActiveEditorContext;
+- (void)_openEditorOpenSpecifier:(IDEEditorOpenSpecifier*)arg1 editorContext:(IDEEditorContext*)arg2 takeFocus:(BOOL)arg3;
 @end
 
 @interface IDEWorkspaceWindowController : NSWindowController
 + (NSArray *)workspaceWindowControllers;
 + (IDEWorkspaceWindowController *)workspaceWindowControllerForWindow:(IDEWorkspaceWindow *)window;
 - (IDEEditorArea *)editorArea;
+@property(readonly) IDEWorkspaceTabController *activeWorkspaceTabController;
 @end
 
 @interface IDEKeyBinding : NSObject
@@ -425,3 +436,15 @@ extern NSString *IDEEditorDocumentDidChangeNotification;
 @interface Xcode3FileReference <NSObject>
 - (id)resolvedFilePath;
 @end
+
+@interface IDEEditorCoordinator : NSObject
++ (void)_doOpenIn_AdjacentEditor_withWorkspaceTabController:(id)arg1 editorContext:(id)arg2 documentURL:(id)arg3 usingBlock:(id)arg4;
++ (void)_doOpenIn_Ask_withWorkspaceTabController:(id)arg1 editorContext:(id)arg2 documentURL:(id)arg3 initialSelection:(id)arg4 options:(id)arg5 usingBlock:(id)arg6;
++ (void)_doOpenIn_NewEditor_withWorkspaceTabController:(id)arg1 usingBlock:(id)arg2;
++ (void)_doOpenIn_NewTab_withWorkspaceWindowController:(id)arg1 usingBlock:(id)arg2;
++ (void)_doOpenIn_NewWindow_withWorkspaceTabController:(id)arg1 documentURL:(id)arg2 usingBlock:(id)arg3;
++ (void)_doOpenIn_SeparateEditor_withWorkspaceTabController:(id)arg1 documentURL:(id)arg2 usingBlock:(id)arg3;
++ (void)_doOpenIn_SeparateTab_withWorkspaceTabController:(id)arg1 documentURL:(id)arg2 usingBlock:(id)arg3;
++ (void)_doOpenIn_SeparateWindow_withWorkspaceTabController:(id)arg1 documentURL:(id)arg2 usingBlock:(id)arg3;
+@end
+

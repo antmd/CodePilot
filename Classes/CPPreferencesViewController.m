@@ -2,33 +2,50 @@
 //  CPPreferencesViewController.m
 //  CodePilot
 //
-//  Created by Zbigniew Sobiecki on 4/26/11.
-//  Copyright 2011 Macoscope. All rights reserved.
+//  Created by Anthony Dervish on 07/12/2014.
+//  Copyright (c) 2014 Macoscope. All rights reserved.
 //
 
 #import "CPPreferencesViewController.h"
-#import "CPPreferencesView.h"
+#import "NSAttributedString+Hyperlink.h"
+
+@interface CPPreferencesViewController ()
+
+@end
+
+static NSAttributedString *sHyperlink = nil;
 
 @implementation CPPreferencesViewController
-- (id)init
+
++ (void)initialize
 {
-  self = [super init];
-  
-  if (self) {
-    self.view = [[CPPreferencesView alloc] initWithPreferredFrame];
+  if (self == [CPPreferencesViewController class]) {
+    sHyperlink = [NSAttributedString hyperlinkFromString:@"http://macoscope.com" withURL:[NSURL URLWithString:@"http://macoscope.com"]];
   }
-  
-  return self;
 }
 
-- (void)setupFromDefaults
+-(NSString *)nibName
 {
+  return @"CPPreferencesViewController";
 }
 
-- (void)applyChanges
+-(NSBundle *)nibBundle
 {
-  BOOL autocopySelectionValue = [self.view.autocopyingSelectionCheckbox state];
-  [[NSUserDefaults standardUserDefaults] setBool:autocopySelectionValue forKey:DEFAULTS_AUTOCOPY_SELECTION_KEY];
+  return [NSBundle bundleForClass:CPPreferencesViewController.class];
 }
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    // Do view setup here.
+}
+
+-(NSAttributedString *)hyperlink
+{
+  return sHyperlink;
+}
+
+-(NSString *)productVersion
+{
+  return PRODUCT_CURRENT_VERSION;
+}
 @end

@@ -46,10 +46,6 @@
 
 #define PRODUCT_BUY_LINK @"http://codepilot.cc"
 
-
-#define CREDITS_STRING @"AMIndeterminateProgressIndicatorCell - Copyright © 2007 Andreas Mayer\nQSSmallScroller - Copyright © 2007-2008 Google Inc. All rights reserved\nRegexKitLite - Copyright © 2008-2009 John Engelhart"
-#define THANKS_STRING @"Ruben Bakker, Marcus S. Zarra";
-
 #define PILOT_WINDOW_DELEGATE (CPCodePilotWindowController *)[[CPCodePilotPlugin sharedInstance] windowController]
 #define USER_LEVEL_DEBUG [[CPCodePilotPlugin sharedInstance] isUserLevelDebugOn]
 #define OUR_WINDOW_IS_OPEN [PILOT_WINDOW_DELEGATE ourWindowIsOpen]
@@ -143,6 +139,7 @@
 #define PREFS_VIEW_MIN_HEIGHT                             230
 
 #define DEFAULTS_AUTOCOPY_SELECTION_KEY										@"MCCodePilotAutocopySelection"
+#define DEFAULTS_CTRL_OPEN_ACTION_KEY	  									@"MCCodePilotCtrlOpenAction"
 #define DEFAULTS_API_SEARCH_KEY										        @"MCCodePilotAPISearch"
 #define DEFAULTS_LAST_VERSION_RUN_KEY                     @"MCCodePilotLastVersionRun"
 #define DEFAULTS_USER_LEVEL_DEBUG_KEY											@"MCCodePilotUserLevelDebug"
