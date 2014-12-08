@@ -88,17 +88,26 @@ static NSString * const IDEIndexDidIndexWorkspaceNotification = @"IDEIndexDidInd
                          withObject:workspace];
 }
 
--(NSDictionary*)sourceCodeEditorsByURL
+-(NSDictionary*)tabControllersByURL
 {
-  NSArray *editorDocuments = [[IDEDocumentController sharedDocumentController] editorDocuments];
+  NSArray *windowControllers = [IDEWorkspaceWindowController workspaceWindowControllers];
   NSMutableDictionary *newurls = [NSMutableDictionary new];
-  for (IDESourceCodeDocument *doc in editorDocuments) {
-    if ([doc isKindOfClass:NSClassFromString(@"IDEEditorDocument")]) {
-      NSURL *fileURL = [doc fileURL];
-      IDESourceCodeEditor *editor = [[doc _documentEditors] anyObject ];
-      if ([editor isKindOfClass:NSClassFromString(@"IDESourceCodeEditor")]
-          || [editor isKindOfClass:NSClassFromString(@"IBDocumentEditor")]) {
-        newurls[fileURL] = editor;
+  for (IDEWorkspaceWindowController *wc in windowControllers) {
+    for (IDEWorkspaceTabController *tc in [wc workspaceTabControllers]) {
+      NSURL *originalURL = tc.tabFilePath.fileURL;
+            if (!originalURL) { continue; }
+      IDEEditorArea *editorArea = tc.editorArea;
+      NSArray *editorContexts = editorArea.editorModeViewController.editorContexts;
+      if (editorContexts.count) {
+        if (editorContexts.count ==1 && [editorContexts[0] originalRequestedDocumentURL] == nil) {
+          // This is a lazily loaded tab -- we can't tell if there are other documents on this tab.
+          newurls[originalURL] = @[wc,tc,editorContexts[0]];
+          continue;
+        }
+        for (IDEEditorContext *ec in editorContexts) {
+          NSURL *url = ec.originalRequestedDocumentURL;
+          newurls[url] = @[wc,tc,ec];
+        }
       }
     }
   }
@@ -412,27 +421,30 @@ static NSString * const IDEIndexDidIndexWorkspaceNotification = @"IDEIndexDidInd
   return self.symbolCachingInProgress;
 }
 
-- (void)openFileOrSymbol:(id)fileOrSymbol sourceCodeEditor:(IDEEditor*)sourceCodeEditor openMode:(CPOpenFileMode)openMode;
+- (void)openFileOrSymbol:(id)fileOrSymbol tabController:(IDEWorkspaceTabController*)tc openMode:(CPOpenFileMode)openMode;
 {
   if (nil != fileOrSymbol && [fileOrSymbol isOpenable]) {
     if ([fileOrSymbol isKindOfClass:[CPSymbol class]]) {
       [self openCPSymbol:fileOrSymbol];
       
-    } else if ([fileOrSymbol isKindOfClass:[CPFileReference class]]) {
-      if ([fileOrSymbol isOpen] && sourceCodeEditor) {
+    }
+    else if ([fileOrSymbol isKindOfClass:[CPFileReference class]]) {
+      IDEWorkspaceTabController *tabController = nil;
+      IDEWorkspaceWindowController *windowController = nil;
+      IDEEditorContext *editorContext = nil;
+      NSArray *tcWc = (NSArray*)tc;
+      if (tcWc) {
+        windowController = tcWc[0];
+        tabController = tcWc[1];
+        editorContext = tcWc[2];
+      }
+      if ([fileOrSymbol isOpen] && tabController && windowController && editorContext) {
         // Move focus to already open file
-        NSWindow *viewWindow = sourceCodeEditor.view.window;
+        NSWindow *viewWindow = windowController.window;
         if (viewWindow) {
-          // View is on an active tab. Bring the window forward and move focus
-          [viewWindow makeKeyAndOrderFront:self];
-          [sourceCodeEditor performSelector:@selector(takeFocus) withObject:nil afterDelay:0.001];
-        }
-        else {
-          // View is probably on an inactive tab. Try switching.
-          IDEWorkspaceTabController *tabController = sourceCodeEditor.workspaceTabController;
-          IDEWorkspaceWindowController *windowController = tabController.windowController;
           [windowController.window makeKeyAndOrderFront:self];
-          [windowController performSelector:@selector(activateWorkspaceTabController:) withObject:tabController afterDelay:0.001];
+          [windowController activateWorkspaceTabController:tabController];
+          [editorContext performSelector:@selector(takeFocus) withObject:nil afterDelay:0.001];
         }
       }
       else {

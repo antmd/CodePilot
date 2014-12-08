@@ -25,7 +25,7 @@ static void *QUERY_CHANGED = &QUERY_CHANGED;
 @property (nonatomic,copy,readonly) NSIndexSet *indexesOfSelectableResults;
 @end
 @implementation CPSearchController {
-  NSDictionary *_urlToSourceCodeEditor;
+  NSDictionary *_urlToTabController;
 }
 - (id)init
 {
@@ -189,14 +189,14 @@ static void *QUERY_CHANGED = &QUERY_CHANGED;
 
 - (void)windowDidBecomeInactive
 {
-  _urlToSourceCodeEditor = nil;
+  _urlToTabController = nil;
 }
 
 // before the window is on screen
 - (void)windowWillBecomeActive
 {
 	[self.searchField reset];
-  _urlToSourceCodeEditor = [_xcodeWrapper sourceCodeEditorsByURL];
+  _urlToTabController = [_xcodeWrapper tabControllersByURL];
 	[self updateContentsWithSearchField];
 	[self selectRowAtIndex:0];
 }
@@ -268,7 +268,7 @@ static void *QUERY_CHANGED = &QUERY_CHANGED;
   self.extendedDisplay = NO; // Must come before setting 'suggestedObjects'!
 	self.suggestedObjects = [self.xcodeWrapper recentlyVisited];
   for (CPFileReference *fileRef in self.suggestedObjects) {
-    fileRef.isOpen = (_urlToSourceCodeEditor[fileRef.fileURL] != nil);
+    fileRef.isOpen = (_urlToTabController[fileRef.fileURL] != nil);
   }
 }
 
@@ -647,8 +647,8 @@ static void *QUERY_CHANGED = &QUERY_CHANGED;
           if ((modifiers & NSControlKeyMask) != 0) {
                   openMode = [NSUserDefaults.standardUserDefaults integerForKey:DEFAULTS_CTRL_OPEN_ACTION_KEY];
           }
-      id sourceCodeEditor = [result isKindOfClass:CPFileReference.class] ? _urlToSourceCodeEditor[[(CPFileReference*)result fileURL]] : nil;
-			[self.xcodeWrapper openFileOrSymbol:result sourceCodeEditor:sourceCodeEditor openMode:openMode];
+      id tabController = [result isKindOfClass:CPFileReference.class] ? _urlToTabController[[(CPFileReference*)result fileURL]] : nil;
+    [self.xcodeWrapper openFileOrSymbol:result tabController:tabController openMode:openMode];
   }
 }
 

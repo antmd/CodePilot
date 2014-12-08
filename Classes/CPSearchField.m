@@ -9,7 +9,6 @@
 #import "CPSearchField.h"
 #import "CPCodePilotConfig.h"
 #import "CPSearchFieldDelegate.h"
-#import "CPSelectedObjectCell.h"
 #import "CPStatusLabel.h"
 #import "CPSymbol.h"
 #import "CPSearchFieldTextView.h"

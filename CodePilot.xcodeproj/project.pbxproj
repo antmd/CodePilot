@@ -54,7 +54,6 @@
 		4BEE52531339193600DA9881 /* NSString+Abbreviation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B04640311347A1C00A27CC6 /* NSString+Abbreviation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		4BEE52551339193600DA9881 /* CPSearchField.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7E38CF1139898E00FDBC98 /* CPSearchField.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		4BEE52561339193600DA9881 /* CPSearchFieldTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BBEE9401139B19F00C77C0C /* CPSearchFieldTextView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		4BEE52571339193600DA9881 /* CPSelectedObjectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BCE7C18113AF46A001F6CB1 /* CPSelectedObjectCell.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		4BEE52581339193600DA9881 /* AMIndeterminateProgressIndicatorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B918211113C25AD00BF23B5 /* AMIndeterminateProgressIndicatorCell.m */; };
 		4BEE525A1339193600DA9881 /* CPFileReference.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B6EC540113D354D00126AE0 /* CPFileReference.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		4BEE52611339193600DA9881 /* CPHUDViewWithRoundCorners.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B1171B011490EA70029BB44 /* CPHUDViewWithRoundCorners.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -183,8 +182,6 @@
 		4BC0BBF213AEBBB80093D04D /* NSURL+Anchors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = "NSURL+Anchors.m"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		4BC46217135494830046C0A6 /* Header.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Header.png; sourceTree = "<group>"; };
 		4BC46218135494830046C0A6 /* Footer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Footer.png; sourceTree = "<group>"; };
-		4BCE7C17113AF46A001F6CB1 /* CPSelectedObjectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPSelectedObjectCell.h; sourceTree = "<group>"; };
-		4BCE7C18113AF46A001F6CB1 /* CPSelectedObjectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPSelectedObjectCell.m; sourceTree = "<group>"; };
 		4BDCDAF4113142B40015BF7D /* NSArray+MiscExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+MiscExtensions.h"; sourceTree = "<group>"; };
 		4BDCDAF5113142B40015BF7D /* NSArray+MiscExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = "NSArray+MiscExtensions.m"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		4BEAF842138D67E8003DB3AB /* LightCell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LightCell.png; sourceTree = "<group>"; };
@@ -425,8 +422,6 @@
 				ED01FE0C1A33697900D81A18 /* CPSearchFieldCell.m */,
 				4BBEE93F1139B19F00C77C0C /* CPSearchFieldTextView.h */,
 				4BBEE9401139B19F00C77C0C /* CPSearchFieldTextView.m */,
-				4BCE7C17113AF46A001F6CB1 /* CPSelectedObjectCell.h */,
-				4BCE7C18113AF46A001F6CB1 /* CPSelectedObjectCell.m */,
 				4B88D25411303885007250E5 /* CPStatusLabel.h */,
 				4B88D25511303885007250E5 /* CPStatusLabel.m */,
 				4B7FBFFF112FFFF800846DF6 /* CPWindow.h */,
@@ -632,7 +627,6 @@
 				F93F4FAD17B3FE550077B19E /* NSColor+ColorArithmetic.m in Sources */,
 				4BEE52551339193600DA9881 /* CPSearchField.m in Sources */,
 				4BEE52561339193600DA9881 /* CPSearchFieldTextView.m in Sources */,
-				4BEE52571339193600DA9881 /* CPSelectedObjectCell.m in Sources */,
 				4BEE52581339193600DA9881 /* AMIndeterminateProgressIndicatorCell.m in Sources */,
 				4BEE525A1339193600DA9881 /* CPFileReference.m in Sources */,
 				ED01FE0D1A33697900D81A18 /* CPSearchFieldCell.m in Sources */,

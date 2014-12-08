@@ -21,7 +21,7 @@
 - (BOOL)hasOpenWorkspace;
 - (NSScreen *)currentScreen;
 - (BOOL)currentProjectIsIndexing;
-- (void)openFileOrSymbol:(id)fileOrSymbol sourceCodeEditor:(IDEEditor*)sourceCodeEditor openMode:(CPOpenFileMode)openMode;
+- (void)openFileOrSymbol:(id)fileOrSymbol tabController:(IDEWorkspaceTabController*)tabController openMode:(CPOpenFileMode)openMode;
 - (void)openCPSymbol:(CPSymbol *)symbol;
 - (void)openCPFileReference:(CPFileReference *)cpFileReference;
 - (void)openCPFileReference:(CPFileReference *)cpFileReference openMode:(CPOpenFileMode)openMode;
@@ -65,6 +65,10 @@
 - (BOOL)isSymbolCachingInProgress;
 
 - (NSArray *)recentlyVisitedFiles;
--(NSDictionary*)sourceCodeEditorsByURL;
+/// Return a map: fileURL --> [ IDEWorkspaceWindowController, IDEWorkspaceTabController, IDEEditorContext ]
+/// This can be used to a) select a window, b) select a tab, c) select an edtior area for a given fileURL
+/// Note, at Xcode startup, not all IDEWorkspaceTabControllers will be fully loaded, so if those tabs contain
+/// multiple editor areas, they will not be found by this routine.
+-(NSDictionary*)tabControllersByURL;
 
 @end

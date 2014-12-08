@@ -7,13 +7,13 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "CPWindow.h"
 
-@class CPWindow;
 @class CPSearchController;
 @class CPSearchFieldTextView;
 
 @interface CPCodePilotWindowController : NSWindowController <NSWindowDelegate>
-@property (nonatomic, strong) IBOutlet CPWindow *window;
+@property (strong) IBOutlet CPWindow *window;
 @property (nonatomic, strong) IBOutlet CPSearchController *searchController;
 @property (nonatomic, assign) BOOL ourWindowIsOpen;
 @property (nonatomic, strong) CPSearchFieldTextView *searchFieldTextEditor;

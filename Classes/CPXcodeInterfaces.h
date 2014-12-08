@@ -298,6 +298,7 @@
 @property(retain, nonatomic) IDEWorkspaceTabController *workspaceTabController;
 @end
 
+
 @interface IDEEditorOpenSpecifier : NSObject
 - (IDEEditorOpenSpecifier *)initWithNavigableItem:(IDENavigableItem *)navigableItem error:(NSError *)error;
 + (IDEEditorOpenSpecifier *)structureEditorOpenSpecifierForDocumentLocation:(DVTDocumentLocation *)documentLocation inWorkspace:(IDEWorkspace *)workspace error:(NSError *)error;
@@ -324,6 +325,10 @@
 -(IDEEditorArea*)editorArea;
 @property(copy) NSString *userDefinedTabLabel;
 @property(readonly) IDEWorkspaceWindowController *windowController;
+@property(retain) NSDocument *document;
+@property(readonly) DVTFilePath *tabFilePath;
+@property(readonly) NSString *tabLabel;
+
 @end
 
 @class IDEEditor;
@@ -333,15 +338,22 @@
 - (IDEEditorHistoryStack *)currentHistoryStack;
 - (IDEEditor *)editor;
 - (IDEWorkspaceTabController*)workspaceTabController;
+-(NSURL*)originalRequestedDocumentURL;
 @end
 
 @class IDEEditorOpenSpecifier;
+@interface IDEEditorModeViewController : NSViewController
+-(NSArray*)editorContexts;
+@end
+
 @interface IDEEditorArea : IDEViewController
 - (IDEEditorContext *)primaryEditorContext;
 - (IDEEditorContext *)lastActiveEditorContext;
+-(IDEEditorModeViewController*)editorModeViewController;
 @property(retain, nonatomic) IDEWorkspaceTabController *workspaceTabController;
 - (void)_openEditorOpenSpecifier:(IDEEditorOpenSpecifier*)arg1 editorContext:(IDEEditorContext*)arg2 takeFocus:(BOOL)arg3;
 @end
+
 
 @interface IDEWorkspaceWindowController : NSWindowController
 + (NSArray *)workspaceWindowControllers;
@@ -349,6 +361,8 @@
 - (IDEEditorArea *)editorArea;
 - (void)activateWorkspaceTabController:(id)arg1;
 @property(readonly) IDEWorkspaceTabController *activeWorkspaceTabController;
+- (NSArray*)workspaceTabControllers;
+
 @end
 
 @interface IDEKeyBinding : NSObject
