@@ -73,6 +73,7 @@
 
 - (BOOL)textView:(NSTextView*)aTextView doCommandBySelector:(SEL)commandSelector
 {
+  USER_LOG(@"Selector = %@",NSStringFromSelector(commandSelector));
   
   if ((commandSelector == @selector(complete:))
       || (commandSelector == @selector(cancelOperation:))
@@ -116,6 +117,7 @@
     return YES;
   } // PAGE-UP
   else if (commandSelector == @selector(insertNewline:)
+           || commandSelector == @selector(insertLineBreak:)
            || commandSelector == @selector(insertNewlineIgnoringFieldEditor:)) // RETURN / ALT+RETURN
   {
     [self sendAction:@selector(performDefaultAction:) to:nil];

@@ -478,7 +478,9 @@ static NSString * const IDEIndexDidIndexWorkspaceNotification = @"IDEIndexDidInd
     IDEWorkspaceTabController *tabController = [primaryEditorContext workspaceTabController] ;
     IDEEditorArea *editorArea = [tabController editorArea] ;
     [editorArea _openEditorOpenSpecifier:openSpecifier editorContext:primaryEditorContext takeFocus:YES];
-    [editorArea.view.window zoom:self];
+    if (openMode == CP_OPEN_IN_NEW_WINDOW && !editorArea.view.window.isZoomed) {
+      [editorArea.view.window zoom:self];
+    }
   };
   
   switch (openMode) {

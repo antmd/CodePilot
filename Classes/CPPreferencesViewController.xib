@@ -104,13 +104,14 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="OAW-Cz-x0W">
+                <popUpButton verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OAW-Cz-x0W">
                     <rect key="frame" x="18" y="182" width="113" height="26"/>
                     <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="hFO-Xk-FSD">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="menu"/>
                         <menu key="menu" id="MQj-J3-oxX">
                             <items>
+                                <menuItem title="Current Editor" id="ylG-Fb-bvT"/>
                                 <menuItem title="New window" tag="1" id="rOB-mm-FSX"/>
                                 <menuItem title="New Tab" tag="2" id="OpV-Xu-hsq"/>
                             </items>
