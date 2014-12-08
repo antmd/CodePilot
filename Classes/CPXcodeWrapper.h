@@ -21,7 +21,7 @@
 - (BOOL)hasOpenWorkspace;
 - (NSScreen *)currentScreen;
 - (BOOL)currentProjectIsIndexing;
-- (void)openFileOrSymbol:(id)fileOrSymbol sourceCodeEditor:(IDESourceCodeEditor*)sourceCodeEditor;
+- (void)openFileOrSymbol:(id)fileOrSymbol sourceCodeEditor:(IDEEditor*)sourceCodeEditor openMode:(CPOpenFileMode)openMode;
 - (void)openCPSymbol:(CPSymbol *)symbol;
 - (void)openCPFileReference:(CPFileReference *)cpFileReference;
 - (void)openCPFileReference:(CPFileReference *)cpFileReference openMode:(CPOpenFileMode)openMode;

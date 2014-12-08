@@ -111,8 +111,8 @@
                         <font key="font" metaFont="menu"/>
                         <menu key="menu" id="MQj-J3-oxX">
                             <items>
-                                <menuItem title="New window" id="rOB-mm-FSX"/>
-                                <menuItem title="New Tab" tag="1" id="OpV-Xu-hsq"/>
+                                <menuItem title="New window" tag="1" id="rOB-mm-FSX"/>
+                                <menuItem title="New Tab" tag="2" id="OpV-Xu-hsq"/>
                             </items>
                         </menu>
                     </popUpButtonCell>

@@ -642,8 +642,13 @@ static void *QUERY_CHANGED = &QUERY_CHANGED;
 -(void)jumpToResult:(CPResult*)result
 {
   if (result) {
+    CPOpenFileMode openMode = CP_OPEN_IN_CURRENT_EDITOR;
+          NSEventModifierFlags modifiers = [[NSApp currentEvent] modifierFlags];
+          if ((modifiers & NSControlKeyMask) != 0) {
+                  openMode = [NSUserDefaults.standardUserDefaults integerForKey:DEFAULTS_CTRL_OPEN_ACTION_KEY];
+          }
       id sourceCodeEditor = [result isKindOfClass:CPFileReference.class] ? _urlToSourceCodeEditor[[(CPFileReference*)result fileURL]] : nil;
-			[self.xcodeWrapper openFileOrSymbol:result sourceCodeEditor:sourceCodeEditor];
+			[self.xcodeWrapper openFileOrSymbol:result sourceCodeEditor:sourceCodeEditor openMode:openMode];
   }
 }
 

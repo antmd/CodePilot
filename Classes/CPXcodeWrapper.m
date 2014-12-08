@@ -93,10 +93,11 @@ static NSString * const IDEIndexDidIndexWorkspaceNotification = @"IDEIndexDidInd
   NSArray *editorDocuments = [[IDEDocumentController sharedDocumentController] editorDocuments];
   NSMutableDictionary *newurls = [NSMutableDictionary new];
   for (IDESourceCodeDocument *doc in editorDocuments) {
-    if ([doc isKindOfClass:NSClassFromString(@"IDESourceCodeDocument")]) {
+    if ([doc isKindOfClass:NSClassFromString(@"IDEEditorDocument")]) {
       NSURL *fileURL = [doc fileURL];
-      IDESourceCodeEditor *editor = [doc _firstEditor];
-      if ([editor isKindOfClass:NSClassFromString(@"IDESourceCodeEditor")]) {
+      IDESourceCodeEditor *editor = [[doc _documentEditors] anyObject ];
+      if ([editor isKindOfClass:NSClassFromString(@"IDESourceCodeEditor")]
+          || [editor isKindOfClass:NSClassFromString(@"IBDocumentEditor")]) {
         newurls[fileURL] = editor;
       }
     }
@@ -411,7 +412,7 @@ static NSString * const IDEIndexDidIndexWorkspaceNotification = @"IDEIndexDidInd
   return self.symbolCachingInProgress;
 }
 
-- (void)openFileOrSymbol:(id)fileOrSymbol sourceCodeEditor:(IDESourceCodeEditor*)sourceCodeEditor;
+- (void)openFileOrSymbol:(id)fileOrSymbol sourceCodeEditor:(IDEEditor*)sourceCodeEditor openMode:(CPOpenFileMode)openMode;
 {
   if (nil != fileOrSymbol && [fileOrSymbol isOpenable]) {
     if ([fileOrSymbol isKindOfClass:[CPSymbol class]]) {
@@ -420,12 +421,23 @@ static NSString * const IDEIndexDidIndexWorkspaceNotification = @"IDEIndexDidInd
     } else if ([fileOrSymbol isKindOfClass:[CPFileReference class]]) {
       if ([fileOrSymbol isOpen] && sourceCodeEditor) {
         // Move focus to already open file
-        [sourceCodeEditor.viewWindow makeKeyAndOrderFront:self];
-        [sourceCodeEditor performSelector:@selector(takeFocus) withObject:nil afterDelay:0.001];
+        NSWindow *viewWindow = sourceCodeEditor.view.window;
+        if (viewWindow) {
+          // View is on an active tab. Bring the window forward and move focus
+          [viewWindow makeKeyAndOrderFront:self];
+          [sourceCodeEditor performSelector:@selector(takeFocus) withObject:nil afterDelay:0.001];
+        }
+        else {
+          // View is probably on an inactive tab. Try switching.
+          IDEWorkspaceTabController *tabController = sourceCodeEditor.workspaceTabController;
+          IDEWorkspaceWindowController *windowController = tabController.windowController;
+          [windowController.window makeKeyAndOrderFront:self];
+          [windowController performSelector:@selector(activateWorkspaceTabController:) withObject:tabController afterDelay:0.001];
+        }
       }
       else {
         // Open file in new editor
-        [self openCPFileReference:fileOrSymbol openMode:CP_OPEN_IN_NEW_WINDOW];
+        [self openCPFileReference:fileOrSymbol openMode:openMode];
       }
     }
   }
@@ -445,24 +457,27 @@ static NSString * const IDEIndexDidIndexWorkspaceNotification = @"IDEIndexDidInd
   IDEEditorOpenSpecifier *openSpecifier = [IDEEditorOpenSpecifier structureEditorOpenSpecifierForDocumentLocation:documentLocation
                                                                                                       inWorkspace:[self currentWorkspace]
                                                                                                             error:nil];
+  IDEWorkspaceWindowController * lastActiveWorkspaceWindowController = [IDEWorkspaceWindow lastActiveWorkspaceWindowController] ;
+  id activeWorkspaceTabController = [lastActiveWorkspaceWindowController activeWorkspaceTabController] ;
   
+  void (^openContinuation)(IDEEditorContext*) = ^(IDEEditorContext* primaryEditorContext) {
+    // This continuation block is fired after the new window has opened,
+    // to set the editor area to edit the selected file
+    IDEWorkspaceTabController *tabController = [primaryEditorContext workspaceTabController] ;
+    IDEEditorArea *editorArea = [tabController editorArea] ;
+    [editorArea _openEditorOpenSpecifier:openSpecifier editorContext:primaryEditorContext takeFocus:YES];
+    [editorArea.view.window zoom:self];
+  };
   
   switch (openMode) {
-    case CP_OPEN_IN_NEW_WINDOW: {
-      IDEWorkspaceWindowController * lastActiveWorkspaceWindowController = [IDEWorkspaceWindow lastActiveWorkspaceWindowController] ;
-      id activeWorkspaceTabController = [lastActiveWorkspaceWindowController activeWorkspaceTabController] ;
-      
+    case CP_OPEN_IN_NEW_WINDOW:
       [IDEEditorCoordinator _doOpenIn_NewWindow_withWorkspaceTabController:activeWorkspaceTabController
                                                                documentURL:cpFileReference.fileURL
-                                                                usingBlock:^(IDEEditorContext* primaryEditorContext) {
-                                                                  // This continuation block is fired after the new window has opened,
-                                                                  // to set the editor area to edit the selected file
-                                                                  IDEWorkspaceTabController *tabController = [primaryEditorContext workspaceTabController] ;
-                                                                  IDEEditorArea *editorArea = [tabController editorArea] ;
-                                                                  [editorArea _openEditorOpenSpecifier:openSpecifier editorContext:primaryEditorContext takeFocus:YES];
-                                                                  [editorArea.view.window zoom:self];
-                                                                }];
-    }
+                                                                usingBlock:openContinuation];
+      break;
+    case CP_OPEN_IN_NEW_TAB:
+      [IDEEditorCoordinator _doOpenIn_NewTab_withWorkspaceWindowController:lastActiveWorkspaceWindowController
+                                                                usingBlock:openContinuation];
       break;
     case CP_OPEN_IN_CURRENT_EDITOR:
     default:

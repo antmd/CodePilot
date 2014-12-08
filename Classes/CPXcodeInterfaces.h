@@ -293,7 +293,9 @@
 
 @interface DVTViewController : NSViewController
 @end
+@class IDEWorkspaceTabController;
 @interface IDEViewController : DVTViewController
+@property(retain, nonatomic) IDEWorkspaceTabController *workspaceTabController;
 @end
 
 @interface IDEEditorOpenSpecifier : NSObject
@@ -317,8 +319,11 @@
 @end
 
 @class IDEEditorArea;
+@class IDEWorkspaceWindowController;
 @interface IDEWorkspaceTabController : NSObject
 -(IDEEditorArea*)editorArea;
+@property(copy) NSString *userDefinedTabLabel;
+@property(readonly) IDEWorkspaceWindowController *windowController;
 @end
 
 @class IDEEditor;
@@ -334,6 +339,7 @@
 @interface IDEEditorArea : IDEViewController
 - (IDEEditorContext *)primaryEditorContext;
 - (IDEEditorContext *)lastActiveEditorContext;
+@property(retain, nonatomic) IDEWorkspaceTabController *workspaceTabController;
 - (void)_openEditorOpenSpecifier:(IDEEditorOpenSpecifier*)arg1 editorContext:(IDEEditorContext*)arg2 takeFocus:(BOOL)arg3;
 @end
 
@@ -341,6 +347,7 @@
 + (NSArray *)workspaceWindowControllers;
 + (IDEWorkspaceWindowController *)workspaceWindowControllerForWindow:(IDEWorkspaceWindow *)window;
 - (IDEEditorArea *)editorArea;
+- (void)activateWorkspaceTabController:(id)arg1;
 @property(readonly) IDEWorkspaceTabController *activeWorkspaceTabController;
 @end
 
@@ -427,10 +434,15 @@ extern NSString *IDEEditorDocumentDidChangeNotification;
 -(NSWindow*)viewWindow;
 -(void)takeFocus;
 @end
-@interface IDESourceCodeDocument <NSObject>
+
+@interface IDEEditorDocument : NSDocument
+- (NSSet*)_documentEditors;
+@end
+
+
+@interface IDESourceCodeDocument : IDEEditorDocument
 - (id)knownFileReferences;
 -(NSURL*)fileURL;
--(IDESourceCodeEditor*)_firstEditor;
 @end
 
 @interface Xcode3FileReference <NSObject>

@@ -123,7 +123,7 @@
 
 -(CGFloat)tableView:(NSTableView *)tableView heightOfRow:(NSInteger)row
 {
-        return self.searchController.extendedDisplay ? 50.0 : 40.0;
+        return self.searchController.extendedDisplay ? 50.0 : 32.0;
 }
 
 -(NSTableRowView *)tableView:(NSTableView *)tableView rowViewForRow:(NSInteger)row

@@ -69,9 +69,6 @@
 		4BEE52771339193600DA9881 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B25285A1165E23700374EB0 /* WebKit.framework */; };
 		ED01FE0D1A33697900D81A18 /* CPSearchFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ED01FE0C1A33697900D81A18 /* CPSearchFieldCell.m */; };
 		ED29B1251A3326F500D13CD9 /* CPResultsTableRowView.m in Sources */ = {isa = PBXBuildFile; fileRef = ED29B1241A3326F500D13CD9 /* CPResultsTableRowView.m */; };
-		ED29B12A1A333D0A00D13CD9 /* openbookTemplate.png in Resources */ = {isa = PBXBuildFile; fileRef = ED29B1271A333D0A00D13CD9 /* openbookTemplate.png */; };
-		ED29B12B1A333D0A00D13CD9 /* openbookTemplate@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED29B1281A333D0A00D13CD9 /* openbookTemplate@2x.png */; };
-		ED29B12C1A333D0A00D13CD9 /* openbookTemplate@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED29B1291A333D0A00D13CD9 /* openbookTemplate@3x.png */; };
 		ED4EDF5A1A310C1200FE7F92 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = ED4EDF571A310C1200FE7F92 /* logo.png */; };
 		ED4EDF5B1A310C1200FE7F92 /* logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED4EDF581A310C1200FE7F92 /* logo@2x.png */; };
 		ED4EDF5C1A310C1200FE7F92 /* logo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED4EDF591A310C1200FE7F92 /* logo@3x.png */; };
@@ -569,15 +566,12 @@
 				ED59EC961A34B88800D3651A /* CPPreferencesViewController.xib in Resources */,
 				EDFD47751A34FCF400BD45C5 /* openbook@3x.png in Resources */,
 				EDD1DD8E1A325AAB00857D66 /* hudmask@3x.png in Resources */,
-				ED29B12C1A333D0A00D13CD9 /* openbookTemplate@3x.png in Resources */,
 				4BEE523B1339193600DA9881 /* InfoPlist.strings in Resources */,
 				4BEE523C1339193600DA9881 /* CodePilotPrefs.png in Resources */,
 				4BEE523D1339193600DA9881 /* CodePilotIcon.icns in Resources */,
 				4BC46219135494830046C0A6 /* Header.png in Resources */,
 				4BC4621A135494830046C0A6 /* Footer.png in Resources */,
 				4B4D42C01354B8BF00ACA78B /* ResultSelection.png in Resources */,
-				ED29B12A1A333D0A00D13CD9 /* openbookTemplate.png in Resources */,
-				ED29B12B1A333D0A00D13CD9 /* openbookTemplate@2x.png in Resources */,
 				ED4EDF5C1A310C1200FE7F92 /* logo@3x.png in Resources */,
 				EDD1DD8D1A325AAB00857D66 /* hudmask@2x.png in Resources */,
 				EDFD47741A34FCF400BD45C5 /* openbook@2x.png in Resources */,
