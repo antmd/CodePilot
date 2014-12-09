@@ -8,3 +8,6 @@
 
 #import "CPCodePilotConstants.h"
 
+
+NSString * CPDefaultsSwitcherKeyboardShortcutKeyCode = @"CPDefaultsSwitcherKeyboardShortcutKeyCode";
+NSString * CPDefaultsSwitcherKeyboardShortcutModifierFlags = @"CPDefaultsSwitcherKeyboardShortcutModifierFlags";

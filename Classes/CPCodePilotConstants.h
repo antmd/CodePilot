@@ -13,3 +13,6 @@ typedef NS_ENUM(NSUInteger, CPOpenFileMode) {
   , CP_OPEN_IN_NEW_WINDOW
   , CP_OPEN_IN_NEW_TAB
 };
+
+extern NSString * CPDefaultsSwitcherKeyboardShortcutKeyCode;
+extern NSString * CPDefaultsSwitcherKeyboardShortcutModifierFlags;

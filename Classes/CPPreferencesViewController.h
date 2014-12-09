@@ -7,8 +7,11 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "GWShortcutRecorder.h"
 
-@interface CPPreferencesViewController : NSViewController
+
+@interface CPPreferencesViewController : NSViewController <GWShortcutRecorderDelegate>
 @property (readonly,nonatomic) NSAttributedString *hyperlink;
 @property (readonly,nonatomic) NSString *productVersion;
+@property (unsafe_unretained) IBOutlet GWShortcutRecorder *switcherModeKeyboardShortcutRecorder;
 @end

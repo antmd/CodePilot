@@ -6,23 +6,24 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="CPPreferencesViewController">
             <connections>
+                <outlet property="switcherModeKeyboardShortcutRecorder" destination="df4-N2-5bB" id="gH9-Bs-VOk"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView id="Hz6-mo-xeY">
-            <rect key="frame" x="0.0" y="0.0" width="545" height="306"/>
+            <rect key="frame" x="0.0" y="0.0" width="545" height="334"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <box horizontalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="tdy-Zu-Icb">
-                    <rect key="frame" x="271" y="20" width="5" height="266"/>
+                    <rect key="frame" x="271" y="20" width="5" height="294"/>
                     <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                     <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <font key="titleFont" metaFont="system"/>
                 </box>
                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="74z-5F-jB8">
-                    <rect key="frame" x="280" y="252" width="247" height="34"/>
+                    <rect key="frame" x="280" y="280" width="247" height="34"/>
                     <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" title="Code Pilot 3.1 © 2014 Macoscope Sp. z o.o. All rights reserved." id="MZ1-1E-e15">
                         <font key="font" metaFont="systemBold"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -44,7 +45,7 @@
                     </connections>
                 </textField>
                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hx3-is-hQA">
-                    <rect key="frame" x="280" y="216" width="153" height="17"/>
+                    <rect key="frame" x="280" y="244" width="153" height="17"/>
                     <textFieldCell key="cell" controlSize="mini" selectable="YES" sendsActionOnEndEditing="YES" title="http://macoscope.com" allowsEditingTextAttributes="YES" id="a8d-ch-drq">
                         <font key="font" metaFont="systemBold"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -55,7 +56,7 @@
                     </connections>
                 </textField>
                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nej-wY-Z5d">
-                    <rect key="frame" x="280" y="104" width="56" height="17"/>
+                    <rect key="frame" x="280" y="90" width="56" height="17"/>
                     <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" title="Thanks:" id="0u6-mk-0Yi">
                         <font key="font" metaFont="systemBold"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -63,7 +64,7 @@
                     </textFieldCell>
                 </textField>
                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NiR-zW-Tqu">
-                    <rect key="frame" x="280" y="86" width="196" height="17"/>
+                    <rect key="frame" x="280" y="72" width="196" height="17"/>
                     <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" title="Ruben Bakker, Marcus S. Zarra" id="Y5j-6Y-UFf">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -71,7 +72,7 @@
                     </textFieldCell>
                 </textField>
                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="l1f-hS-fYc">
-                    <rect key="frame" x="280" y="175" width="56" height="17"/>
+                    <rect key="frame" x="280" y="203" width="56" height="17"/>
                     <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" title="Credits:" id="GZ3-Cv-cgz">
                         <font key="font" metaFont="systemBold"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -79,15 +80,17 @@
                     </textFieldCell>
                 </textField>
                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GiV-KL-It1">
-                    <rect key="frame" x="280" y="145" width="247" height="28"/>
-                    <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" title="BGHUDAppKit – Copyright © 2008, Tim Davis (BinaryMethod.com, binary.god@gmail.com) " id="xNn-eS-Azp">
+                    <rect key="frame" x="280" y="131" width="247" height="70"/>
+                    <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" id="xNn-eS-Azp">
                         <font key="font" metaFont="smallSystem"/>
+                        <string key="title">• BGHUDAppKit – Copyright © 2008, Tim Davis (BinaryMethod.com, binary.god@gmail.com)
+• objc-shortcutrecorder - Aaron Smith (github - @gngrwzrd)</string>
                         <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="awA-Zp-gdR">
-                    <rect key="frame" x="21" y="266" width="201" height="18"/>
+                    <rect key="frame" x="21" y="294" width="201" height="18"/>
                     <buttonCell key="cell" type="check" title="Auto-search for selected text" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="XOY-sw-GyR">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
@@ -97,15 +100,15 @@
                     </connections>
                 </button>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="woL-5N-MxT">
-                    <rect key="frame" x="21" y="214" width="150" height="17"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Ctrl-Return open action" id="j1R-yw-CvI">
+                    <rect key="frame" x="21" y="242" width="154" height="17"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Ctrl-Return open action:" id="j1R-yw-CvI">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <popUpButton verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OAW-Cz-x0W">
-                    <rect key="frame" x="18" y="182" width="113" height="26"/>
+                <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="OAW-Cz-x0W">
+                    <rect key="frame" x="18" y="210" width="121" height="26"/>
                     <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="hFO-Xk-FSD">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="menu"/>
@@ -121,9 +124,28 @@
                         <binding destination="hgD-a2-Cn1" name="selectedTag" keyPath="values.MCCodePilotCtrlOpenAction" id="sI9-mW-4Yb"/>
                     </connections>
                 </popUpButton>
+                <customView translatesAutoresizingMaskIntoConstraints="NO" id="df4-N2-5bB" customClass="GWShortcutRecorder">
+                    <rect key="frame" x="20" y="150" width="210" height="26"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="210" id="4lV-77-kts"/>
+                        <constraint firstAttribute="height" constant="26" id="hRP-kN-GBO"/>
+                    </constraints>
+                    <connections>
+                        <outlet property="delegate" destination="-2" id="AGV-jf-HNd"/>
+                    </connections>
+                </customView>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0c9-s8-hRc">
+                    <rect key="frame" x="19" y="184" width="217" height="17"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Switcher mode keyboard shortcut:" id="AIA-jn-diG">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
             </subviews>
             <constraints>
                 <constraint firstItem="74z-5F-jB8" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="20" id="4Mf-RQ-geo"/>
+                <constraint firstItem="0c9-s8-hRc" firstAttribute="top" secondItem="OAW-Cz-x0W" secondAttribute="bottom" constant="12" id="7Ct-Rw-Ny6"/>
                 <constraint firstItem="GiV-KL-It1" firstAttribute="leading" secondItem="nej-wY-Z5d" secondAttribute="leading" id="7tw-Ku-8a1"/>
                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="NiR-zW-Tqu" secondAttribute="bottom" constant="72" id="8BB-l6-Wab"/>
                 <constraint firstAttribute="centerX" secondItem="tdy-Zu-Icb" secondAttribute="centerX" constant="-0.5" id="A5z-cI-4PQ"/>
@@ -142,7 +164,9 @@
                 <constraint firstItem="NiR-zW-Tqu" firstAttribute="leading" secondItem="nej-wY-Z5d" secondAttribute="leading" id="Y8X-Fd-76P"/>
                 <constraint firstItem="l1f-hS-fYc" firstAttribute="leading" secondItem="GiV-KL-It1" secondAttribute="leading" id="a9r-Rc-xB7"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="tdy-Zu-Icb" secondAttribute="trailing" constant="254" id="cbP-Mt-ciK"/>
+                <constraint firstItem="0c9-s8-hRc" firstAttribute="leading" secondItem="df4-N2-5bB" secondAttribute="leading" constant="1" id="cjd-Db-OOw"/>
                 <constraint firstAttribute="trailing" secondItem="74z-5F-jB8" secondAttribute="trailing" constant="20" symbolic="YES" id="efo-sy-2dm"/>
+                <constraint firstItem="0c9-s8-hRc" firstAttribute="leading" secondItem="OAW-Cz-x0W" secondAttribute="leading" constant="1" id="eiM-I1-Y48"/>
                 <constraint firstItem="awA-Zp-gdR" firstAttribute="leading" secondItem="woL-5N-MxT" secondAttribute="leading" id="lYM-Oc-ljQ"/>
                 <constraint firstItem="GiV-KL-It1" firstAttribute="top" secondItem="l1f-hS-fYc" secondAttribute="bottom" constant="2" id="m9u-Kz-xGC"/>
                 <constraint firstItem="woL-5N-MxT" firstAttribute="leading" secondItem="OAW-Cz-x0W" secondAttribute="leading" constant="3" id="p37-wT-IZD"/>
@@ -150,6 +174,7 @@
                 <constraint firstItem="tdy-Zu-Icb" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="20" id="tZA-WT-9uk"/>
                 <constraint firstItem="NiR-zW-Tqu" firstAttribute="top" secondItem="nej-wY-Z5d" secondAttribute="bottom" constant="1" id="uSU-rg-eZj"/>
                 <constraint firstItem="NiR-zW-Tqu" firstAttribute="top" secondItem="nej-wY-Z5d" secondAttribute="bottom" constant="1" id="vEC-Qe-kua"/>
+                <constraint firstItem="df4-N2-5bB" firstAttribute="top" secondItem="0c9-s8-hRc" secondAttribute="bottom" constant="8" id="yUP-12-Doa"/>
                 <constraint firstItem="tdy-Zu-Icb" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="awA-Zp-gdR" secondAttribute="trailing" constant="8" symbolic="YES" id="zvh-ir-JgE"/>
             </constraints>
             <point key="canvasLocation" x="369.5" y="513"/>

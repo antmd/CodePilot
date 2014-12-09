@@ -21,6 +21,7 @@
 - (id)initWithXcodeWrapper:(CPXcodeWrapper *)xcodeWrapper;
 
 - (void)openWindow;
+- (void)openWindowWithModifierMask:(NSEventModifierFlags)modifierMask keyCode:(NSUInteger)keyCode; // Switcher mode
 - (void)hideWindow;
 
 //ACTIONS

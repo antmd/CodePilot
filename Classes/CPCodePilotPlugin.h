@@ -20,6 +20,8 @@
 @property (nonatomic, assign) BOOL isUserLevelDebugOn;
 @property (nonatomic, assign) BOOL isInDocumentationMode;
 @property (nonatomic, assign) unsigned long long userKeyEquivalentModifierMask;
+@property (nonatomic) NSUInteger switcherModeKeyCode;
+@property (nonatomic) NSEventModifierFlags switcherModeModifierFlags;
 
 + (instancetype)sharedInstance;
 + (void)pluginDidLoad:(id)arg1;
@@ -27,3 +29,5 @@
 - (void)openCodePilotWindow;
 - (void)checkForFirstRun;
 @end
+
+#define CODE_PILOT_PLUGIN ([CPCodePilotPlugin sharedInstance])

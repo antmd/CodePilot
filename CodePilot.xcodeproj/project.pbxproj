@@ -54,7 +54,6 @@
 		4BEE52531339193600DA9881 /* NSString+Abbreviation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B04640311347A1C00A27CC6 /* NSString+Abbreviation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		4BEE52551339193600DA9881 /* CPSearchField.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7E38CF1139898E00FDBC98 /* CPSearchField.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		4BEE52561339193600DA9881 /* CPSearchFieldTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BBEE9401139B19F00C77C0C /* CPSearchFieldTextView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		4BEE52581339193600DA9881 /* AMIndeterminateProgressIndicatorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B918211113C25AD00BF23B5 /* AMIndeterminateProgressIndicatorCell.m */; };
 		4BEE525A1339193600DA9881 /* CPFileReference.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B6EC540113D354D00126AE0 /* CPFileReference.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		4BEE52611339193600DA9881 /* CPHUDViewWithRoundCorners.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B1171B011490EA70029BB44 /* CPHUDViewWithRoundCorners.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		4BEE52631339193600DA9881 /* NSAttributedString+Hyperlink.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B53D0F911492AB200224F53 /* NSAttributedString+Hyperlink.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -71,6 +70,7 @@
 		ED4EDF5A1A310C1200FE7F92 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = ED4EDF571A310C1200FE7F92 /* logo.png */; };
 		ED4EDF5B1A310C1200FE7F92 /* logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED4EDF581A310C1200FE7F92 /* logo@2x.png */; };
 		ED4EDF5C1A310C1200FE7F92 /* logo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED4EDF591A310C1200FE7F92 /* logo@3x.png */; };
+		ED5382DC1A37275000A61FD6 /* GWShortcutRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = ED5382DB1A37275000A61FD6 /* GWShortcutRecorder.m */; };
 		ED59EC951A34B88800D3651A /* CPPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED59EC931A34B88800D3651A /* CPPreferencesViewController.m */; };
 		ED59EC961A34B88800D3651A /* CPPreferencesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED59EC941A34B88800D3651A /* CPPreferencesViewController.xib */; };
 		EDA64E1A1A34F61C00ED3C8F /* CPCodePilotConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = EDA64E191A34F61C00ED3C8F /* CPCodePilotConstants.m */; };
@@ -168,8 +168,6 @@
 		4B7FC009112FFFF800846DF6 /* MCLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = MCLog.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		4B88D25411303885007250E5 /* CPStatusLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPStatusLabel.h; sourceTree = "<group>"; };
 		4B88D25511303885007250E5 /* CPStatusLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPStatusLabel.m; sourceTree = "<group>"; };
-		4B918211113C25AD00BF23B5 /* AMIndeterminateProgressIndicatorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AMIndeterminateProgressIndicatorCell.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		4B918212113C25AD00BF23B5 /* AMIndeterminateProgressIndicatorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMIndeterminateProgressIndicatorCell.h; sourceTree = "<group>"; };
 		4BA45D2B11343FA9006351CC /* NSView+AllSubviews.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSView+AllSubviews.h"; sourceTree = "<group>"; };
 		4BA45D2C11343FA9006351CC /* NSView+AllSubviews.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = "NSView+AllSubviews.m"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		4BAC9BD31386B6310024658A /* CPWorkspaceSymbolCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPWorkspaceSymbolCache.h; sourceTree = "<group>"; };
@@ -200,6 +198,8 @@
 		ED4EDF571A310C1200FE7F92 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		ED4EDF581A310C1200FE7F92 /* logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@2x.png"; sourceTree = "<group>"; };
 		ED4EDF591A310C1200FE7F92 /* logo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@3x.png"; sourceTree = "<group>"; };
+		ED5382DA1A37275000A61FD6 /* GWShortcutRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWShortcutRecorder.h; sourceTree = "<group>"; };
+		ED5382DB1A37275000A61FD6 /* GWShortcutRecorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWShortcutRecorder.m; sourceTree = "<group>"; };
 		ED59EC921A34B88800D3651A /* CPPreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPPreferencesViewController.h; sourceTree = "<group>"; };
 		ED59EC931A34B88800D3651A /* CPPreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPPreferencesViewController.m; sourceTree = "<group>"; };
 		ED59EC941A34B88800D3651A /* CPPreferencesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CPPreferencesViewController.xib; sourceTree = "<group>"; };
@@ -413,9 +413,6 @@
 				4B1171B011490EA70029BB44 /* CPHUDViewWithRoundCorners.m */,
 				ED29B1231A3326F500D13CD9 /* CPResultsTableRowView.h */,
 				ED29B1241A3326F500D13CD9 /* CPResultsTableRowView.m */,
-				EDCAEA481A32186100094CF0 /* CPResultsViewController.h */,
-				EDCAEA491A32186100094CF0 /* CPResultsViewController.m */,
-				EDCAEA4A1A32186100094CF0 /* CPResultsViewController.xib */,
 				4B7E38CE1139898E00FDBC98 /* CPSearchField.h */,
 				4B7E38CF1139898E00FDBC98 /* CPSearchField.m */,
 				ED01FE0B1A33697900D81A18 /* CPSearchFieldCell.h */,
@@ -433,13 +430,16 @@
 		4B3B5B0B113D086E00503FE7 /* Controllers and delegates */ = {
 			isa = PBXGroup;
 			children = (
-				4B7FBFF9112FFFF800846DF6 /* CPSearchController.h */,
-				4B7FBFF7112FFFF800846DF6 /* CPSearchController.m */,
 				4B7FBFFA112FFFF800846DF6 /* CPCodePilotWindowController.h */,
 				4B7FBFEE112FFFF700846DF6 /* CPCodePilotWindowController.m */,
-				EDB488491A320F16009E4BBD /* CPSearchTableDelegate.h */,
 				ED29B1261A332FDE00D13CD9 /* CPResultController.h */,
+				EDCAEA481A32186100094CF0 /* CPResultsViewController.h */,
+				EDCAEA491A32186100094CF0 /* CPResultsViewController.m */,
+				EDCAEA4A1A32186100094CF0 /* CPResultsViewController.xib */,
+				4B7FBFF9112FFFF800846DF6 /* CPSearchController.h */,
+				4B7FBFF7112FFFF800846DF6 /* CPSearchController.m */,
 				EDBF8E3A1A33B12A001133B0 /* CPSearchFieldDelegate.h */,
+				EDB488491A320F16009E4BBD /* CPSearchTableDelegate.h */,
 			);
 			name = "Controllers and delegates";
 			sourceTree = "<group>";
@@ -459,15 +459,6 @@
 				F9979793155D52060023D04C /* CPSymbolCache.m */,
 			);
 			name = Entities;
-			sourceTree = "<group>";
-		};
-		4B918210113C258100BF23B5 /* AMIndeterminateProgressIndicatorCell */ = {
-			isa = PBXGroup;
-			children = (
-				4B918212113C25AD00BF23B5 /* AMIndeterminateProgressIndicatorCell.h */,
-				4B918211113C25AD00BF23B5 /* AMIndeterminateProgressIndicatorCell.m */,
-			);
-			name = AMIndeterminateProgressIndicatorCell;
 			sourceTree = "<group>";
 		};
 		4BAE450E1147B1D30057EEF1 /* Preferences */ = {
@@ -495,7 +486,8 @@
 		65E9E1721884335C0005FCEE /* 3rd party */ = {
 			isa = PBXGroup;
 			children = (
-				4B918210113C258100BF23B5 /* AMIndeterminateProgressIndicatorCell */,
+				ED5382DA1A37275000A61FD6 /* GWShortcutRecorder.h */,
+				ED5382DB1A37275000A61FD6 /* GWShortcutRecorder.m */,
 			);
 			name = "3rd party";
 			path = ../Classes;
@@ -627,7 +619,6 @@
 				F93F4FAD17B3FE550077B19E /* NSColor+ColorArithmetic.m in Sources */,
 				4BEE52551339193600DA9881 /* CPSearchField.m in Sources */,
 				4BEE52561339193600DA9881 /* CPSearchFieldTextView.m in Sources */,
-				4BEE52581339193600DA9881 /* AMIndeterminateProgressIndicatorCell.m in Sources */,
 				4BEE525A1339193600DA9881 /* CPFileReference.m in Sources */,
 				ED01FE0D1A33697900D81A18 /* CPSearchFieldCell.m in Sources */,
 				4BEE52611339193600DA9881 /* CPHUDViewWithRoundCorners.m in Sources */,
@@ -642,6 +633,7 @@
 				4B4DCEF21363543B0009304C /* CPPreferencesToolbarDelegate.m in Sources */,
 				4BAC9BD51386B6310024658A /* CPWorkspaceSymbolCache.m in Sources */,
 				4BC0BBF313AEBBB80093D04D /* NSURL+Anchors.m in Sources */,
+				ED5382DC1A37275000A61FD6 /* GWShortcutRecorder.m in Sources */,
 				F9979794155D52060023D04C /* CPSymbolCache.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

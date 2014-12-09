@@ -20,7 +20,9 @@
 @property (strong,nonatomic) CPResultsViewController *resultsViewController;
 @end
 
-@implementation CPCodePilotWindowController
+@implementation CPCodePilotWindowController {
+  id _localEventMonitor;
+}
 - (id)initWithXcodeWrapper:(CPXcodeWrapper *)xcodeWrapper
 {
 	self = [super init];
@@ -49,12 +51,49 @@
 	return self;
 }
 
+-(void)dealloc
+{
+  [self hideWindow];
+}
 
-- (void)openWindow
+-(void)openWindow
+{
+  [self openWindowWithModifierMask:0 keyCode:0];
+}
+
+- (void)openWindowWithModifierMask:(NSEventModifierFlags)modifierMask keyCode:(NSUInteger)keyCode
 {
 	if (self.ourWindowIsOpen) {
 		return;
 	}
+  if (modifierMask) {
+    __typeof(self) __weak weakSelf = self;
+    _localEventMonitor = [NSEvent addLocalMonitorForEventsMatchingMask:NSFlagsChangedMask|NSKeyDownMask handler:^NSEvent *(NSEvent *event) {
+      __typeof(self) this = weakSelf;
+      if (event.type == NSFlagsChanged) {
+        if ((event.modifierFlags & modifierMask) == 0) {
+          [this hideWindow];
+          [this.searchController performSelector:@selector(jumpToSelectedResult:) withObject:nil afterDelay:0.0];
+        }
+      }
+      else { // NSKeyDown
+        if (event.keyCode == keyCode && (event.modifierFlags & modifierMask)) {
+          if (event.modifierFlags & NSShiftKeyMask) {
+            [this.searchController selectPrevious:this];
+          }
+          else {
+            [this.searchController selectNext:this];
+          }
+          return nil;
+        }
+        else { // Any other key hides the window
+          [this hideWindow];
+          return nil;
+        }
+      }
+      return event;
+    }];
+  }
   
 	[self.searchController windowWillBecomeActive];
     [self.window center];
@@ -65,6 +104,10 @@
 
 - (void)hideWindow
 {
+  if (_localEventMonitor) {
+    [NSEvent removeMonitor:_localEventMonitor];
+    _localEventMonitor = nil;
+  }
 	[self.window orderOut:self];
 	self.ourWindowIsOpen = NO;
 }

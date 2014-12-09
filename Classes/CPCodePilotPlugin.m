@@ -13,11 +13,25 @@
 
 #include <sys/stat.h>
 
-@implementation CPCodePilotPlugin
+@implementation CPCodePilotPlugin {
+  id _switcherEventMonitor;
+}
+
 + (void)pluginDidLoad:(id)arg1
 {
 }
 
++ (instancetype)sharedInstance
+{
+  static id sharedInstance;
+  static dispatch_once_t onceToken;
+  
+  dispatch_once(&onceToken, ^{
+    sharedInstance = [[CPCodePilotPlugin alloc] init];
+  });
+  
+  return sharedInstance;
+}
 + (void)load
 {
   LOG(@"CODE PILOT: CURRENT_XCODE_VERSION: %@ CURRENT_XCODE_REVISION: %@", CURRENT_XCODE_VERSION, CURRENT_XCODE_REVISION);
@@ -44,9 +58,17 @@
                                                  name:NSApplicationDidFinishLaunchingNotification
                                                object:nil];
 		LOG(@"%@ %@ Plugin loaded.", PRODUCT_NAME, PRODUCT_CURRENT_VERSION);
+    
 	}
   
   return self;
+}
+
+-(void)dealloc
+{
+  if (_switcherEventMonitor) {
+    [NSEvent removeMonitor:_switcherEventMonitor];
+  }
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)notification
@@ -54,6 +76,19 @@
   self.installer = [[CPPluginInstaller alloc] init];
   
   [self.installer installPlugin:self];
+  
+  __typeof(self) __weak weakSelf = self;
+  _switcherEventMonitor = [NSEvent addLocalMonitorForEventsMatchingMask:NSKeyDownMask
+                                                                handler:^NSEvent *(NSEvent *event) {
+                                                                  __typeof(self) this = weakSelf;
+                                                                  if (!self.windowController.ourWindowIsOpen
+                                                                      && (event.modifierFlags & this.switcherModeModifierFlags)
+                                                                      && event.keyCode == this.switcherModeKeyCode) {
+                                                                    [this performSelector:@selector(openCodePilotSwitcher) withObject:nil afterDelay:0.0];
+                                                                    return nil;
+                                                                  }
+                                                                  return event;
+                                                                }];
   
 }
 
@@ -67,6 +102,18 @@
   
 	[self.xcWrapper reloadXcodeState];
 	[self.windowController openWindow];
+}
+
+- (void)openCodePilotSwitcher
+{
+  LOGCALL;
+  
+	if (self.windowController.ourWindowIsOpen) {
+		[self.windowController hideWindow];
+	}
+  
+	[self.xcWrapper reloadXcodeState];
+	[self.windowController openWindowWithModifierMask:self.switcherModeModifierFlags keyCode:self.switcherModeKeyCode];
 }
 
 - (void)checkForFirstRun
@@ -85,15 +132,34 @@
 	[[NSUserDefaults standardUserDefaults] setObject:PRODUCT_CURRENT_VERSION forKey:DEFAULTS_LAST_VERSION_RUN_KEY];
 }
 
-+ (instancetype)sharedInstance
+/*
+ *
+ *
+ *================================================================================================*/
+#pragma mark - Properties
+/*==================================================================================================
+ */
+
+-(NSUInteger)switcherModeKeyCode
 {
-  static id sharedInstance;
-  static dispatch_once_t onceToken;
-  
-  dispatch_once(&onceToken, ^{
-    sharedInstance = [[CPCodePilotPlugin alloc] init];
-  });
-  
-  return sharedInstance;
+  NSUInteger keyCode = [NSUserDefaults.standardUserDefaults integerForKey:CPDefaultsSwitcherKeyboardShortcutKeyCode];
+  return keyCode;
 }
+
+-(void)setSwitcherModeKeyCode:(NSUInteger)switcherModeKeyCode
+{
+  [NSUserDefaults.standardUserDefaults setInteger:switcherModeKeyCode forKey:CPDefaultsSwitcherKeyboardShortcutKeyCode];
+}
+
+-(NSEventModifierFlags)switcherModeModifierFlags
+{
+  NSUInteger modifierFlags = [NSUserDefaults.standardUserDefaults integerForKey:CPDefaultsSwitcherKeyboardShortcutModifierFlags];
+  return modifierFlags;
+}
+
+-(void)setSwitcherModeModifierFlags:(NSEventModifierFlags)switcherModeModifierFlags
+{
+  [NSUserDefaults.standardUserDefaults setInteger:switcherModeModifierFlags forKey:CPDefaultsSwitcherKeyboardShortcutModifierFlags];
+}
+
 @end

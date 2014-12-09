@@ -34,11 +34,14 @@ static NSAttributedString *sHyperlink = nil;
   return [NSBundle bundleForClass:CPPreferencesViewController.class];
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do view setup here.
-}
 
+-(void)awakeFromNib
+{
+  NSUInteger keyCode = CODE_PILOT_PLUGIN.switcherModeKeyCode;
+  if (keyCode) {
+    [self.switcherModeKeyboardShortcutRecorder setKeyCode:keyCode andModifierFlags:CODE_PILOT_PLUGIN.switcherModeModifierFlags];
+  }
+}
 -(NSAttributedString *)hyperlink
 {
   return sHyperlink;
@@ -47,5 +50,24 @@ static NSAttributedString *sHyperlink = nil;
 -(NSString *)productVersion
 {
   return PRODUCT_CURRENT_VERSION;
+}
+
+/*
+ *
+ *
+ *================================================================================================*/
+#pragma mark - GWShortcutRecorderDelegate
+/*==================================================================================================
+ */
+
+- (void) shortcutRecorder:(GWShortcutRecorder *) recorder didClearFlags:(NSEventModifierFlags) flags andKeyCode:(unsigned short) keycode
+{
+  CODE_PILOT_PLUGIN.switcherModeKeyCode = 0;
+  CODE_PILOT_PLUGIN.switcherModeModifierFlags = 0;
+}
+- (void) shortcutRecorder:(GWShortcutRecorder *) recorder setFlags:(NSEventModifierFlags) flags andKeyCode:(unsigned short) keycode
+{
+  CODE_PILOT_PLUGIN.switcherModeKeyCode = keycode;
+  CODE_PILOT_PLUGIN.switcherModeModifierFlags = flags;
 }
 @end

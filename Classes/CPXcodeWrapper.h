@@ -69,6 +69,7 @@
 /// This can be used to a) select a window, b) select a tab, c) select an edtior area for a given fileURL
 /// Note, at Xcode startup, not all IDEWorkspaceTabControllers will be fully loaded, so if those tabs contain
 /// multiple editor areas, they will not be found by this routine.
+/// The results of this method are used to mark 'already open' files in the Code Pilot file list
 -(NSDictionary*)tabControllersByURL;
 
 @end
