@@ -66,6 +66,8 @@
 		4BEE52761339193600DA9881 /* libcrypto.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B71F66011561A5E005A8471 /* libcrypto.dylib */; };
 		4BEE52771339193600DA9881 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B25285A1165E23700374EB0 /* WebKit.framework */; };
 		ED0169EE1A3C5546004A8670 /* IDEWorkspaceTabController+CodePilot.m in Sources */ = {isa = PBXBuildFile; fileRef = ED0169ED1A3C5546004A8670 /* IDEWorkspaceTabController+CodePilot.m */; };
+		ED0169F21A3C9791004A8670 /* NSObject+CPSwizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = ED0169F11A3C9791004A8670 /* NSObject+CPSwizzle.m */; };
+		ED0169F51A3CEAF4004A8670 /* IDEWorkspaceDocument+CodePilot.m in Sources */ = {isa = PBXBuildFile; fileRef = ED0169F41A3CEAF4004A8670 /* IDEWorkspaceDocument+CodePilot.m */; };
 		ED01FE0D1A33697900D81A18 /* CPSearchFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ED01FE0C1A33697900D81A18 /* CPSearchFieldCell.m */; };
 		ED29B1251A3326F500D13CD9 /* CPResultsTableRowView.m in Sources */ = {isa = PBXBuildFile; fileRef = ED29B1241A3326F500D13CD9 /* CPResultsTableRowView.m */; };
 		ED4EDF5A1A310C1200FE7F92 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = ED4EDF571A310C1200FE7F92 /* logo.png */; };
@@ -190,6 +192,11 @@
 		D2F7E65807B2D6F200F64583 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
 		ED0169EC1A3C5546004A8670 /* IDEWorkspaceTabController+CodePilot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IDEWorkspaceTabController+CodePilot.h"; sourceTree = "<group>"; };
 		ED0169ED1A3C5546004A8670 /* IDEWorkspaceTabController+CodePilot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "IDEWorkspaceTabController+CodePilot.m"; sourceTree = "<group>"; };
+		ED0169EF1A3C93A5004A8670 /* MCSwizzle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCSwizzle.h; sourceTree = "<group>"; };
+		ED0169F01A3C9791004A8670 /* NSObject+CPSwizzle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+CPSwizzle.h"; sourceTree = "<group>"; };
+		ED0169F11A3C9791004A8670 /* NSObject+CPSwizzle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+CPSwizzle.m"; sourceTree = "<group>"; };
+		ED0169F31A3CEAF4004A8670 /* IDEWorkspaceDocument+CodePilot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IDEWorkspaceDocument+CodePilot.h"; sourceTree = "<group>"; };
+		ED0169F41A3CEAF4004A8670 /* IDEWorkspaceDocument+CodePilot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "IDEWorkspaceDocument+CodePilot.m"; sourceTree = "<group>"; };
 		ED01FE0B1A33697900D81A18 /* CPSearchFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPSearchFieldCell.h; sourceTree = "<group>"; };
 		ED01FE0C1A33697900D81A18 /* CPSearchFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPSearchFieldCell.m; sourceTree = "<group>"; };
 		ED29B1231A3326F500D13CD9 /* CPResultsTableRowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPResultsTableRowView.h; sourceTree = "<group>"; };
@@ -363,6 +370,7 @@
 				4B63C9261190199500C0DB12 /* MCStringScoring.c */,
 				4B7FC009112FFFF800846DF6 /* MCLog.h */,
 				4B7FC008112FFFF800846DF6 /* MCLog.m */,
+				ED0169EF1A3C93A5004A8670 /* MCSwizzle.h */,
 			);
 			path = MCCommons;
 			sourceTree = SOURCE_ROOT;
@@ -390,6 +398,8 @@
 				4BC0BBF213AEBBB80093D04D /* NSURL+Anchors.m */,
 				F93F4FAB17B3FE550077B19E /* NSColor+ColorArithmetic.h */,
 				F93F4FAC17B3FE550077B19E /* NSColor+ColorArithmetic.m */,
+				ED0169F01A3C9791004A8670 /* NSObject+CPSwizzle.h */,
+				ED0169F11A3C9791004A8670 /* NSObject+CPSwizzle.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -407,6 +417,8 @@
 				4B7FBFF0112FFFF700846DF6 /* CPXcodeWrapper.m */,
 				ED0169EC1A3C5546004A8670 /* IDEWorkspaceTabController+CodePilot.h */,
 				ED0169ED1A3C5546004A8670 /* IDEWorkspaceTabController+CodePilot.m */,
+				ED0169F31A3CEAF4004A8670 /* IDEWorkspaceDocument+CodePilot.h */,
+				ED0169F41A3CEAF4004A8670 /* IDEWorkspaceDocument+CodePilot.m */,
 			);
 			name = XcodeConnectivity;
 			sourceTree = "<group>";
@@ -628,6 +640,7 @@
 				ED01FE0D1A33697900D81A18 /* CPSearchFieldCell.m in Sources */,
 				4BEE52611339193600DA9881 /* CPHUDViewWithRoundCorners.m in Sources */,
 				EDA64E1A1A34F61C00ED3C8F /* CPCodePilotConstants.m in Sources */,
+				ED0169F21A3C9791004A8670 /* NSObject+CPSwizzle.m in Sources */,
 				4BEE52631339193600DA9881 /* NSAttributedString+Hyperlink.m in Sources */,
 				4BEE52641339193600DA9881 /* NSNumber+VersionComparison.m in Sources */,
 				F9EAED25179D945100701117 /* CPXcodeInterfaces.m in Sources */,
@@ -636,6 +649,7 @@
 				4BEE526E1339193600DA9881 /* CPSymbol.m in Sources */,
 				4B30A186133979A7008A4372 /* CPPluginInstaller.m in Sources */,
 				4B4DCEF21363543B0009304C /* CPPreferencesToolbarDelegate.m in Sources */,
+				ED0169F51A3CEAF4004A8670 /* IDEWorkspaceDocument+CodePilot.m in Sources */,
 				4BAC9BD51386B6310024658A /* CPWorkspaceSymbolCache.m in Sources */,
 				4BC0BBF313AEBBB80093D04D /* NSURL+Anchors.m in Sources */,
 				ED5382DC1A37275000A61FD6 /* GWShortcutRecorder.m in Sources */,

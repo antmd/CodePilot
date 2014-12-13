@@ -15,12 +15,19 @@
 #import "NSMutableArray+MiscExtensions.h"
 #import "CPWorkspaceSymbolCache.h"
 #import "CPResult.h"
+#import "IDEWorkspaceDocument+CodePilot.h"
 
 static NSString * const WorkspaceDocumentsKeyPath = @"workspaceDocuments";
 static NSString * const IDEIndexWillIndexWorkspaceNotification = @"IDEIndexWillIndexWorkspaceNotification";
 static NSString * const IDEIndexDidIndexWorkspaceNotification = @"IDEIndexDidIndexWorkspaceNotification";
+static NSString * const IDEEditorAreaLastActiveEditorContextDidChangeNotification = @"IDEEditorAreaLastActiveEditorContextDidChangeNotification";
+static NSString * const IDEEditorAreaLastActiveEditorContextDidChangeContextKey = @"IDEEditorContext";
+static NSString * const IDEEditorContextTransitionNotification = @"transition from one file to another";
+
 
 @implementation CPXcodeWrapper
+
+
 - (id)init
 {
   self = [super init];
@@ -45,6 +52,14 @@ static NSString * const IDEIndexDidIndexWorkspaceNotification = @"IDEIndexDidInd
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(didIndexWorkspace:)
                                                  name:IDEIndexDidIndexWorkspaceNotification
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(editorContextBecameActive:)
+                                                 name:IDEEditorAreaLastActiveEditorContextDidChangeNotification
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(editorContextTransition:)
+                                                 name:IDEEditorContextTransitionNotification
                                                object:nil];
   }
   
@@ -86,6 +101,27 @@ static NSString * const IDEIndexDidIndexWorkspaceNotification = @"IDEIndexDidInd
   [NSThread detachNewThreadSelector:@selector(updateWorkspaceSymbolCacheForWorkspace:)
                            toTarget:self
                          withObject:workspace];
+}
+
+
+// Record a history item when an editor context gains focus
+-(void)editorContextBecameActive:(NSNotification*)notification
+{
+  IDEEditorContext *context = notification.userInfo[IDEEditorAreaLastActiveEditorContextDidChangeContextKey];
+  NSURL *fileURL = context.editor.document.fileURL;
+  if ([fileURL isFileURL]) {
+    [[[self currentWorkspaceDocument] cp_recentsStack] push:fileURL];
+  }
+}
+
+// Record a history item when an editor loads a new document
+-(void)editorContextTransition:(NSNotification*)notification
+{
+  //NSLog(@"Transition notification = %@",notification);
+  DVTDocumentLocation *nextLocation = notification.userInfo[@"next"];
+  if ([nextLocation.documentURL isFileURL]) {
+    [[[self currentWorkspaceDocument] cp_recentsStack] push:nextLocation.documentURL];
+  }
 }
 
 -(NSURL*)activeFileURL
@@ -641,21 +677,19 @@ static NSString * const IDEIndexDidIndexWorkspaceNotification = @"IDEIndexDidInd
 
 - (NSArray *)recentlyVisitedFiles
 {
-  NSArray *recentDocumentURLs = [[self currentWorkspaceDocument] recentEditorDocumentURLs];
+  CPUniqueStack *recentFileURLs = [[self currentWorkspaceDocument] cp_recentsStack];
+  NSURL *activeDocumentURL = self.activeFileURL;
+  [recentFileURLs push:activeDocumentURL];
+  NSArray *recentDocumentURLs = [recentFileURLs copy];
   
   // there are not just files, but also things like:
   // x-xcode-log://07BF5C48-BD53-4F83-9C14-1E8DB4EC5C09
   NSMutableArray *fileURLs = [[NSMutableArray alloc]initWithCapacity:100];
   
-  NSURL *activeDocumentURL = self.activeFileURL;
   for (NSURL *documentURL in recentDocumentURLs) {
-    if ([documentURL isFileURL] && ![documentURL isEqualTo:activeDocumentURL]) {
+    if ([documentURL isFileURL]) {
       [fileURLs addObject:documentURL];
     }
-  }
-  // Active document always first
-  if (activeDocumentURL) {
-    [fileURLs insertObject:activeDocumentURL atIndex:0];
   }
   
   return [self arrayOfCPFileReferencesByWrappingFileURLs:fileURLs];

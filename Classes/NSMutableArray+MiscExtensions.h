@@ -11,4 +11,12 @@
 @interface NSMutableArray (MiscExtensions)
 - (NSArray *)arrayFilteredAndScoredWithFuzzyQuery:(NSString *)query forKey:(NSString *)key;
 - (void)filterWithFuzzyQuery:(NSString *)query forKey:(NSString *)key;
+
+// Stack
++(instancetype)uniqueStackWithMaxCount:(NSUInteger)maxCount;
+-(void)push:(id)object;
+-(id)pop;
 @end
+
+// Poor man's Stack ADT
+#define CPUniqueStack NSMutableArray

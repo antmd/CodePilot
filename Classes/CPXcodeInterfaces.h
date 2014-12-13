@@ -387,6 +387,7 @@
 - (IDEEditorContext *)primaryEditorContext;
 - (IDEEditorContext *)lastActiveEditorContext;
 @property(nonatomic) int editorMode;
+- (void)editorContextDidBecomeLastActiveEditor:(id)arg1;
 @property(retain) IDEEditorModeViewController *editorModeViewController;
 @property(retain, nonatomic) IDEWorkspaceTabController *workspaceTabController;
 - (void)_openEditorOpenSpecifier:(IDEEditorOpenSpecifier*)arg1 editorContext:(IDEEditorContext*)arg2 takeFocus:(BOOL)arg3;
