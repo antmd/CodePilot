@@ -20,6 +20,8 @@
 @property (strong,nonatomic) CPResultsViewController *resultsViewController;
 @end
 
+CPOpenSpecifier *openSpecifierForCharacters(NSString* str);
+
 @implementation CPCodePilotWindowController {
   id _localEventMonitor;
 }
@@ -77,13 +79,21 @@
         }
       }
       else { // NSKeyDown
+        CPOpenSpecifier *openSpecifier = nil;
         if (event.keyCode == keyCode && (event.modifierFlags & modifierMask)) {
+          // Shift + switcher key = move up in result list
           if (event.modifierFlags & NSShiftKeyMask) {
             [this.searchController selectPrevious:this];
           }
           else {
+          // switcher key = move down in result list
             [this.searchController selectNext:this];
           }
+          return nil;
+        }
+        else if ( (openSpecifier = openSpecifierForCharacters(event.charactersIgnoringModifiers)) ) {
+          [this hideWindow];
+          [this.searchController performSelector:@selector(jumpToSelectedResult:) withObject:openSpecifier afterDelay:0.0];
           return nil;
         }
         else { // Any other key hides the window
@@ -99,6 +109,10 @@
     [self.window center];
 	[self.window makeKeyAndOrderFront:self];
 	[self.searchController windowDidBecomeActive];
+  if (modifierMask) {
+    // In switcher mode, advance to the file after the current one straight away
+    [self.searchController selectNext:self];
+  }
 	self.ourWindowIsOpen = YES;
 }
 
@@ -164,3 +178,16 @@
   [self hideWindow];
 }
 @end
+
+
+CPOpenSpecifier *openSpecifierForCharacters(NSString* str)
+{
+  if (!str.length) { return nil; }
+  switch ([str.lowercaseString characterAtIndex:0]) {
+    case (unichar)'w': return CPOpenModeNewWindow;
+    case (unichar)'t': return CPOpenModeNewTab;
+    case (unichar)'v': case (unichar)'s': case (unichar)'a': return CPOpenModeVerticalSplit;
+    case (unichar)'h': return CPOpenModeHorizontalSplit;
+  }
+  return nil;
+}

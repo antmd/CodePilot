@@ -66,7 +66,7 @@ enum {
 
 - (NSFont *)statusLabelFont;
 - (NSMutableAttributedString *)normalFacedStatusLabelString:(NSString *)str;
--(void)jumpToResult:(CPResult*)result;
+-(void)jumpToResult:(CPResult*)result openMode:(CPOpenFileMode)openMode;
 
 
 // ACTIONS
@@ -76,3 +76,15 @@ enum {
 -(IBAction)pageUp:(id)sender;
 -(IBAction)jumpToSelectedResult:(id)sender;
 @end
+
+@interface CPOpenSpecifier : NSObject
++(instancetype)openSpecifierWithMode:(CPOpenFileMode)mode ;
++(instancetype)openSpecifierForCurrentModifierFlags;
+@property CPOpenFileMode openMode;
+@end
+
+extern CPOpenSpecifier *CPOpenModeNewWindow;
+extern CPOpenSpecifier *CPOpenModeNewTab;
+extern CPOpenSpecifier *CPOpenModeVerticalSplit;
+extern CPOpenSpecifier *CPOpenModeHorizontalSplit;
+extern CPOpenSpecifier *CPOpenModeCurrentEditor;

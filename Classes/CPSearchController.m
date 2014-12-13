@@ -19,6 +19,11 @@
 static void *RESULT_SELECTION_CHANGED = &RESULT_SELECTION_CHANGED;
 static void *QUERY_CHANGED = &QUERY_CHANGED;
 
+CPOpenSpecifier *CPOpenModeNewWindow;
+CPOpenSpecifier *CPOpenModeNewTab;
+CPOpenSpecifier *CPOpenModeCurrentEditor;
+CPOpenSpecifier *CPOpenModeVerticalSplit;
+CPOpenSpecifier *CPOpenModeHorizontalSplit;
 
 @interface CPSearchController()
 @property (nonatomic) NSUInteger resultSelectionIndex;
@@ -26,6 +31,17 @@ static void *QUERY_CHANGED = &QUERY_CHANGED;
 @end
 @implementation CPSearchController {
   NSDictionary *_urlToTabController;
+}
+
++ (void)initialize
+{
+  if (self == [CPSearchController class]) {
+    CPOpenModeNewWindow = [CPOpenSpecifier openSpecifierWithMode:CP_OPEN_IN_NEW_WINDOW];
+    CPOpenModeNewTab = [CPOpenSpecifier openSpecifierWithMode:CP_OPEN_IN_NEW_TAB];
+    CPOpenModeVerticalSplit = [CPOpenSpecifier openSpecifierWithMode:CP_OPEN_IN_VSPLIT];
+    CPOpenModeHorizontalSplit = [CPOpenSpecifier openSpecifierWithMode:CP_OPEN_IN_HSPLIT];
+    CPOpenModeCurrentEditor = [CPOpenSpecifier openSpecifierWithMode:CP_OPEN_IN_CURRENT_EDITOR];
+  }
 }
 - (id)init
 {
@@ -154,9 +170,17 @@ static void *QUERY_CHANGED = &QUERY_CHANGED;
 }
 -(void)pageDown:(id)sender { /* TODO */; }
 -(void)pageUp:(id)sender { /* TODO */; }
+
 -(IBAction)jumpToSelectedResult:(id)sender
 {
-  [self jumpToResult:self.selectedElement];
+  CPOpenFileMode openMode = CP_OPEN_IN_CURRENT_EDITOR;
+  if ([sender isKindOfClass:CPOpenSpecifier.class]) {
+    openMode = [(CPOpenSpecifier*)sender openMode];
+  }
+  else {
+    openMode = [CPOpenSpecifier openSpecifierForCurrentModifierFlags].openMode;
+  }
+  [self jumpToResult:self.selectedElement openMode:openMode];
 }
 /*
  *
@@ -601,7 +625,7 @@ static void *QUERY_CHANGED = &QUERY_CHANGED;
 	if (@selector(insertNewline:) == command || @selector(PBX_insertNewlineAndIndent:) == command) {
 		if (self.selectedElement) {
 			[(CPCodePilotWindowController *)[[self.searchField window] delegate] hideWindow];
-      [self jumpToResult:self.selectedElement];
+      [self jumpToSelectedResult:self];
 		}
     
 		return YES;
@@ -639,14 +663,9 @@ static void *QUERY_CHANGED = &QUERY_CHANGED;
 	return NO;
 }
 
--(void)jumpToResult:(CPResult*)result
+-(void)jumpToResult:(CPResult*)result openMode:(CPOpenFileMode)openMode
 {
   if (result) {
-    CPOpenFileMode openMode = CP_OPEN_IN_CURRENT_EDITOR;
-          NSEventModifierFlags modifiers = [[NSApp currentEvent] modifierFlags];
-          if ((modifiers & NSControlKeyMask) != 0) {
-                  openMode = [NSUserDefaults.standardUserDefaults integerForKey:DEFAULTS_CTRL_OPEN_ACTION_KEY];
-          }
       id tabController = [result isKindOfClass:CPFileReference.class] ? _urlToTabController[[(CPFileReference*)result fileURL]] : nil;
     [self.xcodeWrapper openFileOrSymbol:result tabController:tabController openMode:openMode];
   }
@@ -675,4 +694,29 @@ static void *QUERY_CHANGED = &QUERY_CHANGED;
   return nil;
 }
 
+@end
+
+@implementation CPOpenSpecifier
++(instancetype)openSpecifierWithMode:(CPOpenFileMode)mode
+{
+  return [[self alloc] initWithMode:mode];
+}
++(instancetype)openSpecifierForCurrentModifierFlags
+{
+  CPOpenFileMode openMode = CP_OPEN_IN_CURRENT_EDITOR;
+    NSEventModifierFlags modifiers = [[NSApp currentEvent] modifierFlags];
+    if ((modifiers & NSControlKeyMask) != 0) {
+      openMode = [NSUserDefaults.standardUserDefaults integerForKey:DEFAULTS_CTRL_OPEN_ACTION_KEY];
+    }
+  return [[self alloc] initWithMode:openMode];
+  
+}
+- (instancetype)initWithMode:(CPOpenFileMode)mode
+{
+  self = [super init];
+  if (self) {
+    self.openMode = mode;
+  }
+  return self;
+}
 @end

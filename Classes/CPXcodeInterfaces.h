@@ -300,7 +300,9 @@
 
 
 @interface IDEEditorOpenSpecifier : NSObject
-- (IDEEditorOpenSpecifier *)initWithNavigableItem:(IDENavigableItem *)navigableItem error:(NSError *)error;
+- (IDEEditorOpenSpecifier *)initWithNavigableItem:(IDENavigableItem *)navigableItem error:(NSError * __autoreleasing *)error;
+- (IDEEditorOpenSpecifier *)initWithNavigableItem:(IDENavigableItem *)navigableItem locationToSelect:(DVTDocumentLocation*)location error:(NSError * __autoreleasing *)error;
+
 + (IDEEditorOpenSpecifier *)structureEditorOpenSpecifierForDocumentLocation:(DVTDocumentLocation *)documentLocation inWorkspace:(IDEWorkspace *)workspace error:(NSError *)error;
 @end
 
@@ -321,8 +323,21 @@
 
 @class IDEEditorArea;
 @class IDEWorkspaceWindowController;
-@interface IDEWorkspaceTabController : NSObject
+@interface IDEWorkspaceTabController : IDEViewController <NSTextViewDelegate /*,DVTTabbedWindowTabContentControlling, DVTStatefulObject, DVTReplacementViewDelegate, IDEEditorAreaContainer, IDEStructureEditingWorkspaceTabContext, IDEWorkspaceDocumentProvider, DVTEditor*/>
 -(IDEEditorArea*)editorArea;
+- (void)changeToAssistantLayout_BH:(id)arg1;
+- (void)changeToAssistantLayout_BV:(id)arg1;
+- (void)changeToAssistantLayout_LH:(id)arg1;
+- (void)changeToAssistantLayout_LV:(id)arg1;
+- (void)changeToAssistantLayout_RH:(id)arg1;
+- (void)changeToAssistantLayout_RV:(id)arg1;
+- (void)changeToAssistantLayout_TH:(id)arg1;
+- (void)changeToAssistantLayout_TV:(id)arg1;
+- (void)changeToStandardEditor:(id)arg1;
+- (void)changeToGeniusEditor:(id)arg1;
+- (void)addAssistantEditor:(id)arg1;
+- (void)removeAssistantEditor:(id)arg1;
+
 @property(copy) NSString *userDefinedTabLabel;
 @property(readonly) IDEWorkspaceWindowController *windowController;
 @property(retain) NSDocument *document;
@@ -339,17 +354,40 @@
 - (IDEEditor *)editor;
 - (IDEWorkspaceTabController*)workspaceTabController;
 -(NSURL*)originalRequestedDocumentURL;
+- (void)takeFocus;
+- (NSArray*)_currentSelectedDocumentLocations;
+@property(readonly, getter=isPrimaryEditorContext) BOOL primaryEditorContext;
+@property(retain, nonatomic) IDENavigableItem *navigableItem;
 @end
 
 @class IDEEditorOpenSpecifier;
 @interface IDEEditorModeViewController : NSViewController
 -(NSArray*)editorContexts;
+@property(retain, nonatomic) IDEEditorContext *primaryEditorContext;
+@end
+
+@interface IDEEditorMultipleContext : IDEViewController <NSSplitViewDelegate>
+- (BOOL)canCloseEditorContexts;
+- (BOOL)canCreateAdditionalEditorContexts;
+- (void)closeAllEditorContextsKeeping:(id)arg1;
+- (void)closeEditorContext:(id)arg1;
+- (IDEEditorContext*)firstEditorContext;
+- (IDEEditorContext*)secondEditorContext;
+
+@property(retain) IDEEditorContext *selectedEditorContext;
+@end
+
+@interface IDEEditorGeniusMode : IDEEditorModeViewController </*IDEEditorContextDelegate, IDEEditorMultipleContextDelegate,*/ NSSplitViewDelegate>
+@property(retain) IDEEditorMultipleContext *alternateEditorMultipleContext;
+- (BOOL)canRemoveAssistantEditor;
+- (void)removeAssistantEditor;
 @end
 
 @interface IDEEditorArea : IDEViewController
 - (IDEEditorContext *)primaryEditorContext;
 - (IDEEditorContext *)lastActiveEditorContext;
--(IDEEditorModeViewController*)editorModeViewController;
+@property(nonatomic) int editorMode;
+@property(retain) IDEEditorModeViewController *editorModeViewController;
 @property(retain, nonatomic) IDEWorkspaceTabController *workspaceTabController;
 - (void)_openEditorOpenSpecifier:(IDEEditorOpenSpecifier*)arg1 editorContext:(IDEEditorContext*)arg2 takeFocus:(BOOL)arg3;
 @end
@@ -424,7 +462,12 @@
 @interface DVTExtension : NSObject
 @end
 
+@interface IDEEditorDocument : NSDocument
+- (NSSet*)_documentEditors;
+@end
+
 @interface IDEEditor : IDEViewController
+@property(retain) IDEEditorDocument *document;
 - (NSArray *)currentSelectedDocumentLocations;
 - (DVTSourceExpression *)selectedExpression;
 @end
@@ -449,9 +492,6 @@ extern NSString *IDEEditorDocumentDidChangeNotification;
 -(void)takeFocus;
 @end
 
-@interface IDEEditorDocument : NSDocument
-- (NSSet*)_documentEditors;
-@end
 
 
 @interface IDESourceCodeDocument : IDEEditorDocument

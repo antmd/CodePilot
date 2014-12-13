@@ -15,6 +15,7 @@
 @property (nonatomic, strong) NSMutableArray *currentlyIndexedWorkspaces;
 @property (nonatomic, strong) NSMutableArray *workspaceSymbolCaches;
 @property (nonatomic, assign) BOOL symbolCachingInProgress;
+@property (readonly,nonatomic) NSURL *activeFileURL; // Focused document URL
 
 - (void)reloadAfterPreferencesChange;
 - (void)reloadXcodeState;

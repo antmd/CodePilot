@@ -88,14 +88,26 @@ static NSString * const IDEIndexDidIndexWorkspaceNotification = @"IDEIndexDidInd
                          withObject:workspace];
 }
 
+-(NSURL*)activeFileURL
+{
+  IDEWorkspaceWindowController *activeWc = [IDEWorkspaceWindow lastActiveWorkspaceWindowController];
+  IDEWorkspaceTabController *activeTc = [activeWc activeWorkspaceTabController];
+  IDEEditorArea *activeEa = [activeTc editorArea];
+  IDEEditorContext *activeEc = [activeEa lastActiveEditorContext];
+  IDEEditor *activeE = [activeEc editor];
+  NSDocument *activeD = [activeE document];
+  return activeD.fileURL;
+}
+
 -(NSDictionary*)tabControllersByURL
 {
   NSArray *windowControllers = [IDEWorkspaceWindowController workspaceWindowControllers];
   NSMutableDictionary *newurls = [NSMutableDictionary new];
+  
   for (IDEWorkspaceWindowController *wc in windowControllers) {
     for (IDEWorkspaceTabController *tc in [wc workspaceTabControllers]) {
       NSURL *originalURL = tc.tabFilePath.fileURL;
-            if (!originalURL) { continue; }
+      if (!originalURL) { continue; }
       IDEEditorArea *editorArea = tc.editorArea;
       NSArray *editorContexts = editorArea.editorModeViewController.editorContexts;
       if (editorContexts.count) {
@@ -105,8 +117,13 @@ static NSString * const IDEIndexDidIndexWorkspaceNotification = @"IDEIndexDidInd
           continue;
         }
         for (IDEEditorContext *ec in editorContexts) {
-          NSURL *url = ec.originalRequestedDocumentURL;
-          newurls[url] = @[wc,tc,ec];
+          NSURL *url = nil;
+          if ((url = ec.originalRequestedDocumentURL)) {
+            newurls[url] = @[wc,tc,ec];
+          }
+          else if ((url = ec.editor.document.fileURL)) {
+            newurls[url] = @[wc,tc,ec];
+          }
         }
       }
     }
@@ -470,14 +487,14 @@ static NSString * const IDEIndexDidIndexWorkspaceNotification = @"IDEIndexDidInd
                                                                                                       inWorkspace:[self currentWorkspace]
                                                                                                             error:nil];
   IDEWorkspaceWindowController * lastActiveWorkspaceWindowController = [IDEWorkspaceWindow lastActiveWorkspaceWindowController] ;
-  id activeWorkspaceTabController = [lastActiveWorkspaceWindowController activeWorkspaceTabController] ;
+  IDEWorkspaceTabController *activeWorkspaceTabController = [lastActiveWorkspaceWindowController activeWorkspaceTabController] ;
   
-  void (^openContinuation)(IDEEditorContext*) = ^(IDEEditorContext* primaryEditorContext) {
+  void (^openContinuation)(IDEEditorContext*) = ^(IDEEditorContext* newEditorContext) {
     // This continuation block is fired after the new window has opened,
     // to set the editor area to edit the selected file
-    IDEWorkspaceTabController *tabController = [primaryEditorContext workspaceTabController] ;
+    IDEWorkspaceTabController *tabController = [newEditorContext workspaceTabController] ;
     IDEEditorArea *editorArea = [tabController editorArea] ;
-    [editorArea _openEditorOpenSpecifier:openSpecifier editorContext:primaryEditorContext takeFocus:YES];
+    [editorArea _openEditorOpenSpecifier:openSpecifier editorContext:newEditorContext takeFocus:YES];
     if (openMode == CP_OPEN_IN_NEW_WINDOW && !editorArea.view.window.isZoomed) {
       [editorArea.view.window zoom:self];
     }
@@ -492,6 +509,13 @@ static NSString * const IDEIndexDidIndexWorkspaceNotification = @"IDEIndexDidInd
     case CP_OPEN_IN_NEW_TAB:
       [IDEEditorCoordinator _doOpenIn_NewTab_withWorkspaceWindowController:lastActiveWorkspaceWindowController
                                                                 usingBlock:openContinuation];
+      break;
+    case CP_OPEN_IN_HSPLIT:
+    case CP_OPEN_IN_VSPLIT:
+      [IDEEditorCoordinator _doOpenIn_AdjacentEditor_withWorkspaceTabController:lastActiveWorkspaceWindowController
+                                                                  editorContext:nil
+                                                                    documentURL:cpFileReference.fileURL
+                                                                     usingBlock:openContinuation];
       break;
     case CP_OPEN_IN_CURRENT_EDITOR:
     default:
@@ -621,12 +645,17 @@ static NSString * const IDEIndexDidIndexWorkspaceNotification = @"IDEIndexDidInd
   
   // there are not just files, but also things like:
   // x-xcode-log://07BF5C48-BD53-4F83-9C14-1E8DB4EC5C09
-  NSArray *fileURLs = [NSArray array];
+  NSMutableArray *fileURLs = [[NSMutableArray alloc]initWithCapacity:100];
   
+  NSURL *activeDocumentURL = self.activeFileURL;
   for (NSURL *documentURL in recentDocumentURLs) {
-    if ([documentURL isFileURL]) {
-      fileURLs = [fileURLs arrayByAddingObject:documentURL];
+    if ([documentURL isFileURL] && ![documentURL isEqualTo:activeDocumentURL]) {
+      [fileURLs addObject:documentURL];
     }
+  }
+  // Active document always first
+  if (activeDocumentURL) {
+    [fileURLs insertObject:activeDocumentURL atIndex:0];
   }
   
   return [self arrayOfCPFileReferencesByWrappingFileURLs:fileURLs];

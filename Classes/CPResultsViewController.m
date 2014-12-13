@@ -81,7 +81,7 @@
   if (sender==self.resultsTableView) {
     CPResult *clickedResult = [self resultAtRow:self.resultsTableView.clickedRow];
     if (clickedResult) {
-      [self.searchController jumpToResult:clickedResult];
+      [self.searchController jumpToResult:clickedResult openMode:CPOpenModeCurrentEditor];
       [self performClose:self];
     }
   }

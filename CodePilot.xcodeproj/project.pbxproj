@@ -65,6 +65,7 @@
 		4BEE52751339193600DA9881 /* libssl.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B71F65C11561A15005A8471 /* libssl.dylib */; };
 		4BEE52761339193600DA9881 /* libcrypto.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B71F66011561A5E005A8471 /* libcrypto.dylib */; };
 		4BEE52771339193600DA9881 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B25285A1165E23700374EB0 /* WebKit.framework */; };
+		ED0169EE1A3C5546004A8670 /* IDEWorkspaceTabController+CodePilot.m in Sources */ = {isa = PBXBuildFile; fileRef = ED0169ED1A3C5546004A8670 /* IDEWorkspaceTabController+CodePilot.m */; };
 		ED01FE0D1A33697900D81A18 /* CPSearchFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ED01FE0C1A33697900D81A18 /* CPSearchFieldCell.m */; };
 		ED29B1251A3326F500D13CD9 /* CPResultsTableRowView.m in Sources */ = {isa = PBXBuildFile; fileRef = ED29B1241A3326F500D13CD9 /* CPResultsTableRowView.m */; };
 		ED4EDF5A1A310C1200FE7F92 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = ED4EDF571A310C1200FE7F92 /* logo.png */; };
@@ -187,6 +188,8 @@
 		4BEE527B1339193600DA9881 /* CodePilot3.xcplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CodePilot3.xcplugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		4BEE52A513391CBF00DA9881 /* CPCodePilotConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = CPCodePilotConfig.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		D2F7E65807B2D6F200F64583 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
+		ED0169EC1A3C5546004A8670 /* IDEWorkspaceTabController+CodePilot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IDEWorkspaceTabController+CodePilot.h"; sourceTree = "<group>"; };
+		ED0169ED1A3C5546004A8670 /* IDEWorkspaceTabController+CodePilot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "IDEWorkspaceTabController+CodePilot.m"; sourceTree = "<group>"; };
 		ED01FE0B1A33697900D81A18 /* CPSearchFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPSearchFieldCell.h; sourceTree = "<group>"; };
 		ED01FE0C1A33697900D81A18 /* CPSearchFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPSearchFieldCell.m; sourceTree = "<group>"; };
 		ED29B1231A3326F500D13CD9 /* CPResultsTableRowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPResultsTableRowView.h; sourceTree = "<group>"; };
@@ -402,6 +405,8 @@
 				F9EAED24179D945100701117 /* CPXcodeInterfaces.m */,
 				4B7FBFED112FFFF700846DF6 /* CPXcodeWrapper.h */,
 				4B7FBFF0112FFFF700846DF6 /* CPXcodeWrapper.m */,
+				ED0169EC1A3C5546004A8670 /* IDEWorkspaceTabController+CodePilot.h */,
+				ED0169ED1A3C5546004A8670 /* IDEWorkspaceTabController+CodePilot.m */,
 			);
 			name = XcodeConnectivity;
 			sourceTree = "<group>";
@@ -634,6 +639,7 @@
 				4BAC9BD51386B6310024658A /* CPWorkspaceSymbolCache.m in Sources */,
 				4BC0BBF313AEBBB80093D04D /* NSURL+Anchors.m in Sources */,
 				ED5382DC1A37275000A61FD6 /* GWShortcutRecorder.m in Sources */,
+				ED0169EE1A3C5546004A8670 /* IDEWorkspaceTabController+CodePilot.m in Sources */,
 				F9979794155D52060023D04C /* CPSymbolCache.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
