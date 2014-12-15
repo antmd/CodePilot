@@ -69,6 +69,7 @@
 		ED0169F21A3C9791004A8670 /* NSObject+CPSwizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = ED0169F11A3C9791004A8670 /* NSObject+CPSwizzle.m */; };
 		ED0169F51A3CEAF4004A8670 /* IDEWorkspaceDocument+CodePilot.m in Sources */ = {isa = PBXBuildFile; fileRef = ED0169F41A3CEAF4004A8670 /* IDEWorkspaceDocument+CodePilot.m */; };
 		ED01FE0D1A33697900D81A18 /* CPSearchFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ED01FE0C1A33697900D81A18 /* CPSearchFieldCell.m */; };
+		ED2105A81A3F775C003D233A /* NSMutableOrderedSet+CodePilot.m in Sources */ = {isa = PBXBuildFile; fileRef = ED2105A71A3F775C003D233A /* NSMutableOrderedSet+CodePilot.m */; };
 		ED29B1251A3326F500D13CD9 /* CPResultsTableRowView.m in Sources */ = {isa = PBXBuildFile; fileRef = ED29B1241A3326F500D13CD9 /* CPResultsTableRowView.m */; };
 		ED4EDF5A1A310C1200FE7F92 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = ED4EDF571A310C1200FE7F92 /* logo.png */; };
 		ED4EDF5B1A310C1200FE7F92 /* logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED4EDF581A310C1200FE7F92 /* logo@2x.png */; };
@@ -100,18 +101,6 @@
 			remoteInfo = "CodePilot for Xcode 4";
 		};
 /* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		4B7A0F8B1356EF8C004CCC96 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		089C1672FE841209C02AAC07 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
@@ -199,6 +188,9 @@
 		ED0169F41A3CEAF4004A8670 /* IDEWorkspaceDocument+CodePilot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "IDEWorkspaceDocument+CodePilot.m"; sourceTree = "<group>"; };
 		ED01FE0B1A33697900D81A18 /* CPSearchFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPSearchFieldCell.h; sourceTree = "<group>"; };
 		ED01FE0C1A33697900D81A18 /* CPSearchFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPSearchFieldCell.m; sourceTree = "<group>"; };
+		ED2105A61A3F775C003D233A /* NSMutableOrderedSet+CodePilot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableOrderedSet+CodePilot.h"; sourceTree = "<group>"; };
+		ED2105A71A3F775C003D233A /* NSMutableOrderedSet+CodePilot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableOrderedSet+CodePilot.m"; sourceTree = "<group>"; };
+		ED2105A91A3F7861003D233A /* CPUniqueStack.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CPUniqueStack.h; sourceTree = "<group>"; };
 		ED29B1231A3326F500D13CD9 /* CPResultsTableRowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPResultsTableRowView.h; sourceTree = "<group>"; };
 		ED29B1241A3326F500D13CD9 /* CPResultsTableRowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPResultsTableRowView.m; sourceTree = "<group>"; };
 		ED29B1261A332FDE00D13CD9 /* CPResultController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CPResultController.h; sourceTree = "<group>"; };
@@ -380,6 +372,9 @@
 			children = (
 				4B38187C115CD37F0007D74B /* NSMutableArray+MiscExtensions.h */,
 				4B38187B115CD37F0007D74B /* NSMutableArray+MiscExtensions.m */,
+				ED2105A61A3F775C003D233A /* NSMutableOrderedSet+CodePilot.h */,
+				ED2105A71A3F775C003D233A /* NSMutableOrderedSet+CodePilot.m */,
+				ED2105A91A3F7861003D233A /* CPUniqueStack.h */,
 				4B53D0F811492AB200224F53 /* NSAttributedString+Hyperlink.h */,
 				4B53D0F911492AB200224F53 /* NSAttributedString+Hyperlink.m */,
 				4B7FC005112FFFF800846DF6 /* NSString+MiscExtensions.h */,
@@ -520,7 +515,6 @@
 				4BEE523A1339193600DA9881 /* Resources */,
 				4BEE523E1339193600DA9881 /* Sources */,
 				4BEE52731339193600DA9881 /* Frameworks */,
-				4B7A0F8B1356EF8C004CCC96 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -619,6 +613,7 @@
 			files = (
 				ED59EC951A34B88800D3651A /* CPPreferencesViewController.m in Sources */,
 				4BEE523F1339193600DA9881 /* CPCodePilotPlugin.m in Sources */,
+				ED2105A81A3F775C003D233A /* NSMutableOrderedSet+CodePilot.m in Sources */,
 				4BEE52401339193600DA9881 /* CPCodePilotWindowController.m in Sources */,
 				4BEE52411339193600DA9881 /* CPXcodeWrapper.m in Sources */,
 				EDCAEA4B1A32186100094CF0 /* CPResultsViewController.m in Sources */,

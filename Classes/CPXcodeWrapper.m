@@ -13,6 +13,7 @@
 #import "CPSymbolCache.h"
 #import "NSArray+MiscExtensions.h"
 #import "NSMutableArray+MiscExtensions.h"
+#import "CPUniqueStack.h"
 #import "CPWorkspaceSymbolCache.h"
 #import "CPResult.h"
 #import "IDEWorkspaceDocument+CodePilot.h"
@@ -23,6 +24,10 @@ static NSString * const IDEIndexDidIndexWorkspaceNotification = @"IDEIndexDidInd
 static NSString * const IDEEditorAreaLastActiveEditorContextDidChangeNotification = @"IDEEditorAreaLastActiveEditorContextDidChangeNotification";
 static NSString * const IDEEditorAreaLastActiveEditorContextDidChangeContextKey = @"IDEEditorContext";
 static NSString * const IDEEditorContextTransitionNotification = @"transition from one file to another";
+
+@interface CPXcodeWrapper ()
+@property (strong,readwrite,nonatomic) NSDictionary *tabControllersByURL;
+@end
 
 
 @implementation CPXcodeWrapper
@@ -70,6 +75,11 @@ static NSString * const IDEEditorContextTransitionNotification = @"transition fr
 {
   [[IDEDocumentController sharedDocumentController] removeObserver:self forKeyPath:WorkspaceDocumentsKeyPath];
   [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+-(void)updateRecentFiles
+{
+  self.tabControllersByURL = [self _latestTabControllersByURL];
 }
 
 - (void)willIndexWorkspace:(NSNotification *)notification
@@ -135,7 +145,7 @@ static NSString * const IDEEditorContextTransitionNotification = @"transition fr
   return activeD.fileURL;
 }
 
--(NSDictionary*)tabControllersByURL
+-(NSDictionary*)_latestTabControllersByURL
 {
   NSArray *windowControllers = [IDEWorkspaceWindowController workspaceWindowControllers];
   NSMutableDictionary *newurls = [NSMutableDictionary new];
@@ -677,7 +687,9 @@ static NSString * const IDEEditorContextTransitionNotification = @"transition fr
 
 - (NSArray *)recentlyVisitedFiles
 {
-  CPUniqueStack *recentFileURLs = [[self currentWorkspaceDocument] cp_recentsStack];
+  CPUniqueStack *recentFileURLs = [self.currentWorkspaceDocument cp_recentsStack];
+  [recentFileURLs addObjectsFromArray:self.currentWorkspaceDocument.recentEditorDocumentURLs];
+  
   NSURL *activeDocumentURL = self.activeFileURL;
   [recentFileURLs push:activeDocumentURL];
   NSArray *recentDocumentURLs = [recentFileURLs copy];

@@ -7,6 +7,7 @@
 //
 
 #import "IDEWorkspaceDocument+CodePilot.h"
+#import "CPUniqueStack.h"
 #import <objc/runtime.h>
 
 static void *RECENTS_STACK_KEY = &RECENTS_STACK_KEY;
@@ -18,7 +19,6 @@ static void *RECENTS_STACK_KEY = &RECENTS_STACK_KEY;
   CPUniqueStack *recentsStack = objc_getAssociatedObject(self, RECENTS_STACK_KEY);
   if (!recentsStack) {
     recentsStack = [CPUniqueStack uniqueStackWithMaxCount:100];
-    [recentsStack addObjectsFromArray:self.recentEditorDocumentURLs];
     objc_setAssociatedObject(self, RECENTS_STACK_KEY, recentsStack, OBJC_ASSOCIATION_RETAIN);
   }
   return recentsStack;

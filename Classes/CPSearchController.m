@@ -220,7 +220,10 @@ CPOpenSpecifier *CPOpenModeHorizontalSplit;
 - (void)windowWillBecomeActive
 {
 	[self.searchField reset];
-  _urlToTabController = [_xcodeWrapper tabControllersByURL];
+  
+  [_xcodeWrapper updateRecentFiles];
+  _urlToTabController = _xcodeWrapper.tabControllersByURL;
+  
 	[self updateContentsWithSearchField];
 	[self selectRowAtIndex:0];
 }

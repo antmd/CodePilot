@@ -8,9 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import "CPXcodeInterfaces.h"
-#import "NSMutableArray+MiscExtensions.h"
+#import "CPUniqueStack.h"
 
 @interface IDEWorkspaceDocument(CodePilot)
 -(CPUniqueStack*)cp_recentsStack;
-
 @end
