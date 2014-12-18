@@ -9,6 +9,7 @@
 #import <Cocoa/Cocoa.h>
 
 @interface NSArray (MiscExtensions)
+- (NSArray*) cp_filter:(BOOL (^)(id elt) )filterBlock;
 - (NSArray *)arrayScoresWithFuzzyQuery:(NSString *)query forKey:(NSString *)key;
 - (NSArray *)arrayWithoutElementsHavingNilOrEmptyValueForKey:(NSString *)key;
 @end

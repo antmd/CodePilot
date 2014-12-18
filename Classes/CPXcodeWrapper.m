@@ -32,6 +32,14 @@ static NSString * const IDEEditorContextTransitionNotification = @"transition fr
 
 @implementation CPXcodeWrapper
 
+/*
+ *
+ *
+ *================================================================================================*/
+#pragma mark - Lifecycle
+/*==================================================================================================
+ */
+
 
 - (id)init
 {
@@ -77,189 +85,13 @@ static NSString * const IDEEditorContextTransitionNotification = @"transition fr
   [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
--(void)updateRecentFiles
-{
-  self.tabControllersByURL = [self _latestTabControllersByURL];
-}
-
-- (void)willIndexWorkspace:(NSNotification *)notification
-{
-  @synchronized (self.currentlyIndexedWorkspaces) {
-    IDEIndex *index = (IDEIndex *)[notification object];
-    
-    for (IDEWorkspace *workspace in [self allOpenedWorkspaces]) {
-      if (index == [workspace index]) {
-        if (![self.currentlyIndexedWorkspaces containsObject:workspace]) {
-          [self.currentlyIndexedWorkspaces addObject:workspace];
-        }
-      }
-    }
-  }
-}
-
-- (void)didIndexWorkspace:(NSNotification *)notification
-{
-  IDEIndex *index = (IDEIndex *)[notification object];
-  IDEWorkspace *workspace = [self workspaceForIndex:index];
-  
-  @synchronized (self.currentlyIndexedWorkspaces) {
-    if ([self.currentlyIndexedWorkspaces containsObject:workspace]) {
-      [self.currentlyIndexedWorkspaces removeObject:workspace];
-    }
-  }
-  
-  [NSThread detachNewThreadSelector:@selector(updateWorkspaceSymbolCacheForWorkspace:)
-                           toTarget:self
-                         withObject:workspace];
-}
-
-
-// Record a history item when an editor context gains focus
--(void)editorContextBecameActive:(NSNotification*)notification
-{
-  IDEEditorContext *context = notification.userInfo[IDEEditorAreaLastActiveEditorContextDidChangeContextKey];
-  NSURL *fileURL = context.editor.document.fileURL;
-  if ([fileURL isFileURL]) {
-    [[[self currentWorkspaceDocument] cp_recentsStack] push:fileURL];
-  }
-}
-
-// Record a history item when an editor loads a new document
--(void)editorContextTransition:(NSNotification*)notification
-{
-  //NSLog(@"Transition notification = %@",notification);
-  DVTDocumentLocation *nextLocation = notification.userInfo[@"next"];
-  if ([nextLocation.documentURL isFileURL]) {
-    [[[self currentWorkspaceDocument] cp_recentsStack] push:nextLocation.documentURL];
-  }
-}
-
--(NSURL*)activeFileURL
-{
-  IDEWorkspaceWindowController *activeWc = [IDEWorkspaceWindow lastActiveWorkspaceWindowController];
-  IDEWorkspaceTabController *activeTc = [activeWc activeWorkspaceTabController];
-  IDEEditorArea *activeEa = [activeTc editorArea];
-  IDEEditorContext *activeEc = [activeEa lastActiveEditorContext];
-  IDEEditor *activeE = [activeEc editor];
-  NSDocument *activeD = [activeE document];
-  return activeD.fileURL;
-}
-
--(NSDictionary*)_latestTabControllersByURL
-{
-  NSArray *windowControllers = [IDEWorkspaceWindowController workspaceWindowControllers];
-  NSMutableDictionary *newurls = [NSMutableDictionary new];
-  
-  for (IDEWorkspaceWindowController *wc in windowControllers) {
-    for (IDEWorkspaceTabController *tc in [wc workspaceTabControllers]) {
-      NSURL *originalURL = tc.tabFilePath.fileURL;
-      if (!originalURL) { continue; }
-      IDEEditorArea *editorArea = tc.editorArea;
-      NSArray *editorContexts = editorArea.editorModeViewController.editorContexts;
-      if (editorContexts.count) {
-        if (editorContexts.count ==1 && [editorContexts[0] originalRequestedDocumentURL] == nil) {
-          // This is a lazily loaded tab -- we can't tell if there are other documents on this tab.
-          newurls[originalURL] = @[wc,tc,editorContexts[0]];
-          continue;
-        }
-        for (IDEEditorContext *ec in editorContexts) {
-          NSURL *url = nil;
-          if ((url = ec.originalRequestedDocumentURL)) {
-            newurls[url] = @[wc,tc,ec];
-          }
-          else if ((url = ec.editor.document.fileURL)) {
-            newurls[url] = @[wc,tc,ec];
-          }
-        }
-      }
-    }
-  }
-  return newurls;
-}
-
-// if someone closes workspace while it's being indexed,
-// we need to remove it from currentlyIndexedWorkspaces array
-- (void)removeClosedWorkspacesFromCurrentlyIndexed
-{
-  @synchronized (self.currentlyIndexedWorkspaces) {
-    NSArray *currentWorkspaces = [self allOpenedWorkspaces];
-    for (IDEWorkspace *workspace in [self.currentlyIndexedWorkspaces copy]) {
-      if (![currentWorkspaces containsObject:workspace]) {
-        [self.currentlyIndexedWorkspaces removeObject:workspace];
-      }
-    }
-  }
-}
-
-- (NSArray *)allOpenedWorkspaces
-{
-  NSArray *workspaces = [NSArray array];
-  
-  for (IDEWorkspaceDocument *workspaceDocument in [[IDEDocumentController sharedDocumentController] workspaceDocuments]) {
-    workspaces = [workspaces arrayByAddingObject:[workspaceDocument workspace]];
-  }
-  
-  return workspaces;
-}
-
-- (IDEWorkspace *)workspaceForIndex:(IDEIndex *)index
-{
-  for (IDEWorkspace *workspace in [self allOpenedWorkspaces]) {
-    if ([workspace index] == index) {
-      return workspace;
-    }
-  }
-  
-  return nil;
-}
-
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
-{
-  if ([keyPath isEqualToString:WorkspaceDocumentsKeyPath] && [object isKindOfClass:[IDEDocumentController class]]) {
-    [self removeClosedWorkspacesFromCurrentlyIndexed];
-  }
-}
-
-- (void)reloadAfterPreferencesChange
-{
-}
-
-- (void)reloadXcodeState
-{
-}
-
-- (BOOL)hasOpenWorkspace
-{
-  NSUInteger numberOfOpenWorkspaces = [[[IDEDocumentController sharedDocumentController] workspaceDocuments] count];
-  
-  return (numberOfOpenWorkspaces > 0);
-}
-
-- (NSString *)normalizedQueryForQuery:(NSString *)query
-{
-  NSString *normalizedQuery = nil;
-  if (query) {
-    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"[\\*\\ \\r\\n\\t]"
-                                                                           options:0
-                                                                             error:nil];
-    normalizedQuery = [regex stringByReplacingMatchesInString:query
-                                                      options:0
-                                                        range:NSMakeRange(0, query.length)
-                                                 withTemplate:@""];
-  }
-  return normalizedQuery;
-}
-
-- (CPWorkspaceSymbolCache *)workspaceSymbolCacheForWorkspace:(IDEWorkspace *)workspace
-{
-  for (CPWorkspaceSymbolCache *workspaceSymbolCache in self.workspaceSymbolCaches) {
-    if (workspaceSymbolCache.workspace == workspace) {
-      return workspaceSymbolCache;
-    }
-  }
-  
-  return nil;
-}
+/*
+ *
+ *
+ *================================================================================================*/
+#pragma mark - Symbols Cache
+/*==================================================================================================
+ */
 
 
 - (void)updateWorkspaceSymbolCacheForWorkspace:(IDEWorkspace *)workspace withWorkspaceSymbolCache:(CPWorkspaceSymbolCache *)newWorkspaceSymbolCache
@@ -322,6 +154,141 @@ static NSString * const IDEEditorContextTransitionNotification = @"transition fr
     LOG(@"EXCEPTION OCCURRED: %@", exception);
   }
 }
+- (void)willIndexWorkspace:(NSNotification *)notification
+{
+  @synchronized (self.currentlyIndexedWorkspaces) {
+    IDEIndex *index = (IDEIndex *)[notification object];
+    
+    for (IDEWorkspace *workspace in [self allOpenedWorkspaces]) {
+      if (index == [workspace index]) {
+        if (![self.currentlyIndexedWorkspaces containsObject:workspace]) {
+          [self.currentlyIndexedWorkspaces addObject:workspace];
+        }
+      }
+    }
+  }
+}
+
+- (void)didIndexWorkspace:(NSNotification *)notification
+{
+  IDEIndex *index = (IDEIndex *)[notification object];
+  IDEWorkspace *workspace = [self workspaceForIndex:index];
+  
+  @synchronized (self.currentlyIndexedWorkspaces) {
+    if ([self.currentlyIndexedWorkspaces containsObject:workspace]) {
+      [self.currentlyIndexedWorkspaces removeObject:workspace];
+    }
+  }
+  
+  [NSThread detachNewThreadSelector:@selector(updateWorkspaceSymbolCacheForWorkspace:)
+                           toTarget:self
+                         withObject:workspace];
+}
+
+
+// if someone closes workspace while it's being indexed,
+// we need to remove it from currentlyIndexedWorkspaces array
+- (void)removeClosedWorkspacesFromCurrentlyIndexed
+{
+  @synchronized (self.currentlyIndexedWorkspaces) {
+    NSArray *currentWorkspaces = [self allOpenedWorkspaces];
+    for (IDEWorkspace *workspace in [self.currentlyIndexedWorkspaces copy]) {
+      if (![currentWorkspaces containsObject:workspace]) {
+        [self.currentlyIndexedWorkspaces removeObject:workspace];
+      }
+    }
+  }
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+  if ([keyPath isEqualToString:WorkspaceDocumentsKeyPath] && [object isKindOfClass:[IDEDocumentController class]]) {
+    [self removeClosedWorkspacesFromCurrentlyIndexed];
+  }
+}
+
+- (void)reloadAfterPreferencesChange
+{
+}
+
+- (void)reloadXcodeState
+{
+}
+
+- (BOOL)hasOpenWorkspace
+{
+  NSUInteger numberOfOpenWorkspaces = [[[IDEDocumentController sharedDocumentController] workspaceDocuments] count];
+  
+  return (numberOfOpenWorkspaces > 0);
+}
+
+/*
+ *
+ *
+ *================================================================================================*/
+#pragma mark - Symbol Lookup
+/*==================================================================================================
+ */
+
+
++ (NSArray *)symbolsForProject:(id)pbxProject
+{
+  return @[];
+}
+- (CPWorkspaceSymbolCache *)workspaceSymbolCacheForWorkspace:(IDEWorkspace *)workspace
+{
+  for (CPWorkspaceSymbolCache *workspaceSymbolCache in self.workspaceSymbolCaches) {
+    if (workspaceSymbolCache.workspace == workspace) {
+      return workspaceSymbolCache;
+    }
+  }
+  
+  return nil;
+}
+
+
+- (NSString *)currentSelectionSymbolString
+{
+  @try {
+    DVTSourceExpression *selectedExpression = [[[self currentEditorContext] editor] selectedExpression];
+    if (nil != selectedExpression) {
+      NSString *selectedString = [selectedExpression textSelectionString];
+      if (selectedString.length < MAX_AUTOCOPY_STRING_LENGTH) {
+        return selectedString;
+      }
+    }
+  }
+  @catch (NSException *exception) {
+    LOG(@"EXCEPTION: %@", exception);
+  }
+  
+  return @"";
+}
+
+
+/*
+ *
+ *
+ *================================================================================================*/
+#pragma mark - Queries
+/*==================================================================================================
+ */
+
+
+- (NSString *)normalizedQueryForQuery:(NSString *)query
+{
+  NSString *normalizedQuery = nil;
+  if (query) {
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"[\\*\\ \\r\\n\\t]"
+                                                                           options:0
+                                                                             error:nil];
+    normalizedQuery = [regex stringByReplacingMatchesInString:query
+                                                      options:0
+                                                        range:NSMakeRange(0, query.length)
+                                                 withTemplate:@""];
+  }
+  return normalizedQuery;
+}
 
 - (NSArray *)topLevelCPSymbolsMatchingQuery:(NSString *)query
 {
@@ -336,6 +303,17 @@ static NSString * const IDEEditorContextTransitionNotification = @"transition fr
   NSArray *result = [self arrayOfCPSymbolsByWrappingIDESymbols:symbols forCPFileReference:nil];
   
   return result;
+}
+
+
+- (NSArray *)cpFileReferencesMatchingQuery:(NSString *)query
+{
+	query = [self normalizedQueryForQuery:query];
+  
+  NSMutableArray *projectFiles = [[self flattenedProjectContents] mutableCopy];
+	[projectFiles filterWithFuzzyQuery:query forKey:@"name"];
+  
+  return [self arrayOfCPFileReferencesByWrappingXcodeFileReferences:projectFiles];
 }
 
 - (NSArray *)filesAndSymbolsFromProjectForQuery:(NSString *)query
@@ -363,6 +341,36 @@ static NSString * const IDEEditorContextTransitionNotification = @"transition fr
   
 	return resultArray;
 }
+
+- (NSArray *)contentsForQuery:(NSString *)query fromResult:(CPResult *)result
+{
+  NSString *normalizedQuery = [self normalizedQueryForQuery:query];
+  NSArray *resultArray = [NSArray new];
+  
+	if ([result isKindOfClass:[CPFileReference class]]) {
+    CPFileReference *fileReference = (CPFileReference *)result;
+    
+		if (fileReference.isGroup) {
+			PBXFileReference *pbxSymbol = [self pbxFileReferenceForCPFileReference:fileReference];
+      
+			resultArray = [pbxSymbol children];
+			resultArray = [self arrayByFilteringAndSortingArray:resultArray withFuzzyQuery:normalizedQuery key:@"name"];
+			resultArray = [self arrayOfCPFileReferencesByWrappingXcodeFileReferences:resultArray];
+      
+		} else {
+			resultArray = [self cpSymbolsFromFile:fileReference matchingQuery:normalizedQuery];
+			resultArray = [self arrayByFilteringAndSortingArray:resultArray withFuzzyQuery:normalizedQuery key:@"name"];
+		}
+	} else if ([result isKindOfClass:[CPSymbol class]]) {
+    CPSymbol *symbol = (CPSymbol *)result;
+    
+    resultArray = [symbol children];
+    resultArray = [self arrayByFilteringAndSortingArray:resultArray withFuzzyQuery:normalizedQuery key:@"name"];
+	}
+  
+	return resultArray;
+}
+
 
 - (NSArray *)arrayByFilteringAndSortingArray:(NSArray *)unsortedArray withFuzzyQuery:(NSString *)query key:(NSString *)key
 {
@@ -405,84 +413,36 @@ static NSString * const IDEEditorContextTransitionNotification = @"transition fr
 	return result;
 }
 
-- (NSArray *)cpFileReferencesMatchingQuery:(NSString *)query
-{
-	query = [self normalizedQueryForQuery:query];
-  
-  NSMutableArray *projectFiles = [[self flattenedProjectContents] mutableCopy];
-	[projectFiles filterWithFuzzyQuery:query forKey:@"name"];
-  
-  return [self arrayOfCPFileReferencesByWrappingXcodeFileReferences:projectFiles];
-}
 
-- (NSArray *)arrayOfCPFileReferencesByWrappingXcodeFileReferences:(NSArray *)xcodeFileReferences
+- (NSArray *)cpSymbolsFromFile:(CPFileReference *)fileObject matchingQuery:(NSString *)query
 {
-	NSMutableArray *cpFileReferences = [NSMutableArray array];
-	for (id xcodeFileReference in xcodeFileReferences) {
-    @try {
-      CPFileReference *cpFileRef = [[CPFileReference alloc] initWithPBXFileReference:xcodeFileReference];
-      if (nil != cpFileRef) {
-        [cpFileReferences addObject:cpFileRef];
-      }
-    }
-    @catch (NSException *exception) {
-      LOG(@"EXCEPTION OCCURRED: %@", exception);
-    }
+	NSString *normalizedQuery = [self normalizedQueryForQuery:query];
+  
+	@try {
+    NSMutableArray *ideSymbols = [[self allIDEIndexSymbolsFromCPFileReference:fileObject] mutableCopy];
+    
+    [ideSymbols filterWithFuzzyQuery:normalizedQuery forKey:@"name"];
+    
+		NSArray *cpSymbols = [self arrayOfCPSymbolsByWrappingIDESymbols:ideSymbols forCPFileReference:fileObject];
+    
+    return cpSymbols;
+    
+	} @catch (NSException * e) {
+		LOG(@"EXCEPTION OCCURRED: %@", e);
 	}
   
-	return cpFileReferences;
+	return [NSArray new];
 }
 
-- (NSArray *)arrayOfCPFileReferencesByWrappingDVTFilePaths:(NSArray *)dvtFilePaths
-{
-  NSArray *cpFileReferences = @[];
-  
-  for (DVTFilePath *dvtFilePath in dvtFilePaths) {
-    @try {
-      CPFileReference *newCPFileReference = [[CPFileReference alloc] initWithDVTFilePath:dvtFilePath];
-      cpFileReferences = [cpFileReferences arrayByAddingObject:newCPFileReference];
-    }
-    @catch (NSException *exception) {
-      LOG(@"EXCEPTION OCCURRED: %@", exception);
-    }
-  }
-  
-  return cpFileReferences;
-}
 
-// used for history document urls
-- (NSArray *)arrayOfCPFileReferencesByWrappingFileURLs:(NSArray *)fileURLs
-{
-  NSArray *cpFileReferences = @[];
-  
-  for (NSURL *fileURL in fileURLs) {
-    @try {
-      id newCPFileReference; // declaring as CPFileReference * generates a bunch of WTF warnings
-      newCPFileReference = [[CPFileReference alloc] initWithFileURL:fileURL];
-      cpFileReferences = [cpFileReferences arrayByAddingObject:newCPFileReference];
-    }
-    @catch (NSException *exception) {
-      LOG(@"EXCEPTION OCCURRED: %@", exception);
-    }
-  }
-  
-  return cpFileReferences;
-}
+/*
+ *
+ *
+ *================================================================================================*/
+#pragma mark - Actions
+/*==================================================================================================
+ */
 
-- (NSScreen *)currentScreen
-{
-  return nil;
-}
-
-- (BOOL)currentProjectIsIndexing
-{
-  return ([self.currentlyIndexedWorkspaces containsObject:[self currentWorkspace]] || [self isSymbolCachingInProgress]);
-}
-
-- (BOOL)isSymbolCachingInProgress
-{
-  return self.symbolCachingInProgress;
-}
 
 - (void)openFileOrSymbol:(id)fileOrSymbol tabController:(IDEWorkspaceTabController*)tc openMode:(CPOpenFileMode)openMode;
 {
@@ -589,69 +549,109 @@ static NSString * const IDEEditorContextTransitionNotification = @"transition fr
   }
 }
 
-- (IDEEditorContext *)currentEditorContext
+
+/*
+ *
+ *
+ *================================================================================================*/
+#pragma mark - Recent Files
+/*==================================================================================================
+ */
+
+-(void)updateRecentFiles
 {
-  return [[[self currentWorkspaceWindowController] editorArea] lastActiveEditorContext];
+  self.tabControllersByURL = [self _latestTabControllersByURL];
 }
 
-- (IDEWorkspaceWindowController *)currentWorkspaceWindowController
+
+// Record a history item when an editor context gains focus
+-(void)editorContextBecameActive:(NSNotification*)notification
 {
-  return [IDEWorkspaceWindowController workspaceWindowControllerForWindow:[IDEWorkspaceWindow mc_lastActiveWorkspaceWindow]];
+  IDEEditorContext *context = notification.userInfo[IDEEditorAreaLastActiveEditorContextDidChangeContextKey];
+  NSURL *fileURL = context.editor.document.fileURL;
+  if ([fileURL isFileURL]) {
+    [[[self currentWorkspaceDocument] cp_recentsStack] push:fileURL];
+  }
 }
 
-- (NSString *)currentProjectName
+// Record a history item when an editor loads a new document
+-(void)editorContextTransition:(NSNotification*)notification
 {
-  return [[self currentWorkspace] name];
+  //NSLog(@"Transition notification = %@",notification);
+  DVTDocumentLocation *nextLocation = notification.userInfo[@"next"];
+  if ([nextLocation.documentURL isFileURL]) {
+    [[[self currentWorkspaceDocument] cp_recentsStack] push:nextLocation.documentURL];
+  }
 }
 
-- (NSArray *)contentsForQuery:(NSString *)query fromResult:(CPResult *)result
+-(NSURL*)activeFileURL
 {
-  NSString *normalizedQuery = [self normalizedQueryForQuery:query];
-  NSArray *resultArray = [NSArray new];
-  
-	if ([result isKindOfClass:[CPFileReference class]]) {
-    CPFileReference *fileReference = (CPFileReference *)result;
-    
-		if (fileReference.isGroup) {
-			PBXFileReference *pbxSymbol = [self pbxFileReferenceForCPFileReference:fileReference];
-      
-			resultArray = [pbxSymbol children];
-			resultArray = [self arrayByFilteringAndSortingArray:resultArray withFuzzyQuery:normalizedQuery key:@"name"];
-			resultArray = [self arrayOfCPFileReferencesByWrappingXcodeFileReferences:resultArray];
-      
-		} else {
-			resultArray = [self cpSymbolsFromFile:fileReference matchingQuery:normalizedQuery];
-			resultArray = [self arrayByFilteringAndSortingArray:resultArray withFuzzyQuery:normalizedQuery key:@"name"];
-		}
-	} else if ([result isKindOfClass:[CPSymbol class]]) {
-    CPSymbol *symbol = (CPSymbol *)result;
-    
-    resultArray = [symbol children];
-    resultArray = [self arrayByFilteringAndSortingArray:resultArray withFuzzyQuery:normalizedQuery key:@"name"];
-	}
-  
-	return resultArray;
+  IDEWorkspaceWindowController *activeWc = [IDEWorkspaceWindow lastActiveWorkspaceWindowController];
+  IDEWorkspaceTabController *activeTc = [activeWc activeWorkspaceTabController];
+  IDEEditorArea *activeEa = [activeTc editorArea];
+  IDEEditorContext *activeEc = [activeEa lastActiveEditorContext];
+  IDEEditor *activeE = [activeEc editor];
+  NSDocument *activeD = [activeE document];
+  return [activeD.fileURL isFileURL] ? activeD.fileURL : nil;
 }
 
-- (NSArray *)cpSymbolsFromFile:(CPFileReference *)fileObject matchingQuery:(NSString *)query
+-(NSDictionary*)_latestTabControllersByURL
 {
-	NSString *normalizedQuery = [self normalizedQueryForQuery:query];
+  NSArray *windowControllers = [IDEWorkspaceWindowController workspaceWindowControllers];
+  NSMutableDictionary *newurls = [NSMutableDictionary new];
   
-	@try {
-    NSMutableArray *ideSymbols = [[self allIDEIndexSymbolsFromCPFileReference:fileObject] mutableCopy];
-    
-    [ideSymbols filterWithFuzzyQuery:normalizedQuery forKey:@"name"];
-    
-		NSArray *cpSymbols = [self arrayOfCPSymbolsByWrappingIDESymbols:ideSymbols forCPFileReference:fileObject];
-    
-    return cpSymbols;
-    
-	} @catch (NSException * e) {
-		LOG(@"EXCEPTION OCCURRED: %@", e);
-	}
-  
-	return [NSArray new];
+  for (IDEWorkspaceWindowController *wc in windowControllers) {
+    for (IDEWorkspaceTabController *tc in [wc workspaceTabControllers]) {
+      NSURL *originalURL = tc.tabFilePath.fileURL;
+      if (!originalURL) { continue; }
+      IDEEditorArea *editorArea = tc.editorArea;
+      NSArray *editorContexts = editorArea.editorModeViewController.editorContexts;
+      if (editorContexts.count) {
+        if (editorContexts.count ==1 && [editorContexts[0] originalRequestedDocumentURL] == nil) {
+          // This is a lazily loaded tab -- we can't tell if there are other documents on this tab.
+          newurls[originalURL] = @[wc,tc,editorContexts[0]];
+          continue;
+        }
+        for (IDEEditorContext *ec in editorContexts) {
+          NSURL *url = nil;
+          if ((url = ec.originalRequestedDocumentURL)) {
+            newurls[url] = @[wc,tc,ec];
+          }
+          else if ((url = ec.editor.document.fileURL)) {
+            newurls[url] = @[wc,tc,ec];
+          }
+        }
+      }
+    }
+  }
+  return newurls;
 }
+
+- (NSArray *)recentlyVisitedFiles
+{
+  CPUniqueStack *recentFileURLs = [self.currentWorkspaceDocument cp_recentsStack];
+  [recentFileURLs appendMany:[self.currentWorkspaceDocument.recentEditorDocumentURLs cp_filter:^BOOL(id elt) {
+    return[(NSURL*)elt isFileURL];
+  }]];
+  
+  // Currently active file always go at the top
+  [recentFileURLs push:self.activeFileURL];
+  
+  return [self arrayOfCPFileReferencesByWrappingFileURLs:recentFileURLs.array];
+}
+
+- (NSArray *)recentlyVisited
+{
+  return [self recentlyVisitedFiles];
+}
+
+/*
+ *
+ *
+ *================================================================================================*/
+#pragma mark - Data Adaptors
+/*==================================================================================================
+ */
 
 // we wrap Xcode's IDE*Symbol into CPSymbol to provide copyWithZone: capabilities
 - (NSArray *)arrayOfCPSymbolsByWrappingIDESymbols:(NSArray *)ideSymbols forCPFileReference:(CPFileReference *)fileObject
@@ -685,55 +685,52 @@ static NSString * const IDEEditorContextTransitionNotification = @"transition fr
 }
 
 
-- (NSArray *)recentlyVisitedFiles
+- (NSArray *)arrayOfCPFileReferencesByWrappingXcodeFileReferences:(NSArray *)xcodeFileReferences
 {
-  CPUniqueStack *recentFileURLs = [self.currentWorkspaceDocument cp_recentsStack];
-  [recentFileURLs addObjectsFromArray:self.currentWorkspaceDocument.recentEditorDocumentURLs];
-  
-  NSURL *activeDocumentURL = self.activeFileURL;
-  [recentFileURLs push:activeDocumentURL];
-  NSArray *recentDocumentURLs = [recentFileURLs copy];
-  
-  // there are not just files, but also things like:
-  // x-xcode-log://07BF5C48-BD53-4F83-9C14-1E8DB4EC5C09
-  NSMutableArray *fileURLs = [[NSMutableArray alloc]initWithCapacity:100];
-  
-  for (NSURL *documentURL in recentDocumentURLs) {
-    if ([documentURL isFileURL]) {
-      [fileURLs addObject:documentURL];
-    }
-  }
-  
-  return [self arrayOfCPFileReferencesByWrappingFileURLs:fileURLs];
-}
-
-- (NSArray *)recentlyVisited
-{
-  return [self recentlyVisitedFiles];
-}
-
-- (NSString *)currentSelectionSymbolString
-{
-  @try {
-    DVTSourceExpression *selectedExpression = [[[self currentEditorContext] editor] selectedExpression];
-    if (nil != selectedExpression) {
-      NSString *selectedString = [selectedExpression textSelectionString];
-      if (selectedString.length < MAX_AUTOCOPY_STRING_LENGTH) {
-        return selectedString;
+	NSMutableArray *cpFileReferences = [NSMutableArray array];
+	for (id xcodeFileReference in xcodeFileReferences) {
+    @try {
+      CPFileReference *cpFileRef = [[CPFileReference alloc] initWithPBXFileReference:xcodeFileReference];
+      if (nil != cpFileRef) {
+        [cpFileReferences addObject:cpFileRef];
       }
     }
-  }
-  @catch (NSException *exception) {
-    LOG(@"EXCEPTION: %@", exception);
-  }
+    @catch (NSException *exception) {
+      LOG(@"EXCEPTION OCCURRED: %@", exception);
+    }
+	}
   
-  return @"";
+	return cpFileReferences;
 }
 
-+ (NSArray *)symbolsForProject:(id)pbxProject
+
+// used for history document urls
+- (NSArray *)arrayOfCPFileReferencesByWrappingFileURLs:(NSArray *)fileURLs
 {
-  return @[];
+  NSArray *cpFileReferences = @[];
+  
+  for (NSURL *fileURL in fileURLs) {
+    @try {
+      id newCPFileReference; // declaring as CPFileReference * generates a bunch of WTF warnings
+      newCPFileReference = [[CPFileReference alloc] initWithFileURL:fileURL];
+      cpFileReferences = [cpFileReferences arrayByAddingObject:newCPFileReference];
+    }
+    @catch (NSException *exception) {
+      LOG(@"EXCEPTION OCCURRED: %@", exception);
+    }
+  }
+  
+  return cpFileReferences;
 }
+
+
+/*
+ *
+ *
+ *================================================================================================*/
+#pragma mark - Xcode Wrappers
+/*==================================================================================================
+ */
 
 - (NSArray *)recursiveChildrenOfPBXGroup:(PBXGroup *)pbxGroup
 {
@@ -834,6 +831,37 @@ static NSString * const IDEEditorContextTransitionNotification = @"transition fr
   return contents;
 }
 
+/*
+ *
+ *
+ *================================================================================================*/
+#pragma mark - Xcode Properties
+/*==================================================================================================
+ */
+
+
+- (NSArray *)allOpenedWorkspaces
+{
+  NSArray *workspaces = [NSArray array];
+  
+  for (IDEWorkspaceDocument *workspaceDocument in [[IDEDocumentController sharedDocumentController] workspaceDocuments]) {
+    workspaces = [workspaces arrayByAddingObject:[workspaceDocument workspace]];
+  }
+  
+  return workspaces;
+}
+
+- (IDEWorkspace *)workspaceForIndex:(IDEIndex *)index
+{
+  for (IDEWorkspace *workspace in [self allOpenedWorkspaces]) {
+    if ([workspace index] == index) {
+      return workspace;
+    }
+  }
+  
+  return nil;
+}
+
 - (IDEWorkspace *)currentWorkspace
 {
   return [[self currentWorkspaceDocument] workspace];
@@ -847,5 +875,34 @@ static NSString * const IDEEditorContextTransitionNotification = @"transition fr
 - (IDEIndex *)currentIndex
 {
   return [[self currentWorkspace] index];
+}
+
+- (IDEEditorContext *)currentEditorContext
+{
+  return [[[self currentWorkspaceWindowController] editorArea] lastActiveEditorContext];
+}
+
+- (IDEWorkspaceWindowController *)currentWorkspaceWindowController
+{
+  return [IDEWorkspaceWindowController workspaceWindowControllerForWindow:[IDEWorkspaceWindow mc_lastActiveWorkspaceWindow]];
+}
+
+- (NSString *)currentProjectName
+{
+  return [[self currentWorkspace] name];
+}
+- (NSScreen *)currentScreen
+{
+  return nil;
+}
+
+- (BOOL)currentProjectIsIndexing
+{
+  return ([self.currentlyIndexedWorkspaces containsObject:[self currentWorkspace]] || [self isSymbolCachingInProgress]);
+}
+
+- (BOOL)isSymbolCachingInProgress
+{
+  return self.symbolCachingInProgress;
 }
 @end

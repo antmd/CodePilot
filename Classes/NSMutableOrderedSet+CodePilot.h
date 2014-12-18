@@ -10,8 +10,10 @@
 
 @interface NSMutableOrderedSet(CodePilot)
 +(instancetype)uniqueStackWithMaxCount:(NSUInteger)maxCount;
--(void)push:(id)object;
+-(void)push:(id)object; //!< Includes 'nil' check
 -(void)pushMany:(NSArray *)array;
+-(void)appendMany:(NSArray*)array;
 -(id)pop;
+@property(readonly, copy) NSArray *array;
 @end
 

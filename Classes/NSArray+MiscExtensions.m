@@ -11,6 +11,18 @@
 
 @implementation NSArray (MiscExtensions)
 
+- (NSArray*) cp_filter:(BOOL (^)(id elt) )filterBlock
+{
+    if ( self.count == 0 || filterBlock == NULL ) {
+        return self ;
+    }
+    id  filteredArray = [ NSMutableArray array ] ;
+    for ( id elt in self ) {
+        if ( filterBlock( elt ) ) { [ filteredArray addObject:elt ] ; }
+    }
+
+    return filteredArray ;
+}
 
 - (NSArray *)arrayScoresWithFuzzyQuery:(NSString *)query forKey:(NSString *)key
 {

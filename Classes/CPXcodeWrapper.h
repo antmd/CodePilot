@@ -51,8 +51,6 @@
 - (NSArray *)arrayOfCPFileReferencesByWrappingFileURLs:(NSArray *)fileURLs;
 - (IDEWorkspaceWindowController *)currentWorkspaceWindowController;
 
-- (NSArray *)arrayOfCPFileReferencesByWrappingDVTFilePaths:(NSArray *)dvtFilePaths;
-
 - (void)willIndexWorkspace:(NSNotification *)notification;
 - (void)didIndexWorkspace:(NSNotification *)notification;
 - (void)removeClosedWorkspacesFromCurrentlyIndexed;

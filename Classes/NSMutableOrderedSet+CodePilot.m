@@ -27,10 +27,7 @@ static void *STACK_CAPACITY_KEY = &STACK_CAPACITY_KEY;
   if (!object) {return;}
   [self removeObject:object];
   [self insertObject:object atIndex:0];
-  NSNumber *maxCount = objc_getAssociatedObject(self, STACK_CAPACITY_KEY);
-  if (maxCount && self.count > maxCount.unsignedIntegerValue) {
-    [self removeObjectsInRange:NSMakeRange(maxCount.unsignedIntegerValue, self.count-maxCount.unsignedIntegerValue)];
-  }
+  [self _trim];
 }
 
 -(void)pushMany:(NSArray *)array
@@ -38,10 +35,14 @@ static void *STACK_CAPACITY_KEY = &STACK_CAPACITY_KEY;
   if (!array.count) { return; }
   [self removeObjectsInArray:array];
   [self insertObjects:array atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, array.count)]];
-  NSNumber *maxCount = objc_getAssociatedObject(self, STACK_CAPACITY_KEY);
-  if (maxCount && self.count > maxCount.unsignedIntegerValue) {
-    [self removeObjectsInRange:NSMakeRange(maxCount.unsignedIntegerValue, self.count-maxCount.unsignedIntegerValue)];
-  }
+  [self _trim];
+}
+
+-(void)appendMany:(NSArray*)array
+{
+  if (!array.count) { return; }
+  [self addObjectsFromArray:array];
+  [self _trim];
 }
 
 -(id)pop
@@ -52,5 +53,13 @@ static void *STACK_CAPACITY_KEY = &STACK_CAPACITY_KEY;
     [self removeObjectAtIndex:0];
   }
   return obj;
+}
+
+-(void)_trim
+{
+  NSNumber *maxCount = objc_getAssociatedObject(self, STACK_CAPACITY_KEY);
+  if (maxCount && self.count > maxCount.unsignedIntegerValue) {
+    [self removeObjectsInRange:NSMakeRange(maxCount.unsignedIntegerValue, self.count-maxCount.unsignedIntegerValue)];
+  }
 }
 @end
