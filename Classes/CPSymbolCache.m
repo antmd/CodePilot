@@ -40,7 +40,7 @@
 
 - (void)onFileChangeNotification:(NSNotification *)notification
 {
-  if (![[notification object] isKindOfClass:[IDESourceCodeDocument class]]) {
+  if (![[notification object] isKindOfClass:NSClassFromString(@"IDESourceCodeDocument") ]) {
     return;
   }
   

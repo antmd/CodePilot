@@ -43,8 +43,14 @@
 - (id)init
 {
   self = [super init];
+	static dispatch_once_t onceToken;
+    NSString *currentApplicationName = [[NSBundle mainBundle] infoDictionary][@"CFBundleName"];
+  
   
   if (self) {
+    if ([currentApplicationName isEqual:@"Xcode"])
+        dispatch_once(&onceToken, ^{
+      
     self.isUserLevelDebugOn = [[NSUserDefaults standardUserDefaults] boolForKey:DEFAULTS_USER_LEVEL_DEBUG_KEY];
     
     [self checkForFirstRun];
@@ -59,6 +65,7 @@
                                                object:nil];
 		LOG(@"%@ %@ Plugin loaded.", PRODUCT_NAME, PRODUCT_CURRENT_VERSION);
     
+    });
 	}
   
   return self;
