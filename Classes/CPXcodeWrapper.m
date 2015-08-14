@@ -201,7 +201,6 @@ static NSString * const IDEEditorAreaLastActiveEditorContextDidChangeContextKey 
     
     if (fileURL != nil) {
       [[[self currentWorkspaceDocument] cp_recentsStack] push:fileURL];
-      NSLog(@"Latest file = %@", fileURL);
     }
 
   }
@@ -720,7 +719,8 @@ static NSString * const IDEEditorAreaLastActiveEditorContextDidChangeContextKey 
   
   for (id child in [pbxGroup children]) {
     if ([child isKindOfClass:[PBXGroup class]]) {
-      [objects addObjectsFromArray:[self recursiveChildrenOfPBXGroup:child]];
+      NSArray *children = [self recursiveChildrenOfPBXGroup:child];
+      [objects addObjectsFromArray:children];
     }
   }
   
@@ -734,7 +734,8 @@ static NSString * const IDEEditorAreaLastActiveEditorContextDidChangeContextKey 
   for (id child in [pbxGroup children]) {
     if ([child isKindOfClass:[PBXGroup class]]) {
       [objects addObject:child];
-      [objects addObjectsFromArray:[self recursiveGroupsOfPBXGroup:child]];
+      NSArray *children = [self recursiveGroupsOfPBXGroup:child];
+      [objects addObjectsFromArray:children];
     }
   }
   
@@ -748,10 +749,15 @@ static NSString * const IDEEditorAreaLastActiveEditorContextDidChangeContextKey 
   if ([ideIndexSymbol isKindOfClass:[IDEIndexContainerSymbol class]]) {
     IDEIndexContainerSymbol *containerSymbol = (IDEIndexContainerSymbol *)ideIndexSymbol;
     
-    [objects addObjectsFromArray:[containerSymbol children]];
+    NSArray *children = [containerSymbol children];
+    if ([children isKindOfClass:NSClassFromString(@"IDEIndexCollection")]) {
+      children = [(IDEIndexCollection*)children allObjects];
+    }
+    [objects addObjectsFromArray:children];
     
     for (id child in [containerSymbol children]) {
-      [objects addObjectsFromArray:[self recursiveChildrenOfIDEIndexSymbol:child]];
+      NSArray *children = [self recursiveChildrenOfIDEIndexSymbol:child];
+      [objects addObjectsFromArray:children];
     }
   }
   
@@ -769,7 +775,8 @@ static NSString * const IDEEditorAreaLastActiveEditorContextDidChangeContextKey 
   
   for (IDEIndexSymbol *ideSymbol in topLevelSymbols) {
     [objects addObject:ideSymbol];
-    [objects addObjectsFromArray:[self recursiveChildrenOfIDEIndexSymbol:ideSymbol]];
+    NSArray *children = [self recursiveChildrenOfIDEIndexSymbol:ideSymbol];
+    [objects addObjectsFromArray:children];
   }
   
   [objects arrayWithoutElementsHavingNilOrEmptyValueForKey:@"name"];

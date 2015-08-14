@@ -226,6 +226,7 @@
 
 @interface IDEIndexCollection : NSObject
 - (NSArray *)allObjects;
+- (NSArray *)uniqueObjects;
 @end
 
 @interface IDEIndexSymbolOccurrenceCollection : IDEIndexCollection <NSFastEnumeration>
