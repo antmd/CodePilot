@@ -66,9 +66,9 @@
 		4BEE52761339193600DA9881 /* libcrypto.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B71F66011561A5E005A8471 /* libcrypto.dylib */; };
 		4BEE52771339193600DA9881 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B25285A1165E23700374EB0 /* WebKit.framework */; };
 		ED0169EE1A3C5546004A8670 /* IDEWorkspaceTabController+CodePilot.m in Sources */ = {isa = PBXBuildFile; fileRef = ED0169ED1A3C5546004A8670 /* IDEWorkspaceTabController+CodePilot.m */; };
-		ED0169F21A3C9791004A8670 /* NSObject+CPSwizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = ED0169F11A3C9791004A8670 /* NSObject+CPSwizzle.m */; };
 		ED0169F51A3CEAF4004A8670 /* IDEWorkspaceDocument+CodePilot.m in Sources */ = {isa = PBXBuildFile; fileRef = ED0169F41A3CEAF4004A8670 /* IDEWorkspaceDocument+CodePilot.m */; };
 		ED01FE0D1A33697900D81A18 /* CPSearchFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ED01FE0C1A33697900D81A18 /* CPSearchFieldCell.m */; };
+		ED1D2B4C1B7E319D00A0EAC1 /* IDEEditor+CodePilot.m in Sources */ = {isa = PBXBuildFile; fileRef = ED1D2B4B1B7E319D00A0EAC1 /* IDEEditor+CodePilot.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		ED2105A81A3F775C003D233A /* NSMutableOrderedSet+CodePilot.m in Sources */ = {isa = PBXBuildFile; fileRef = ED2105A71A3F775C003D233A /* NSMutableOrderedSet+CodePilot.m */; };
 		ED29B1251A3326F500D13CD9 /* CPResultsTableRowView.m in Sources */ = {isa = PBXBuildFile; fileRef = ED29B1241A3326F500D13CD9 /* CPResultsTableRowView.m */; };
 		ED4EDF5A1A310C1200FE7F92 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = ED4EDF571A310C1200FE7F92 /* logo.png */; };
@@ -182,12 +182,12 @@
 		ED0169EC1A3C5546004A8670 /* IDEWorkspaceTabController+CodePilot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IDEWorkspaceTabController+CodePilot.h"; sourceTree = "<group>"; };
 		ED0169ED1A3C5546004A8670 /* IDEWorkspaceTabController+CodePilot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "IDEWorkspaceTabController+CodePilot.m"; sourceTree = "<group>"; };
 		ED0169EF1A3C93A5004A8670 /* MCSwizzle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCSwizzle.h; sourceTree = "<group>"; };
-		ED0169F01A3C9791004A8670 /* NSObject+CPSwizzle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+CPSwizzle.h"; sourceTree = "<group>"; };
-		ED0169F11A3C9791004A8670 /* NSObject+CPSwizzle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+CPSwizzle.m"; sourceTree = "<group>"; };
 		ED0169F31A3CEAF4004A8670 /* IDEWorkspaceDocument+CodePilot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IDEWorkspaceDocument+CodePilot.h"; sourceTree = "<group>"; };
 		ED0169F41A3CEAF4004A8670 /* IDEWorkspaceDocument+CodePilot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "IDEWorkspaceDocument+CodePilot.m"; sourceTree = "<group>"; };
 		ED01FE0B1A33697900D81A18 /* CPSearchFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPSearchFieldCell.h; sourceTree = "<group>"; };
 		ED01FE0C1A33697900D81A18 /* CPSearchFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPSearchFieldCell.m; sourceTree = "<group>"; };
+		ED1D2B4A1B7E319D00A0EAC1 /* IDEEditor+CodePilot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IDEEditor+CodePilot.h"; sourceTree = "<group>"; };
+		ED1D2B4B1B7E319D00A0EAC1 /* IDEEditor+CodePilot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "IDEEditor+CodePilot.m"; sourceTree = "<group>"; };
 		ED2105A61A3F775C003D233A /* NSMutableOrderedSet+CodePilot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableOrderedSet+CodePilot.h"; sourceTree = "<group>"; };
 		ED2105A71A3F775C003D233A /* NSMutableOrderedSet+CodePilot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableOrderedSet+CodePilot.m"; sourceTree = "<group>"; };
 		ED2105A91A3F7861003D233A /* CPUniqueStack.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CPUniqueStack.h; sourceTree = "<group>"; };
@@ -393,8 +393,6 @@
 				4BC0BBF213AEBBB80093D04D /* NSURL+Anchors.m */,
 				F93F4FAB17B3FE550077B19E /* NSColor+ColorArithmetic.h */,
 				F93F4FAC17B3FE550077B19E /* NSColor+ColorArithmetic.m */,
-				ED0169F01A3C9791004A8670 /* NSObject+CPSwizzle.h */,
-				ED0169F11A3C9791004A8670 /* NSObject+CPSwizzle.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -414,6 +412,8 @@
 				ED0169ED1A3C5546004A8670 /* IDEWorkspaceTabController+CodePilot.m */,
 				ED0169F31A3CEAF4004A8670 /* IDEWorkspaceDocument+CodePilot.h */,
 				ED0169F41A3CEAF4004A8670 /* IDEWorkspaceDocument+CodePilot.m */,
+				ED1D2B4A1B7E319D00A0EAC1 /* IDEEditor+CodePilot.h */,
+				ED1D2B4B1B7E319D00A0EAC1 /* IDEEditor+CodePilot.m */,
 			);
 			name = XcodeConnectivity;
 			sourceTree = "<group>";
@@ -532,7 +532,7 @@
 		089C1669FE841209C02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0610;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = Macoscope;
 			};
 			buildConfigurationList = 1DEB913E08733D840010E9CD /* Build configuration list for PBXProject "CodePilot" */;
@@ -626,6 +626,7 @@
 				4BEE52501339193600DA9881 /* CPStatusLabel.m in Sources */,
 				4BEE52511339193600DA9881 /* NSArray+MiscExtensions.m in Sources */,
 				4BEE52521339193600DA9881 /* NSView+AllSubviews.m in Sources */,
+				ED1D2B4C1B7E319D00A0EAC1 /* IDEEditor+CodePilot.m in Sources */,
 				4BEE52531339193600DA9881 /* NSString+Abbreviation.m in Sources */,
 				ED29B1251A3326F500D13CD9 /* CPResultsTableRowView.m in Sources */,
 				F93F4FAD17B3FE550077B19E /* NSColor+ColorArithmetic.m in Sources */,
@@ -635,7 +636,6 @@
 				ED01FE0D1A33697900D81A18 /* CPSearchFieldCell.m in Sources */,
 				4BEE52611339193600DA9881 /* CPHUDViewWithRoundCorners.m in Sources */,
 				EDA64E1A1A34F61C00ED3C8F /* CPCodePilotConstants.m in Sources */,
-				ED0169F21A3C9791004A8670 /* NSObject+CPSwizzle.m in Sources */,
 				4BEE52631339193600DA9881 /* NSAttributedString+Hyperlink.m in Sources */,
 				4BEE52641339193600DA9881 /* NSNumber+VersionComparison.m in Sources */,
 				F9EAED25179D945100701117 /* CPXcodeInterfaces.m in Sources */,
@@ -678,8 +678,8 @@
 		1DEB913F08733D840010E9CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_ENABLE_OBJC_GC = supported;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
@@ -693,7 +693,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_ENABLE_OBJC_GC = supported;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
@@ -735,19 +734,19 @@
 				DSTROOT = "$(HOME)";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_OBJC_GC = unsupported;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Other Sources/CodePilot_Prefix.pch";
 				INFOPLIST_FILE = Resources/Info.plist;
 				INSTALL_PATH = "/Library/Application Support/Developer/Shared/Xcode/Plug-ins";
-				MACOSX_DEPLOYMENT_TARGET = "";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				OTHER_LDFLAGS = (
 					"-licucore",
 					"-undefined",
 					dynamic_lookup,
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = net.macoscope.CodePilot3;
 				PRODUCT_NAME = CodePilot3;
 				SDKROOT = macosx;
 				STRIP_INSTALLED_PRODUCT = NO;
@@ -766,18 +765,18 @@
 				DEPLOYMENT_POSTPROCESSING = YES;
 				DSTROOT = "$(HOME)";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
-				GCC_ENABLE_OBJC_GC = unsupported;
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Other Sources/CodePilot_Prefix.pch";
 				INFOPLIST_FILE = Resources/Info.plist;
 				INSTALL_PATH = "/Library/Application Support/Developer/Shared/Xcode/Plug-ins";
-				MACOSX_DEPLOYMENT_TARGET = "";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				OTHER_LDFLAGS = (
 					"-licucore",
 					"-undefined",
 					dynamic_lookup,
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = net.macoscope.CodePilot3;
 				PRODUCT_NAME = CodePilot3;
 				SDKROOT = macosx;
 				STRIP_INSTALLED_PRODUCT = NO;

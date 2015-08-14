@@ -25,6 +25,8 @@ CPOpenSpecifier *openSpecifierForCharacters(NSString* str);
 @implementation CPCodePilotWindowController {
   id _localEventMonitor;
 }
+@dynamic window;
+
 - (id)initWithXcodeWrapper:(CPXcodeWrapper *)xcodeWrapper
 {
 	self = [super init];

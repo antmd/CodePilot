@@ -19,6 +19,18 @@
 
 + (void)pluginDidLoad:(id)arg1
 {
+    static dispatch_once_t onceToken;
+    NSString *currentApplicationName = [[NSBundle mainBundle] infoDictionary][@"CFBundleName"];
+
+    if ([currentApplicationName isEqual:@"Xcode"]) {
+        dispatch_once(&onceToken, ^{
+          LOG(@"CODE PILOT: CURRENT_XCODE_VERSION: %@ CURRENT_XCODE_REVISION: %@", CURRENT_XCODE_VERSION, CURRENT_XCODE_REVISION);
+          
+          // just instantiate the singleton
+          (void)[CPCodePilotPlugin sharedInstance];
+        });
+    }
+
 }
 
 + (instancetype)sharedInstance
@@ -32,13 +44,7 @@
   
   return sharedInstance;
 }
-+ (void)load
-{
-  LOG(@"CODE PILOT: CURRENT_XCODE_VERSION: %@ CURRENT_XCODE_REVISION: %@", CURRENT_XCODE_VERSION, CURRENT_XCODE_REVISION);
-  
-  // just instantiate the singleton
-  (void)[CPCodePilotPlugin sharedInstance];
-}
+
 
 - (id)init
 {

@@ -469,6 +469,7 @@
 
 @interface IDEEditor : IDEViewController
 @property(retain) IDEEditorDocument *document;
+-(void)didSetupEditor;
 - (NSArray *)currentSelectedDocumentLocations;
 - (DVTSourceExpression *)selectedExpression;
 @end

@@ -19,7 +19,7 @@ enum {
   
 } DataMode;
 
-@interface CPSearchController : NSObject <NSTextFieldDelegate,NSTableViewDataSource,NSTableViewDelegate,CPSearchFieldDelegate>
+@interface CPSearchController : NSObject <NSTextFieldDelegate,NSSearchFieldDelegate,NSTableViewDataSource,NSTableViewDelegate,CPSearchFieldDelegate>
 @property (nonatomic, weak) NSControl *indexingProgressIndicator;
 @property (nonatomic, weak) CPSearchField *searchField;
 @property (nonatomic, weak) NSTableView *tableView;

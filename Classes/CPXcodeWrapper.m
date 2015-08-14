@@ -21,9 +21,7 @@
 static NSString * const WorkspaceDocumentsKeyPath = @"workspaceDocuments";
 static NSString * const IDEIndexWillIndexWorkspaceNotification = @"IDEIndexWillIndexWorkspaceNotification";
 static NSString * const IDEIndexDidIndexWorkspaceNotification = @"IDEIndexDidIndexWorkspaceNotification";
-static NSString * const IDEEditorAreaLastActiveEditorContextDidChangeNotification = @"IDEEditorAreaLastActiveEditorContextDidChangeNotification";
 static NSString * const IDEEditorAreaLastActiveEditorContextDidChangeContextKey = @"IDEEditorContext";
-static NSString * const IDEEditorContextTransitionNotification = @"transition from one file to another";
 
 @interface CPXcodeWrapper ()
 @property (strong,readwrite,nonatomic) NSDictionary *tabControllersByURL;
@@ -65,14 +63,6 @@ static NSString * const IDEEditorContextTransitionNotification = @"transition fr
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(didIndexWorkspace:)
                                                  name:IDEIndexDidIndexWorkspaceNotification
-                                               object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(editorContextBecameActive:)
-                                                 name:IDEEditorAreaLastActiveEditorContextDidChangeNotification
-                                               object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(editorContextTransition:)
-                                                 name:IDEEditorContextTransitionNotification
                                                object:nil];
   }
   
@@ -202,8 +192,18 @@ static NSString * const IDEEditorContextTransitionNotification = @"transition fr
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-  if ([keyPath isEqualToString:WorkspaceDocumentsKeyPath] && [object isKindOfClass:[IDEDocumentController class]]) {
+  if ([keyPath isEqualToString:WorkspaceDocumentsKeyPath] && [object isKindOfClass:NSClassFromString(@"IDEDocumentController")]) {
     [self removeClosedWorkspacesFromCurrentlyIndexed];
+  }
+  else if ([keyPath isEqualToString:@"document"] && [object isKindOfClass:NSClassFromString(@"IDEEditor")]) {
+    // An IDEEditor has been activated -- update recents
+    NSURL *fileURL = [[object document] fileURL];
+    
+    if (fileURL != nil) {
+      [[[self currentWorkspaceDocument] cp_recentsStack] push:fileURL];
+      NSLog(@"Latest file = %@", fileURL);
+    }
+
   }
 }
 
@@ -563,26 +563,6 @@ static NSString * const IDEEditorContextTransitionNotification = @"transition fr
   self.tabControllersByURL = [self _latestTabControllersByURL];
 }
 
-
-// Record a history item when an editor context gains focus
--(void)editorContextBecameActive:(NSNotification*)notification
-{
-  IDEEditorContext *context = notification.userInfo[IDEEditorAreaLastActiveEditorContextDidChangeContextKey];
-  NSURL *fileURL = context.editor.document.fileURL;
-  if ([fileURL isFileURL]) {
-    [[[self currentWorkspaceDocument] cp_recentsStack] push:fileURL];
-  }
-}
-
-// Record a history item when an editor loads a new document
--(void)editorContextTransition:(NSNotification*)notification
-{
-  //NSLog(@"Transition notification = %@",notification);
-  DVTDocumentLocation *nextLocation = notification.userInfo[@"next"];
-  if ([nextLocation.documentURL isFileURL]) {
-    [[[self currentWorkspaceDocument] cp_recentsStack] push:nextLocation.documentURL];
-  }
-}
 
 -(NSURL*)activeFileURL
 {
