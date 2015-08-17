@@ -197,10 +197,13 @@ static NSString * const IDEEditorAreaLastActiveEditorContextDidChangeContextKey 
   }
   else if ([keyPath isEqualToString:@"document"] && [object isKindOfClass:NSClassFromString(@"IDEEditor")]) {
     // An IDEEditor has been activated -- update recents
-    NSURL *fileURL = [[object document] fileURL];
-    
-    if (fileURL != nil) {
-      [[[self currentWorkspaceDocument] cp_recentsStack] push:fileURL];
+    IDEEditorDocument *document = [object document];
+    if (document.filePath != nil) {
+      NSURL *fileURL = [[object document] fileURL];
+      
+      if (fileURL != nil) {
+        [[[self currentWorkspaceDocument] cp_recentsStack] push:fileURL];
+      }
     }
 
   }

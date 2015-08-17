@@ -465,6 +465,7 @@
 @end
 
 @interface IDEEditorDocument : NSDocument
+@property(retain) DVTFilePath *filePath;
 - (NSSet*)_documentEditors;
 @end
 
