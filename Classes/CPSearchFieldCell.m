@@ -16,29 +16,29 @@
 }
 - (instancetype)initWithCoder:(NSCoder *)coder
 {
-  self = [super initWithCoder:coder];
-  if (self) {
-    [self _setup];
-  }
-  return self;
+    self = [super initWithCoder:coder];
+    if (self) {
+        [self _setup];
+    }
+    return self;
 }
 
 -(instancetype)initTextCell:(NSString *)aString
 {
-  self = [super initTextCell:aString];
-  if (self) {
-    [self _setup];
-  }
-  return self;
+    self = [super initTextCell:aString];
+    if (self) {
+        [self _setup];
+    }
+    return self;
 }
 
 -(instancetype)initImageCell:(NSImage *)image
 {
-  return [self initTextCell:@""];
+    return [self initTextCell:@""];
 }
 - (instancetype)init
 {
-  return [self initTextCell:@""];
+    return [self initTextCell:@""];
 }
 
 /*
@@ -52,25 +52,25 @@
 
 -(void)setLabel:(NSString*)label
 {
-  if (label.length) {
-    NSButtonCell *cell = [[NSButtonCell alloc] initTextCell:label];
-    cell.bezelStyle = NSInlineBezelStyle;
-    self.searchButtonCell = cell;
-  }
-  else {
-    [self resetSearchButtonCell];
-  }
-  NSSearchField *controlView = (NSSearchField*)self.controlView;
-  if (controlView.currentEditor) {
-    // The current editor is embedded in a private clipview
-    [controlView.subviews[0] setFrame:[self searchTextRectForBounds:controlView.bounds]];
-  }
-  [self.controlView setNeedsDisplay:YES];
+    if (label.length) {
+        NSButtonCell *cell = [[NSButtonCell alloc] initTextCell:label];
+        cell.bezelStyle = NSInlineBezelStyle;
+        self.searchButtonCell = cell;
+    }
+    else {
+        [self resetSearchButtonCell];
+    }
+    NSSearchField *controlView = (NSSearchField*)self.controlView;
+    if (controlView.currentEditor) {
+        // The current editor is embedded in a private clipview
+        [controlView.subviews[0] setFrame:[self searchTextRectForBounds:controlView.bounds]];
+    }
+    [self.controlView setNeedsDisplay:YES];
 }
 
 -(NSString*)label
 {
-  return self.searchButtonCell.title ;
+    return self.searchButtonCell.title ;
 }
 
 /*
@@ -83,165 +83,165 @@
 
 //
 - (void)drawWithFrame:(NSRect)cellFrame inView:(NSView *)controlView {
-  
-  //Adjust Rect
-  cellFrame = NSInsetRect(cellFrame, 0.5f, 0.5f);
-  
-  //Create Path
-  NSBezierPath *path = [[NSBezierPath alloc] init];
-  
-  if([self bezelStyle] == NSTextFieldRoundedBezel) {
     
-    [path appendBezierPathWithArcWithCenter: NSMakePoint(cellFrame.origin.x + (cellFrame.size.height /2), cellFrame.origin.y + (cellFrame.size.height /2))
-                                     radius: cellFrame.size.height /2
-                                 startAngle: 90
-                                   endAngle: 270];
+    //Adjust Rect
+    cellFrame = NSInsetRect(cellFrame, 0.5f, 0.5f);
     
-    [path appendBezierPathWithArcWithCenter: NSMakePoint(cellFrame.origin.x + (cellFrame.size.width - (cellFrame.size.height /2)), cellFrame.origin.y + (cellFrame.size.height /2))
-                                     radius: cellFrame.size.height /2
-                                 startAngle: 270
-                                   endAngle: 90];
+    //Create Path
+    NSBezierPath *path = [[NSBezierPath alloc] init];
     
-    [path closePath];
-  } else {
-    
-    [path appendBezierPathWithRoundedRect: cellFrame xRadius: 3.0f yRadius: 3.0f];
-  }
-  [NSColor controlBackgroundColor];
-  [path fill];
-  if([self isBezeled] || [self isBordered]) {
-    
-    [NSGraphicsContext saveGraphicsState];
-    
-    if([super showsFirstResponder] && [[[self controlView] window] isKeyWindow] &&
-       ([self focusRingType] == NSFocusRingTypeDefault ||
-        [self focusRingType] == NSFocusRingTypeExterior)) {
-         
-         [NSGraphicsContext saveGraphicsState];
-         NSSetFocusRingStyle(NSFocusRingOnly);
-         NSRectFill(cellFrame);
-         [NSGraphicsContext restoreGraphicsState];
-       }
-    
-    //Check State
-    if([self isEnabled]) {
-      
-      [NSColor.whiteColor set];
+    if([self bezelStyle] == NSTextFieldRoundedBezel) {
+        
+        [path appendBezierPathWithArcWithCenter: NSMakePoint(cellFrame.origin.x + (cellFrame.size.height /2), cellFrame.origin.y + (cellFrame.size.height /2))
+                                         radius: cellFrame.size.height /2
+                                     startAngle: 90
+                                       endAngle: 270];
+        
+        [path appendBezierPathWithArcWithCenter: NSMakePoint(cellFrame.origin.x + (cellFrame.size.width - (cellFrame.size.height /2)), cellFrame.origin.y + (cellFrame.size.height /2))
+                                         radius: cellFrame.size.height /2
+                                     startAngle: 270
+                                       endAngle: 90];
+        
+        [path closePath];
     } else {
-      
-      [NSColor.grayColor set];
+        
+        [path appendBezierPathWithRoundedRect: cellFrame xRadius: 3.0f yRadius: 3.0f];
+    }
+    [NSColor controlBackgroundColor];
+    [path fill];
+    if([self isBezeled] || [self isBordered]) {
+        
+        [NSGraphicsContext saveGraphicsState];
+        
+        if([super showsFirstResponder] && [[[self controlView] window] isKeyWindow] &&
+           ([self focusRingType] == NSFocusRingTypeDefault ||
+            [self focusRingType] == NSFocusRingTypeExterior)) {
+               
+               [NSGraphicsContext saveGraphicsState];
+               NSSetFocusRingStyle(NSFocusRingOnly);
+               NSRectFill(cellFrame);
+               [NSGraphicsContext restoreGraphicsState];
+           }
+        
+        //Check State
+        if([self isEnabled]) {
+            
+            [NSColor.whiteColor set];
+        } else {
+            
+            [NSColor.grayColor set];
+        }
+        
+        [path setLineWidth: 1.0f];
+        [path stroke];
+        
+        [NSGraphicsContext restoreGraphicsState];
     }
     
-    [path setLineWidth: 1.0f];
-    [path stroke];
+    NSTextView* view = (NSTextView*)[[controlView window] fieldEditor: NO forObject: controlView];
     
-    [NSGraphicsContext restoreGraphicsState];
-  }
-  
-  NSTextView* view = (NSTextView*)[[controlView window] fieldEditor: NO forObject: controlView];
-  
-  //Get Attributes of the selected text
-  NSMutableDictionary *dict = [[view selectedTextAttributes] mutableCopy] ;
-  
-  //If window/app is active draw the highlight/text in active colors
-  if([self showsFirstResponder] && [[[self controlView] window] isKeyWindow])
-  {
-    [dict setObject: [NSColor selectedTextBackgroundColor]
-             forKey: NSBackgroundColorAttributeName];
+    //Get Attributes of the selected text
+    NSMutableDictionary *dict = [[view selectedTextAttributes] mutableCopy] ;
     
-    [view setTextColor: [NSColor selectedTextColor]
-                 range: [view selectedRange]];
-  }
-  else
-  {
-    [dict setObject: [[NSColor selectedTextBackgroundColor] colorWithAlphaComponent:0.5]
-             forKey: NSBackgroundColorAttributeName];
+    //If window/app is active draw the highlight/text in active colors
+    if([self showsFirstResponder] && [[[self controlView] window] isKeyWindow])
+    {
+        [dict setObject: [NSColor selectedTextBackgroundColor]
+                 forKey: NSBackgroundColorAttributeName];
+        
+        [view setTextColor: [NSColor selectedTextColor]
+                     range: [view selectedRange]];
+    }
+    else
+    {
+        [dict setObject: [[NSColor selectedTextBackgroundColor] colorWithAlphaComponent:0.5]
+                 forKey: NSBackgroundColorAttributeName];
+        
+        [view setTextColor: [[NSColor selectedTextColor] colorWithAlphaComponent:0.5]
+                     range: [view selectedRange]];
+    }
     
-    [view setTextColor: [[NSColor selectedTextColor] colorWithAlphaComponent:0.5]
-                 range: [view selectedRange]];
-  }
-  
-  [view setSelectedTextAttributes:dict];
-  
-  if([self isEnabled]) {
+    [view setSelectedTextAttributes:dict];
     
-    [self setTextColor:[NSColor textColor]];
-  } else {
+    if([self isEnabled]) {
+        
+        [self setTextColor:[NSColor textColor]];
+    } else {
+        
+        [self setTextColor:[NSColor disabledControlTextColor]];
+    }
     
-    [self setTextColor:[NSColor disabledControlTextColor]];
-  }
-  
-  if(![self placeholderAttributedString] && [self placeholderString]) {
+    if(![self placeholderAttributedString] && [self placeholderString]) {
+        
+        //Nope lets create it
+        NSDictionary *attribs = @{ NSForegroundColorAttributeName: [NSColor disabledControlTextColor]
+                                   , NSFontAttributeName: self.font
+                                   };
+        
+        
+        //Set it
+        [self setPlaceholderAttributedString: [[NSAttributedString alloc] initWithString:[self placeholderString] attributes:attribs ]] ;
+    }
     
-    //Nope lets create it
-    NSDictionary *attribs = @{ NSForegroundColorAttributeName: [NSColor disabledControlTextColor]
-                               , NSFontAttributeName: self.font
-                               };
+    //Adjust Frame so Text Draws correctly
+    switch ([self controlSize]) {
+            
+        case NSControlSizeSmall:
+            
+            cellFrame.origin.y += 1;
+            break;
+            
+        case NSControlSizeMini:
+            
+            cellFrame.origin.y += 1;
+            
+        default:
+            break;
+    }
     
-    
-    //Set it
-    [self setPlaceholderAttributedString: [[NSAttributedString alloc] initWithString:[self placeholderString] attributes:attribs ]] ;
-  }
-  
-  //Adjust Frame so Text Draws correctly
-  switch ([self controlSize]) {
-      
-    case NSSmallControlSize:
-      
-      cellFrame.origin.y += 1;
-      break;
-      
-    case NSMiniControlSize:
-      
-      cellFrame.origin.y += 1;
-      
-    default:
-      break;
-  }
-  
-  [self drawInteriorWithFrame: cellFrame inView: controlView];
+    [self drawInteriorWithFrame: cellFrame inView: controlView];
 }
 
 
 
 // This adjusts the drawing location of the Cancel Button
 -(NSRect)cancelButtonRectForBounds:(NSRect) aRect {
-  
-  NSRect nRect = [super cancelButtonRectForBounds: aRect];
-  
-  switch ([self controlSize]) {
-      
-    case NSRegularControlSize:
-      
-      nRect.origin.y -= 1;
-      break;
-      
-    case NSSmallControlSize:
-      
-      nRect.origin.y -= 1.5;
-      nRect.origin.x += 2;
-      break;
-      
-    case NSMiniControlSize:
-      
-      nRect.origin.y -= 2;
-      break;
-      
-    default:
-      break;
-  }
-  
-  return nRect;
+    
+    NSRect nRect = [super cancelButtonRectForBounds: aRect];
+    
+    switch ([self controlSize]) {
+            
+        case NSControlSizeRegular:
+            
+            nRect.origin.y -= 1;
+            break;
+            
+        case NSControlSizeSmall:
+            
+            nRect.origin.y -= 1.5;
+            nRect.origin.x += 2;
+            break;
+            
+        case NSControlSizeMini:
+            
+            nRect.origin.y -= 2;
+            break;
+            
+        default:
+            break;
+    }
+    
+    return nRect;
 }
 
 // Set insertion point to white
 -(NSText *)setUpFieldEditorAttributes:(NSText *) textObj
 {
-  textObj = [super setUpFieldEditorAttributes:textObj];
-  if([textObj isKindOfClass:[NSTextView class]]) {
-    [(NSTextView *)textObj setInsertionPointColor:[self textColor]];
-  }
-  return textObj;
+    textObj = [super setUpFieldEditorAttributes:textObj];
+    if([textObj isKindOfClass:[NSTextView class]]) {
+        [(NSTextView *)textObj setInsertionPointColor:[self textColor]];
+    }
+    return textObj;
 }
 
 /*
@@ -255,30 +255,30 @@
 
 - (void)editWithFrame:(NSRect)aRect inView:(NSView *)controlView editor:(NSText *)textObj delegate:(id)anObject event:(NSEvent *)theEvent
 {
-  [self _adjustRectForButtons:&aRect inView:controlView];
-  [super editWithFrame: aRect inView: controlView editor: textObj delegate: anObject event: theEvent];
+    [self _adjustRectForButtons:&aRect inView:controlView];
+    [super editWithFrame: aRect inView: controlView editor: textObj delegate: anObject event: theEvent];
 }
 
 - (void)selectWithFrame:(NSRect)aRect inView:(NSView *)controlView editor:(NSText *)textObj delegate:(id)anObject start:(NSInteger)selStart length:(NSInteger)selLength
 {
-  [self _adjustRectForButtons:&aRect inView:controlView];
-  [super selectWithFrame: aRect inView: controlView editor: textObj delegate: anObject start: selStart length: selLength];
+    [self _adjustRectForButtons:&aRect inView:controlView];
+    [super selectWithFrame: aRect inView: controlView editor: textObj delegate: anObject start: selStart length: selLength];
 }
 
 -(NSRect)searchTextRectForBounds:(NSRect)rect
 {
-  [self _adjustRectForButtons:&rect inView:self.controlView];
-  // Not sure why, but we need to adjust here
-  rect.origin.x += 5.0;
-  rect.origin.y -= 2.0;
-  return rect;
+    [self _adjustRectForButtons:&rect inView:self.controlView];
+    // Not sure why, but we need to adjust here
+    rect.origin.x += 5.0;
+    rect.origin.y -= 2.0;
+    return rect;
 }
 
 -(NSRect)searchButtonRectForBounds:(NSRect)rect
 {
-  NSSize cellSize = [(NSCell*)self.searchButtonCell cellSizeForBounds:self.controlView.bounds];
-  CGFloat yPos = (NSHeight(self.controlView.bounds)-cellSize.height)/2.0;
-  return NSMakeRect(0.0,yPos,cellSize.width,cellSize.height);
+    NSSize cellSize = [(NSCell*)self.searchButtonCell cellSizeForBounds:self.controlView.bounds];
+    CGFloat yPos = (NSHeight(self.controlView.bounds)-cellSize.height)/2.0;
+    return NSMakeRect(0.0,yPos,cellSize.width,cellSize.height);
 }
 
 /*
@@ -291,10 +291,10 @@
 
 -(void)_adjustRectForButtons:(NSRectPointer)rectPtr inView:(NSView*)controlView
 {
-  NSRect searchButtonRect = [self searchButtonRectForBounds:controlView.bounds];
-  NSRect cancelButtonRect = [self cancelButtonRectForBounds:controlView.bounds];
-  rectPtr->origin.x = searchButtonRect.origin.x + searchButtonRect.size.width + 3.0;
-  rectPtr->size.width = controlView.bounds.size.width - rectPtr->origin.x - cancelButtonRect.size.width - 3.0;
+    NSRect searchButtonRect = [self searchButtonRectForBounds:controlView.bounds];
+    NSRect cancelButtonRect = [self cancelButtonRectForBounds:controlView.bounds];
+    rectPtr->origin.x = searchButtonRect.origin.x + searchButtonRect.size.width + 3.0;
+    rectPtr->size.width = controlView.bounds.size.width - rectPtr->origin.x - cancelButtonRect.size.width - 3.0;
 }
 
 @end

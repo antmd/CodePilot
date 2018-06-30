@@ -11,6 +11,6 @@
 @implementation NSURL (Anchors)
 - (NSString *)pathWithoutAnchor
 {
-  return [[[self path] componentsSeparatedByString:@"#"] objectAtIndex:0];
+    return [[[self path] componentsSeparatedByString:@"#"] objectAtIndex:0];
 }
 @end

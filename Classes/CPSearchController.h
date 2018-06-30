@@ -12,12 +12,12 @@
 
 @class CPXcodeWrapper,  CPSearchField, CPStatusLabel, CPResult;
 
-enum {
+typedef NS_OPTIONS(NSInteger, DataMode) {
   DataModeRecentJumps = 1,
   DataModeMatchingFiles = 2,
   DataModeMatchingSymbols = 3
   
-} DataMode;
+  };
 
 @interface CPSearchController : NSObject <NSTextFieldDelegate,NSSearchFieldDelegate,NSTableViewDataSource,NSTableViewDelegate,CPSearchFieldDelegate>
 @property (nonatomic, weak) NSControl *indexingProgressIndicator;

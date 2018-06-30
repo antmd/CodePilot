@@ -11,36 +11,36 @@
 @implementation NSNumber (VersionComparison)
 + (NSNumber *)numberWithVersionString:(NSString *)versionString
 {
-	NSArray *parts = [versionString componentsSeparatedByString:@"."];
-  
-	long bigNumber = 0;
-	long powerOfTheMultiplier = 9;
-  
-	for (NSString *part in parts) {
-		NSInteger partInt = [part integerValue];
+    NSArray *parts = [versionString componentsSeparatedByString:@"."];
     
-		if (partInt > 0) {
-			bigNumber += partInt * pow(10, powerOfTheMultiplier);
-		}
+    long bigNumber = 0;
+    long powerOfTheMultiplier = 9;
     
-		powerOfTheMultiplier -= 2;
-	}
-  
-	return [NSNumber numberWithVersionLong:bigNumber];
+    for (NSString *part in parts) {
+        NSInteger partInt = [part integerValue];
+        
+        if (partInt > 0) {
+            bigNumber += partInt * pow(10, powerOfTheMultiplier);
+        }
+        
+        powerOfTheMultiplier -= 2;
+    }
+    
+    return [NSNumber numberWithVersionLong:bigNumber];
 }
 
 + (NSNumber *)numberWithVersionLong:(long)versionLong
 {
-	return [NSNumber numberWithLong:versionLong];
+    return [NSNumber numberWithLong:versionLong];
 }
 
 + (NSNumber *)numberWithVersionInt:(NSInteger)versionInt
 {
-	return [NSNumber numberWithInt:versionInt];
+    return [NSNumber numberWithInteger:versionInt];
 }
 
 + (NSNumber *)numberWithVersionNumber:(NSNumber *)n
 {
-	return [NSNumber numberWithInt:[n intValue]];
+    return [NSNumber numberWithInteger:[n integerValue]];
 }
 @end

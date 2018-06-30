@@ -62,8 +62,6 @@
 		4BEE526C1339193600DA9881 /* MCStringScoring.c in Sources */ = {isa = PBXBuildFile; fileRef = 4B63C9261190199500C0DB12 /* MCStringScoring.c */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		4BEE526E1339193600DA9881 /* CPSymbol.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BBC547911D7757D00C63705 /* CPSymbol.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		4BEE52741339193600DA9881 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */; };
-		4BEE52751339193600DA9881 /* libssl.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B71F65C11561A15005A8471 /* libssl.dylib */; };
-		4BEE52761339193600DA9881 /* libcrypto.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B71F66011561A5E005A8471 /* libcrypto.dylib */; };
 		4BEE52771339193600DA9881 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B25285A1165E23700374EB0 /* WebKit.framework */; };
 		ED0169EE1A3C5546004A8670 /* IDEWorkspaceTabController+CodePilot.m in Sources */ = {isa = PBXBuildFile; fileRef = ED0169ED1A3C5546004A8670 /* IDEWorkspaceTabController+CodePilot.m */; };
 		ED0169F51A3CEAF4004A8670 /* IDEWorkspaceDocument+CodePilot.m in Sources */ = {isa = PBXBuildFile; fileRef = ED0169F41A3CEAF4004A8670 /* IDEWorkspaceDocument+CodePilot.m */; };
@@ -77,6 +75,7 @@
 		ED5382DC1A37275000A61FD6 /* GWShortcutRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = ED5382DB1A37275000A61FD6 /* GWShortcutRecorder.m */; };
 		ED59EC951A34B88800D3651A /* CPPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED59EC931A34B88800D3651A /* CPPreferencesViewController.m */; };
 		ED59EC961A34B88800D3651A /* CPPreferencesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED59EC941A34B88800D3651A /* CPPreferencesViewController.xib */; };
+		ED86CBA7200126D200A35850 /* XcodeUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = ED86CBA6200126D200A35850 /* XcodeUtils.m */; };
 		EDA64E1A1A34F61C00ED3C8F /* CPCodePilotConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = EDA64E191A34F61C00ED3C8F /* CPCodePilotConstants.m */; };
 		EDCAEA4B1A32186100094CF0 /* CPResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDCAEA491A32186100094CF0 /* CPResultsViewController.m */; };
 		EDCAEA4C1A32186100094CF0 /* CPResultsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EDCAEA4A1A32186100094CF0 /* CPResultsViewController.xib */; };
@@ -88,7 +87,6 @@
 		EDFD47751A34FCF400BD45C5 /* openbook@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = EDFD47721A34FCF400BD45C5 /* openbook@3x.png */; };
 		F93F4FAD17B3FE550077B19E /* NSColor+ColorArithmetic.m in Sources */ = {isa = PBXBuildFile; fileRef = F93F4FAC17B3FE550077B19E /* NSColor+ColorArithmetic.m */; };
 		F9979794155D52060023D04C /* CPSymbolCache.m in Sources */ = {isa = PBXBuildFile; fileRef = F9979793155D52060023D04C /* CPSymbolCache.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		F9EAED25179D945100701117 /* CPXcodeInterfaces.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EAED24179D945100701117 /* CPXcodeInterfaces.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F9F596B417BBF78E0037BE7A /* CPResult.m in Sources */ = {isa = PBXBuildFile; fileRef = F9F596B317BBF78E0037BE7A /* CPResult.m */; };
 /* End PBXBuildFile section */
 
@@ -109,94 +107,91 @@
 		1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		32DBCF630370AF2F00C91783 /* CodePilot_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = CodePilot_Prefix.pch; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		4B04640211347A1C00A27CC6 /* NSString+Abbreviation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Abbreviation.h"; sourceTree = "<group>"; };
-		4B04640311347A1C00A27CC6 /* NSString+Abbreviation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = "NSString+Abbreviation.m"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		4B04640311347A1C00A27CC6 /* NSString+Abbreviation.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = "NSString+Abbreviation.m"; sourceTree = "<group>"; tabWidth = 4; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		4B1171AF11490EA70029BB44 /* CPHUDViewWithRoundCorners.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPHUDViewWithRoundCorners.h; sourceTree = "<group>"; };
-		4B1171B011490EA70029BB44 /* CPHUDViewWithRoundCorners.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPHUDViewWithRoundCorners.m; sourceTree = "<group>"; };
+		4B1171B011490EA70029BB44 /* CPHUDViewWithRoundCorners.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = CPHUDViewWithRoundCorners.m; sourceTree = "<group>"; tabWidth = 4; };
 		4B19163B1150FFBD00E073F8 /* CodePilotPrefs.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CodePilotPrefs.png; sourceTree = "<group>"; };
 		4B19163C1150FFBD00E073F8 /* CodePilotIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = CodePilotIcon.icns; sourceTree = "<group>"; };
 		4B197DC013AF37A100DF2598 /* memlak.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = memlak.png; sourceTree = "<group>"; };
 		4B25285A1165E23700374EB0 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		4B30A184133979A7008A4372 /* CPPluginInstaller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPPluginInstaller.h; sourceTree = "<group>"; };
-		4B30A185133979A7008A4372 /* CPPluginInstaller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CPPluginInstaller.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		4B30A185133979A7008A4372 /* CPPluginInstaller.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CPPluginInstaller.m; sourceTree = "<group>"; tabWidth = 4; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		4B30AEF4138D526F0008B1A9 /* UpperStatusBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UpperStatusBackground.png; sourceTree = "<group>"; };
 		4B32ED3F138E4B8B00D272E4 /* ATROX.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = ATROX.TTF; sourceTree = "<group>"; };
-		4B38187B115CD37F0007D74B /* NSMutableArray+MiscExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = "NSMutableArray+MiscExtensions.m"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		4B38187B115CD37F0007D74B /* NSMutableArray+MiscExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = "NSMutableArray+MiscExtensions.m"; sourceTree = "<group>"; tabWidth = 4; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		4B38187C115CD37F0007D74B /* NSMutableArray+MiscExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+MiscExtensions.h"; sourceTree = "<group>"; };
 		4B38FD30112DF476006C375F /* CPCodePilotPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = CPCodePilotPlugin.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		4B38FD31112DF476006C375F /* CPCodePilotPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CPCodePilotPlugin.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		4B38FD31112DF476006C375F /* CPCodePilotPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CPCodePilotPlugin.m; sourceTree = "<group>"; tabWidth = 4; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		4B3A20FF1354CCF0004EAF8F /* InfoLabelBarTriangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = InfoLabelBarTriangle.png; sourceTree = "<group>"; };
 		4B3A21001354CCF0004EAF8F /* InfoLabelBarRect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = InfoLabelBarRect.png; sourceTree = "<group>"; };
 		4B4D42BE1354B8BF00ACA78B /* ResultSelection.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ResultSelection.png; sourceTree = "<group>"; };
 		4B4DCEF01363543B0009304C /* CPPreferencesToolbarDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPPreferencesToolbarDelegate.h; sourceTree = "<group>"; };
 		4B4DCEF11363543B0009304C /* CPPreferencesToolbarDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CPPreferencesToolbarDelegate.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		4B53D0F811492AB200224F53 /* NSAttributedString+Hyperlink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = "NSAttributedString+Hyperlink.h"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		4B53D0F911492AB200224F53 /* NSAttributedString+Hyperlink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = "NSAttributedString+Hyperlink.m"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		4B53D0F911492AB200224F53 /* NSAttributedString+Hyperlink.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = "NSAttributedString+Hyperlink.m"; sourceTree = "<group>"; tabWidth = 4; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		4B61EB361354D52900ED0A40 /* HeaderWithInfo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HeaderWithInfo.png; sourceTree = "<group>"; };
 		4B63C9251190199500C0DB12 /* MCStringScoring.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCStringScoring.h; sourceTree = "<group>"; };
 		4B63C9261190199500C0DB12 /* MCStringScoring.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = MCStringScoring.c; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.c; };
 		4B69D3031153AA5E00541012 /* NSNumber+VersionComparison.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+VersionComparison.h"; sourceTree = "<group>"; };
-		4B69D3041153AA5E00541012 /* NSNumber+VersionComparison.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = "NSNumber+VersionComparison.m"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		4B69D3041153AA5E00541012 /* NSNumber+VersionComparison.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = "NSNumber+VersionComparison.m"; sourceTree = "<group>"; tabWidth = 4; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		4B6EC540113D354D00126AE0 /* CPFileReference.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CPFileReference.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		4B6EC541113D354D00126AE0 /* CPFileReference.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = CPFileReference.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		4B71F65C11561A15005A8471 /* libssl.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libssl.dylib; path = usr/lib/libssl.dylib; sourceTree = SDKROOT; };
 		4B71F66011561A5E005A8471 /* libcrypto.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcrypto.dylib; path = usr/lib/libcrypto.dylib; sourceTree = SDKROOT; };
 		4B76E9261333B7A000398AB0 /* CPXcodeInterfaces.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = CPXcodeInterfaces.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		4B7E38CE1139898E00FDBC98 /* CPSearchField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPSearchField.h; sourceTree = "<group>"; };
-		4B7E38CF1139898E00FDBC98 /* CPSearchField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CPSearchField.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		4B7E38CF1139898E00FDBC98 /* CPSearchField.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CPSearchField.m; sourceTree = "<group>"; tabWidth = 4; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		4B7FBFED112FFFF700846DF6 /* CPXcodeWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = CPXcodeWrapper.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		4B7FBFEE112FFFF700846DF6 /* CPCodePilotWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CPCodePilotWindowController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		4B7FBFF0112FFFF700846DF6 /* CPXcodeWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CPXcodeWrapper.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		4B7FBFF7112FFFF800846DF6 /* CPSearchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CPSearchController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		4B7FBFEE112FFFF700846DF6 /* CPCodePilotWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CPCodePilotWindowController.m; sourceTree = "<group>"; tabWidth = 4; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		4B7FBFF0112FFFF700846DF6 /* CPXcodeWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CPXcodeWrapper.m; sourceTree = "<group>"; tabWidth = 4; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		4B7FBFF7112FFFF800846DF6 /* CPSearchController.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CPSearchController.m; sourceTree = "<group>"; tabWidth = 4; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		4B7FBFF8112FFFF800846DF6 /* MCCommons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCCommons.h; sourceTree = "<group>"; };
 		4B7FBFF9112FFFF800846DF6 /* CPSearchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = CPSearchController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		4B7FBFFA112FFFF800846DF6 /* CPCodePilotWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPCodePilotWindowController.h; sourceTree = "<group>"; };
-		4B7FBFFE112FFFF800846DF6 /* CPWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPWindow.m; sourceTree = "<group>"; };
+		4B7FBFFE112FFFF800846DF6 /* CPWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = CPWindow.m; sourceTree = "<group>"; tabWidth = 4; };
 		4B7FBFFF112FFFF800846DF6 /* CPWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPWindow.h; sourceTree = "<group>"; };
-		4B7FC004112FFFF800846DF6 /* NSString+MiscExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = "NSString+MiscExtensions.m"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		4B7FC004112FFFF800846DF6 /* NSString+MiscExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = "NSString+MiscExtensions.m"; sourceTree = "<group>"; tabWidth = 4; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		4B7FC005112FFFF800846DF6 /* NSString+MiscExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MiscExtensions.h"; sourceTree = "<group>"; };
-		4B7FC006112FFFF800846DF6 /* NSAppleEventDescriptor+ToObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAppleEventDescriptor+ToObject.m"; sourceTree = "<group>"; };
+		4B7FC006112FFFF800846DF6 /* NSAppleEventDescriptor+ToObject.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAppleEventDescriptor+ToObject.m"; sourceTree = "<group>"; tabWidth = 4; };
 		4B7FC007112FFFF800846DF6 /* NSAppleEventDescriptor+ToObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAppleEventDescriptor+ToObject.h"; sourceTree = "<group>"; };
 		4B7FC008112FFFF800846DF6 /* MCLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCLog.m; sourceTree = "<group>"; };
 		4B7FC009112FFFF800846DF6 /* MCLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = MCLog.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		4B88D25411303885007250E5 /* CPStatusLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPStatusLabel.h; sourceTree = "<group>"; };
-		4B88D25511303885007250E5 /* CPStatusLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPStatusLabel.m; sourceTree = "<group>"; };
+		4B88D25511303885007250E5 /* CPStatusLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = CPStatusLabel.m; sourceTree = "<group>"; tabWidth = 4; };
 		4BA45D2B11343FA9006351CC /* NSView+AllSubviews.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSView+AllSubviews.h"; sourceTree = "<group>"; };
-		4BA45D2C11343FA9006351CC /* NSView+AllSubviews.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = "NSView+AllSubviews.m"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		4BA45D2C11343FA9006351CC /* NSView+AllSubviews.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = "NSView+AllSubviews.m"; sourceTree = "<group>"; tabWidth = 4; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		4BAC9BD31386B6310024658A /* CPWorkspaceSymbolCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPWorkspaceSymbolCache.h; sourceTree = "<group>"; };
 		4BAC9BD41386B6310024658A /* CPWorkspaceSymbolCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPWorkspaceSymbolCache.m; sourceTree = "<group>"; };
 		4BBC547911D7757D00C63705 /* CPSymbol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CPSymbol.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		4BBC547A11D7757D00C63705 /* CPSymbol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPSymbol.h; sourceTree = "<group>"; };
 		4BBEE93F1139B19F00C77C0C /* CPSearchFieldTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPSearchFieldTextView.h; sourceTree = "<group>"; };
-		4BBEE9401139B19F00C77C0C /* CPSearchFieldTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPSearchFieldTextView.m; sourceTree = "<group>"; };
+		4BBEE9401139B19F00C77C0C /* CPSearchFieldTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = CPSearchFieldTextView.m; sourceTree = "<group>"; tabWidth = 4; };
 		4BC0BBF113AEBBB80093D04D /* NSURL+Anchors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+Anchors.h"; sourceTree = "<group>"; };
-		4BC0BBF213AEBBB80093D04D /* NSURL+Anchors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = "NSURL+Anchors.m"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		4BC0BBF213AEBBB80093D04D /* NSURL+Anchors.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = "NSURL+Anchors.m"; sourceTree = "<group>"; tabWidth = 4; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		4BC46217135494830046C0A6 /* Header.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Header.png; sourceTree = "<group>"; };
 		4BC46218135494830046C0A6 /* Footer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Footer.png; sourceTree = "<group>"; };
 		4BDCDAF4113142B40015BF7D /* NSArray+MiscExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+MiscExtensions.h"; sourceTree = "<group>"; };
-		4BDCDAF5113142B40015BF7D /* NSArray+MiscExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = "NSArray+MiscExtensions.m"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		4BDCDAF5113142B40015BF7D /* NSArray+MiscExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = "NSArray+MiscExtensions.m"; sourceTree = "<group>"; tabWidth = 4; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		4BEAF842138D67E8003DB3AB /* LightCell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LightCell.png; sourceTree = "<group>"; };
 		4BEAF843138D67E8003DB3AB /* DarkCell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DarkCell.png; sourceTree = "<group>"; };
 		4BEE527B1339193600DA9881 /* CodePilot3.xcplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CodePilot3.xcplugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		4BEE52A513391CBF00DA9881 /* CPCodePilotConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = CPCodePilotConfig.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		D2F7E65807B2D6F200F64583 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
 		ED0169EC1A3C5546004A8670 /* IDEWorkspaceTabController+CodePilot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IDEWorkspaceTabController+CodePilot.h"; sourceTree = "<group>"; };
-		ED0169ED1A3C5546004A8670 /* IDEWorkspaceTabController+CodePilot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "IDEWorkspaceTabController+CodePilot.m"; sourceTree = "<group>"; };
+		ED0169ED1A3C5546004A8670 /* IDEWorkspaceTabController+CodePilot.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = "IDEWorkspaceTabController+CodePilot.m"; sourceTree = "<group>"; tabWidth = 4; };
 		ED0169EF1A3C93A5004A8670 /* MCSwizzle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCSwizzle.h; sourceTree = "<group>"; };
 		ED0169F31A3CEAF4004A8670 /* IDEWorkspaceDocument+CodePilot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IDEWorkspaceDocument+CodePilot.h"; sourceTree = "<group>"; };
-		ED0169F41A3CEAF4004A8670 /* IDEWorkspaceDocument+CodePilot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "IDEWorkspaceDocument+CodePilot.m"; sourceTree = "<group>"; };
+		ED0169F41A3CEAF4004A8670 /* IDEWorkspaceDocument+CodePilot.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = "IDEWorkspaceDocument+CodePilot.m"; sourceTree = "<group>"; tabWidth = 4; };
 		ED01FE0B1A33697900D81A18 /* CPSearchFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPSearchFieldCell.h; sourceTree = "<group>"; };
-		ED01FE0C1A33697900D81A18 /* CPSearchFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPSearchFieldCell.m; sourceTree = "<group>"; };
+		ED01FE0C1A33697900D81A18 /* CPSearchFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = CPSearchFieldCell.m; sourceTree = "<group>"; tabWidth = 4; };
 		ED1D2B4A1B7E319D00A0EAC1 /* IDEEditor+CodePilot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IDEEditor+CodePilot.h"; sourceTree = "<group>"; };
-		ED1D2B4B1B7E319D00A0EAC1 /* IDEEditor+CodePilot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "IDEEditor+CodePilot.m"; sourceTree = "<group>"; };
+		ED1D2B4B1B7E319D00A0EAC1 /* IDEEditor+CodePilot.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = "IDEEditor+CodePilot.m"; sourceTree = "<group>"; tabWidth = 4; };
 		ED2105A61A3F775C003D233A /* NSMutableOrderedSet+CodePilot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableOrderedSet+CodePilot.h"; sourceTree = "<group>"; };
-		ED2105A71A3F775C003D233A /* NSMutableOrderedSet+CodePilot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableOrderedSet+CodePilot.m"; sourceTree = "<group>"; };
+		ED2105A71A3F775C003D233A /* NSMutableOrderedSet+CodePilot.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableOrderedSet+CodePilot.m"; sourceTree = "<group>"; tabWidth = 4; };
 		ED2105A91A3F7861003D233A /* CPUniqueStack.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CPUniqueStack.h; sourceTree = "<group>"; };
 		ED29B1231A3326F500D13CD9 /* CPResultsTableRowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPResultsTableRowView.h; sourceTree = "<group>"; };
-		ED29B1241A3326F500D13CD9 /* CPResultsTableRowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPResultsTableRowView.m; sourceTree = "<group>"; };
+		ED29B1241A3326F500D13CD9 /* CPResultsTableRowView.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = CPResultsTableRowView.m; sourceTree = "<group>"; tabWidth = 4; };
 		ED29B1261A332FDE00D13CD9 /* CPResultController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CPResultController.h; sourceTree = "<group>"; };
-		ED29B1271A333D0A00D13CD9 /* openbookTemplate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = openbookTemplate.png; sourceTree = "<group>"; };
-		ED29B1281A333D0A00D13CD9 /* openbookTemplate@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "openbookTemplate@2x.png"; sourceTree = "<group>"; };
-		ED29B1291A333D0A00D13CD9 /* openbookTemplate@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "openbookTemplate@3x.png"; sourceTree = "<group>"; };
 		ED4EDF571A310C1200FE7F92 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		ED4EDF581A310C1200FE7F92 /* logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@2x.png"; sourceTree = "<group>"; };
 		ED4EDF591A310C1200FE7F92 /* logo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@3x.png"; sourceTree = "<group>"; };
@@ -205,12 +200,44 @@
 		ED59EC921A34B88800D3651A /* CPPreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPPreferencesViewController.h; sourceTree = "<group>"; };
 		ED59EC931A34B88800D3651A /* CPPreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPPreferencesViewController.m; sourceTree = "<group>"; };
 		ED59EC941A34B88800D3651A /* CPPreferencesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CPPreferencesViewController.xib; sourceTree = "<group>"; };
+		ED86CB8C20011E2000A35850 /* DVTTextPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DVTTextPreferences.h; sourceTree = "<group>"; };
+		ED86CB8E20011E2000A35850 /* DVTViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DVTViewController.h; sourceTree = "<group>"; };
+		ED86CB8F20011E2000A35850 /* DVTFontAndColorTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DVTFontAndColorTheme.h; sourceTree = "<group>"; };
+		ED86CB9020011E2000A35850 /* DVTDocumentLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DVTDocumentLocation.h; sourceTree = "<group>"; };
+		ED86CB9220011E2000A35850 /* IDEEditorCoordinator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEEditorCoordinator.h; sourceTree = "<group>"; };
+		ED86CB9320011E2000A35850 /* IDEWorkspaceTabController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEWorkspaceTabController.h; sourceTree = "<group>"; };
+		ED86CB9420011E2000A35850 /* IDEEditorModeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEEditorModeViewController.h; sourceTree = "<group>"; };
+		ED86CB9520011E2000A35850 /* IDEEditorGeniusMode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEEditorGeniusMode.h; sourceTree = "<group>"; };
+		ED86CB9620011E2000A35850 /* IDEEditorContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEEditorContext.h; sourceTree = "<group>"; };
+		ED86CB9720011E2000A35850 /* IDEComparisonEditorSubmode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEComparisonEditorSubmode.h; sourceTree = "<group>"; };
+		ED86CB9820011E2000A35850 /* IDEEditorVersionsMode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEEditorVersionsMode.h; sourceTree = "<group>"; };
+		ED86CB9920011E2000A35850 /* IDEEditorDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEEditorDocument.h; sourceTree = "<group>"; };
+		ED86CB9A20011E2000A35850 /* IDEEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEEditor.h; sourceTree = "<group>"; };
+		ED86CB9B20011E2000A35850 /* IDEWorkspaceWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEWorkspaceWindowController.h; sourceTree = "<group>"; };
+		ED86CB9C20011E2000A35850 /* IDEViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEViewController.h; sourceTree = "<group>"; };
+		ED86CB9D20011E2000A35850 /* IDEEditorMultipleContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEEditorMultipleContext.h; sourceTree = "<group>"; };
+		ED86CB9E20011E2000A35850 /* IDEEditorArea.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEEditorArea.h; sourceTree = "<group>"; };
+		ED86CB9F20011E2000A35850 /* IDEWorkspaceWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEWorkspaceWindow.h; sourceTree = "<group>"; };
+		ED86CBA020011E2000A35850 /* IDEEditorOpenSpecifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEEditorOpenSpecifier.h; sourceTree = "<group>"; };
+		ED86CBA120011FBA00A35850 /* IDESourceCodeDocument-Protocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IDESourceCodeDocument-Protocol.h"; sourceTree = "<group>"; };
+		ED86CBA22001213100A35850 /* DVTApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DVTApplication.h; sourceTree = "<group>"; };
+		ED86CBA32001213800A35850 /* IDEApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEApplication.h; sourceTree = "<group>"; };
+		ED86CBA42001213800A35850 /* IDEApplicationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEApplicationController.h; sourceTree = "<group>"; };
+		ED86CBA5200126D100A35850 /* XcodeUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XcodeUtils.h; sourceTree = "<group>"; };
+		ED86CBA6200126D200A35850 /* XcodeUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XcodeUtils.m; sourceTree = "<group>"; };
+		ED86CBAA20013D4D00A35850 /* _TtC12SourceEditor23SourceEditorUndoManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _TtC12SourceEditor23SourceEditorUndoManager.h; sourceTree = "<group>"; };
+		ED86CBAB20013D4D00A35850 /* _TtC12SourceEditor23SourceEditorContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _TtC12SourceEditor23SourceEditorContentView.h; sourceTree = "<group>"; };
+		ED86CBAC20013D4D00A35850 /* SourceEditorScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SourceEditorScrollView.h; sourceTree = "<group>"; };
+		ED86CBAD20013D4D00A35850 /* _TtC12SourceEditor16SourceEditorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _TtC12SourceEditor16SourceEditorView.h; sourceTree = "<group>"; };
+		ED86CBB120013D4D00A35850 /* _TtC22IDEPegasusSourceEditor16SourceCodeEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _TtC22IDEPegasusSourceEditor16SourceCodeEditor.h; sourceTree = "<group>"; };
+		ED86CBB220013D4D00A35850 /* _TtC22IDEPegasusSourceEditor20SourceCodeEditorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _TtC22IDEPegasusSourceEditor20SourceCodeEditorView.h; sourceTree = "<group>"; };
+		ED86CBB320013D4D00A35850 /* _TtC22IDEPegasusSourceEditor18SourceCodeDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _TtC22IDEPegasusSourceEditor18SourceCodeDocument.h; sourceTree = "<group>"; };
 		EDA64E181A34F61C00ED3C8F /* CPCodePilotConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPCodePilotConstants.h; sourceTree = "<group>"; };
 		EDA64E191A34F61C00ED3C8F /* CPCodePilotConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPCodePilotConstants.m; sourceTree = "<group>"; };
-		EDB488491A320F16009E4BBD /* CPSearchTableDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CPSearchTableDelegate.h; sourceTree = "<group>"; };
+		EDB488491A320F16009E4BBD /* CPSearchTableDelegate.h */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.c.h; path = CPSearchTableDelegate.h; sourceTree = "<group>"; tabWidth = 4; };
 		EDBF8E3A1A33B12A001133B0 /* CPSearchFieldDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CPSearchFieldDelegate.h; sourceTree = "<group>"; };
 		EDCAEA481A32186100094CF0 /* CPResultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPResultsViewController.h; sourceTree = "<group>"; };
-		EDCAEA491A32186100094CF0 /* CPResultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPResultsViewController.m; sourceTree = "<group>"; };
+		EDCAEA491A32186100094CF0 /* CPResultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = CPResultsViewController.m; sourceTree = "<group>"; tabWidth = 4; };
 		EDCAEA4A1A32186100094CF0 /* CPResultsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CPResultsViewController.xib; sourceTree = "<group>"; };
 		EDD1DD891A325AAB00857D66 /* hudmask.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hudmask.png; sourceTree = "<group>"; };
 		EDD1DD8A1A325AAB00857D66 /* hudmask@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hudmask@2x.png"; sourceTree = "<group>"; };
@@ -220,10 +247,9 @@
 		EDFD47721A34FCF400BD45C5 /* openbook@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "openbook@3x.png"; sourceTree = "<group>"; };
 		F90494C017D650DA00B7C1CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F93F4FAB17B3FE550077B19E /* NSColor+ColorArithmetic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSColor+ColorArithmetic.h"; sourceTree = "<group>"; };
-		F93F4FAC17B3FE550077B19E /* NSColor+ColorArithmetic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSColor+ColorArithmetic.m"; sourceTree = "<group>"; };
+		F93F4FAC17B3FE550077B19E /* NSColor+ColorArithmetic.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = "NSColor+ColorArithmetic.m"; sourceTree = "<group>"; tabWidth = 4; };
 		F9979792155D52060023D04C /* CPSymbolCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPSymbolCache.h; sourceTree = "<group>"; };
 		F9979793155D52060023D04C /* CPSymbolCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CPSymbolCache.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		F9EAED24179D945100701117 /* CPXcodeInterfaces.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CPXcodeInterfaces.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		F9F596B217BBF78E0037BE7A /* CPResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPResult.h; sourceTree = "<group>"; };
 		F9F596B317BBF78E0037BE7A /* CPResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPResult.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -234,8 +260,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4BEE52741339193600DA9881 /* Cocoa.framework in Frameworks */,
-				4BEE52751339193600DA9881 /* libssl.dylib in Frameworks */,
-				4BEE52761339193600DA9881 /* libcrypto.dylib in Frameworks */,
 				4BEE52771339193600DA9881 /* WebKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -246,6 +270,7 @@
 		089C166AFE841209C02AAC07 /* CodePilot */ = {
 			isa = PBXGroup;
 			children = (
+				ED86CB8A20011E2000A35850 /* Xcode */,
 				08FB77AFFE84173DC02AAC07 /* Classes */,
 				32C88E010371C26100C91783 /* Other Sources */,
 				089C167CFE841241C02AAC07 /* Resources */,
@@ -273,9 +298,6 @@
 				EDFD47701A34FCF400BD45C5 /* openbook.png */,
 				EDFD47711A34FCF400BD45C5 /* openbook@2x.png */,
 				EDFD47721A34FCF400BD45C5 /* openbook@3x.png */,
-				ED29B1271A333D0A00D13CD9 /* openbookTemplate.png */,
-				ED29B1281A333D0A00D13CD9 /* openbookTemplate@2x.png */,
-				ED29B1291A333D0A00D13CD9 /* openbookTemplate@3x.png */,
 				EDD1DD891A325AAB00857D66 /* hudmask.png */,
 				EDD1DD8A1A325AAB00857D66 /* hudmask@2x.png */,
 				EDD1DD8B1A325AAB00857D66 /* hudmask@3x.png */,
@@ -405,7 +427,6 @@
 				4B30A184133979A7008A4372 /* CPPluginInstaller.h */,
 				4B30A185133979A7008A4372 /* CPPluginInstaller.m */,
 				4B76E9261333B7A000398AB0 /* CPXcodeInterfaces.h */,
-				F9EAED24179D945100701117 /* CPXcodeInterfaces.m */,
 				4B7FBFED112FFFF700846DF6 /* CPXcodeWrapper.h */,
 				4B7FBFF0112FFFF700846DF6 /* CPXcodeWrapper.m */,
 				ED0169EC1A3C5546004A8670 /* IDEWorkspaceTabController+CodePilot.h */,
@@ -505,6 +526,85 @@
 			path = ../Classes;
 			sourceTree = "<group>";
 		};
+		ED86CB8A20011E2000A35850 /* Xcode */ = {
+			isa = PBXGroup;
+			children = (
+				ED86CBB020013D4D00A35850 /* IDEPegasusSourceEditor */,
+				ED86CBA820013D4D00A35850 /* SourceEditor */,
+				ED86CBA5200126D100A35850 /* XcodeUtils.h */,
+				ED86CBA6200126D200A35850 /* XcodeUtils.m */,
+				ED86CB8B20011E2000A35850 /* DVTFoundation */,
+				ED86CB8D20011E2000A35850 /* DVTKit */,
+				ED86CB9120011E2000A35850 /* IDEKit */,
+			);
+			path = Xcode;
+			sourceTree = "<group>";
+		};
+		ED86CB8B20011E2000A35850 /* DVTFoundation */ = {
+			isa = PBXGroup;
+			children = (
+				ED86CB8C20011E2000A35850 /* DVTTextPreferences.h */,
+			);
+			path = DVTFoundation;
+			sourceTree = "<group>";
+		};
+		ED86CB8D20011E2000A35850 /* DVTKit */ = {
+			isa = PBXGroup;
+			children = (
+				ED86CBA22001213100A35850 /* DVTApplication.h */,
+				ED86CB8E20011E2000A35850 /* DVTViewController.h */,
+				ED86CB8F20011E2000A35850 /* DVTFontAndColorTheme.h */,
+				ED86CB9020011E2000A35850 /* DVTDocumentLocation.h */,
+			);
+			path = DVTKit;
+			sourceTree = "<group>";
+		};
+		ED86CB9120011E2000A35850 /* IDEKit */ = {
+			isa = PBXGroup;
+			children = (
+				ED86CBA32001213800A35850 /* IDEApplication.h */,
+				ED86CBA42001213800A35850 /* IDEApplicationController.h */,
+				ED86CB9720011E2000A35850 /* IDEComparisonEditorSubmode.h */,
+				ED86CB9A20011E2000A35850 /* IDEEditor.h */,
+				ED86CB9E20011E2000A35850 /* IDEEditorArea.h */,
+				ED86CB9620011E2000A35850 /* IDEEditorContext.h */,
+				ED86CB9220011E2000A35850 /* IDEEditorCoordinator.h */,
+				ED86CB9920011E2000A35850 /* IDEEditorDocument.h */,
+				ED86CB9520011E2000A35850 /* IDEEditorGeniusMode.h */,
+				ED86CB9420011E2000A35850 /* IDEEditorModeViewController.h */,
+				ED86CB9D20011E2000A35850 /* IDEEditorMultipleContext.h */,
+				ED86CBA020011E2000A35850 /* IDEEditorOpenSpecifier.h */,
+				ED86CB9820011E2000A35850 /* IDEEditorVersionsMode.h */,
+				ED86CBA120011FBA00A35850 /* IDESourceCodeDocument-Protocol.h */,
+				ED86CB9C20011E2000A35850 /* IDEViewController.h */,
+				ED86CB9320011E2000A35850 /* IDEWorkspaceTabController.h */,
+				ED86CB9F20011E2000A35850 /* IDEWorkspaceWindow.h */,
+				ED86CB9B20011E2000A35850 /* IDEWorkspaceWindowController.h */,
+			);
+			path = IDEKit;
+			sourceTree = "<group>";
+		};
+		ED86CBA820013D4D00A35850 /* SourceEditor */ = {
+			isa = PBXGroup;
+			children = (
+				ED86CBAA20013D4D00A35850 /* _TtC12SourceEditor23SourceEditorUndoManager.h */,
+				ED86CBAB20013D4D00A35850 /* _TtC12SourceEditor23SourceEditorContentView.h */,
+				ED86CBAC20013D4D00A35850 /* SourceEditorScrollView.h */,
+				ED86CBAD20013D4D00A35850 /* _TtC12SourceEditor16SourceEditorView.h */,
+			);
+			path = SourceEditor;
+			sourceTree = "<group>";
+		};
+		ED86CBB020013D4D00A35850 /* IDEPegasusSourceEditor */ = {
+			isa = PBXGroup;
+			children = (
+				ED86CBB120013D4D00A35850 /* _TtC22IDEPegasusSourceEditor16SourceCodeEditor.h */,
+				ED86CBB220013D4D00A35850 /* _TtC22IDEPegasusSourceEditor20SourceCodeEditorView.h */,
+				ED86CBB320013D4D00A35850 /* _TtC22IDEPegasusSourceEditor18SourceCodeDocument.h */,
+			);
+			path = IDEPegasusSourceEditor;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -532,7 +632,7 @@
 		089C1669FE841209C02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0920;
 				ORGANIZATIONNAME = Macoscope;
 			};
 			buildConfigurationList = 1DEB913E08733D840010E9CD /* Build configuration list for PBXProject "CodePilot" */;
@@ -638,7 +738,6 @@
 				EDA64E1A1A34F61C00ED3C8F /* CPCodePilotConstants.m in Sources */,
 				4BEE52631339193600DA9881 /* NSAttributedString+Hyperlink.m in Sources */,
 				4BEE52641339193600DA9881 /* NSNumber+VersionComparison.m in Sources */,
-				F9EAED25179D945100701117 /* CPXcodeInterfaces.m in Sources */,
 				4BEE526A1339193600DA9881 /* NSMutableArray+MiscExtensions.m in Sources */,
 				4BEE526C1339193600DA9881 /* MCStringScoring.c in Sources */,
 				4BEE526E1339193600DA9881 /* CPSymbol.m in Sources */,
@@ -646,6 +745,7 @@
 				4B4DCEF21363543B0009304C /* CPPreferencesToolbarDelegate.m in Sources */,
 				ED0169F51A3CEAF4004A8670 /* IDEWorkspaceDocument+CodePilot.m in Sources */,
 				4BAC9BD51386B6310024658A /* CPWorkspaceSymbolCache.m in Sources */,
+				ED86CBA7200126D200A35850 /* XcodeUtils.m in Sources */,
 				4BC0BBF313AEBBB80093D04D /* NSURL+Anchors.m in Sources */,
 				ED5382DC1A37275000A61FD6 /* GWShortcutRecorder.m in Sources */,
 				ED0169EE1A3C5546004A8670 /* IDEWorkspaceTabController+CodePilot.m in Sources */,
@@ -678,10 +778,32 @@
 		1DEB913F08733D840010E9CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				ONLY_ACTIVE_ARCH = YES;
@@ -692,8 +814,30 @@
 		1DEB914008733D840010E9CD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				OTHER_LDFLAGS = "";
@@ -738,9 +882,10 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Other Sources/CodePilot_Prefix.pch";
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/Xcode";
 				INFOPLIST_FILE = Resources/Info.plist;
 				INSTALL_PATH = "/Library/Application Support/Developer/Shared/Xcode/Plug-ins";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				OTHER_LDFLAGS = (
 					"-licucore",
 					"-undefined",
@@ -768,9 +913,10 @@
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Other Sources/CodePilot_Prefix.pch";
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/Xcode";
 				INFOPLIST_FILE = Resources/Info.plist;
 				INSTALL_PATH = "/Library/Application Support/Developer/Shared/Xcode/Plug-ins";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				OTHER_LDFLAGS = (
 					"-licucore",
 					"-undefined",

@@ -14,46 +14,46 @@
 @implementation CPWindow
 - (id)initWithDefaultSettings
 {
-	return [[CPWindow alloc] initWithContentRect:NSMakeRect(100, 100, WINDOW_WIDTH, 500)
-                                     styleMask:NSTitledWindowMask
-                                       backing:NSBackingStoreBuffered
-                                         defer:0];
+    return [[CPWindow alloc] initWithContentRect:NSMakeRect(100, 100, WINDOW_WIDTH, 500)
+                                       styleMask:NSWindowStyleMaskTitled
+                                         backing:NSBackingStoreBuffered
+                                           defer:0];
 }
 
-- (id)initWithContentRect:(NSRect)contentRect styleMask:(NSUInteger)aStyle backing:(NSBackingStoreType)bufferingType defer:(BOOL)flag
+- (id)initWithContentRect:(NSRect)contentRect styleMask:(NSWindowStyleMask)aStyle backing:(NSBackingStoreType)bufferingType defer:(BOOL)flag
 {
-	self = [super initWithContentRect:contentRect
-                          styleMask:NSBorderlessWindowMask|NSResizableWindowMask
-                            backing:bufferingType
-                              defer:flag];
-  
-  if (self) {
-#if MAC_OS_X_VERSION_MIN_REQUIRED >= MAC_OS_X_VERSION_10_10
-    self.appearance = [NSAppearance appearanceNamed:NSAppearanceNameVibrantDark];
-#endif
-    [self setBackgroundColor:[NSColor clearColor]];
-    [self setHasShadow:YES];
-    [self setOpaque:NO];
-    self.movableByWindowBackground = YES;
+    self = [super initWithContentRect:contentRect
+                            styleMask:NSWindowStyleMaskBorderless|NSWindowStyleMaskResizable
+                              backing:bufferingType
+                                defer:flag];
     
-    [self setCollectionBehavior:NSWindowCollectionBehaviorMoveToActiveSpace];
-  }
-  
-	return self;
+    if (self) {
+#if MAC_OS_X_VERSION_MIN_REQUIRED >= MAC_OS_X_VERSION_10_10
+        self.appearance = [NSAppearance appearanceNamed:NSAppearanceNameVibrantDark];
+#endif
+        [self setBackgroundColor:[NSColor clearColor]];
+        [self setHasShadow:YES];
+        [self setOpaque:NO];
+        self.movableByWindowBackground = YES;
+        
+        [self setCollectionBehavior:NSWindowCollectionBehaviorMoveToActiveSpace];
+    }
+    
+    return self;
 }
 
 
 - (NSScreen *)destinationScreen
 {
-  NSScreen *xCodeCurrentScreen = [[[CPCodePilotPlugin sharedInstance] xcWrapper] currentScreen];
-  
-  return xCodeCurrentScreen ?: [NSScreen mainScreen];
+    NSScreen *xCodeCurrentScreen = [[[CPCodePilotPlugin sharedInstance] xcWrapper] currentScreen];
+    
+    return xCodeCurrentScreen ?: [NSScreen mainScreen];
 }
 
 
 // Normally windows with the NSBorderlessWindowMask can't become the key window
 - (BOOL)canBecomeKeyWindow
 {
-  return YES;
+    return YES;
 }
 @end

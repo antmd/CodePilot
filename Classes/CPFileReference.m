@@ -94,7 +94,7 @@
     self.isOpenableInEditor = self.isOpenable;
     
     if ([pbxFileReference isGroup]) {
-      self.icon = [[[IDEGroup alloc] init] navigableItem_image];
+      self.icon = nil /* TODO */;
     } else {
       if (!IsEmpty(self.absolutePath) && [[NSFileManager defaultManager] fileExistsAtPath:self.absolutePath]) {
         DVTFilePath *dvtFilePath = [DVTFilePath filePathForPathString:self.absolutePath];

@@ -232,7 +232,7 @@ float MCStringScoring_scoreStringForQuery(const char *scoredString, const char *
   }
   
   if (wordMatches) {
-    finalScore = MCStringScoring_findBestMatch(queryCharMatchIndexes, queryLength, valueLength, indexesOfMatchedChars);
+    finalScore = MCStringScoring_findBestMatch(queryCharMatchIndexes, (int)queryLength, (int)valueLength, indexesOfMatchedChars);
   }
   
   for (index = 0; index < queryLength; index++) {
@@ -498,7 +498,7 @@ float MCStringScoring_scoreStringForQueryNEW(const char *scoredString, const cha
   }
   
   if (wordMatches) {
-    finalScore = MCStringScoring_findBestMatchNEW(queryCharMatchIndexes, queryLength, valueLength, indexesOfMatchedChars);
+    finalScore = MCStringScoring_findBestMatchNEW(queryCharMatchIndexes, (int)queryLength, (int)valueLength, indexesOfMatchedChars);
   }
   
   for (index = 0; index < queryLength; index++) {

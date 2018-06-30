@@ -11,33 +11,33 @@
 @implementation CPStatusLabel
 - (id)initWithFrame:(NSRect)frameRect
 {
-	self = [super initWithFrame:frameRect];
-  
-  if (self) {
-    [self setBackgroundColor:[NSColor clearColor]];
-    [self setTextColor:[NSColor grayColor]];
-    [self setBordered:NO];
-    [self setEditable:NO];
-    [self setSelectable:NO];
-  }
-  
-	return self;
+    self = [super initWithFrame:frameRect];
+    
+    if (self) {
+        [self setBackgroundColor:[NSColor clearColor]];
+        [self setTextColor:[NSColor grayColor]];
+        [self setBordered:NO];
+        [self setEditable:NO];
+        [self setSelectable:NO];
+    }
+    
+    return self;
 }
 
 - (BOOL)acceptsFirstResponder
 {
-	return NO;
+    return NO;
 }
 
 - (void)mouseDown:(NSEvent *)theEvent
 {
-	if (self.clickUrl) {
-		[[NSWorkspace sharedWorkspace] openURL:self.clickUrl];
-	}
+    if (self.clickUrl) {
+        [[NSWorkspace sharedWorkspace] openURL:self.clickUrl];
+    }
 }
 
 - (CGFloat)textWidth
 {
-  return [[self attributedStringValue] size].width;
+    return [[self attributedStringValue] size].width;
 }
 @end

@@ -16,50 +16,50 @@ static void *STACK_CAPACITY_KEY = &STACK_CAPACITY_KEY;
 
 +(instancetype)uniqueStackWithMaxCount:(NSUInteger)maxCount
 {
-  id stack = [[self alloc] initWithCapacity:maxCount];
-  // WARNING: This will not be copied along with copying the underlying array -- Quick and very dirty
-  objc_setAssociatedObject(stack, STACK_CAPACITY_KEY, @(maxCount?:UINT_MAX), OBJC_ASSOCIATION_COPY);
-  return stack;
+    id stack = [[self alloc] initWithCapacity:maxCount];
+    // WARNING: This will not be copied along with copying the underlying array -- Quick and very dirty
+    objc_setAssociatedObject(stack, STACK_CAPACITY_KEY, @(maxCount?:UINT_MAX), OBJC_ASSOCIATION_COPY);
+    return stack;
 }
 
 -(void)push:(id)object
 {
-  if (!object) {return;}
-  [self removeObject:object];
-  [self insertObject:object atIndex:0];
-  [self _trim];
+    if (!object) {return;}
+    [self removeObject:object];
+    [self insertObject:object atIndex:0];
+    [self _trim];
 }
 
 -(void)pushMany:(NSArray *)array
 {
-  if (!array.count) { return; }
-  [self removeObjectsInArray:array];
-  [self insertObjects:array atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, array.count)]];
-  [self _trim];
+    if (!array.count) { return; }
+    [self removeObjectsInArray:array];
+    [self insertObjects:array atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, array.count)]];
+    [self _trim];
 }
 
 -(void)appendMany:(NSArray*)array
 {
-  if (!array.count) { return; }
-  [self addObjectsFromArray:array];
-  [self _trim];
+    if (!array.count) { return; }
+    [self addObjectsFromArray:array];
+    [self _trim];
 }
 
 -(id)pop
 {
-  id obj = nil;
-  if (self.count) {
-    obj = [self objectAtIndex:0];
-    [self removeObjectAtIndex:0];
-  }
-  return obj;
+    id obj = nil;
+    if (self.count) {
+        obj = [self objectAtIndex:0];
+        [self removeObjectAtIndex:0];
+    }
+    return obj;
 }
 
 -(void)_trim
 {
-  NSNumber *maxCount = objc_getAssociatedObject(self, STACK_CAPACITY_KEY);
-  if (maxCount && self.count > maxCount.unsignedIntegerValue) {
-    [self removeObjectsInRange:NSMakeRange(maxCount.unsignedIntegerValue, self.count-maxCount.unsignedIntegerValue)];
-  }
+    NSNumber *maxCount = objc_getAssociatedObject(self, STACK_CAPACITY_KEY);
+    if (maxCount && self.count > maxCount.unsignedIntegerValue) {
+        [self removeObjectsInRange:NSMakeRange(maxCount.unsignedIntegerValue, self.count-maxCount.unsignedIntegerValue)];
+    }
 }
 @end

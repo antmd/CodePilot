@@ -16,12 +16,12 @@ static void *RECENTS_STACK_KEY = &RECENTS_STACK_KEY;
 
 -(CPUniqueStack*)cp_recentsStack
 {
-  CPUniqueStack *recentsStack = objc_getAssociatedObject(self, RECENTS_STACK_KEY);
-  if (!recentsStack) {
-    recentsStack = [CPUniqueStack uniqueStackWithMaxCount:100];
-    objc_setAssociatedObject(self, RECENTS_STACK_KEY, recentsStack, OBJC_ASSOCIATION_RETAIN);
-  }
-  return recentsStack;
-  
+    CPUniqueStack *recentsStack = objc_getAssociatedObject(self, RECENTS_STACK_KEY);
+    if (!recentsStack) {
+        recentsStack = [CPUniqueStack uniqueStackWithMaxCount:100];
+        objc_setAssociatedObject(self, RECENTS_STACK_KEY, recentsStack, OBJC_ASSOCIATION_RETAIN);
+    }
+    return recentsStack;
+    
 }
 @end

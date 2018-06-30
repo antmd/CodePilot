@@ -25,4 +25,4 @@ unsigned int MCStringScoring_buildMatchTree(int **matchIndexes, struct MCStringS
 void MCStringScoring_freeMatchTree(struct MCStringScoringMatchTreeNode *rootNode);
 void MCStringScoring_combinationsFromTree(struct MCStringScoringMatchTreeNode *parentNode, int currentLevel, int maxLevel, int elementsCount, int **combinations, int *currentCombinationIndex);
 
-struct MCStringScoringMatchTreeNode* newMatchTreeNode();
+struct MCStringScoringMatchTreeNode* newMatchTreeNode(void);

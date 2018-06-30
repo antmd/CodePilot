@@ -18,6 +18,8 @@ static NSString * const SelectedItemIdentifierKeyPath = @"selectedItemIdentifier
 
 @property (nonatomic, assign) CGFloat previousReplacementViewHeight;
 @property (nonatomic, strong) NSString *previousItemIdentifier;
+@property (nonatomic, weak) NSLayoutConstraint *widthConstraint;
+@property (nonatomic, weak) NSLayoutConstraint *heightConstraint;
 @end
 
 // this is kind of a proxy from IDEToolbar when used for preferences.
@@ -93,8 +95,8 @@ static NSString * const SelectedItemIdentifierKeyPath = @"selectedItemIdentifier
       newWindowFrame.size.height += self.previousReplacementViewHeight - self.ourViewController.view.frame.size.height;
       newWindowFrame.origin.y -= self.previousReplacementViewHeight - self.ourViewController.view.frame.size.height;
       
-      [window setFrame:newWindowFrame display:YES animate:YES];
-      
+      [window setFrame:newWindowFrame display:YES animate:NO];
+
       // To prevent the previous replacement subviews from being shown during the automatic resize animation
     } else {
       for (NSView *subview in [replacementView subviews]) {
@@ -141,23 +143,29 @@ static NSString * const SelectedItemIdentifierKeyPath = @"selectedItemIdentifier
 - (void)ourItemWasSelected:(id)sender
 {
   DVTReplacementView *replacementView = [self.originalDelegate paneReplacementView];
-  NSRect oldRect = replacementView.frame;
-  NSWindow *window = [replacementView window];
-  
+
   self.previousReplacementViewHeight = replacementView.frame.size.height;
   
-  NSView *ourPrefView = self.ourViewController.view;
-  
+   NSWindow *window = [replacementView window];
+   NSView *ourPrefView = self.ourViewController.view;
   CGRect newWindowFrame = window.frame;
-  [ourPrefView setFrame:NSMakeRect(0.0, 0.0, NSWidth(oldRect), ourPrefView.frame.size.height)];
   newWindowFrame.size.height -= replacementView.frame.size.height - ourPrefView.frame.size.height;
   newWindowFrame.origin.y += replacementView.frame.size.height - ourPrefView.frame.size.height;
   
   [window setTitle:PRODUCT_NAME];
-  [window setFrame:newWindowFrame display:YES animate:YES];
+  [window setFrame:newWindowFrame display:YES animate:NO];
+  NSView *container = [replacementView superview];
   
   [replacementView setHidden:YES];
-  [[replacementView superview] addSubview:self.ourViewController.view];
+  [container addSubview:ourPrefView];
+  if (!self.heightConstraint) {
+      self.heightConstraint = [ourPrefView.heightAnchor constraintEqualToConstant:NSHeight(ourPrefView.bounds)];
+      self.widthConstraint = [ourPrefView.widthAnchor constraintEqualToConstant:NSWidth(ourPrefView.bounds)];
+    [ourPrefView.bottomAnchor constraintEqualToAnchor:container.bottomAnchor].active = YES;
+  }
+  self.heightConstraint.active = YES;
+  self.widthConstraint.active = YES;
+
 }
 
 - (NSArray *)toolbarAllowedItemIdentifiers:(NSToolbar *)toolbar

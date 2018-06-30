@@ -20,35 +20,35 @@
     for ( id elt in self ) {
         if ( filterBlock( elt ) ) { [ filteredArray addObject:elt ] ; }
     }
-
+    
     return filteredArray ;
 }
 
 - (NSArray *)arrayScoresWithFuzzyQuery:(NSString *)query forKey:(NSString *)key
 {
-	NSMutableArray *scores = [NSMutableArray new];
-  
-	for (id obj in self) {
-		NSNumber *score = [[obj valueForKey:key] scoreForQuery:query];
+    NSMutableArray *scores = [NSMutableArray new];
     
-    [scores addObject:score ?: [NSNull null]];
-	}
-  
-	return scores;
+    for (id obj in self) {
+        NSNumber *score = [[obj valueForKey:key] scoreForQuery:query];
+        
+        [scores addObject:score ?: [NSNull null]];
+    }
+    
+    return scores;
 }
 
 - (NSArray *)arrayWithoutElementsHavingNilOrEmptyValueForKey:(NSString *)key
 {
-	NSMutableIndexSet *selectedIndexes = [NSMutableIndexSet new];
-  
-	for (NSUInteger i = 0; i < [self count]; i++) {
-		id obj = [self objectAtIndex:i];
+    NSMutableIndexSet *selectedIndexes = [NSMutableIndexSet new];
     
-		if (!IsEmpty([obj valueForKey:key])) {
-			[selectedIndexes addIndex:i];
-		}
-	}
-  
-	return [self objectsAtIndexes:selectedIndexes];
+    for (NSUInteger i = 0; i < [self count]; i++) {
+        id obj = [self objectAtIndex:i];
+        
+        if (!IsEmpty([obj valueForKey:key])) {
+            [selectedIndexes addIndex:i];
+        }
+    }
+    
+    return [self objectsAtIndexes:selectedIndexes];
 }
 @end

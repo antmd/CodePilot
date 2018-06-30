@@ -71,7 +71,7 @@
 	[self.snapBackImage lockFocus];
 	[self.snapBackButtonTint set];
 	NSRect imageRect2 = {NSZeroPoint,[self.snapBackImage size]};
-	NSRectFillUsingOperation(imageRect2,NSCompositeSourceAtop);
+  NSRectFillUsingOperation(imageRect2,NSCompositingOperationSourceAtop);
 	[self.snapBackImage unlockFocus];
 	
 	if(self.mouseDownTintAdjustment) {
@@ -81,9 +81,9 @@
 		[self.snapBackImageTinted lockFocus];
 		NSRect imageRect3 = {NSZeroPoint,[self.snapBackImage size]};
 		[self.snapBackButtonTint set];
-		NSRectFillUsingOperation(imageRect3,NSCompositeSourceAtop);
+    NSRectFillUsingOperation(imageRect3,NSCompositingOperationSourceAtop);
 		[self.mouseDownTintAdjustment set];
-		NSRectFillUsingOperation(imageRect3,NSCompositeSourceAtop);
+    NSRectFillUsingOperation(imageRect3,NSCompositingOperationSourceAtop);
 		[self.snapBackImageTinted unlockFocus];
 	}
 }
@@ -95,7 +95,7 @@
 	[self.clearImage lockFocus];
 	[self.clearButtonTint set];
 	NSRect imageRect = {NSZeroPoint,[self.clearImage size]};
-	NSRectFillUsingOperation(imageRect,NSCompositeSourceAtop);
+  NSRectFillUsingOperation(imageRect,NSCompositingOperationSourceAtop);
 	[self.clearImage unlockFocus];
 	
 	if(self.mouseDownTintAdjustment) {
@@ -105,9 +105,9 @@
 		[self.clearImageTinted lockFocus];
 		NSRect imageRect3 = {NSZeroPoint,[self.clearImageTinted size]};
 		[self.clearButtonTint set];
-		NSRectFillUsingOperation(imageRect3,NSCompositeSourceAtop);
+    NSRectFillUsingOperation(imageRect3,NSCompositingOperationSourceAtop);
 		[self.mouseDownTintAdjustment set];
-		NSRectFillUsingOperation(imageRect3,NSCompositeSourceAtop);
+    NSRectFillUsingOperation(imageRect3,NSCompositingOperationSourceAtop);
 		[self.clearImageTinted unlockFocus];
 	}
 }
@@ -227,19 +227,19 @@
 - (NSString *) stringFromKeyCode:(unsigned short) keyCode andModifierFlags:(NSEventModifierFlags) modifierFlags {
 	NSMutableString * stringValue = [[NSMutableString alloc] init];
 	
-	if(modifierFlags & NSControlKeyMask) {
+  if(modifierFlags & NSEventModifierFlagControl) {
 		[stringValue appendFormat:@"%C",(unichar)kControlUnicode];
 	}
 	
-	if(modifierFlags & NSAlternateKeyMask) {
+  if(modifierFlags & NSEventModifierFlagOption) {
 		[stringValue appendFormat:@"%C",(unichar)kOptionUnicode];
 	}
 	
-	if(modifierFlags & NSShiftKeyMask) {
+  if(modifierFlags & NSEventModifierFlagShift) {
 		[stringValue appendFormat:@"%C",(unichar)kShiftUnicode];
 	}
 	
-	if(modifierFlags & NSCommandKeyMask) {
+  if(modifierFlags & NSEventModifierFlagCommand) {
 		[stringValue appendFormat:@"%C",(unichar)kCommandUnicode];
 	}
 	
@@ -374,23 +374,23 @@
 	NSEventModifierFlags flags = 0;
 	self.mutableLabel = [NSMutableString string];
 	
-	if(theEvent.modifierFlags & NSControlKeyMask) {
-		flags |= NSControlKeyMask;
+  if(theEvent.modifierFlags & NSEventModifierFlagControl) {
+    flags |= NSEventModifierFlagControl;
 		[self.mutableLabel appendString:@"⌃"];
 	}
 	
-	if(theEvent.modifierFlags & NSAlternateKeyMask) {
-		flags |= NSAlternateKeyMask;
+  if(theEvent.modifierFlags & NSEventModifierFlagOption) {
+    flags |= NSEventModifierFlagOption;
 		[self.mutableLabel appendString:@"⌥"];
 	}
 	
-	if(theEvent.modifierFlags & NSShiftKeyMask) {
-		flags |= NSShiftKeyMask;
+  if(theEvent.modifierFlags & NSEventModifierFlagShift) {
+    flags |= NSEventModifierFlagShift;
 		[self.mutableLabel appendString:@"⇧"];
 	}
 	
-	if(theEvent.modifierFlags & NSCommandKeyMask) {
-		flags |= NSCommandKeyMask;
+  if(theEvent.modifierFlags & NSEventModifierFlagCommand) {
+    flags |= NSEventModifierFlagCommand;
 		[self.mutableLabel appendString:@"⌘"];
 	}
 	

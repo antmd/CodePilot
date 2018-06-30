@@ -8,6 +8,22 @@
 //
 
 #import "CPCodePilotConfig.h"
+#import "DVTKit/DVTApplication.h"
+#import "DVTKit/DVTViewController.h"
+#import "DVTKit/DVTDocumentLocation.h"
+#import "IDEKit/IDEApplication.h"
+#import "IDEKit/IDEApplicationController.h"
+#import "IDEKit/IDEEditor.h"
+#import "IDEKit/IDEEditorArea.h"
+#import "IDEKit/IDEEditorContext.h"
+#import "IDEKit/IDEEditorCoordinator.h"
+#import "IDEKit/IDEEditorDocument.h"
+#import "IDEKit/IDEEditorOpenSpecifier.h"
+#import "IDEKit/IDESourceCodeDocument-Protocol.h"
+#import "IDEKit/IDEViewController.h"
+#import "IDEKit/IDEWorkspaceTabController.h"
+#import "IDEKit/IDEWorkspaceWindow.h"
+#import "IDEKit/IDEWorkspaceWindowController.h"
 
 @interface DVTSourceCodeSymbolKind : NSObject
 + (id)containerSymbolKind;
@@ -121,6 +137,15 @@
 - (NSImage *)navigableItem_image;
 @end
 
+@interface IDESymbolNavigatorRootGroup : NSObject
+- (NSImage *)navigableItem_image;
+@end
+
+@interface Xcode3EditingGroup : NSObject
+- (NSImage *)navigableItem_image;
+@end
+
+
 @interface IDEContainer : DVTModelObject
 - (DVTFilePath *)filePath;
 - (IDEGroup *)rootGroup;
@@ -143,14 +168,6 @@
 - (id)sdefSupport_fileReferences;
 @end
 
-@interface IDEWorkspaceWindow : NSWindow
-+ (id)lastActiveWorkspaceWindowController;
-- (IDEWorkspaceDocument *)document;
-@end
-
-@interface IDEWorkspaceWindow (MissingMethods)
-+ (IDEWorkspaceWindow *)mc_lastActiveWorkspaceWindow;
-@end
 
 @interface IDEFileReference : NSObject
 - (IDEContainer *)referencedContainer;
@@ -187,17 +204,6 @@
 - (Xcode3Group *)rootGroup;
 @end
 
-@interface DVTApplication : NSApplication
-@end
-
-@interface IDEApplication : DVTApplication
-+ (IDEApplication *)sharedApplication;
-@end
-
-@interface IDEApplicationController : NSObject
-+ (IDEApplicationController *)sharedAppController;
-- (BOOL)application:(IDEApplication *)application openFile:(NSString *)filePath;
-@end
 
 @interface XCSpecification : NSObject
 @end
@@ -281,10 +287,6 @@
 + (IDEFileReferenceNavigableItem *)navigableItemWithRepresentedObject:(id)object;
 @end
 
-@interface DVTDocumentLocation : NSObject
-- (DVTDocumentLocation *)initWithDocumentURL:(NSURL *)documentURL timestamp:(NSNumber *)timestamp;
-- (NSURL *)documentURL;
-@end
 
 @interface DVTTextDocumentLocation : DVTDocumentLocation
 - (DVTTextDocumentLocation *)initWithDocumentURL:(NSURL *)documentURL timestamp:(NSNumber *)timestamp lineRange:(NSRange)lineRange;
@@ -292,20 +294,7 @@
 - (NSURL *)documentURL;
 @end
 
-@interface DVTViewController : NSViewController
-@end
-@class IDEWorkspaceTabController;
-@interface IDEViewController : DVTViewController
-@property(retain, nonatomic) IDEWorkspaceTabController *workspaceTabController;
-@end
 
-
-@interface IDEEditorOpenSpecifier : NSObject
-- (IDEEditorOpenSpecifier *)initWithNavigableItem:(IDENavigableItem *)navigableItem error:(NSError * __autoreleasing *)error;
-- (IDEEditorOpenSpecifier *)initWithNavigableItem:(IDENavigableItem *)navigableItem locationToSelect:(DVTDocumentLocation*)location error:(NSError * __autoreleasing *)error;
-
-+ (IDEEditorOpenSpecifier *)structureEditorOpenSpecifierForDocumentLocation:(DVTDocumentLocation *)documentLocation inWorkspace:(IDEWorkspace *)workspace error:(NSError *)error;
-@end
 
 @interface IDEEditorHistoryItem : NSObject
 - (NSString *)historyMenuItemTitle;
@@ -322,44 +311,7 @@
 - (IDEEditorHistoryItem *)currentEditorHistoryItem;
 @end
 
-@class IDEEditorArea;
-@class IDEWorkspaceWindowController;
-@interface IDEWorkspaceTabController : IDEViewController <NSTextViewDelegate /*,DVTTabbedWindowTabContentControlling, DVTStatefulObject, DVTReplacementViewDelegate, IDEEditorAreaContainer, IDEStructureEditingWorkspaceTabContext, IDEWorkspaceDocumentProvider, DVTEditor*/>
--(IDEEditorArea*)editorArea;
-- (void)changeToAssistantLayout_BH:(id)arg1;
-- (void)changeToAssistantLayout_BV:(id)arg1;
-- (void)changeToAssistantLayout_LH:(id)arg1;
-- (void)changeToAssistantLayout_LV:(id)arg1;
-- (void)changeToAssistantLayout_RH:(id)arg1;
-- (void)changeToAssistantLayout_RV:(id)arg1;
-- (void)changeToAssistantLayout_TH:(id)arg1;
-- (void)changeToAssistantLayout_TV:(id)arg1;
-- (void)changeToStandardEditor:(id)arg1;
-- (void)changeToGeniusEditor:(id)arg1;
-- (void)addAssistantEditor:(id)arg1;
-- (void)removeAssistantEditor:(id)arg1;
 
-@property(copy) NSString *userDefinedTabLabel;
-@property(readonly) IDEWorkspaceWindowController *windowController;
-@property(retain) NSDocument *document;
-@property(readonly) DVTFilePath *tabFilePath;
-@property(readonly) NSString *tabLabel;
-
-@end
-
-@class IDEEditor;
-
-@interface IDEEditorContext : IDEViewController
-- (BOOL)openEditorOpenSpecifier:(IDEEditorOpenSpecifier *)openSpecifier;
-- (IDEEditorHistoryStack *)currentHistoryStack;
-- (IDEEditor *)editor;
-- (IDEWorkspaceTabController*)workspaceTabController;
--(NSURL*)originalRequestedDocumentURL;
-- (void)takeFocus;
-- (NSArray*)_currentSelectedDocumentLocations;
-@property(readonly, getter=isPrimaryEditorContext) BOOL primaryEditorContext;
-@property(retain, nonatomic) IDENavigableItem *navigableItem;
-@end
 
 @class IDEEditorOpenSpecifier;
 @interface IDEEditorModeViewController : NSViewController
@@ -384,26 +336,7 @@
 - (void)removeAssistantEditor;
 @end
 
-@interface IDEEditorArea : IDEViewController
-- (IDEEditorContext *)primaryEditorContext;
-- (IDEEditorContext *)lastActiveEditorContext;
-@property(nonatomic) int editorMode;
-- (void)editorContextDidBecomeLastActiveEditor:(id)arg1;
-@property(retain) IDEEditorModeViewController *editorModeViewController;
-@property(retain, nonatomic) IDEWorkspaceTabController *workspaceTabController;
-- (void)_openEditorOpenSpecifier:(IDEEditorOpenSpecifier*)arg1 editorContext:(IDEEditorContext*)arg2 takeFocus:(BOOL)arg3;
-@end
 
-
-@interface IDEWorkspaceWindowController : NSWindowController
-+ (NSArray *)workspaceWindowControllers;
-+ (IDEWorkspaceWindowController *)workspaceWindowControllerForWindow:(IDEWorkspaceWindow *)window;
-- (IDEEditorArea *)editorArea;
-- (void)activateWorkspaceTabController:(id)arg1;
-@property(readonly) IDEWorkspaceTabController *activeWorkspaceTabController;
-- (NSArray*)workspaceTabControllers;
-
-@end
 
 @interface IDEKeyBinding : NSObject
 - (NSString *)title;
@@ -464,17 +397,6 @@
 @interface DVTExtension : NSObject
 @end
 
-@interface IDEEditorDocument : NSDocument
-@property(retain) DVTFilePath *filePath;
-- (NSSet*)_documentEditors;
-@end
-
-@interface IDEEditor : IDEViewController
-@property(retain) IDEEditorDocument *document;
--(void)didSetupEditor;
-- (NSArray *)currentSelectedDocumentLocations;
-- (DVTSourceExpression *)selectedExpression;
-@end
 
 @interface DVTSourceLandmarkItem : NSObject
 - (NSString *)name;
@@ -497,24 +419,10 @@ extern NSString *IDEEditorDocumentDidChangeNotification;
 @end
 
 
-
-@interface IDESourceCodeDocument : IDEEditorDocument
-- (id)knownFileReferences;
--(NSURL*)fileURL;
-@end
+typedef IDEEditorDocument<IDESourceCodeDocument> IDESourceCodeDocument;
 
 @interface Xcode3FileReference <NSObject>
 - (id)resolvedFilePath;
 @end
 
-@interface IDEEditorCoordinator : NSObject
-+ (void)_doOpenIn_AdjacentEditor_withWorkspaceTabController:(id)arg1 editorContext:(id)arg2 documentURL:(id)arg3 usingBlock:(id)arg4;
-+ (void)_doOpenIn_Ask_withWorkspaceTabController:(id)arg1 editorContext:(id)arg2 documentURL:(id)arg3 initialSelection:(id)arg4 options:(id)arg5 usingBlock:(id)arg6;
-+ (void)_doOpenIn_NewEditor_withWorkspaceTabController:(id)arg1 usingBlock:(id)arg2;
-+ (void)_doOpenIn_NewTab_withWorkspaceWindowController:(id)arg1 usingBlock:(id)arg2;
-+ (void)_doOpenIn_NewWindow_withWorkspaceTabController:(id)arg1 documentURL:(id)arg2 usingBlock:(id)arg3;
-+ (void)_doOpenIn_SeparateEditor_withWorkspaceTabController:(id)arg1 documentURL:(id)arg2 usingBlock:(id)arg3;
-+ (void)_doOpenIn_SeparateTab_withWorkspaceTabController:(id)arg1 documentURL:(id)arg2 usingBlock:(id)arg3;
-+ (void)_doOpenIn_SeparateWindow_withWorkspaceTabController:(id)arg1 documentURL:(id)arg2 usingBlock:(id)arg3;
-@end
 

@@ -20,33 +20,33 @@ void *CPHasRegisteredDocumentObserverKey = @"CPHasRegisteredDocumentObserverKey"
 
 + (void)load
 {
-  mc_methodSwizzle(IDEEditor_CodePilot.class, @selector(didSetupEditor), NSClassFromString(@"IDEEditor"));
-  mc_methodSwizzle(IDEEditor_CodePilot.class, @selector(dealloc), NSClassFromString(@"IDEEditor"));
+    mc_methodSwizzle(IDEEditor_CodePilot.class, @selector(didSetupEditor), NSClassFromString(@"IDEEditor"));
+    mc_methodSwizzle(IDEEditor_CodePilot.class, @selector(dealloc), NSClassFromString(@"IDEEditor"));
 }
 
 -(void)CP_didSetupEditor
 {
-  BOOL isObserving = [objc_getAssociatedObject(self, CPHasRegisteredDocumentObserverKey) boolValue];
-  if (!isObserving) {
-    // Observing 'document' property of IDEEditor instances allows us to track 'recent' documents
-    [self addObserver:CPCodePilotPlugin.sharedInstance.xcWrapper
-           forKeyPath:@"document"
-              options:(NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew)
-              context:(void*)self];
-    objc_setAssociatedObject(self, CPHasRegisteredDocumentObserverKey, @YES, OBJC_ASSOCIATION_COPY);
-  }
-  
-  [self CP_didSetupEditor];
+    BOOL isObserving = [objc_getAssociatedObject(self, CPHasRegisteredDocumentObserverKey) boolValue];
+    if (!isObserving) {
+        // Observing 'document' property of IDEEditor instances allows us to track 'recent' documents
+        [self addObserver:CPCodePilotPlugin.sharedInstance.xcWrapper
+               forKeyPath:@"document"
+                  options:(NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew)
+                  context:(void*)self];
+        objc_setAssociatedObject(self, CPHasRegisteredDocumentObserverKey, @YES, OBJC_ASSOCIATION_COPY);
+    }
+    
+    [self CP_didSetupEditor];
 }
 
 -(void)CP_dealloc
 {
-  BOOL isObserving = [objc_getAssociatedObject(self, CPHasRegisteredDocumentObserverKey) boolValue];
-  if (isObserving) {
-    [self removeObserver:CPCodePilotPlugin.sharedInstance.xcWrapper
-              forKeyPath:@"document"];
-  }
-  invokeSuper(IDEEditor_CodePilot, dealloc);
+    BOOL isObserving = [objc_getAssociatedObject(self, CPHasRegisteredDocumentObserverKey) boolValue];
+    if (isObserving) {
+        [self removeObserver:CPCodePilotPlugin.sharedInstance.xcWrapper
+                  forKeyPath:@"document"];
+    }
+    invokeSuper(IDEEditor_CodePilot, dealloc);
 }
 
 @end

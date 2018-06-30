@@ -46,9 +46,12 @@
   
   IDESourceCodeDocument *document = [notification object];
   
+  // TODO
+  /*
   for (Xcode3FileReference *fileReference in (NSArray *)[document knownFileReferences]) {
     [self.symbolsForFilePath removeObjectForKey:[[fileReference resolvedFilePath] pathString]];
   }
+   */
 }
 
 - (CPSymbol *)symbolForIDEIndexSymbol:(IDEIndexSymbol *)ideIndexSymbol relatedFilePath:(NSString *)relatedFilePath
