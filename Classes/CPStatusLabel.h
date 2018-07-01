@@ -10,6 +10,7 @@
 
 @interface CPStatusLabel : NSTextField
 @property (nonatomic, strong) NSURL *clickUrl;
+@property (nonatomic) BOOL isInactive;
 
 - (CGFloat)textWidth;
 @end

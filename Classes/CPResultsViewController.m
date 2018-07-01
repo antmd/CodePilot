@@ -7,6 +7,7 @@
 //
 
 #import "CPResultsViewController.h"
+#import "CPStatusLabel.h"
 #import "CPSymbol.h"
 #import "CPSearchField.h"
 #import "CPFileReference.h"
@@ -14,10 +15,16 @@
 #import "CPSearchController.h"
 
 @interface CPResultsViewController ()
+@property (weak) IBOutlet NSLayoutConstraint *resultsTableBottomSpaceConstraint;
+@property (weak) IBOutlet NSLayoutConstraint *resultsTableTopSpaceConstraint;
+@property (weak) IBOutlet NSLayoutConstraint *resultsTableHeightConstraint;
 @property (nonatomic) BOOL hasAwoken;
 @end
 
-@implementation CPResultsViewController
+@implementation CPResultsViewController {
+    float _originalBottomSpaceConstant;
+}
+@synthesize isSwitcher = _isSwitcher;
 
 - (instancetype)initWithSearchController:(CPSearchController *)searchController
 {
@@ -29,23 +36,33 @@
     return self;
 }
 
--(NSString *)nibName
-{
-    return @"CPResultsViewController";
-}
-
--(NSBundle *)nibBundle
-{
-    return [NSBundle bundleForClass:CPResultsViewController.class];
-}
-
 -(void)awakeFromNib
 {
     if (!self.hasAwoken) {
         self.hasAwoken = YES;
         self.resultsTableView.doubleAction = @selector(doubleClickedOnResult:);
+        _originalBottomSpaceConstant = self.resultsTableBottomSpaceConstraint.constant;
     }
 }
+
+-(void)setIsSwitcher:(BOOL)isSwitcher {
+    if (_isSwitcher && !isSwitcher) {
+        // Transform to full search interface
+        self.searchController.searchField.hidden = NO;
+        self.lowerStatusLabel.isInactive = NO;
+        self.resultsTableTopSpaceConstraint.constant += 40.0;
+        self.resultsTableBottomSpaceConstraint.constant = _originalBottomSpaceConstant;
+    }
+    else if (!_isSwitcher && isSwitcher) {
+        // Transform to switcher
+        self.searchController.searchField.hidden = YES;
+        self.lowerStatusLabel.isInactive = YES;
+        self.resultsTableTopSpaceConstraint.constant -= 40.0;
+        self.resultsTableBottomSpaceConstraint.constant = 0.0;
+    }
+    _isSwitcher = isSwitcher;
+}
+
 /*
  *
  *

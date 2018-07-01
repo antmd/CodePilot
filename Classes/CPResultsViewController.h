@@ -23,6 +23,7 @@
 @property (unsafe_unretained) IBOutlet CPStatusLabel *lowerStatusLabel;
 @property (unsafe_unretained) IBOutlet NSProgressIndicator *indexingProgressIndicator;
 @property (weak) CPXcodeWrapper *xcodeWrapper;
+@property (nonatomic) BOOL isSwitcher;
 
 -(instancetype)initWithSearchController:(CPSearchController*)searchController;
 

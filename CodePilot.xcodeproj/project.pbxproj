@@ -55,7 +55,6 @@
 		4BEE52551339193600DA9881 /* CPSearchField.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7E38CF1139898E00FDBC98 /* CPSearchField.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		4BEE52561339193600DA9881 /* CPSearchFieldTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BBEE9401139B19F00C77C0C /* CPSearchFieldTextView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		4BEE525A1339193600DA9881 /* CPFileReference.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B6EC540113D354D00126AE0 /* CPFileReference.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		4BEE52611339193600DA9881 /* CPHUDViewWithRoundCorners.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B1171B011490EA70029BB44 /* CPHUDViewWithRoundCorners.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		4BEE52631339193600DA9881 /* NSAttributedString+Hyperlink.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B53D0F911492AB200224F53 /* NSAttributedString+Hyperlink.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		4BEE52641339193600DA9881 /* NSNumber+VersionComparison.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B69D3041153AA5E00541012 /* NSNumber+VersionComparison.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		4BEE526A1339193600DA9881 /* NSMutableArray+MiscExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B38187B115CD37F0007D74B /* NSMutableArray+MiscExtensions.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -75,10 +74,11 @@
 		ED5382DC1A37275000A61FD6 /* GWShortcutRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = ED5382DB1A37275000A61FD6 /* GWShortcutRecorder.m */; };
 		ED59EC951A34B88800D3651A /* CPPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED59EC931A34B88800D3651A /* CPPreferencesViewController.m */; };
 		ED59EC961A34B88800D3651A /* CPPreferencesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED59EC941A34B88800D3651A /* CPPreferencesViewController.xib */; };
+		ED5E7D4320E9001600107864 /* CPResultsView.m in Sources */ = {isa = PBXBuildFile; fileRef = ED5E7D4220E9001600107864 /* CPResultsView.m */; };
 		ED86CBA7200126D200A35850 /* XcodeUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = ED86CBA6200126D200A35850 /* XcodeUtils.m */; };
 		EDA64E1A1A34F61C00ED3C8F /* CPCodePilotConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = EDA64E191A34F61C00ED3C8F /* CPCodePilotConstants.m */; };
 		EDCAEA4B1A32186100094CF0 /* CPResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDCAEA491A32186100094CF0 /* CPResultsViewController.m */; };
-		EDCAEA4C1A32186100094CF0 /* CPResultsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EDCAEA4A1A32186100094CF0 /* CPResultsViewController.xib */; };
+		EDCAEA4C1A32186100094CF0 /* CPCodePilotWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EDCAEA4A1A32186100094CF0 /* CPCodePilotWindowController.xib */; };
 		EDD1DD8C1A325AAB00857D66 /* hudmask.png in Resources */ = {isa = PBXBuildFile; fileRef = EDD1DD891A325AAB00857D66 /* hudmask.png */; };
 		EDD1DD8D1A325AAB00857D66 /* hudmask@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EDD1DD8A1A325AAB00857D66 /* hudmask@2x.png */; };
 		EDD1DD8E1A325AAB00857D66 /* hudmask@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = EDD1DD8B1A325AAB00857D66 /* hudmask@3x.png */; };
@@ -108,8 +108,6 @@
 		32DBCF630370AF2F00C91783 /* CodePilot_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = CodePilot_Prefix.pch; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		4B04640211347A1C00A27CC6 /* NSString+Abbreviation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Abbreviation.h"; sourceTree = "<group>"; };
 		4B04640311347A1C00A27CC6 /* NSString+Abbreviation.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = "NSString+Abbreviation.m"; sourceTree = "<group>"; tabWidth = 4; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		4B1171AF11490EA70029BB44 /* CPHUDViewWithRoundCorners.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPHUDViewWithRoundCorners.h; sourceTree = "<group>"; };
-		4B1171B011490EA70029BB44 /* CPHUDViewWithRoundCorners.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = CPHUDViewWithRoundCorners.m; sourceTree = "<group>"; tabWidth = 4; };
 		4B19163B1150FFBD00E073F8 /* CodePilotPrefs.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CodePilotPrefs.png; sourceTree = "<group>"; };
 		4B19163C1150FFBD00E073F8 /* CodePilotIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = CodePilotIcon.icns; sourceTree = "<group>"; };
 		4B197DC013AF37A100DF2598 /* memlak.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = memlak.png; sourceTree = "<group>"; };
@@ -200,6 +198,8 @@
 		ED59EC921A34B88800D3651A /* CPPreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPPreferencesViewController.h; sourceTree = "<group>"; };
 		ED59EC931A34B88800D3651A /* CPPreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPPreferencesViewController.m; sourceTree = "<group>"; };
 		ED59EC941A34B88800D3651A /* CPPreferencesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CPPreferencesViewController.xib; sourceTree = "<group>"; };
+		ED5E7D4120E9001600107864 /* CPResultsView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CPResultsView.h; sourceTree = "<group>"; };
+		ED5E7D4220E9001600107864 /* CPResultsView.m */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = CPResultsView.m; sourceTree = "<group>"; tabWidth = 4; };
 		ED86CB8C20011E2000A35850 /* DVTTextPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DVTTextPreferences.h; sourceTree = "<group>"; };
 		ED86CB8E20011E2000A35850 /* DVTViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DVTViewController.h; sourceTree = "<group>"; };
 		ED86CB8F20011E2000A35850 /* DVTFontAndColorTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DVTFontAndColorTheme.h; sourceTree = "<group>"; };
@@ -238,7 +238,7 @@
 		EDBF8E3A1A33B12A001133B0 /* CPSearchFieldDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CPSearchFieldDelegate.h; sourceTree = "<group>"; };
 		EDCAEA481A32186100094CF0 /* CPResultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPResultsViewController.h; sourceTree = "<group>"; };
 		EDCAEA491A32186100094CF0 /* CPResultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = CPResultsViewController.m; sourceTree = "<group>"; tabWidth = 4; };
-		EDCAEA4A1A32186100094CF0 /* CPResultsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CPResultsViewController.xib; sourceTree = "<group>"; };
+		EDCAEA4A1A32186100094CF0 /* CPCodePilotWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CPCodePilotWindowController.xib; sourceTree = "<group>"; };
 		EDD1DD891A325AAB00857D66 /* hudmask.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hudmask.png; sourceTree = "<group>"; };
 		EDD1DD8A1A325AAB00857D66 /* hudmask@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hudmask@2x.png"; sourceTree = "<group>"; };
 		EDD1DD8B1A325AAB00857D66 /* hudmask@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hudmask@3x.png"; sourceTree = "<group>"; };
@@ -442,8 +442,6 @@
 		4B3B5B07113D07F400503FE7 /* UI Elements */ = {
 			isa = PBXGroup;
 			children = (
-				4B1171AF11490EA70029BB44 /* CPHUDViewWithRoundCorners.h */,
-				4B1171B011490EA70029BB44 /* CPHUDViewWithRoundCorners.m */,
 				ED29B1231A3326F500D13CD9 /* CPResultsTableRowView.h */,
 				ED29B1241A3326F500D13CD9 /* CPResultsTableRowView.m */,
 				4B7E38CE1139898E00FDBC98 /* CPSearchField.h */,
@@ -465,14 +463,16 @@
 			children = (
 				4B7FBFFA112FFFF800846DF6 /* CPCodePilotWindowController.h */,
 				4B7FBFEE112FFFF700846DF6 /* CPCodePilotWindowController.m */,
+				EDCAEA4A1A32186100094CF0 /* CPCodePilotWindowController.xib */,
 				ED29B1261A332FDE00D13CD9 /* CPResultController.h */,
 				EDCAEA481A32186100094CF0 /* CPResultsViewController.h */,
 				EDCAEA491A32186100094CF0 /* CPResultsViewController.m */,
-				EDCAEA4A1A32186100094CF0 /* CPResultsViewController.xib */,
 				4B7FBFF9112FFFF800846DF6 /* CPSearchController.h */,
 				4B7FBFF7112FFFF800846DF6 /* CPSearchController.m */,
 				EDBF8E3A1A33B12A001133B0 /* CPSearchFieldDelegate.h */,
 				EDB488491A320F16009E4BBD /* CPSearchTableDelegate.h */,
+				ED5E7D4120E9001600107864 /* CPResultsView.h */,
+				ED5E7D4220E9001600107864 /* CPResultsView.m */,
 			);
 			name = "Controllers and delegates";
 			sourceTree = "<group>";
@@ -660,7 +660,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EDCAEA4C1A32186100094CF0 /* CPResultsViewController.xib in Resources */,
+				EDCAEA4C1A32186100094CF0 /* CPCodePilotWindowController.xib in Resources */,
 				ED59EC961A34B88800D3651A /* CPPreferencesViewController.xib in Resources */,
 				EDFD47751A34FCF400BD45C5 /* openbook@3x.png in Resources */,
 				EDD1DD8E1A325AAB00857D66 /* hudmask@3x.png in Resources */,
@@ -721,6 +721,7 @@
 				4BEE52461339193600DA9881 /* CPWindow.m in Sources */,
 				F9F596B417BBF78E0037BE7A /* CPResult.m in Sources */,
 				4BEE52491339193600DA9881 /* NSString+MiscExtensions.m in Sources */,
+				ED5E7D4320E9001600107864 /* CPResultsView.m in Sources */,
 				4BEE524A1339193600DA9881 /* NSAppleEventDescriptor+ToObject.m in Sources */,
 				4BEE524B1339193600DA9881 /* MCLog.m in Sources */,
 				4BEE52501339193600DA9881 /* CPStatusLabel.m in Sources */,
@@ -734,7 +735,6 @@
 				4BEE52561339193600DA9881 /* CPSearchFieldTextView.m in Sources */,
 				4BEE525A1339193600DA9881 /* CPFileReference.m in Sources */,
 				ED01FE0D1A33697900D81A18 /* CPSearchFieldCell.m in Sources */,
-				4BEE52611339193600DA9881 /* CPHUDViewWithRoundCorners.m in Sources */,
 				EDA64E1A1A34F61C00ED3C8F /* CPCodePilotConstants.m in Sources */,
 				4BEE52631339193600DA9881 /* NSAttributedString+Hyperlink.m in Sources */,
 				4BEE52641339193600DA9881 /* NSNumber+VersionComparison.m in Sources */,

@@ -48,8 +48,7 @@ static NSString * const IDEEditorAreaLastActiveEditorContextDidChangeContextKey 
     if (self) {
         self.currentlyIndexedWorkspaces = [NSMutableArray array];
         self.workspaceSymbolCaches = [NSMutableArray array];
-        self.symbolCachingInProgress = NO;
-        
+
         // we monitor workspaces open to keep an up-to-date indexDB connections / query providers
         // open, because it requires a lot of resources to open. and monitoring workspaces.
         [[IDEDocumentController sharedDocumentController] addObserver:self
@@ -105,7 +104,7 @@ static NSString * const IDEEditorAreaLastActiveEditorContextDidChangeContextKey 
 {
     @try {
         @synchronized (self.workspaceSymbolCaches) {
-            self.symbolCachingInProgress = YES;
+            [self _setSymbolCachingInProgress:YES];
             NSMutableArray *newSymbolCacheContents = [NSMutableArray array];
             
             NSArray *interestingSymbolKinds = [NSArray arrayWithObjects:
@@ -139,7 +138,7 @@ static NSString * const IDEEditorAreaLastActiveEditorContextDidChangeContextKey 
             
             [self updateWorkspaceSymbolCacheForWorkspace:workspace withWorkspaceSymbolCache:newWorkspaceSymbolCache];
             
-            self.symbolCachingInProgress = NO;
+            [self _setSymbolCachingInProgress:NO];
         }
     }
     @catch (NSException *exception) {
@@ -897,5 +896,13 @@ static NSString * const IDEEditorAreaLastActiveEditorContextDidChangeContextKey 
 - (BOOL)isSymbolCachingInProgress
 {
     return self.symbolCachingInProgress;
+}
+
+-(void)_setSymbolCachingInProgress:(BOOL)inProgress {
+    __weak CPXcodeWrapper * wself = self;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        CPXcodeWrapper *this = wself;
+        this.symbolCachingInProgress = inProgress;
+    });
 }
 @end

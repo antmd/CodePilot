@@ -13,10 +13,11 @@
 @class CPSearchFieldTextView;
 
 @interface CPCodePilotWindowController : NSWindowController <NSWindowDelegate>
-@property (strong) IBOutlet CPWindow *window;
+@property (strong) IBOutlet NSWindow *window;
 @property (nonatomic, strong) IBOutlet CPSearchController *searchController;
 @property (nonatomic, assign) BOOL ourWindowIsOpen;
 @property (nonatomic, strong) CPSearchFieldTextView *searchFieldTextEditor;
+@property (nonatomic, readonly) CPXcodeWrapper *xcodeWrapper;
 
 - (id)initWithXcodeWrapper:(CPXcodeWrapper *)xcodeWrapper;
 

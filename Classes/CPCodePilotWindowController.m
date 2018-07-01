@@ -9,7 +9,6 @@
 #import "CPCodePilotWindowController.h"
 #import "CPXcodeWrapper.h"
 #import "CPSearchController.h"
-#import "CPWindow.h"
 #import "CPCodePilotConfig.h"
 #import "CPStatusLabel.h"
 #import "CPSearchField.h"
@@ -17,7 +16,7 @@
 #import "CPResultsViewController.h"
 
 @interface CPCodePilotWindowController ()
-@property (strong,nonatomic) CPResultsViewController *resultsViewController;
+@property (strong,nonatomic) IBOutlet CPResultsViewController *resultsViewController;
 @end
 
 CPOpenSpecifier *openSpecifierForCharacters(NSString* str);
@@ -29,7 +28,7 @@ CPOpenSpecifier *openSpecifierForCharacters(NSString* str);
 
 - (id)initWithXcodeWrapper:(CPXcodeWrapper *)xcodeWrapper
 {
-    self = [super init];
+    self = [super initWithWindowNibName:self.windowNibName];
     
     if (self) {
         self.ourWindowIsOpen = NO;
@@ -37,22 +36,24 @@ CPOpenSpecifier *openSpecifierForCharacters(NSString* str);
         self.searchController = [CPSearchController new];
         [self.searchController setXcodeWrapper:xcodeWrapper];
         
-        self.window = [[CPWindow alloc] initWithDefaultSettings];
-        [self.window setDelegate:self];
-        
-        CPResultsViewController *resultsViewController = [[CPResultsViewController alloc] initWithSearchController:self.searchController];
-        self.window.contentView = resultsViewController.view; // Loads the view ... must happen before referring to subviews below
-        resultsViewController.searchField.delegate = self.searchController;
-        [self.searchController setSearchField:resultsViewController.searchField];
-        [self.searchController setIndexingProgressIndicator:(NSControl*)resultsViewController.indexingProgressIndicator];
-        [self.searchController setUpperStatusLabel:resultsViewController.upperStatusLabel];
-        [self.searchController setLowerStatusLabel:resultsViewController.lowerStatusLabel];
-        self.resultsViewController = resultsViewController;
         //    [self.searchController setInfoStatusLabel:[self.window.searchWindowView infoStatusLabel]];
         
     }
     
     return self;
+}
+
+-(NSNibName)windowNibName {
+    return @"CPCodePilotWindowController";
+}
+
+-(void)windowDidLoad {
+    self.resultsViewController.searchController = self.searchController;
+    self.resultsViewController.searchField.delegate = self.searchController;
+    [self.searchController setSearchField:self.resultsViewController.searchField];
+    [self.searchController setIndexingProgressIndicator:(NSControl*)self.resultsViewController.indexingProgressIndicator];
+    [self.searchController setUpperStatusLabel:self.resultsViewController.upperStatusLabel];
+    [self.searchController setLowerStatusLabel:self.resultsViewController.lowerStatusLabel];
 }
 
 -(void)dealloc
@@ -70,7 +71,11 @@ CPOpenSpecifier *openSpecifierForCharacters(NSString* str);
     if (self.ourWindowIsOpen) {
         return;
     }
+    BOOL switcher = NO;
+    
     if (modifierMask) {
+        switcher = YES;
+        // Switcher Mode only: Watch for release of Ctrl key and other key presses
         __typeof(self) __weak weakSelf = self;
         _localEventMonitor = [NSEvent addLocalMonitorForEventsMatchingMask:NSEventMaskFlagsChanged|NSEventMaskKeyDown handler:^NSEvent *(NSEvent *event) {
             __typeof(self) this = weakSelf;
@@ -107,9 +112,11 @@ CPOpenSpecifier *openSpecifierForCharacters(NSString* str);
         }];
     }
     
-    [self.searchController windowWillBecomeActive];
     [self.window center];
+    // Call 'windowWillBecomeActive' after first use of 'self.window' above
+    [self.searchController windowWillBecomeActive];
     [self.window makeKeyAndOrderFront:self];
+    self.resultsViewController.isSwitcher = switcher;
     [self.searchController windowDidBecomeActive];
     if (modifierMask) {
         // In switcher mode, advance to the file after the current one straight away
@@ -179,8 +186,15 @@ CPOpenSpecifier *openSpecifierForCharacters(NSString* str);
 {
     [self hideWindow];
 }
+
+-(CPXcodeWrapper*)xcodeWrapper {
+    return self.searchController.xcodeWrapper;
+}
+
 @end
 
+
+// UTILS
 
 CPOpenSpecifier *openSpecifierForCharacters(NSString* str)
 {

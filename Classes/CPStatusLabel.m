@@ -9,6 +9,8 @@
 #import "CPStatusLabel.h"
 
 @implementation CPStatusLabel
+@synthesize isInactive = _isInactive;
+
 - (id)initWithFrame:(NSRect)frameRect
 {
     self = [super initWithFrame:frameRect];
@@ -40,4 +42,14 @@
 {
     return [[self attributedStringValue] size].width;
 }
+
+-(void)setIsInactive:(BOOL)isInactive {
+    _isInactive = isInactive;
+    [super setHidden:isInactive];
+}
+
+-(void)setHidden:(BOOL)hidden {
+    if (!self.isInactive) [super setHidden:hidden];
+}
+
 @end

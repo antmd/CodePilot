@@ -363,9 +363,9 @@ CPOpenSpecifier *CPOpenModeHorizontalSplit;
     }
     
     NSMutableDictionary *boldAttributes = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
-                                           [NSColor colorWithCalibratedRed:0.48 green:0.49 blue:0.62 alpha:1], NSForegroundColorAttributeName,
+                                           [NSColor secondaryLabelColor], NSForegroundColorAttributeName,
                                            [NSNumber numberWithFloat:0.8],  NSKernAttributeName,
-                                           [self statusLabelFont], NSFontAttributeName,
+                                           [self boldStatusLabelFont], NSFontAttributeName,
                                            nil];
     
     return [[NSMutableAttributedString alloc] initWithString:str attributes:boldAttributes];
@@ -378,8 +378,7 @@ CPOpenSpecifier *CPOpenModeHorizontalSplit;
     }
     
     NSMutableDictionary *normalAttributes = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
-                                             [NSColor colorWithCalibratedWhite:0.5 alpha:0.8], NSForegroundColorAttributeName,
-                                             [NSNumber numberWithFloat:0.8],  NSKernAttributeName,
+                                             [NSColor secondaryLabelColor], NSForegroundColorAttributeName,
                                              [self statusLabelFont], NSFontAttributeName,
                                              nil];
     
@@ -388,14 +387,11 @@ CPOpenSpecifier *CPOpenModeHorizontalSplit;
 
 - (NSFont *)statusLabelFont
 {
-    NSBundle *myBundle = [NSBundle bundleForClass:[self class]];
-    NSString *fontPath = [myBundle pathForResource:@"ATROX" ofType:@"TTF"];
-    NSURL *fontURL = [NSURL fileURLWithPath:fontPath];
-    
-    NSArray *fontDescriptors = (NSArray *)CFBridgingRelease(CTFontManagerCreateFontDescriptorsFromURL((__bridge CFURLRef)fontURL));
-    CTFontDescriptorRef fontDescriptor = (__bridge CTFontDescriptorRef)[fontDescriptors lastObject];
-    
-    return (NSFont *)CFBridgingRelease(CTFontCreateWithFontDescriptor(fontDescriptor, 16.0, NULL));
+    return [NSFont systemFontOfSize:[NSFont systemFontSizeForControlSize:NSControlSizeRegular]];
+}
+- (NSFont *)boldStatusLabelFont
+{
+    return [NSFont boldSystemFontOfSize:[NSFont systemFontSizeForControlSize:NSControlSizeRegular]];
 }
 
 - (void)setupRecentJumpsStatusLabels

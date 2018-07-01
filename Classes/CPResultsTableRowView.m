@@ -10,11 +10,7 @@
 
 @implementation CPResultsTableRowView
 
-- (void)drawRect:(NSRect)dirtyRect {
-    [super drawRect:dirtyRect];
-    
-    // Drawing code here.
-}
 - (BOOL)isEmphasized { return YES; }
+- (BOOL)allowsVibrancy { return YES; }
 
 @end
