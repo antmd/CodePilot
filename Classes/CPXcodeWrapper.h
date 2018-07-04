@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import "CPCodePilotConfig.h"
 
-@class CPFileReference, CPSymbol, CPWorkspaceSymbolCache, CPResult;
+@class CPFileReference, CPSymbol, CPWorkspaceSymbolCache, CPResult, IDESourceKitWorkspace, IDESourceKitSymbol;
 
 @interface CPXcodeWrapper : NSObject
 @property (nonatomic, strong) NSMutableArray *currentlyIndexedWorkspaces;
@@ -43,8 +43,8 @@
 - (NSArray *)recursiveChildrenOfPBXGroup:(PBXGroup *)pbxGroup;
 - (NSArray *)flattenedProjectContents;
 - (IDEWorkspace *)currentWorkspace;
-- (IDEIndex *)currentIndex;
-- (NSArray *)recursiveChildrenOfIDEIndexSymbol:(IDEIndexSymbol *)ideIndexSymbol;
+- (IDESourceKitWorkspace *)currentIndex;
+- (NSArray *)recursiveChildrenOfIDEIndexSymbol:(IDESourceKitSymbol *)ideIndexSymbol;
 - (NSArray *)allIDEIndexSymbolsFromCPFileReference:(CPFileReference *)fileReference;
 - (IDEEditorContext *)currentEditorContext;
 - (IDEWorkspaceDocument *)currentWorkspaceDocument;

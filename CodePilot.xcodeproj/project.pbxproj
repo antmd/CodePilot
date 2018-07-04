@@ -184,6 +184,15 @@
 		ED01FE0C1A33697900D81A18 /* CPSearchFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = CPSearchFieldCell.m; sourceTree = "<group>"; tabWidth = 4; };
 		ED1D2B4A1B7E319D00A0EAC1 /* IDEEditor+CodePilot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IDEEditor+CodePilot.h"; sourceTree = "<group>"; };
 		ED1D2B4B1B7E319D00A0EAC1 /* IDEEditor+CodePilot.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = "IDEEditor+CodePilot.m"; sourceTree = "<group>"; tabWidth = 4; };
+		ED1EECAB20EBA41E00CA1C92 /* IDESourceKitResponseSymbolCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDESourceKitResponseSymbolCollection.h; sourceTree = "<group>"; };
+		ED1EECAC20EBA43600CA1C92 /* IDESourceKitVariantDictionaryWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDESourceKitVariantDictionaryWrapper.h; sourceTree = "<group>"; };
+		ED1EECAD20EBA4BB00CA1C92 /* IDESourceKitResponseArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDESourceKitResponseArray.h; sourceTree = "<group>"; };
+		ED1EECAE20EBA57E00CA1C92 /* IDESourceKitVariantDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDESourceKitVariantDictionary.h; sourceTree = "<group>"; };
+		ED1EECAF20EBA57E00CA1C92 /* IDESourceKitVariantWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDESourceKitVariantWrapper.h; sourceTree = "<group>"; };
+		ED1EECB020EBA5EA00CA1C92 /* IDESourceKitResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDESourceKitResponse.h; sourceTree = "<group>"; };
+		ED1EECB120EBA6C900CA1C92 /* IDESourceKitResponseSymbol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDESourceKitResponseSymbol.h; sourceTree = "<group>"; };
+		ED1EECB220EBA75600CA1C92 /* IDESourceKitResponseSymbolOccurrence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDESourceKitResponseSymbolOccurrence.h; sourceTree = "<group>"; };
+		ED1EECB320EBAD1700CA1C92 /* IDESourceKitWorkspace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDESourceKitWorkspace.h; sourceTree = "<group>"; };
 		ED2105A61A3F775C003D233A /* NSMutableOrderedSet+CodePilot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableOrderedSet+CodePilot.h"; sourceTree = "<group>"; };
 		ED2105A71A3F775C003D233A /* NSMutableOrderedSet+CodePilot.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableOrderedSet+CodePilot.m"; sourceTree = "<group>"; tabWidth = 4; };
 		ED2105A91A3F7861003D233A /* CPUniqueStack.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CPUniqueStack.h; sourceTree = "<group>"; };
@@ -200,6 +209,16 @@
 		ED59EC941A34B88800D3651A /* CPPreferencesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CPPreferencesViewController.xib; sourceTree = "<group>"; };
 		ED5E7D4120E9001600107864 /* CPResultsView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CPResultsView.h; sourceTree = "<group>"; };
 		ED5E7D4220E9001600107864 /* CPResultsView.m */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = CPResultsView.m; sourceTree = "<group>"; tabWidth = 4; };
+		ED6D27DF20ECD99B00518B66 /* IDESourceKitSymbol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDESourceKitSymbol.h; sourceTree = "<group>"; };
+		ED6D27E020ECD99B00518B66 /* IDESourceKitRequestSymbol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDESourceKitRequestSymbol.h; sourceTree = "<group>"; };
+		ED6D27E120ECD99B00518B66 /* IDESourceKitContainerSymbol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDESourceKitContainerSymbol.h; sourceTree = "<group>"; };
+		ED6D27E220ECD99C00518B66 /* IDESourceKitProtocolSymbol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDESourceKitProtocolSymbol.h; sourceTree = "<group>"; };
+		ED6D27E320ECD99C00518B66 /* IDESourceKitClassSymbol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDESourceKitClassSymbol.h; sourceTree = "<group>"; };
+		ED6D27E420ECD99D00518B66 /* IDESourceKitCategorySymbol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDESourceKitCategorySymbol.h; sourceTree = "<group>"; };
+		ED6D27E520ECD99D00518B66 /* IDESourceKitResponseSymbol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IDESourceKitResponseSymbol.h; path = ../../../../Hacking/Xcode/IDEFoundation/IDESourceKitResponseSymbol.h; sourceTree = "<group>"; };
+		ED6D27E620ECD99D00518B66 /* IDESourceKitPropertySymbol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDESourceKitPropertySymbol.h; sourceTree = "<group>"; };
+		ED6D27E720ECD99D00518B66 /* IDESourceKitCallableSymbol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDESourceKitCallableSymbol.h; sourceTree = "<group>"; };
+		ED6D27E820ECD9FC00518B66 /* IDESourceKitSymbolOccurrence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDESourceKitSymbolOccurrence.h; sourceTree = "<group>"; };
 		ED86CB8C20011E2000A35850 /* DVTTextPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DVTTextPreferences.h; sourceTree = "<group>"; };
 		ED86CB8E20011E2000A35850 /* DVTViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DVTViewController.h; sourceTree = "<group>"; };
 		ED86CB8F20011E2000A35850 /* DVTFontAndColorTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DVTFontAndColorTheme.h; sourceTree = "<group>"; };
@@ -526,9 +545,36 @@
 			path = ../Classes;
 			sourceTree = "<group>";
 		};
+		ED1EECA920EBA35E00CA1C92 /* IDEFoundation */ = {
+			isa = PBXGroup;
+			children = (
+				ED6D27E820ECD9FC00518B66 /* IDESourceKitSymbolOccurrence.h */,
+				ED6D27E720ECD99D00518B66 /* IDESourceKitCallableSymbol.h */,
+				ED6D27E420ECD99D00518B66 /* IDESourceKitCategorySymbol.h */,
+				ED6D27E320ECD99C00518B66 /* IDESourceKitClassSymbol.h */,
+				ED6D27E120ECD99B00518B66 /* IDESourceKitContainerSymbol.h */,
+				ED6D27E620ECD99D00518B66 /* IDESourceKitPropertySymbol.h */,
+				ED6D27E220ECD99C00518B66 /* IDESourceKitProtocolSymbol.h */,
+				ED6D27E020ECD99B00518B66 /* IDESourceKitRequestSymbol.h */,
+				ED6D27E520ECD99D00518B66 /* IDESourceKitResponseSymbol.h */,
+				ED6D27DF20ECD99B00518B66 /* IDESourceKitSymbol.h */,
+				ED1EECB320EBAD1700CA1C92 /* IDESourceKitWorkspace.h */,
+				ED1EECB220EBA75600CA1C92 /* IDESourceKitResponseSymbolOccurrence.h */,
+				ED1EECB120EBA6C900CA1C92 /* IDESourceKitResponseSymbol.h */,
+				ED1EECB020EBA5EA00CA1C92 /* IDESourceKitResponse.h */,
+				ED1EECAE20EBA57E00CA1C92 /* IDESourceKitVariantDictionary.h */,
+				ED1EECAF20EBA57E00CA1C92 /* IDESourceKitVariantWrapper.h */,
+				ED1EECAD20EBA4BB00CA1C92 /* IDESourceKitResponseArray.h */,
+				ED1EECAC20EBA43600CA1C92 /* IDESourceKitVariantDictionaryWrapper.h */,
+				ED1EECAB20EBA41E00CA1C92 /* IDESourceKitResponseSymbolCollection.h */,
+			);
+			path = IDEFoundation;
+			sourceTree = "<group>";
+		};
 		ED86CB8A20011E2000A35850 /* Xcode */ = {
 			isa = PBXGroup;
 			children = (
+				ED1EECA920EBA35E00CA1C92 /* IDEFoundation */,
 				ED86CBB020013D4D00A35850 /* IDEPegasusSourceEditor */,
 				ED86CBA820013D4D00A35850 /* SourceEditor */,
 				ED86CBA5200126D100A35850 /* XcodeUtils.h */,

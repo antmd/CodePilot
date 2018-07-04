@@ -22,7 +22,7 @@
 @end
 
 @implementation CPResultsViewController {
-    float _originalBottomSpaceConstant;
+    float _originalBottomSpaceConstant, _originalTopSpaceConstant;
 }
 @synthesize isSwitcher = _isSwitcher;
 
@@ -42,6 +42,7 @@
         self.hasAwoken = YES;
         self.resultsTableView.doubleAction = @selector(doubleClickedOnResult:);
         _originalBottomSpaceConstant = self.resultsTableBottomSpaceConstraint.constant;
+        _originalTopSpaceConstant = self.resultsTableTopSpaceConstraint.constant;
     }
 }
 
@@ -50,15 +51,15 @@
         // Transform to full search interface
         self.searchController.searchField.hidden = NO;
         self.lowerStatusLabel.isInactive = NO;
-        self.resultsTableTopSpaceConstraint.constant += 40.0;
+        self.resultsTableTopSpaceConstraint.constant = _originalTopSpaceConstant;
         self.resultsTableBottomSpaceConstraint.constant = _originalBottomSpaceConstant;
     }
     else if (!_isSwitcher && isSwitcher) {
         // Transform to switcher
         self.searchController.searchField.hidden = YES;
         self.lowerStatusLabel.isInactive = YES;
-        self.resultsTableTopSpaceConstraint.constant -= 40.0;
-        self.resultsTableBottomSpaceConstraint.constant = 0.0;
+        self.resultsTableTopSpaceConstraint.constant -= 50.0;
+        self.resultsTableBottomSpaceConstraint.constant = 12.0;
     }
     _isSwitcher = isSwitcher;
 }

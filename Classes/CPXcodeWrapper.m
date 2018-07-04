@@ -18,6 +18,10 @@
 #import "CPResult.h"
 #import "XcodeUtils.h"
 #import "IDEPegasusSourceEditor/_TtC22IDEPegasusSourceEditor20SourceCodeEditorView.h"
+#import "IDEFoundation/IDESourceKitWorkspace.h"
+#import "IDEFoundation/IDESourceKitResponseSymbolCollection.h"
+#import "IDEFoundation/IDESourceKitResponseSymbolOccurrence.h"
+#import <IDEFoundation/IDESourceKitSymbol.h>
 #import "IDEWorkspaceDocument+CodePilot.h"
 
 static NSString * const WorkspaceDocumentsKeyPath = @"workspaceDocuments";
@@ -108,23 +112,32 @@ static NSString * const IDEEditorAreaLastActiveEditorContextDidChangeContextKey 
             NSMutableArray *newSymbolCacheContents = [NSMutableArray array];
             
             NSArray *interestingSymbolKinds = [NSArray arrayWithObjects:
-                                               [DVTSourceCodeSymbolKind containerSymbolKind],
-                                               [DVTSourceCodeSymbolKind globalSymbolKind],
-                                               [DVTSourceCodeSymbolKind classMethodSymbolKind],
-                                               [DVTSourceCodeSymbolKind instanceMethodSymbolKind],
-                                               [DVTSourceCodeSymbolKind instanceVariableSymbolKind],
-                                               [DVTSourceCodeSymbolKind classVariableSymbolKind],
-                                               [DVTSourceCodeSymbolKind parameterSymbolKind],
-                                               [DVTSourceCodeSymbolKind macroSymbolKind],
-                                               [DVTSourceCodeSymbolKind propertySymbolKind],
-                                               [DVTSourceCodeSymbolKind unionSymbolKind],
-                                               [DVTSourceCodeSymbolKind localVariableSymbolKind], nil];
+                                               [[DVTSourceCodeSymbolKind classSymbolKind] identifier],
+                                               [[DVTSourceCodeSymbolKind containerSymbolKind] identifier],
+                                               [[DVTSourceCodeSymbolKind fieldSymbolKind] identifier],
+                                               [[DVTSourceCodeSymbolKind globalSymbolKind] identifier],
+                                               [[DVTSourceCodeSymbolKind classMethodSymbolKind] identifier],
+                                               [[DVTSourceCodeSymbolKind instanceMethodSymbolKind] identifier],
+                                               [[DVTSourceCodeSymbolKind instanceVariableSymbolKind] identifier],
+                                               [[DVTSourceCodeSymbolKind classVariableSymbolKind] identifier],
+                                               [[DVTSourceCodeSymbolKind parameterSymbolKind] identifier],
+                                               [[DVTSourceCodeSymbolKind macroSymbolKind] identifier],
+                                               [[DVTSourceCodeSymbolKind propertySymbolKind] identifier],
+                                               [[DVTSourceCodeSymbolKind unionSymbolKind] identifier],
+                                               [[DVTSourceCodeSymbolKind localVariableSymbolKind] identifier], nil];
             
             for (DVTSourceCodeSymbolKind *symbolKind in interestingSymbolKinds) {
-                NSArray *symbolsForKind = [workspace.index allSymbolsMatchingKind:symbolKind workspaceOnly:YES];
+                NSError * err = nil;
+                IDEIndexCollection *symbolsForKind = nil;
+                @try {
+                    symbolsForKind = [(IDESourceKitResponseSymbolCollection*)[workspace.index allSymbolsMatchingKind:symbolKind workspaceOnly:YES topLevelOnly:NO error:&err] ide_collection:workspace.index];
+                }
+                @catch(NSException*ex) {
+                    
+                }
                 
                 NSUInteger duplicateSymbols = 0;
-                for (IDEIndexSymbol *symbol in symbolsForKind) {
+                for (IDESourceKitResponseSymbolOccurrence *symbol in [symbolsForKind allObjects]) {
                     if ([newSymbolCacheContents containsObject:symbol]) {
                         duplicateSymbols++;
                     } else {
@@ -148,7 +161,7 @@ static NSString * const IDEEditorAreaLastActiveEditorContextDidChangeContextKey 
 - (void)willIndexWorkspace:(NSNotification *)notification
 {
     @synchronized (self.currentlyIndexedWorkspaces) {
-        IDEIndex *index = (IDEIndex *)[notification object];
+        IDESourceKitWorkspace *index = (IDESourceKitWorkspace *)[notification object];
         
         for (IDEWorkspace *workspace in [self allOpenedWorkspaces]) {
             if (index == [workspace index]) {
@@ -747,7 +760,7 @@ static NSString * const IDEEditorAreaLastActiveEditorContextDidChangeContextKey 
     return objects;
 }
 
-- (NSArray *)recursiveChildrenOfIDEIndexSymbol:(IDEIndexSymbol *)ideIndexSymbol
+- (NSArray *)recursiveChildrenOfIDEIndexSymbol:(IDESourceKitSymbol *)ideIndexSymbol
 {
     NSMutableArray *objects = [NSMutableArray array];
     
@@ -772,13 +785,16 @@ static NSString * const IDEEditorAreaLastActiveEditorContextDidChangeContextKey 
 - (NSArray *)allIDEIndexSymbolsFromCPFileReference:(CPFileReference *)fileReference
 {
     NSMutableArray *objects = [NSMutableArray array];
-    NSArray *topLevelSymbols = [NSArray array];
-    
+
     PBXFileReference *pbxFileReference = [self pbxFileReferenceForCPFileReference:fileReference];
     
-    topLevelSymbols = [[self currentIndex] topLevelSymbolsInFile:[pbxFileReference absolutePath]];
+    NSMutableArray *topLevelSymbols = [[[self.currentIndex topLevelClassesWorkspaceOnly:YES] allObjects] mutableCopy];
+    [topLevelSymbols addObjectsFromArray:[[self.currentIndex topLevelProtocolsWorkspaceOnly:YES] allObjects]];
     
-    for (IDEIndexSymbol *ideSymbol in topLevelSymbols) {
+    for (IDESourceKitSymbol *ideSymbol in topLevelSymbols) {
+        DVTFilePath * symbolFile = ideSymbol.file;
+        if (![symbolFile.pathString isEqualToString:pbxFileReference.absolutePath]) continue;
+        
         [objects addObject:ideSymbol];
         NSArray *children = [self recursiveChildrenOfIDEIndexSymbol:ideSymbol];
         [objects addObjectsFromArray:children];
@@ -864,9 +880,11 @@ static NSString * const IDEEditorAreaLastActiveEditorContextDidChangeContextKey 
     return [XVimLastActiveWindowController() document];
 }
 
-- (IDEIndex *)currentIndex
+- (IDESourceKitWorkspace *)currentIndex
 {
-    return [[self currentWorkspace] index];
+    __typeof(self.currentWorkspace.index) ws = self.currentWorkspace.index;
+    NSAssert([ws isKindOfClass:IDESourceKitWorkspace.class], @"Workspace is unknown class");
+    return ws;
 }
 
 - (IDEEditorContext *)currentEditorContext

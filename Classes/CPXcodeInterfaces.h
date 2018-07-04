@@ -98,6 +98,7 @@
 - (DVTFilePath *)databaseFile;
 - (NSArray *)topLevelSymbolsInFile:(NSString *)filepath;
 - (NSArray *)allSymbolsMatchingKind:(DVTSourceCodeSymbolKind *)symbolKind workspaceOnly:(BOOL)wonly;
+- (NSArray *)allSymbolsMatchingKind:(DVTSourceCodeSymbolKind *)symbolKind workspaceOnly:(BOOL)wonly topLevelOnly:(BOOL)topLevel error:(NSError**)error;
 @end
 
 
@@ -156,8 +157,10 @@
 @interface IDEXMLPackageContainer : IDEContainer
 @end
 
+@class IDESourceKitWorkspace;
+
 @interface IDEWorkspace : IDEXMLPackageContainer
-- (IDEIndex *)index;
+- (IDESourceKitWorkspace *)index;
 - (NSString *)name;
 - (NSSet *)referencedContainers;
 @end
