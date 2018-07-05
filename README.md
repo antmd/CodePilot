@@ -22,6 +22,8 @@ The Switcher
  
 Pressing Ctrl-Tab brings up the recent-files switcher. As soon as Ctrl is released, the switcher is dismissed. If you have selected a different file in the switcher, that file will be displayed.
 
+An open book symbol is shown on the right-hand side for files that are already open in some tab/window/split.
+
 The keys supported in the switcher (Ctrl must be held down):
 
 * `tab` - select next file in the list
