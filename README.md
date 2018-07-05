@@ -18,15 +18,17 @@ Resign Xcode (at your own risk -- signing of Xcode is supposed to stop malicious
 The Switcher
 ============
 
+ ![Switcher](Screenshots/CodePilotSwitcher.png)
+ 
 Pressing Ctrl-Tab brings up the recent-files switcher. As soon as Ctrl is released, the switcher is dismissed. If you have selected a different file in the switcher, that file will be displayed.
 
 The keys supported in the switcher (Ctrl must be held down):
 
-tab - select next file in the list
-shift-tab - select the previous file in the list
-w - open the selected file in full-size window mode
-v/s - open the selected file in a split
-esc - close the switcher without changing file-focus
+* `tab` - select next file in the list
+* `shift-tab` - select the previous file in the list
+* `w` - open the selected file in full-size window mode
+* `v` or `s` - open the selected file in a split
+* `esc` - close the switcher without changing file-focus
 
 License
 =======
