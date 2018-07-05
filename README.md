@@ -1,26 +1,32 @@
 What is Code Pilot?
 ===================
 
-Read the [full story](http://macoscope.com/blog/the-story-of-code-pilot/) of Code Pilot.
+This version of Code Pilot is compatible with Xcode 9, and introduces a 'Recent Files' switcher (Ctrl-Tab).
 
-Code Pilot is a plugin for Xcode 5 that allows you to quickly find files, methods and symbols within your project without the need for your mouse. 
-It uses fuzzy query matching to compute a list of results sorted by their relevancy. With just a few keystrokes you can jump to the method you're looking for.
+Xcode 9 requires re-signing before you can install. See this page for the XVim plugin: https://github.com/XVimProject/XVim2/blob/master/SIGNING_Xcode.md
 
-![CodePilot Window](https://github.com/macoscope/CodePilot/raw/master/Screenshots/CodePilot_01.png "CodePilot Window")
+Read the [full story](http://macoscope.com/blog/the-story-of-code-pilot/) of Code Pilot. Here's the GitHub repo. for the un-maintained version: https://github.com/macoscope/CodePilot
 
-More about original Code Pilot release [here](http://codepilot.cc/).
+This is a work-in-progress: the symbol functionality is not complete, but the approach used in the code is correct. I just do not have time to complete the work, so any pull-requests will be gratefully received.
 
 How to use Code Pilot?
 ======================
 
-To use Code Pilot you have to build the project and copy the resulting `CodePilot3.xcplugin` file to you plugin directory - `~/Library/Application\ Support/Developer/Shared/Xcode/Plug-ins`. 
+Resign Xcode (at your own risk -- signing of Xcode is supposed to stop malicious versions of Xcode doing nasty things), build the CodePilot plugin, then re-start Xcode.
 
-Alternatively you can build the installer package and use it to install the plugin (it essentially just moves the xcplugin to the Plug-ins directory). 
-To load the plugin you have to restart Xcode 5.
 
-NOTE: In order to build a package you may need to install PackageMaker.app included in "Auxiliary tools for Xcode" [PackageMaker](https://developer.apple.com/downloads/index.action?name=PackageMaker)
+The Switcher
+============
 
-When the plugin is loaded you can open the CodePilot window with CMD + SHIFT + X, and then type your query.
+Pressing Ctrl-Tab brings up the recent-files switcher. As soon as Ctrl is released, the switcher is dismissed. If you have selected a different file in the switcher, that file will be displayed.
+
+The keys supported in the switcher (Ctrl must be held down):
+
+tab - select next file in the list
+shift-tab - select the previous file in the list
+w - open the selected file in full-size window mode
+v/s - open the selected file in a split
+esc - close the switcher without changing file-focus
 
 License
 =======
