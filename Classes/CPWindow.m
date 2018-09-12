@@ -28,7 +28,7 @@
                                 defer:flag];
     
     if (self) {
-        self.appearance = [NSAppearance appearanceNamed:NSAppearanceNameVibrantDark];
+        self.appearance = [NSAppearance appearanceNamed:NSAppearanceNameDarkAqua];
         [self setBackgroundColor:[NSColor clearColor]];
         [self setHasShadow:YES];
         [self setOpaque:NO];

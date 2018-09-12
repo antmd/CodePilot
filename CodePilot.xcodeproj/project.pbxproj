@@ -931,7 +931,7 @@
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/Xcode";
 				INFOPLIST_FILE = Resources/Info.plist;
 				INSTALL_PATH = "/Library/Application Support/Developer/Shared/Xcode/Plug-ins";
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				OTHER_LDFLAGS = (
 					"-licucore",
 					"-undefined",
@@ -962,7 +962,7 @@
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/Xcode";
 				INFOPLIST_FILE = Resources/Info.plist;
 				INSTALL_PATH = "/Library/Application Support/Developer/Shared/Xcode/Plug-ins";
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				OTHER_LDFLAGS = (
 					"-licucore",
 					"-undefined",
